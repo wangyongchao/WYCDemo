@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.weishop.test.R;
+import com.weishop.test.util.TestUtils;
 
 
 public class MyActivity extends Activity {
@@ -15,6 +16,9 @@ public class MyActivity extends Activity {
     private View mylinear;
 
     private int n = 0;
+    private View imageview;
+    private int distance;
+    private View myView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,43 +34,57 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_myview);
 
         mylinear = findViewById(R.id.mylinear);
+        myView = findViewById(R.id.myview);
 
         View btn = findViewById(R.id.btn);
         btn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int left = myView.getLeft();
+                int top = myView.getTop();
+                System.out.println("left="+left+",top="+top);
+                testScroll();
             }
+
         });
 
-        btn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return false;
-            }
-        });
-
-        View imageview = findViewById(R.id.imageview);
+        imageview = findViewById(R.id.imageview);
         imageview.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                n = 10;
-                mylinear.scrollBy(20,0);
-                int scrollY = mylinear.getScrollY();
-                System.out.println("scrollX=" + scrollY);
+
             }
         });
 
-        imageview.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
+    }
 
-//                TestUtils.getProperty(MyActivity.this);
+    private void testScroll() {
+        //正数可视区域向下，向右移动相当子view向上，向左移动。负数相反
+        int scrollX = mylinear.getScrollX();
+        int scrollY = mylinear.getScrollY();
+        System.out.println("scrollX=" + scrollX + ",scrollY=" + scrollY);
+//        testScrollto();
+        testScrollto();
 
-                return false;
-            }
-        });
+    }
+
+
+    private void testScrollto() {
+        distance = distance + 10;
+        mylinear.scrollTo(distance, 0);//可视区域移动
+        int scrollX = mylinear.getScrollX();
+        int scrollY = mylinear.getScrollY();
+        System.out.println("after scrollX=" + scrollX + ",scrollY=" + scrollY);
+
+        int left = myView.getLeft();
+        int top = myView.getTop();
+        System.out.println("after left="+left+",top="+top);
+
+    }
+
+    private void testScrollby() {
+        distance = 0 - 10;
+        mylinear.scrollBy(0, distance);//可视区域移动
 
     }
 

@@ -3,6 +3,9 @@ package com.weishop.test.custom.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
@@ -11,12 +14,20 @@ import com.weishop.test.util.TestUtils;
 
 public class MyLinearLayout extends LinearLayout {
 
+    private  Paint paint;
+
     public MyLinearLayout(Context context) {
         super(context);
     }
 
     public MyLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        paint = new Paint();
+        paint.setColor(Color.BLACK);// 设置红色
+        paint.setStrokeWidth(2);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
     }
 
     @Override
@@ -123,10 +134,19 @@ public class MyLinearLayout extends LinearLayout {
         super.onLayout(changed, l, t, r, b);
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         System.out.println("MyLinearLayout onDraw");
         super.onDraw(canvas);
+
+        Path path1 = new Path();
+//        path1.moveTo(180, 200);
+        path1.lineTo(100, 100);
+        path1.lineTo(210, 210);
+//        path1.close();//封闭
+        canvas.drawPath(path1, paint);
+
 
     }
 }

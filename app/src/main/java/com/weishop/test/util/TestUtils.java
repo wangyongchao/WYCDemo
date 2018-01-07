@@ -30,7 +30,7 @@ public class TestUtils {
     public static List<View> views = new ArrayList<>();
 
 
-    public static boolean OPEN = true;
+    public static boolean OPEN = false;
 
     public static void getProperty(Activity context) {
         Rect frame = new Rect();

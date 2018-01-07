@@ -1,4 +1,52 @@
 <resources>
-    <string name="app_name">WeishopTest</string>
+    <string name="app_name">WeishopTest111</string>
     <string name="action_settings">Settings</string>
+    <string name="linear_test">linear_test</string>
+    <string name="framelayout_test">framelayout_test</string>
+    <string name="relative_test">relative_test</string>
+    <string name="myview">myview</string>
+    <string name="animate">animate</string>
+    <string name="listview">listview</string>
+    <string name="text1">1111111111111</string>
+    <string name="text2">2222222222222</string>
+    <string name="text3">3333333333333</string>
+    <string name="text4">myviewmyviewmyview</string>
+    <string name="text5">myview</string>
+    <string name="text6">start</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="local_service_started">local_service_started</string>
+    <string name="local_service_stopped">local_service_stopped</string>
+
+    <!-- 19  -->
+
+    <string-array name="names">
+        <item>aaaaa11</item>
+        <item>aaaaa22</item>
+        <item>aaaaa33</item>
+        <item>bbbb11</item>
+        <item>bbbb22</item>
+        <item>bbbb33</item>
+        <item>cccc11</item>
+        <item>cccc22</item>
+        <item>cccc33</item>
+        <item>cccc44</item>
+        <item>cccc55</item>
+        <item>dddd11</item>
+        <item>dddd22</item>
+        <item>dddd33</item>
+        <item>dddd44</item>
+        <item>eeee11</item>
+        <item>eeee22</item>
+        <item>eeee33</item>
+        <item>eeee44</item>
+
+    </string-array>
+
+    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
 </resources>

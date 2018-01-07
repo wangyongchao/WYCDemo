@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.weishop.test.custom.view.CustomView
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        custom:attr_one="attr one in xml"
+        style="@style/ThroughStyle"
+        android:background="@color/item_background"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+    </com.weishop.test.custom.view.CustomView>
+
+</RelativeLayout>

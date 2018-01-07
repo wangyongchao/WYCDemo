@@ -3,4 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="item_background">#D0D0D0</color>
+    <color name="title_background">#300000</color>
+    <color name="content_background">#D0D0D0</color>
+    <color name="content_color">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#ff0000</color>
+    <color name="selector_background">#DAA520</color>
+    <color name="shadow20">#fff4dd</color>
+    <color name="shadow40">#ffe9bb</color>
+    <color name="shadow70">#ffd987</color>
+    <color name="shadow90">#ffce65</color>
+    <color name="redh">#f13232</color>
 </resources>

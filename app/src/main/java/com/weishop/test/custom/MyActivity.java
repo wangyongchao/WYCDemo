@@ -3,12 +3,10 @@ package com.weishop.test.custom;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.weishop.test.R;
-import com.weishop.test.util.TestUtils;
 
 
 public class MyActivity extends Activity {
@@ -42,7 +40,7 @@ public class MyActivity extends Activity {
             public void onClick(View v) {
                 int left = myView.getLeft();
                 int top = myView.getTop();
-                System.out.println("left="+left+",top="+top);
+                System.out.println("left=" + left + ",top=" + top);
                 testScroll();
             }
 
@@ -78,7 +76,7 @@ public class MyActivity extends Activity {
 
         int left = myView.getLeft();
         int top = myView.getTop();
-        System.out.println("after left="+left+",top="+top);
+        System.out.println("after left=" + left + ",top=" + top);
 
     }
 

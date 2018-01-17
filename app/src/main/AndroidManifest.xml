@@ -20,7 +20,7 @@
         android:name="com.weishop.test.MyApplication"
         android:label="@string/app_name">
         <activity
-            android:name=".custom.MyActivity"
+            android:name=".custom.DragActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/app_name">
             <intent-filter>

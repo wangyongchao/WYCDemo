@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MultiDexTest/MultiDexTest.iml" filepath="$PROJECT_DIR$/MultiDexTest/MultiDexTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WeishopTest.iml" filepath="$PROJECT_DIR$/WeishopTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/sourceTest/sourceTest.iml" filepath="$PROJECT_DIR$/sourceTest/sourceTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/thinkinjava/thinkinjava.iml" filepath="$PROJECT_DIR$/thinkinjava/thinkinjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wycdemo.iml" filepath="$PROJECT_DIR$/wycdemo.iml" />
     </modules>
   </component>
 </project>

@@ -9,45 +9,32 @@ import android.widget.RelativeLayout;
 
 import com.weishop.test.util.TestUtils;
 
-public class MyRelativeLayout extends RelativeLayout {
 
-    public MyRelativeLayout(Context context) {
+public class FlingRelativeLayout extends RelativeLayout {
+
+    public FlingRelativeLayout(Context context) {
         super(context);
     }
 
-    public MyRelativeLayout(Context context, AttributeSet attrs) {
+    public FlingRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public FlingRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        System.out.println("onAttachedToWindow");
-        super.onAttachedToWindow();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        System.out.println("onDetachedFromWindow");
-        super.onDetachedFromWindow();
-    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         final int actionMasked = MotionEventCompat.getActionMasked(ev);
         final int actionIndex = MotionEventCompat.getActionIndex(ev);
-        int pointerId = MotionEventCompat.getPointerId(ev, actionIndex);
-        float x =  MotionEventCompat.getX(ev,actionIndex);
-        float y = MotionEventCompat.getY(ev,actionIndex);
+        float x = MotionEventCompat.getX(ev, actionIndex);
+        float y = MotionEventCompat.getY(ev, actionIndex);
         float rawX = ev.getRawX();
         float rawY = ev.getRawY();
-        int action = ev.getAction();
         String strAction = null;
-
-        switch (action & MotionEventCompat.ACTION_MASK) {
+        switch (actionMasked) {
             case MotionEvent.ACTION_DOWN:
                 strAction = "ACTION_DOWN";
                 break;
@@ -68,9 +55,9 @@ public class MyRelativeLayout extends RelativeLayout {
                 break;
         }
         if (TestUtils.OPEN) {
-            System.out.println("MyRelativeLayout dispatchTouchEvent action=" + strAction + ",x="
+            System.out.println("FlingRelativeLayout dispatchTouchEvent action=" + strAction + ",x="
                     + x + ",y=" + y + ",rawX=" + rawX + ",rawY=" + rawY + ",actionMasked="
-                    + actionMasked + ",actionIndex=" + actionIndex+",pointerId="+pointerId);
+                    + actionMasked + ",actionIndex=" + actionIndex);
         }
 
         return super.dispatchTouchEvent(ev);
@@ -82,14 +69,15 @@ public class MyRelativeLayout extends RelativeLayout {
         float y = ev.getY();
         float rawX = ev.getRawX();
         float rawY = ev.getRawY();
-        int action = ev.getAction();
+        int actionMasked = ev.getActionMasked();
         String strAction = null;
-        switch (action & MotionEventCompat.ACTION_MASK) {
+        switch (actionMasked) {
             case MotionEvent.ACTION_DOWN:
                 strAction = "ACTION_DOWN";
                 break;
             case MotionEvent.ACTION_MOVE:
                 strAction = "ACTION_MOVE";
+
                 break;
             case MotionEvent.ACTION_UP:
                 strAction = "ACTION_UP";
@@ -99,20 +87,18 @@ public class MyRelativeLayout extends RelativeLayout {
                 break;
         }
         if (TestUtils.OPEN) {
-            System.out.println("MyRelativeLayout onInterceptTouchEvent action=" + strAction + ",x="
+            System.out.println("DragRelativeLayout onInterceptTouchEvent action=" + strAction + ",x="
                     + x + ",y=" + y + ",rawX=" + rawX + ",rawY=" + rawY);
         }
-
-        return true;
+        return false;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         final int actionMasked = MotionEventCompat.getActionMasked(ev);
         final int actionIndex = MotionEventCompat.getActionIndex(ev);
-        float x =  MotionEventCompat.getX(ev,actionIndex);
-        float y = MotionEventCompat.getY(ev,actionIndex);
-        int pointerId = MotionEventCompat.getPointerId(ev, actionIndex);
+        float x = MotionEventCompat.getX(ev, actionIndex);
+        float y = MotionEventCompat.getY(ev, actionIndex);
         float rawX = ev.getRawX();
         float rawY = ev.getRawY();
         String strAction = null;
@@ -122,6 +108,7 @@ public class MyRelativeLayout extends RelativeLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 strAction = "ACTION_MOVE";
+
                 break;
             case MotionEvent.ACTION_UP:
                 strAction = "ACTION_UP";
@@ -137,11 +124,9 @@ public class MyRelativeLayout extends RelativeLayout {
                 break;
         }
         if (TestUtils.OPEN) {
-            System.out.println("MyRelativeLayout dispatchTouchEvent action=" + strAction + ",x="
-                    + x + ",y=" + y + ",rawX=" + rawX + ",rawY=" + rawY + ",actionMasked="
-                    + actionMasked + ",actionIndex=" + actionIndex+",pointerId="+pointerId);
+            System.out.println("DragRelativeLayout onTouchEvent action=" + strAction + ",x=" + x
+                    + ",y=" + y + ",rawX=" + rawX + ",rawY=" + rawY);
         }
-
-        return true;
+        return super.onTouchEvent(ev);
     }
 }

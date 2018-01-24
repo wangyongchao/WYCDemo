@@ -3,7 +3,9 @@ package com.weishop.test.custom.view;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -62,6 +64,29 @@ public class CustomViewPager extends ViewGroup {
         }
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        int actionMasked = MotionEventCompat.getActionMasked(ev);
+        float x = MotionEventCompat.getX(ev, MotionEventCompat.getActionIndex(ev));
+        switch (actionMasked) {
+            case MotionEvent.ACTION_DOWN:
 
 
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+
+        }
+
+
+        return super.onInterceptTouchEvent(ev);
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
 }

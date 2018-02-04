@@ -1,8 +1,9 @@
-package com.weishop.test.fragment.viewpager;
+package com.weishop.test.custom.viewpager;
 
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.weishop.test.custom.viewpager.source.PagerAdapter;
 
 /**
  * Created by wangyongchao on 2017/9/20.

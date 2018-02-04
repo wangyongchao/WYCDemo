@@ -1,4 +1,4 @@
-package com.weishop.test.fragment.viewpager;
+package com.weishop.test.custom.viewpager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

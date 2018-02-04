@@ -22,6 +22,8 @@ public class CustomViewPager extends ViewGroup {
     private int scaledTouchSlop;
     private boolean isBeingFiling = false;
     private Scroller scroller;
+    private int leftBorder;
+    private int rightBorder;
 
     public CustomViewPager(Context context) {
         this(context, null);
@@ -78,13 +80,15 @@ public class CustomViewPager extends ViewGroup {
             int right = left + child.getMeasuredWidth();
             child.layout(left, 0, right, child.getMeasuredHeight());
         }
+        leftBorder = getChildAt(0).getLeft();
+        rightBorder = getChildAt(getChildCount() - 1).getRight();
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         int actionMasked = MotionEventCompat.getActionMasked(ev);
         int x = (int) MotionEventCompat.getX(ev, MotionEventCompat.getActionIndex(ev));
-        TestUtils.printEvent(ev,"CustomViewPager onInterceptTouchEvent",null);
+        TestUtils.printEvent(ev, "CustomViewPager onInterceptTouchEvent", null);
         switch (actionMasked) {
             case MotionEvent.ACTION_DOWN:
                 mLastX = x;
@@ -114,15 +118,34 @@ public class CustomViewPager extends ViewGroup {
                 break;
             case MotionEvent.ACTION_MOVE:
                 int deltX = mLastX - x;
+                System.out.println("deltX=" + deltX + ",scorllx=" + getScrollX());
+                if (getScrollX() + deltX < leftBorder) {
+                    scrollTo(leftBorder, 0);
+                    return true;
+                } else if (getScrollX() + getWidth() + deltX > rightBorder) {
+                    scrollTo(rightBorder - getWidth(), 0);
+                    return true;
+                }
                 scrollBy(deltX, 0);
-
-
+                mLastX = x;
                 break;
             case MotionEvent.ACTION_UP:
+                int targetIndex = (getScrollX() + getWidth() / 2) / getWidth();
+                int dx = targetIndex * getWidth() - getScrollX();
+                // 第二步，调用startScroll()方法来初始化滚动数据并刷新界面
+                scroller.startScroll(getScrollX(), 0, dx, 0);
+//                invalidate();
                 break;
 
         }
-
         return true;
+    }
+
+    @Override
+    public void computeScroll() {
+        if (scroller.computeScrollOffset()) {
+            scrollTo(scroller.getCurrX(), scroller.getCurrY());
+            invalidate();
+        }
     }
 }

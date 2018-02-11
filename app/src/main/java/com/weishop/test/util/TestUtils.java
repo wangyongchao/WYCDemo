@@ -76,19 +76,51 @@ public class TestUtils {
 
     }
 
+    /**
+     * MemoryInfo.totalMem:系统总的内存大小
+     * MemoryInfo.availMem:系统当前可用的内存大小
+     * MemoryInfo.lowMemory:现在系统是否处于低内存的情况
+     * MemoryInfo.threshold：低内存的临界值，低于这个值的情况下，系统会有限杀死后台进程或者一些无关联的进程。
+     *
+     * Runtime.maxMemory:当前堆内存可以扩展的最大内存
+     * Runtime.freeMemory:当前堆内存可用的内存，没有扩展的情况下
+     * Runtime.totalMemory:当前堆内存的大小
+     *
+     * @param context
+     */
     public static void getMemoryInfo(Context context) {
-        long maxMemory = (Runtime.getRuntime().maxMemory() / (1024 * 1024));
+        float maxMemory = caculateMunit(Runtime.getRuntime().maxMemory());
+        float totalMemory = caculateMunit(Runtime.getRuntime().totalMemory());
+        float freeMemory = caculateMunit(Runtime.getRuntime().freeMemory());
 
+        System.out.println("maxMemory="+maxMemory+",totalMemory="+totalMemory+",freeMemory="+freeMemory);
 
+        //系统内存相关属性
         ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo info = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(info);
-        long availMem = info.availMem / (1024 * 1024);
+        float totalMem = caculateMunit(info.totalMem);
+        float availMem = caculateMunit(info.availMem);
+        boolean lowMemory = info.lowMemory;
+        float threshold = caculateMunit(info.threshold);
 
+        System.out.println("totalMem=" + totalMem + "，availMem=" + availMem +
+                ",lowMemory=" + lowMemory + ",threshold=" + threshold);
 
-        System.out.println("Max memory is " + maxMemory + "MB" + ",availMem=" + availMem + "MB");
 
     }
+
+    /**
+     * 转化为M
+     *
+     * @param value
+     * @return
+     */
+    public static float caculateMunit(long value) {
+        float result = value / (1024 * 1024f);
+        return result;
+    }
+
 
     public static int calculateInSampleSize(BitmapFactory.Options options,
                                             int reqWidth, int reqHeight) {

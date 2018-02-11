@@ -21,6 +21,7 @@ public class AActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_a);
         findViewById(R.id.aaa).setOnClickListener(this);
 
+
     }
 
     @Override

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.weishop.test.util;
+package com.weishop.test.lru;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

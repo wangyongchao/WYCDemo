@@ -23,6 +23,12 @@ public class FragmentViewPagerActivity extends android.support.v4.app.FragmentAc
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("FragmentViewPagerActivity onResume");
+    }
+
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         LayoutInflater inflater = LayoutInflater.from(this);

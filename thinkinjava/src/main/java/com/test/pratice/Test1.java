@@ -1,6 +1,12 @@
 package com.test.pratice;
 
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by wangyongchao on 16/11/23.
  */
@@ -9,11 +15,39 @@ public class Test1 {
 
 
     public static void main(String[] args) {
-        OuterClass outerClass = new OuterClass();
-        outerClass.testOuter();
-//        OuterClass.InnerClass innerClass = outerClass.new InnerClass();
-//        innerClass.testInner();
+        LinkedHashMap<Integer, String> linkedHashMap = new LinkedHashMap<Integer, String>(0, 0.75f, true);
+        linkedHashMap.put(1, "1");
+        linkedHashMap.put(2, "2");
+        linkedHashMap.put(3, "3");
+        linkedHashMap.put(4, "4");
+        print(linkedHashMap);
 
+
+       linkedHashMap.get(1);
+        linkedHashMap.get(1);
+
+        linkedHashMap.put(2, "222");
+
+        linkedHashMap.get(4);
+
+        linkedHashMap.get(3);
+
+        //put ,get都算使用，最近使用的放入队列的末尾，队列首部都是最近最少使用的
+
+        print(linkedHashMap);
+
+
+    }
+
+    private static void print(HashMap<Integer, String> map) {
+        Set<Map.Entry<Integer, String>> entries = map.entrySet();
+        Iterator<Map.Entry<Integer, String>> iterator = entries.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, String> next = iterator.next();
+            Integer key = next.getKey();
+            System.out.print(",key=" + key);
+        }
+        System.out.println();
     }
 
 }

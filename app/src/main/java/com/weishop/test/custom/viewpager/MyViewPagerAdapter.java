@@ -51,4 +51,5 @@ public class MyViewPagerAdapter extends PagerAdapter {
         System.out.println("destroyItem position="+position);
         container.removeView((View) object);
     }
+
 }

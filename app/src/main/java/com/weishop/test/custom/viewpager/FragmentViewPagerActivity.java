@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.weishop.test.R;
+import com.weishop.test.custom.CustomActivity;
 import com.weishop.test.custom.viewpager.source.ViewPager;
+import com.weishop.test.util.TestUtils;
 
 public class FragmentViewPagerActivity extends android.support.v4.app.FragmentActivity implements
         View.OnClickListener {
@@ -19,6 +21,7 @@ public class FragmentViewPagerActivity extends android.support.v4.app.FragmentAc
         super.onCreate(savedInstanceState);
         System.out.println("FragmentViewPagerActivity onCreate");
         setContentView(R.layout.activity_fragment_viewpager);
+
         initView();
 
     }
@@ -31,6 +34,12 @@ public class FragmentViewPagerActivity extends android.support.v4.app.FragmentAc
 
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                TestUtils.getProperty(FragmentViewPagerActivity.this);
+            }
+        }, 200);
         LayoutInflater inflater = LayoutInflater.from(this);
         View view1 = inflater.inflate(R.layout.item_view, null);
         view1.setBackgroundColor(getResources().getColor(android.R.color.background_dark));

@@ -88,7 +88,7 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        mAdapter.addData(0);
+        mAdapter.notifyItemChanged(1);
 
     }
 }

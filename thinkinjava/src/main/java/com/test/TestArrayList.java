@@ -9,21 +9,10 @@ public class TestArrayList {
 
 
     public static void main(String[] args) {
-        String s = "1000000000000000000000000000000000000000000000000000000000000000";
+       while(true){
+           System.out.println("dfsads");
 
-        byte a = Byte.MAX_VALUE;
-
-        byte x = 123;
-        byte y = 100;
-
-
-        byte x1 = 0x7b;
-        byte y1 = 0x64;
-
-        byte z = (byte) (x + y);
-
-        System.out.println(Integer.toBinaryString(x));
-
+       }
 
     }
 

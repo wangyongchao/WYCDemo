@@ -2,7 +2,8 @@ package com.weishop.test.memory;
 
 public class Student {
 
-    private int[] a = new int[1000];
+    //    new byte[1024 * 1024 * 380];
+    private int[] a = new int[1024 * 1024];
 
     private String id;
 

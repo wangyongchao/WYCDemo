@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import com.weishop.test.R;
 import com.weishop.test.util.TestUtils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,6 +25,7 @@ public class LRUActivity extends Activity implements View.OnClickListener {
     private ImageView imageView;
     private LruCache<String, Bitmap> mMemoryCache;
     private int count;
+    private People people;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +47,37 @@ public class LRUActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        AClass aClass = new AClass();
+        AClass bClass = new AClass();
+        aClass.obj = bClass;
+        bClass.obj = aClass;
+        aClass = null;
+        bClass = null;
+        System.gc();
         int id = v.getId();
-        if (id == R.id.add_btn) {
+//        if (id == R.id.add_btn) {
+//            people = new People();
+//            TestUtils.getMemoryInfo(this);
+//
+//        } else {
+//
+//        }
+
+    }
+
+
+    private void testNativeBitmap() {
 //            String externalFilesDir = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/test/test.jpg";
 //            Bitmap bitmap = createBitmap(externalFilesDir);
 
-            try {
-                AssetManager am = getAssets();
-                InputStream is = am.open("test.jpg");
-                Bitmap bitmap = BitmapFactory.decodeStream(is);
-                TestUtils.getMemoryInfo(this);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        } else {
-
+        try {
+            AssetManager am = getAssets();
+            InputStream is = am.open("test.jpg");
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            System.out.println("bitmap=" + bitmap);
+            TestUtils.getMemoryInfo(this);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

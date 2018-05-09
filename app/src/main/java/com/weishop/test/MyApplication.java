@@ -5,7 +5,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.multidex.MultiDexApplication;
+
+import com.weishop.test.util.TestUtils;
 
 /**
  * Created by wangyongchao on 16/7/1.
@@ -17,6 +18,7 @@ public class MyApplication extends Application implements Application.ActivityLi
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
+        TestUtils.applicationContext = this;
     }
 
     @Override

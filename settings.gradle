@@ -1,1 +1,1 @@
-include ':app', ':thinkinjava', ':sourceTest', ':MultiDexTest'
+include ':app'

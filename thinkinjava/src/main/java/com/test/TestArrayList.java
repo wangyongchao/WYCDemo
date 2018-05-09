@@ -9,10 +9,8 @@ public class TestArrayList {
 
 
     public static void main(String[] args) {
-       while(true){
-           System.out.println("dfsads");
-
-       }
+        String canonicalName = TestArrayList.class.getCanonicalName();
+        System.out.println(canonicalName);
 
     }
 

@@ -26,6 +26,8 @@ import static android.content.Context.ACTIVITY_SERVICE;
  */
 public class TestUtils {
 
+    public static Context applicationContext;
+
     public static List<Context> contexts = new ArrayList<>();
     public static List<View> views = new ArrayList<>();
 

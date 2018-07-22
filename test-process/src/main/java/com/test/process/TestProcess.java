@@ -27,26 +27,7 @@ public class TestProcess extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         System.out.println("processprocessprocessprocess");
-        MethodSpec main = MethodSpec.methodBuilder("main")
-                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(void.class)
-                .addParameter(String[].class, "args")
-                .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
-                .build();
 
-        TypeSpec helloWorld = TypeSpec.classBuilder("HelloWorld")
-                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .addMethod(main)
-                .build();
-
-        JavaFile javaFile = JavaFile.builder("com.songwenju.aptproject", helloWorld)
-                .build();
-
-        try {
-            javaFile.writeTo(processingEnv.getFiler());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return false;
     }
 }

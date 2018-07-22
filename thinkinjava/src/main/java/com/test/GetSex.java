@@ -11,7 +11,7 @@ public class GetSex {
     public static void main(String[] args) {
 
         try {
-            Class clazz=Class.forName("com.test.TestArrayList");
+            Class clazz=Class.forName("com.example.arithmetic.algorithm.TestArrayList");
             Object o = clazz.newInstance();
             Method method = clazz.getMethod("checkedAdd");
         } catch (Exception e) {

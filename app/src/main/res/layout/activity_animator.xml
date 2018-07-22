@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,16 +11,38 @@
         android:text="@string/text6" />
 
 
-    <TextView
-        android:id="@+id/testText"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/start"
+        android:background="#fbf2d7">
+
+        <TextView
+            android:id="@+id/testText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="张三为你点赞,努力的自己就是最好的自己!"
+            android:textColor="#5e2718"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+
+    <com.weishop.test.animator.AdvTextSwitcher
+        android:id="@+id/advTextSwitcher"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/text2" />
+        android:textColor="#66BCBB"
+        app:gravity="center"
+        app:inAnim="@android:anim/slide_in_left"
+        app:outAnim="@android:anim/slide_out_right"
+        app:textSize="32sp" />
 
 
-    <com.weishop.test.custom.view.MyAnimView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<com.weishop.test.custom.view.MyAnimView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
 
 </RelativeLayout>

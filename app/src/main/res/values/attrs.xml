@@ -30,4 +30,15 @@
 
     <attr name="CustomizeStyle" format="reference" />
 
+    <declare-styleable name="app">
+        <attr name="textSize" format="dimension" />
+        <attr name="inAnim" format="dimension" />
+        <attr name="outAnim" format="dimension" />
+        <attr name="gravity">
+            <flag name="right" value="0x01" />
+            <flag name="left" value="0x02" />
+            <flag name="center" value="0x03" />
+        </attr>
+    </declare-styleable>
+
 </resources>

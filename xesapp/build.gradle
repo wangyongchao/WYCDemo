@@ -68,5 +68,4 @@ dependencies {
     annotationProcessor project(':test-process')
     compile project(':test-annotation')
 
-
 }

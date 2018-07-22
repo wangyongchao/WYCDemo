@@ -3,6 +3,9 @@ package com.xesapp.test;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.test.annotation.AutoCreate;
+
+@AutoCreate
 public class MainActivity extends Activity {
 
     @Override

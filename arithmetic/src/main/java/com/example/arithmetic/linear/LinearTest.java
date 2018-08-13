@@ -1,5 +1,9 @@
-package com.example.arithmetic.algorithm.linear;
+package com.example.arithmetic.linear;
 
+
+import com.example.arithmetic.entity.Person;
+
+import java.lang.String;
 
 /**
  * Created by wangyongchao on 2018/5/30.
@@ -8,9 +12,40 @@ package com.example.arithmetic.algorithm.linear;
 
 public class LinearTest {
     public static void main(String[] args) {
-        System.out.println(testN(20));
+        testContains();
+    }
+
+    private static void testContains() {
+        Person person1 = new Person();
+        person1.setIdCard("1");
+        int hashCode1 = person1.hashCode();
+        Person person2 = new Person();
+        person2.setIdCard("1");
+        int hashCode2 = person2.hashCode();
+        System.out.println("hashCode1="+hashCode1+",hashCode2="+hashCode2);
+        System.out.println(person1.equals(person2));
 
     }
+
+
+    /**
+     * 测试队列
+     */
+    private static void testQueue() {
+        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>(6);
+        arrayDeque.offer(0);
+        arrayDeque.offer(1);
+        arrayDeque.offer(2);
+        arrayDeque.offer(3);
+        arrayDeque.offer(4);
+        arrayDeque.offer(5);
+        arrayDeque.offer(6);
+        arrayDeque.offer(7);
+        arrayDeque.offer(8);
+
+
+    }
+
 
     /**
      * 阶乘，递归

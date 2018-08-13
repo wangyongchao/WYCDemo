@@ -5,7 +5,9 @@
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package com.example.arithmetic.algorithm.linear;
+package com.example.arithmetic.linear;
+
+import java.lang.String;
 
 import java.util.AbstractList;
 import java.util.ArrayList;

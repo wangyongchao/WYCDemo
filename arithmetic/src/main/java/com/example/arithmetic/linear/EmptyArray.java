@@ -1,4 +1,6 @@
-package com.example.arithmetic.algorithm.linear;
+package com.example.arithmetic.linear;
+
+import java.lang.String;
 
 public final class EmptyArray {
     private EmptyArray() {

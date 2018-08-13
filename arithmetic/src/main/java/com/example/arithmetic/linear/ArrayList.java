@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package com.example.arithmetic.algorithm.linear;
+package com.example.arithmetic.linear;
 
 import java.io.IOException;
 import java.io.InvalidObjectException;

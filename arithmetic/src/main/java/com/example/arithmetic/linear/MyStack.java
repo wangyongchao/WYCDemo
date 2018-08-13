@@ -1,4 +1,4 @@
-package com.example.arithmetic.algorithm.linear;
+package com.example.arithmetic.linear;
 
 import java.util.Arrays;
 

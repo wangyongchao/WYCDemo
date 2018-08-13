@@ -1,1 +1,1 @@
-include ':app','test-process','test-annotation','arithmetic'
+include ':image',':designmode',':arithmetic'

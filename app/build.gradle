@@ -8,7 +8,7 @@ android {
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.weishop.test"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -101,6 +101,8 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
 
     compile 'io.reactivex:rxjava:1.2.3'
+    implementation 'com.airbnb.android:lottie:2.6.1'
+    implementation 'com.robinhood.ticker:ticker:2.0.0'
 
 
 

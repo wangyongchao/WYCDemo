@@ -122,6 +122,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        System.out.println("MainActivity onDestroy");
+        System.out.println("BarrageActivity onDestroy");
     }
 }

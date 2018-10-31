@@ -1,1 +1,1 @@
-include ':image',':designmode',':arithmetic'
+include ':app',':image',':designmode',':arithmetic'

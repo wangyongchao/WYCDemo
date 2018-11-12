@@ -6,12 +6,7 @@ package com.example.designmode.test;
 
 public class Test {
     public static void main(String[] args) {
-        int endFrame=279;
-        int startFrame=240;
-        int frameRate=30;
-        long frameDuration = endFrame - startFrame;
-        long duration = (long) (frameDuration / (float) frameRate * 1000);
-        System.out.println("duration="+duration);
+        System.out.println(900*30*6.9);
 
     }
 

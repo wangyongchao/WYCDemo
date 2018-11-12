@@ -9,8 +9,7 @@ import java.util.Date;
 public class Test1 extends Date {
 
     public static void main(String[] args) {
-        Test1 test1 = new Test1();
-        System.out.println(Test1.class.getClassLoader());
+        System.out.println(2700*30);
 
     }
 

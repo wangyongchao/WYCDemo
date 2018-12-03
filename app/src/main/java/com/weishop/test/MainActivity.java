@@ -17,6 +17,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -31,8 +32,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.weishop.test.activitycharacter.AActivity;
 import com.weishop.test.custom.CustomActivity;
 import com.weishop.test.custom.MyActivity;
+import com.weishop.test.memory.LeakActivity;
 import com.weishop.test.util.FeedBackWindowManager;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -79,11 +82,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        System.out.println("onSaveInstanceState");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        System.out.println("onSaveInstanceState PersistableBundle");
+    }
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "dfasdf",Toast.LENGTH_LONG).show();
-        FeedBackWindowManager.getInstance().showWindow("dsfa");
+//        Toast.makeText(this, "dfasdf",Toast.LENGTH_LONG).show();
+
+//        FeedBackWindowManager.getInstance().showWindow("dsfa");
+        startActivity(new Intent(this,LeakActivity.class));
 
     }
 

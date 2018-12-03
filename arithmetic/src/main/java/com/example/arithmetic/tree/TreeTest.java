@@ -9,9 +9,18 @@ import java.util.List;
 public class TreeTest {
 
     public static void main(String[] args) {
-        testTreeParent();
+
+        testBinaryTree();
+    }
+
+    private static void testBinaryTree() {
+
+        String tree = "A,B,#,D,#,#,C,#,#";
+        BinaryTree binaryTree = new BinaryTree(tree);
+        binaryTree.preOrderTraverse(binaryTree.getRoot());
 
     }
+
 
     /**
      * 双亲表示法

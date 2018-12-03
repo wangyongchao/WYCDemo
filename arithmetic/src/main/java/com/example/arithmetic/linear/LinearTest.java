@@ -8,8 +8,18 @@ package com.example.arithmetic.linear;
 
 public class LinearTest {
     public static void main(String[] args) {
+        yueSeFuHuan();
 
 
+    }
+
+    /**
+     * 约瑟夫环
+     */
+    private static void yueSeFuHuan() {
+        YueSeFuHuan yueSeFuHuan = new YueSeFuHuan(5);
+        yueSeFuHuan.iterator();
+        yueSeFuHuan.start(3,2);
     }
 
 

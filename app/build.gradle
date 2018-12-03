@@ -103,6 +103,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.2.3'
     implementation 'com.airbnb.android:lottie:2.6.1'
     implementation 'com.robinhood.ticker:ticker:2.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha2'
 
 
 

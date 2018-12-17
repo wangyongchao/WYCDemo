@@ -1,5 +1,6 @@
 package com.example.arithmetic.tree;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -9,16 +10,35 @@ import java.util.List;
 public class TreeTest {
 
     public static void main(String[] args) {
+        testHuffmanTree();
 
-        testBinaryTree();
+
     }
 
+    private static void testHuffmanTree() {
+        int[] weights = {3, 5, 4, 6, 9};
+        HuffmanTree huffmanTree = new HuffmanTree(weights);
+
+    }
+
+
+    /**
+     * 构建二叉树
+     */
     private static void testBinaryTree() {
-
-        String tree = "A,B,#,D,#,#,C,#,#";
+        String tree = "A,B,D,H,#,K,#,#,#,E,#,#,C,F,I,#,#,#,G,#,J,#,#";
         BinaryTree binaryTree = new BinaryTree(tree);
-        binaryTree.preOrderTraverse(binaryTree.getRoot());
+        binaryTree.orderTraverseUnRecursion(binaryTree.getRoot());
+    }
 
+    /**
+     * 线索二叉树
+     */
+    private static void testThreadBinaryTree() {
+        String tree = "A,B,D,H,#,#,I,#,#,E,J,#,#,#,C,F,#,#,G,#,#";
+        BinaryTree binaryTree = new BinaryTree(tree);
+        binaryTree.addThreadBinaryTreeHeader(binaryTree.getRoot());
+        binaryTree.revertTraverseByHeader(binaryTree.getHeader());
     }
 
 

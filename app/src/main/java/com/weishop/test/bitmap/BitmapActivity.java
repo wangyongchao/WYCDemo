@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.weishop.test.R;
@@ -27,9 +29,18 @@ public class BitmapActivity extends Activity {
 
         setContentView(R.layout.activity_bitmap);
         imageView = (ImageView) findViewById(R.id.testBitmap);
-
-        loadBitmap();
-
+        Button btnView = findViewById(R.id.btn);
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+                int byteCount = bitmap.getByteCount();
+                float caculateMunit = TestUtils.caculateMunit(byteCount);
+                System.out.println("caculateMunit="+caculateMunit+",with="+bitmap.getWidth()+",height="+bitmap.getHeight());
+                TestUtils.getMemoryInfo(BitmapActivity.this);
+//                loadBitmap();
+            }
+        });
 
     }
 

@@ -38,6 +38,9 @@ public class AppUtils {
                 Log.e(TAG, "Failed to calculate accurate cpu count", t);
             }
         }
+        int cpuCount = cpus != null ? cpus.length : 0;
+        int availableProcessors = Math.max(1, Runtime.getRuntime().availableProcessors());
+
     }
 
     /**

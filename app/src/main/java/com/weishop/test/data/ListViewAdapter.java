@@ -1,6 +1,8 @@
 package com.weishop.test.data;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Trace;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.TextView;
 
 import com.weishop.test.R;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,11 +67,27 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     private void test() {
+        String str = "fdasdfdsfdsfdsfdsf";
+        int i = 0;
         try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
+            while (i < 100) {
+                i++;
+                byte[] md5s = MessageDigest.getInstance("MD5").digest(str.getBytes("UTF-8"));
+                mContext.getSharedPreferences("md5", Context.MODE_PRIVATE).edit().putString("md5", new String(md5s));
+            }
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+
+//        try {
+//            Thread.sleep(20);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void setData(List<String> data) {

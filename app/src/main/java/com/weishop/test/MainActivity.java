@@ -36,6 +36,7 @@ import com.weishop.test.activitycharacter.AActivity;
 import com.weishop.test.custom.CustomActivity;
 import com.weishop.test.custom.MyActivity;
 import com.weishop.test.memory.LeakActivity;
+import com.weishop.test.performance.PerformanceActivity;
 import com.weishop.test.util.FeedBackWindowManager;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -99,7 +100,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        Toast.makeText(this, "dfasdf",Toast.LENGTH_LONG).show();
 
 //        FeedBackWindowManager.getInstance().showWindow("dsfa");
-        startActivity(new Intent(this,LeakActivity.class));
+        startActivity(new Intent(this,PerformanceActivity.class));
 
     }
 

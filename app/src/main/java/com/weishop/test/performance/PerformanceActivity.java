@@ -2,71 +2,89 @@
 package com.weishop.test.performance;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
+import android.os.Environment;
+import android.os.Trace;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.weishop.test.data.ListViewAdapter;
 import com.weishop.test.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PerformanceActivity extends Activity implements View.OnClickListener {
-
-
+    private TextView textView;
     private ListView mListView;
     private ListViewAdapter mAdapter;
     private List<String> mData = new ArrayList<String>();
 
+    static {
+//        Debug.startMethodTracing("startTime");
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Debug.startMethodTracing();
-
         setContentView(R.layout.activity_performance);
-
-        mListView = (ListView) findViewById(R.id.listview);
-        mAdapter = new ListViewAdapter(this);
-        mListView.setAdapter(mAdapter);
-        findViewById(R.id.start).setOnClickListener(this);
-
+        this.findViewById(R.id.start).setOnClickListener(this);
+        textView = findViewById(R.id.textview);
+        mListView = findViewById(R.id.list);
+        testRead();
         initData();
 
+    }
+
+    private void initData() {
+        for (int i = 0; i < 1000; i++) {
+            mData.add("item" + i);
+        }
+        mAdapter = new ListViewAdapter(this);
+        mListView.setAdapter(mAdapter);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        textView.setText("测试");
         mAdapter.setData(mData);
         mAdapter.notifyDataSetChanged();
 
 
     }
 
-    private void initData() {
-        for (int i = 0; i < 100; i++) {
-            mData.add("item" + i);
-        }
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        Thread thread = new Thread(new R1());
-        thread.start();
-
-
-    }
-
-    class R1 implements Runnable {
-
-        @Override
-        public void run() {
-            try {
-                synchronized (mAdapter) {
-                    mAdapter.wait(2000);
-                }
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    private void testRead() {
+        try {
+            File externalStorageDirectory = Environment.getExternalStorageDirectory();
+            File file = new File(externalStorageDirectory, "/test/testimage.jpg");
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] bytes = new byte[1024];
+            int read = 0;
+            while ((read = fileInputStream.read(bytes)) != -1) {
+                System.out.println("lenght=" + read);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void test() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -74,6 +92,6 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Debug.stopMethodTracing();
+//        Debug.stopMethodTracing();
     }
 }

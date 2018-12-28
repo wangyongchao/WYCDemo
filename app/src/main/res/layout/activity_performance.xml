@@ -9,13 +9,21 @@
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text6" />
+        android:text="debug" />
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="启动时候的状态"
+        android:textSize="14sp" />
+
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
-        android:layout_below="@id/start"></ListView>
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>

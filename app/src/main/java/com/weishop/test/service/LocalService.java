@@ -63,11 +63,11 @@ public class LocalService extends Service {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Display a notification about us starting. We put an icon in the
         // status bar.
-        showNotification();
+//        showNotification();
     }
 
 
@@ -94,10 +94,10 @@ public class LocalService extends Service {
     public void onDestroy() {
         System.out.println("LocalService onDestroy");
         // Cancel the persistent notification.
-        mNM.cancel(NOTIFICATION);
+//        mNM.cancel(NOTIFICATION);
 
         // Tell the user we stopped.
-        Toast.makeText(this, R.string.local_service_stopped, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, R.string.local_service_stopped, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -140,6 +140,8 @@ public class LocalService extends Service {
 
         // Send the notification.
         mNM.notify(NOTIFICATION, noti);
+
+        startForeground(NOTIFICATION,noti);
     }
 
 }

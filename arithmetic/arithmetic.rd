@@ -281,6 +281,8 @@ Stack的pop方法是线程安全的。push方法没有加synchronized。
 2.邻接表
 3.十字链表
 有向图中，解决入度出度问题
+data firstin firstout:data数据域，firstin指向入边表第一条，firstout指向出边表第一条
+tailvex headvex headlink taillink:tailvex弧尾，headvex弧头，headlink弧头相同的下一条边，taillink弧尾相同的下一条边。
 
 
 

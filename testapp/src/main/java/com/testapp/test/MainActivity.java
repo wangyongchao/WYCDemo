@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.testapp.test.Label;
 import com.testapp.test.ListViewAdapter;
+import com.testapp.test.activitycharacter.AActivity;
 import com.testapp.test.handler.HandlerActivity;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class MainActivity extends Activity {
     private void clickType(int type) {
         switch (type) {
             case 1:
-               startActivityTest();
+                startActivityTest();
                 break;
             case 2:
                 startHandlerTest();
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
     }
 
     private void startActivityTest() {
-
+        startActivity(new Intent(this, AActivity.class));
     }
 
     private void initData() {

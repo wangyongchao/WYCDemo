@@ -17,6 +17,18 @@
         </activity>
 
         <activity android:name="com.testapp.test.handler.HandlerActivity" />
+        <activity android:name="com.testapp.test.activitycharacter.AActivity" />
+        <activity android:name="com.testapp.test.activitycharacter.BActivity" />
+
+        <activity
+            android:name="com.testapp.test.activitycharacter.CActivity"
+            android:taskAffinity="com.testapp.test.activitycharacter.CActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.testapp.test.activitycharacter.CActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 

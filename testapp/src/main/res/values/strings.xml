@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">xesapp</string>
+    <string name="start_activity_test">start activity test"</string>
+    <string name="handler_test">handler test</string>
+    <string name="view_touch_draw_test">view touch draw test</string>
+    <string name="start_main_thread">startMainThread</string>
+    <string name="start_main_thread_delay">startMainThreadDelay</string>
+    <string name="stop_main_thread">stopMainThread</string>
+    <string name="start_work_thread">startWorkThread</string>
+    <string name="stop_work_thread">stopWorkThread</string>
+</resources>

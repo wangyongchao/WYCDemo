@@ -6,7 +6,7 @@ interface USB {
 
 class Outer {
     public void fun() {
-        int i = 1; // 被匿名内部类访问的局部变量必须被final修饰
+        final int i = 1; // 被匿名内部类访问的局部变量必须被final修饰
         new USB() {
             @Override
             public void start() {

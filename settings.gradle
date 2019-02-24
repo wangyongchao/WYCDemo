@@ -1,1 +1,1 @@
-include ':app',':image',':designmode',':arithmetic'
+include ':thinkinjava'

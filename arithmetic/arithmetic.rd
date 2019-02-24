@@ -275,7 +275,14 @@ Stack的pop方法是线程安全的。push方法没有加synchronized。
 
 图:
 图是由顶点的有穷非空集合和顶点之间边的集合组成，通常表示为：G(V,E),其中，G表示一个图，V是图G中顶点的集合，E是图G中边的集合。
-
+图的存储方式：
+1.邻接矩阵
+一个一维数组存储顶点信息，一个二维数组存储图中的边或弧的信息。
+2.邻接表
+3.十字链表
+有向图中，解决入度出度问题
+data firstin firstout:data数据域，firstin指向入边表第一条，firstout指向出边表第一条
+tailvex headvex headlink taillink:tailvex弧尾，headvex弧头，headlink弧头相同的下一条边，taillink弧尾相同的下一条边。
 
 
 

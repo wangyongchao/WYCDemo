@@ -1,6 +1,8 @@
 package com.example.arithmetic.linear;
 
 
+import java.util.Iterator;
+
 /**
  * Created by wangyongchao on 2018/5/30.
  * 线性表测试类
@@ -120,6 +122,8 @@ public class LinearTest {
 
         String s = linkedList.get(5);
         linkedList.remove(2);
+
+        Iterator<String> iterator = linkedList.iterator();
 
 
     }

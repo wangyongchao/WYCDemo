@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package test.databinding.sourcecode;
+package dalvik.system;
 
 import java.io.File;
 import java.net.URL;

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -37,7 +38,14 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
             case R.id.start:
                 Intent intent = new Intent(this, LocalService.class);
                 intent.putExtra("name", "dafds" + (++count));
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    startForegroundService(intent);
+//                }else {
+//                    startService(intent);
+//                }
+
                 startService(intent);
+
 
                 break;
 
@@ -46,7 +54,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
 
                 break;
             case R.id.bind:
-                Intent bindIntent = new Intent(this,LocalService.class);
+                Intent bindIntent = new Intent(this, LocalService.class);
                 bindService(bindIntent, myServiceConnection, BIND_AUTO_CREATE);
 
                 break;

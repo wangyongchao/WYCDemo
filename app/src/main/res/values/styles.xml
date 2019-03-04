@@ -31,4 +31,9 @@
         <item name="attr_four">attr four from defalut style res</item>
     </style>
 
+    <style name="launchTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

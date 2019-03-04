@@ -9,7 +9,7 @@ public class OuterClass {
 
     public void testOuter() {
         System.out.println("testOuter");
-        int i = 4;
+        final int i = 4;
         class MethodInnerClass {
             private int methodInner = 4;
 

@@ -5,10 +5,8 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.view.View;
 
 import com.weishop.test.R;
@@ -72,15 +70,15 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             System.out.println("onServiceConnected service=" + service);
-//             LocalService.LocalBinder binder= (LocalService.LocalBinder) service;
-//             binder.startDownload();
-            try {
-                MyAIDLService myAIDLService = MyAIDLService.Stub.asInterface(service);
-                int plus = myAIDLService.plus(3, 4);
-                System.out.println("plus=" + plus);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+             LocalService.LocalBinder binder= (LocalService.LocalBinder) service;
+             binder.startDownload();
+//            try {
+//                MyAIDLService myAIDLService = MyAIDLService.Stub.asInterface(service);
+//                int plus = myAIDLService.plus(3, 4);
+//                System.out.println("plus=" + plus);
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
 
 
         }

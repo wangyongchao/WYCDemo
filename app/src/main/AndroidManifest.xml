@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 
@@ -22,8 +22,7 @@
         android:name="com.weishop.test.MyApplication"
         android:label="@string/app_name">
         <activity
-            android:name="com.weishop.test.LaunchActivity"
-            android:theme="@style/launchTheme"
+            android:name="com.weishop.test.service.ServiceActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,14 +36,14 @@
         <activity android:name=".performance.PerformanceActivity"></activity>
 
 
-        <service
-            android:name="com.weishop.test.service.LocalService"
-            android:process=":remote">
+        <service android:name="com.weishop.test.service.LocalService">
             <intent-filter>
                 <action android:name="com.weishop.test.action.service" />
             </intent-filter>
 
         </service>
+
+        <service android:name=".service.MyIntentService" />
 
     </application>
 

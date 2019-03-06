@@ -24,11 +24,9 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.weishop.test.activitycharacter.AActivity;
 import com.weishop.test.R;
+import com.weishop.test.activitycharacter.AActivity;
 
 public class LocalService extends Service {
     private NotificationManager mNM;
@@ -36,6 +34,8 @@ public class LocalService extends Service {
     // Unique Identification Number for the Notification.
     // We use it on Notification start, and to cancel it.
     private int NOTIFICATION = R.string.local_service_started;
+
+    Binder binder = new LocalBinder();
 
     /**
      * Class for clients to access. Because we know this service always runs in
@@ -81,9 +81,13 @@ public class LocalService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        System.out.println("LocalService onStartCommand intent=" + intent + ",flags=" + flags
-                + ",startId=" + startId + ",name=" + intent.getStringExtra("name"));
-        Log.i("LocalService", "Received start id " + startId + ": " + intent);
+        if (intent == null) {
+            System.out.println("nullll");
+        } else {
+            System.out.println("LocalService onStartCommand intent=" + intent + ",flags=" + flags
+                    + ",startId=" + startId + ",name=" + intent.getStringExtra("name"));
+        }
+
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.
         return START_REDELIVER_INTENT;
@@ -108,7 +112,7 @@ public class LocalService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return stub;
+        return binder;
     }
 
     @Override
@@ -141,7 +145,7 @@ public class LocalService extends Service {
         // Send the notification.
         mNM.notify(NOTIFICATION, noti);
 
-        startForeground(NOTIFICATION,noti);
+        startForeground(NOTIFICATION, noti);
     }
 
 }

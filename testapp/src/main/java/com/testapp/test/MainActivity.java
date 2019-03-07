@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.testapp.test.Label;
 import com.testapp.test.ListViewAdapter;
 import com.testapp.test.activitycharacter.AActivity;
+import com.testapp.test.fragment.FragmentTestActivity;
 import com.testapp.test.handler.HandlerActivity;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class MainActivity extends Activity {
             case 3:
                 break;
             case 4:
+                startFragmentTest();
                 break;
         }
 
@@ -58,7 +60,10 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this, HandlerActivity.class));
 
     }
+    private void startFragmentTest() {
+        startActivity(new Intent(this, FragmentTestActivity.class));
 
+    }
     private void startActivityTest() {
         startActivity(new Intent(this, AActivity.class));
     }
@@ -73,6 +78,8 @@ public class MainActivity extends Activity {
         label = new Label(getResources().getString(R.string.handler_test), 2);
         labels.add(label);
         label = new Label(getResources().getString(R.string.view_touch_draw_test), 3);
+        labels.add(label);
+        label = new Label(getResources().getString(R.string.fragment_test), 4);
         labels.add(label);
 
         mAdapter.setData(labels);

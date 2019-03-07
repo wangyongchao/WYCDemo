@@ -33,6 +33,7 @@
         </activity>
 
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".performance.BlockActivity"></activity>
         <activity android:name=".memory.LeakActivity"></activity>
         <activity android:name=".performance.PerformanceActivity"></activity>
 

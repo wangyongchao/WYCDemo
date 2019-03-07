@@ -20,11 +20,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testcpu.trace");
-        System.out.println("onCreate");
-        init();
+//        Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testcpu.trace");
+//        init();
 
-        Debug.stopMethodTracing();
+//        Debug.stopMethodTracing();
 
     }
 

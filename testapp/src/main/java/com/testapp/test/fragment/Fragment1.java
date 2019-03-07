@@ -1,5 +1,5 @@
 
-package com.weishop.test.fragment;
+package com.testapp.test.fragment;
 
 import android.Manifest;
 import android.app.Fragment;
@@ -7,23 +7,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import com.weishop.test.R;
-
-import java.util.Random;
 
 public class Fragment1 extends Fragment {
 
     private EditText editText;
     private InputMethodManager inputMethodManager;
-    private int REQUEST_CODE_MUTI=100;
+    private int REQUEST_CODE_MUTI = 100;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +68,7 @@ public class Fragment1 extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]
             grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         System.out.println("onRequestPermissionsResult");

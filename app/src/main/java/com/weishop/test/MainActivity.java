@@ -15,9 +15,12 @@ import android.graphics.drawable.DrawableContainer;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
+import android.os.Debug;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -96,13 +99,76 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    class MyThread extends Thread {
+        public MyThread(@NonNull String name) {
+            super(name);
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+            }
+
+        }
+    }
+
+    private int a = 0;
+    private int b = 0;
+    private int c = 0;
+    private int d = 0;
+
+    @Override
     public void onClick(View v) {
 //        Toast.makeText(this, "dfasdf",Toast.LENGTH_LONG).show();
 
 //        FeedBackWindowManager.getInstance().showWindow("dsfa");
-        startActivity(new Intent(this,PerformanceActivity.class));
+//        startActivity(new Intent(this, PerformanceActivity.class));
+//        MyThread myThread = new MyThread("testCpu");
+//        myThread.start();
+
+        if (v.getId() == R.id.linear_btn) {
+            try {
+                Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testCpuPro.trace");
+                A();
+                Debug.stopMethodTracing();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("a=" + a + ",b=" + b + ",c=" + c + ",d=" + d);
+        }
 
     }
+
+    private void A() throws Exception {
+        a++;
+        B();
+        D();
+        Thread.sleep(100);
+    }
+
+    private void B() throws Exception {
+        b++;
+        C();
+        Thread.sleep(100);
+    }
+
+    private void C() throws Exception {
+        c++;
+        Thread.sleep(100);
+    }
+
+    private void D() throws Exception {
+        d++;
+        C();
+        B();
+        Thread.sleep(100);
+    }
+
 
     class OnPressTouchListener implements View.OnTouchListener {
         private Drawable stateDrawable;
@@ -125,7 +191,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 case MotionEvent.ACTION_UP:
                     if (orginalDrawable != null) {
                         orginalDrawable.clearColorFilter();
-                    }else {
+                    } else {
                         v.setBackgroundDrawable(null);
                     }
                     v.invalidate();

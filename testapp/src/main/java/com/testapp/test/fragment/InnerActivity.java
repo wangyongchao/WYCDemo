@@ -1,5 +1,5 @@
 
-package com.weishop.test.activitycharacter;
+package com.testapp.test.fragment;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -8,11 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.weishop.test.R;
-import com.weishop.test.fragment.Fragment1;
+import com.testapp.test.R;
 
 
-public class AActivity extends Activity implements View.OnClickListener {
+public class InnerActivity extends Activity implements View.OnClickListener {
 
     private Fragment1 fragment1;
 

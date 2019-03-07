@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.testapp.test">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +22,8 @@
         <activity android:name="com.testapp.test.handler.HandlerActivity" />
         <activity android:name="com.testapp.test.activitycharacter.AActivity" />
         <activity android:name="com.testapp.test.activitycharacter.BActivity" />
+        <activity android:name="com.testapp.test.fragment.FragmentTestActivity" />
+        <activity android:name="com.testapp.test.fragment.InnerActivity" />
 
         <activity
             android:name="com.testapp.test.activitycharacter.CActivity"

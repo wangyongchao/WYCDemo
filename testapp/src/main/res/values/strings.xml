@@ -3,6 +3,7 @@
     <string name="start_activity_test">start activity test"</string>
     <string name="handler_test">handler test</string>
     <string name="view_touch_draw_test">view touch draw test</string>
+    <string name="fragment_test">fragment_test</string>
     <string name="start_main_thread">startMainThread</string>
     <string name="start_main_thread_delay">startMainThreadDelay</string>
     <string name="stop_main_thread">stopMainThread</string>
@@ -11,4 +12,6 @@
     <string name="activity_a">activityA</string>
     <string name="activity_b">activityB</string>
     <string name="activity_c">activityC</string>
+    <string name="get1">get1</string>
+    <string name="get2">get2</string>
 </resources>

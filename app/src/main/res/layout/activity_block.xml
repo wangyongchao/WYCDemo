@@ -6,10 +6,21 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/block_start"
+        android:id="@+id/block_start1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="block" />
+        android:text="block1" />
+
+    <Button
+        android:id="@+id/block_start2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="block2" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

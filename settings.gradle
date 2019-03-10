@@ -1,2 +1,2 @@
-include ':app',':testapp'
+include ':app'
 

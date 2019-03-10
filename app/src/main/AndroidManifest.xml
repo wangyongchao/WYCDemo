@@ -22,7 +22,7 @@
         android:name="com.weishop.test.MyApplication"
         android:label="@string/app_name">
         <activity
-            android:name="com.weishop.test.service.MessengerServiceActivities$Binding"
+            android:name="com.weishop.test.service.ServiceActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

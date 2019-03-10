@@ -33,6 +33,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent bindIntent = new Intent(this, LocalService.class);
         switch (v.getId()) {
             case R.id.start:
                 Intent intent = new Intent(this, LocalService.class);
@@ -53,7 +54,8 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
 
                 break;
             case R.id.bind:
-                Intent bindIntent = new Intent(this, LocalService.class);
+
+//                bindIntent.setAction("aaaa");
                 bindService(bindIntent, myServiceConnection, BIND_AUTO_CREATE);
 
                 break;
@@ -61,7 +63,19 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
                 unbindService(myServiceConnection);
                 break;
             case R.id.another:
-                startActivity(new Intent(this, ServiceActivity.class));
+//                startActivity(new Intent(this, ServiceActivity.class));
+//                bindIntent.setAction("bbbb");
+                bindService(bindIntent, new ServiceConnection() {
+                    @Override
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        System.out.println("onServiceConnected another="  + service);
+                    }
+
+                    @Override
+                    public void onServiceDisconnected(ComponentName name) {
+
+                    }
+                }, BIND_AUTO_CREATE);
                 break;
         }
 
@@ -74,12 +88,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
         public void onServiceConnected(ComponentName name, IBinder service) {
             System.out.println("onServiceConnected service=" + service);
             LocalService.LocalBinder binder = (LocalService.LocalBinder) service;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    binder.startDownload();
-                }
-            }).start();
+            binder.startDownload();
 //            try {
 //                MyAIDLService myAIDLService = MyAIDLService.Stub.asInterface(service);
 //                int plus = myAIDLService.plus(3, 4);

@@ -70,6 +70,7 @@ public class RemoteService extends Service {
 
     @Override
     public void onCreate() {
+        System.out.println("onCreate");
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Display a notification about us starting.
@@ -89,6 +90,7 @@ public class RemoteService extends Service {
 
     @Override
     public void onDestroy() {
+        System.out.println("onDestroy");
         // Cancel the persistent notification.
         mNM.cancel(R.string.remote_service_started);
 
@@ -106,6 +108,7 @@ public class RemoteService extends Service {
     // BEGIN_INCLUDE(exposing_a_service)
     @Override
     public IBinder onBind(Intent intent) {
+        System.out.println("onBind");
         // Select the interface to return.  If your service only implements
         // a single interface, you can just return it here without checking
         // the Intent.
@@ -116,6 +119,12 @@ public class RemoteService extends Service {
             return mSecondaryBinder;
         }
         return null;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        System.out.println("onUnbind");
+        return super.onUnbind(intent);
     }
 
     /**

@@ -22,7 +22,7 @@
         android:name="com.weishop.test.MyApplication"
         android:label="@string/app_name">
         <activity
-            android:name="com.weishop.test.service.ServiceActivity"
+            android:name="com.weishop.test.service.RemoteService$Binding"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,13 +62,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".service.RemoteService$Binding"
-            android:label="@string/activity_remote_service_binding">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
-            </intent-filter>
-        </activity>
+        <!--<activity android:name=".service.RemoteService$Binding"-->
+            <!--android:label="@string/activity_remote_service_binding">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.SAMPLE_CODE" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
 
         <activity android:name=".service.RemoteService$BindingOptions"
             android:label="@string/activity_remote_service_binding_options">

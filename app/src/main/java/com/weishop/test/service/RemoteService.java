@@ -50,7 +50,7 @@ import com.weishop.test.R;
  * process, we must use IPC to interact with it.  The
  * {@link Controller} and {@link Binding} classes
  * show how to interact with the service.
- * 
+ *
  * <p>Note that most applications <strong>do not</strong> need to deal with
  * the complexity shown here.  If your application simply has a service
  * running in its own process, the {@link LocalService} sample shows a much
@@ -64,17 +64,17 @@ public class RemoteService extends Service {
      */
     final RemoteCallbackList<IRemoteServiceCallback> mCallbacks
             = new RemoteCallbackList<IRemoteServiceCallback>();
-    
+
     int mValue = 0;
     NotificationManager mNM;
-    
+
     @Override
     public void onCreate() {
-        mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Display a notification about us starting.
         showNotification();
-        
+
         // While this service is running, it will continually increment a
         // number.  Send the first message that is used to perform the
         // increment.
@@ -94,16 +94,16 @@ public class RemoteService extends Service {
 
         // Tell the user we stopped.
         Toast.makeText(this, R.string.remote_service_stopped, Toast.LENGTH_SHORT).show();
-        
+
         // Unregister all callbacks.
         mCallbacks.kill();
-        
+
         // Remove the next pending message to increment the counter, stopping
         // the increment loop.
         mHandler.removeMessages(REPORT_MSG);
     }
-    
-// BEGIN_INCLUDE(exposing_a_service)
+
+    // BEGIN_INCLUDE(exposing_a_service)
     @Override
     public IBinder onBind(Intent intent) {
         // Select the interface to return.  If your service only implements
@@ -125,6 +125,7 @@ public class RemoteService extends Service {
         public void registerCallback(IRemoteServiceCallback cb) {
             if (cb != null) mCallbacks.register(cb);
         }
+
         public void unregisterCallback(IRemoteServiceCallback cb) {
             if (cb != null) mCallbacks.unregister(cb);
         }
@@ -137,17 +138,18 @@ public class RemoteService extends Service {
         public int getPid() {
             return Process.myPid();
         }
+
         public void basicTypes(int anInt, long aLong, boolean aBoolean,
-                float aFloat, double aDouble, String aString) {
+                               float aFloat, double aDouble, String aString) {
         }
     };
 // END_INCLUDE(exposing_a_service)
-    
+
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         Toast.makeText(this, "Task removed: " + rootIntent, Toast.LENGTH_LONG).show();
     }
-    
+
     private static final int REPORT_MSG = 1;
 
     /**
@@ -155,17 +157,18 @@ public class RemoteService extends Service {
      * to schedule increments of our value.
      */
     private final Handler mHandler = new Handler() {
-        @Override public void handleMessage(Message msg) {
+        @Override
+        public void handleMessage(Message msg) {
             switch (msg.what) {
-                
+
                 // It is time to bump the value!
                 case REPORT_MSG: {
                     // Up it goes.
                     int value = ++mValue;
-                    
+
                     // Broadcast to all clients the new value.
                     final int N = mCallbacks.beginBroadcast();
-                    for (int i=0; i<N; i++) {
+                    for (int i = 0; i < N; i++) {
                         try {
                             mCallbacks.getBroadcastItem(i).valueChanged(value);
                         } catch (RemoteException e) {
@@ -174,10 +177,11 @@ public class RemoteService extends Service {
                         }
                     }
                     mCallbacks.finishBroadcast();
-                    
+
                     // Repeat every 1 second.
-                    sendMessageDelayed(obtainMessage(REPORT_MSG), 1*1000);
-                } break;
+                    sendMessageDelayed(obtainMessage(REPORT_MSG), 1 * 1000);
+                }
+                break;
                 default:
                     super.handleMessage(msg);
             }
@@ -209,15 +213,15 @@ public class RemoteService extends Service {
         // We use a string id because it is a unique number.  We use it later to cancel.
         mNM.notify(R.string.remote_service_started, notification);
     }
-    
+
     // ----------------------------------------------------------------------
-    
+
     /**
      * <p>Example of explicitly starting and stopping the remove service.
      * This demonstrates the implementation of a service that runs in a different
      * process than the rest of the application, which is explicitly started and stopped
      * as desired.</p>
-     * 
+     *
      * <p>Note that this is implemented as an inner class only keep the sample
      * all together; typically this code would appear in some separate class.
      */
@@ -229,9 +233,9 @@ public class RemoteService extends Service {
             setContentView(R.layout.remote_service_controller);
 
             // Watch for button clicks.
-            Button button = (Button)findViewById(R.id.start);
+            Button button = (Button) findViewById(R.id.start);
             button.setOnClickListener(mStartListener);
-            button = (Button)findViewById(R.id.stop);
+            button = (Button) findViewById(R.id.stop);
             button.setOnClickListener(mStopListener);
         }
 
@@ -255,24 +259,24 @@ public class RemoteService extends Service {
             }
         };
     }
-    
+
     // ----------------------------------------------------------------------
-    
+
     /**
      * Example of binding and unbinding to the remote service.
      * This demonstrates the implementation of a service which the client will
      * bind to, interacting with it through an aidl interface.</p>
-     * 
+     *
      * <p>Note that this is implemented as an inner class only keep the sample
      * all together; typically this code would appear in some separate class.
      */
- // BEGIN_INCLUDE(calling_a_service)
+    // BEGIN_INCLUDE(calling_a_service)
     public static class Binding extends Activity {
         /** The primary interface we will be calling on the service. */
         IRemoteService mService = null;
         /** Another interface we use on the service. */
         ISecondary mSecondaryService = null;
-        
+
         Button mKillButton;
         TextView mCallbackText;
 
@@ -289,15 +293,15 @@ public class RemoteService extends Service {
             setContentView(R.layout.remote_service_binding);
 
             // Watch for button clicks.
-            Button button = (Button)findViewById(R.id.bind);
+            Button button = (Button) findViewById(R.id.bind);
             button.setOnClickListener(mBindListener);
-            button = (Button)findViewById(R.id.unbind);
+            button = (Button) findViewById(R.id.unbind);
             button.setOnClickListener(mUnbindListener);
-            mKillButton = (Button)findViewById(R.id.kill);
+            mKillButton = (Button) findViewById(R.id.kill);
             mKillButton.setOnClickListener(mKillListener);
             mKillButton.setEnabled(false);
-            
-            mCallbackText = (TextView)findViewById(R.id.callback);
+
+            mCallbackText = (TextView) findViewById(R.id.callback);
             mCallbackText.setText("Not attached.");
         }
 
@@ -306,7 +310,7 @@ public class RemoteService extends Service {
          */
         private ServiceConnection mConnection = new ServiceConnection() {
             public void onServiceConnected(ComponentName className,
-                    IBinder service) {
+                                           IBinder service) {
                 // This is called when the connection with the service has been
                 // established, giving us the service object we can use to
                 // interact with the service.  We are communicating with our
@@ -326,7 +330,7 @@ public class RemoteService extends Service {
                     // disconnected (and then reconnected if it can be restarted)
                     // so there is no need to do anything here.
                 }
-                
+
                 // As part of the sample, tell the user what happened.
                 Toast.makeText(Binding.this, R.string.remote_service_connected,
                         Toast.LENGTH_SHORT).show();
@@ -350,7 +354,7 @@ public class RemoteService extends Service {
          */
         private ServiceConnection mSecondaryConnection = new ServiceConnection() {
             public void onServiceConnected(ComponentName className,
-                    IBinder service) {
+                                           IBinder service) {
                 // Connecting to a secondary interface is the same as any
                 // other interface.
                 mSecondaryService = ISecondary.Stub.asInterface(service);
@@ -392,7 +396,7 @@ public class RemoteService extends Service {
                             // has crashed.
                         }
                     }
-                    
+
                     // Detach our existing connection.
                     unbindService(mConnection);
                     unbindService(mSecondaryConnection);
@@ -432,11 +436,11 @@ public class RemoteService extends Service {
                 }
             }
         };
-        
+
         // ----------------------------------------------------------------------
         // Code showing how to deal with callbacks.
         // ----------------------------------------------------------------------
-        
+
         /**
          * This implementation is used to receive callbacks from the remote
          * service.
@@ -453,11 +457,12 @@ public class RemoteService extends Service {
                 mHandler.sendMessage(mHandler.obtainMessage(BUMP_MSG, value, 0));
             }
         };
-        
+
         private static final int BUMP_MSG = 1;
-        
+
         private Handler mHandler = new Handler() {
-            @Override public void handleMessage(Message msg) {
+            @Override
+            public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case BUMP_MSG:
                         mCallbackText.setText("Received from service: " + msg.arg1);
@@ -466,7 +471,7 @@ public class RemoteService extends Service {
                         super.handleMessage(msg);
                 }
             }
-            
+
         };
     }
 // END_INCLUDE(calling_a_service)
@@ -476,7 +481,7 @@ public class RemoteService extends Service {
     /**
      * Examples of behavior of different bind flags.</p>
      */
- // BEGIN_INCLUDE(calling_a_service)
+    // BEGIN_INCLUDE(calling_a_service)
     public static class BindingOptions extends Activity {
         ServiceConnection mCurConnection;
         TextView mCallbackText;
@@ -494,7 +499,7 @@ public class RemoteService extends Service {
             }
 
             public void onServiceConnected(ComponentName className,
-                    IBinder service) {
+                                           IBinder service) {
                 if (mCurConnection != this) {
                     return;
                 }
@@ -530,24 +535,24 @@ public class RemoteService extends Service {
             setContentView(R.layout.remote_binding_options);
 
             // Watch for button clicks.
-            Button button = (Button)findViewById(R.id.bind_normal);
+            Button button = (Button) findViewById(R.id.bind_normal);
             button.setOnClickListener(mBindNormalListener);
-            button = (Button)findViewById(R.id.bind_not_foreground);
+            button = (Button) findViewById(R.id.bind_not_foreground);
             button.setOnClickListener(mBindNotForegroundListener);
-            button = (Button)findViewById(R.id.bind_above_client);
+            button = (Button) findViewById(R.id.bind_above_client);
             button.setOnClickListener(mBindAboveClientListener);
-            button = (Button)findViewById(R.id.bind_allow_oom);
+            button = (Button) findViewById(R.id.bind_allow_oom);
             button.setOnClickListener(mBindAllowOomListener);
-            button = (Button)findViewById(R.id.bind_waive_priority);
+            button = (Button) findViewById(R.id.bind_waive_priority);
             button.setOnClickListener(mBindWaivePriorityListener);
-            button = (Button)findViewById(R.id.bind_important);
+            button = (Button) findViewById(R.id.bind_important);
             button.setOnClickListener(mBindImportantListener);
-            button = (Button)findViewById(R.id.bind_with_activity);
+            button = (Button) findViewById(R.id.bind_with_activity);
             button.setOnClickListener(mBindWithActivityListener);
-            button = (Button)findViewById(R.id.unbind);
+            button = (Button) findViewById(R.id.unbind);
             button.setOnClickListener(mUnbindListener);
 
-            mCallbackText = (TextView)findViewById(R.id.callback);
+            mCallbackText = (TextView) findViewById(R.id.callback);
             mCallbackText.setText("Not attached.");
 
             mBindIntent = new Intent(this, RemoteService.class);
@@ -646,7 +651,7 @@ public class RemoteService extends Service {
                 ServiceConnection conn = new MyServiceConnection();
                 if (bindService(mBindIntent, conn,
                         Context.BIND_AUTO_CREATE | Context.BIND_ADJUST_WITH_ACTIVITY
-                        | Context.BIND_WAIVE_PRIORITY)) {
+                                | Context.BIND_WAIVE_PRIORITY)) {
                     mCurConnection = conn;
                 }
             }

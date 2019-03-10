@@ -27,6 +27,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.stop).setOnClickListener(this);
         findViewById(R.id.bind).setOnClickListener(this);
         findViewById(R.id.unbind).setOnClickListener(this);
+        findViewById(R.id.another).setOnClickListener(this);
 
     }
 
@@ -58,7 +59,9 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.unbind:
                 unbindService(myServiceConnection);
-
+                break;
+            case R.id.another:
+                startActivity(new Intent(this, ServiceActivity.class));
                 break;
         }
 
@@ -70,8 +73,13 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             System.out.println("onServiceConnected service=" + service);
-             LocalService.LocalBinder binder= (LocalService.LocalBinder) service;
-             binder.startDownload();
+            LocalService.LocalBinder binder = (LocalService.LocalBinder) service;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    binder.startDownload();
+                }
+            }).start();
 //            try {
 //                MyAIDLService myAIDLService = MyAIDLService.Stub.asInterface(service);
 //                int plus = myAIDLService.plus(3, 4);

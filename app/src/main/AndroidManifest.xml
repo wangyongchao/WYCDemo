@@ -22,7 +22,7 @@
         android:name="com.weishop.test.MyApplication"
         android:label="@string/app_name">
         <activity
-            android:name="com.weishop.test.performance.BlockActivity"
+            android:name="com.weishop.test.service.MessengerServiceActivities$Binding"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
         <activity android:name=".activitycharacter.BActivity"></activity>
         <activity android:name=".activitycharacter.CActivity"></activity>
 
-        <service android:name="com.weishop.test.service.LocalService">
+        <service android:name="com.weishop.test.service.LocalService" >
             <intent-filter>
                 <action android:name="com.weishop.test.action.service" />
             </intent-filter>
@@ -46,6 +46,38 @@
         </service>
 
         <service android:name=".service.MyIntentService" />
+        <!-- BEGIN_INCLUDE(remote_service_declaration) -->
+        <service
+            android:name=".service.MessengerService"
+            android:process=":remote" />
+
+        <service android:name=".service.RemoteService" android:process=":remote" />
+
+        <activity android:name=".service.RemoteService$Controller"
+            android:label="@string/activity_remote_service_controller"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".service.RemoteService$Binding"
+            android:label="@string/activity_remote_service_binding">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".service.RemoteService$BindingOptions"
+            android:label="@string/activity_remote_service_binding_options">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
 
     </application>
 

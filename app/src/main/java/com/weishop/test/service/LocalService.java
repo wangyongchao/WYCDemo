@@ -47,7 +47,7 @@ public class LocalService extends Service {
         }
 
         public void startDownload() {
-            System.out.println("startDownload");
+            System.out.println("startDownload:"+Thread.currentThread().getName());
         }
     }
 
@@ -63,11 +63,11 @@ public class LocalService extends Service {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-//        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Display a notification about us starting. We put an icon in the
         // status bar.
-//        showNotification();
+        showNotification();
     }
 
 
@@ -112,13 +112,14 @@ public class LocalService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        System.out.println("LocalService onBind");
         return binder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
         System.out.println("LocalService onUnbind");
-        return super.onUnbind(intent);
+        return true;
     }
 
     // This is the object that receives interactions from clients. See

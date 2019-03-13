@@ -47,7 +47,7 @@ public class LocalService extends Service {
         }
 
         public void startDownload() {
-            System.out.println("startDownload:"+Thread.currentThread().getName());
+            System.out.println("startDownload:" + Thread.currentThread().getName());
         }
     }
 

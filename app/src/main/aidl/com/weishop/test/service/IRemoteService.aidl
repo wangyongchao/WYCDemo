@@ -17,6 +17,7 @@
 package com.weishop.test.service;
 
 import com.weishop.test.service.IRemoteServiceCallback;
+import com.weishop.test.service.Rect;
 
 /**
  * Example of defining an interface for calling on to a remote service
@@ -34,4 +35,10 @@ interface IRemoteService {
      * Remove a previously registered callback interface.
      */
     void unregisterCallback(IRemoteServiceCallback cb);
+
+    Rect inRect(in Rect rect);
+
+    Rect outRect(out Rect rect);
+
+    Rect inoutRect(inout Rect rect);
 }

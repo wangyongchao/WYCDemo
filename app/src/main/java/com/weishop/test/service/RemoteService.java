@@ -129,6 +129,11 @@ public class RemoteService extends Service {
 
     /**
      * The IRemoteInterface is defined through IDL
+     * AIDL中的定向 tag 表示了在跨进程通信中数据的流向，其中 in 表示数据只能由客户端流向服务端， out 表示数据只能由服务端流向客户端，而 inout
+     * 则表示数据可在服务端与客户端之间双向流通。其中，数据流向是针对在客户端中的那个传入方法的对象而言的。in 为定向 tag
+     * 的话表现为服务端将会接收到一个那个对象的完整数据，但是客户端的那个对象不会因为服务端对传参的修改而发生变动；out
+     * 的话表现为服务端将会接收到那个对象的的空对象，但是在服务端对接收到的空对象有任何修改之后客户端将会同步变动；inout 为定向 tag
+     * 的情况下，服务端将会接收到客户端传来对象的完整信息，并且客户端将会同步服务端对该对象的任何变动。
      */
     private final IRemoteService.Stub mBinder = new IRemoteService.Stub() {
         public void registerCallback(IRemoteServiceCallback cb) {
@@ -137,6 +142,27 @@ public class RemoteService extends Service {
 
         public void unregisterCallback(IRemoteServiceCallback cb) {
             if (cb != null) mCallbacks.unregister(cb);
+        }
+
+        @Override
+        public Rect inRect(Rect rect) throws RemoteException {
+            System.out.println("inRect=" + rect);
+            return rect;
+
+        }
+
+        @Override
+        public Rect outRect(Rect rect) throws RemoteException {
+            rect.bottom = 11;
+            rect.top = 11;
+            System.out.println("outRect=" + rect);
+            return rect;
+        }
+
+        @Override
+        public Rect inoutRect(Rect rect) throws RemoteException {
+            System.out.println("inoutRec=" + rect);
+            return rect;
         }
     };
 
@@ -333,6 +359,16 @@ public class RemoteService extends Service {
                 // connected to it.
                 try {
                     mService.registerCallback(mCallback);
+                    Rect rect = new Rect();
+                    rect.left = 10;
+                    rect.bottom = 20;
+                    rect.right = 22;
+                    rect.top = 23;
+//                    Rect rect1 = mService.inRect(rect);
+                    System.out.println("rect=" + rect);
+                    Rect rect1 = mService.outRect(rect);
+//                    Rect rect1 = mService.inoutRect(rect);
+                    System.out.println("rect1=" + rect1 + ",rect=" + rect);
                 } catch (RemoteException e) {
                     // In this case the service has crashed before we could even
                     // do anything with it; we can count on soon being

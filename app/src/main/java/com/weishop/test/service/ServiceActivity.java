@@ -5,11 +5,13 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
 
 import com.weishop.test.R;
+import com.weishop.test.memory.LeakActivity;
 
 
 public class ServiceActivity extends Activity implements View.OnClickListener {
@@ -38,13 +40,13 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
             case R.id.start:
                 Intent intent = new Intent(this, LocalService.class);
                 intent.putExtra("name", "dafds" + (++count));
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    startForegroundService(intent);
-//                }else {
-//                    startService(intent);
-//                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(intent);
+                } else {
+                    startService(intent);
+                }
 
-                startService(intent);
+//                startForegroundService(intent);
 
 
                 break;
@@ -63,19 +65,19 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
                 unbindService(myServiceConnection);
                 break;
             case R.id.another:
-//                startActivity(new Intent(this, ServiceActivity.class));
+                startActivity(new Intent(this, LeakActivity.class));
 //                bindIntent.setAction("bbbb");
-                bindService(bindIntent, new ServiceConnection() {
-                    @Override
-                    public void onServiceConnected(ComponentName name, IBinder service) {
-                        System.out.println("onServiceConnected another="  + service);
-                    }
-
-                    @Override
-                    public void onServiceDisconnected(ComponentName name) {
-
-                    }
-                }, BIND_AUTO_CREATE);
+//                bindService(bindIntent, new ServiceConnection() {
+//                    @Override
+//                    public void onServiceConnected(ComponentName name, IBinder service) {
+//                        System.out.println("onServiceConnected another=" + service);
+//                    }
+//
+//                    @Override
+//                    public void onServiceDisconnected(ComponentName name) {
+//
+//                    }
+//                }, BIND_AUTO_CREATE);
                 break;
         }
 

@@ -1,5 +1,5 @@
 
-package com.weishop.test.memory;
+package com.weishop.test.performance.memory;
 
 import android.app.Activity;
 import android.content.Intent;

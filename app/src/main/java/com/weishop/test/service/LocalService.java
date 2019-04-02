@@ -59,7 +59,7 @@ public class LocalService extends Service {
     public void onCreate() {
         System.out.println("LocalService onCreate");
 //        try {
-//            Thread.sleep(6000);
+//            Thread.sleep(21000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }

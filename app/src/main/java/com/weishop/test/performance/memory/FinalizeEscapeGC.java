@@ -1,4 +1,4 @@
-package com.weishop.test.memory;
+package com.weishop.test.performance.memory;
 
 /*
  * 此代码演示了两点：

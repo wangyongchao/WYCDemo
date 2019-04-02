@@ -1,4 +1,4 @@
-package com.weishop.test.memory;
+package com.weishop.test.performance.memory;
 
 public class People {
     int a = 1;

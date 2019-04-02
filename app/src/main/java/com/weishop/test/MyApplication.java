@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Debug;
 import android.os.Environment;
 
+import com.github.moduth.blockcanary.BlockCanary;
+import com.weishop.test.performance.AppBlockCanaryContext;
 import com.weishop.test.util.TestUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -24,6 +26,8 @@ public class MyApplication extends Application {
 //        init();
 
 //        Debug.stopMethodTracing();
+//        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+
 
     }
 

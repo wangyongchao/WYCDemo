@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.weishop.test.memory;
+package com.weishop.test.performance.memory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

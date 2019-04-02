@@ -1,4 +1,4 @@
-package com.weishop.test.memory;
+package com.weishop.test.performance.memory;
 
 import android.content.Context;
 

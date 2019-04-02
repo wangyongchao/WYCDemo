@@ -1,19 +1,11 @@
 
 package com.weishop.test;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Environment;
@@ -21,26 +13,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.TextWatcher;
-import android.text.style.ImageSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.weishop.test.activitycharacter.AActivity;
-import com.weishop.test.custom.CustomActivity;
-import com.weishop.test.custom.MyActivity;
-import com.weishop.test.memory.LeakActivity;
-import com.weishop.test.performance.PerformanceActivity;
-import com.weishop.test.util.FeedBackWindowManager;
+import com.weishop.test.performance.memory.LeakActivity;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 

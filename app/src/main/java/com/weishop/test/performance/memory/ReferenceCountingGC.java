@@ -1,4 +1,4 @@
-package com.weishop.test.memory;
+package com.weishop.test.performance.memory;
 
 /**
  * 虚拟机参数：-verbose:gc

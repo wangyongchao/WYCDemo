@@ -23,14 +23,14 @@ public class Test {
             System.out.println("create soft" + soft.get());
             hs1.add(soft);
         }
-//        System.gc();
-//        checkQueue();
+        System.gc();
+        checkQueue();
 
-        for (int i = 1; i <= 10; i++) {
-            WeakReference<Student> weakReference = new WeakReference<Student>(new Student("weak" + i), queue);
-            System.out.println("create weakReference" + weakReference.get());
-            hs2.add(weakReference);
-        }
+//        for (int i = 1; i <= 10; i++) {
+//            WeakReference<Student> weakReference = new WeakReference<Student>(new Student("weak" + i), queue);
+//            System.out.println("create weakReference" + weakReference.get());
+//            hs2.add(weakReference);
+//        }
 
 //        System.gc();
 //        checkQueue();

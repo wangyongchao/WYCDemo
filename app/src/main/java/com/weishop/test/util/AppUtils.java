@@ -17,6 +17,7 @@ public class AppUtils {
     private static String TAG = "AppUtils";
     private static final String CPU_NAME_REGEX = "cpu[0-9]+";
     private static final String CPU_LOCATION = "/sys/devices/system/cpu/";
+    public static final int _1MB = 1024 * 1024;
 
 
     /**

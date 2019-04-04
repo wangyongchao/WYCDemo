@@ -7,9 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.weishop.test.R;
+import com.weishop.test.util.TestUtils;
+
+import java.lang.ref.SoftReference;
 
 public class MemoryActivity extends Activity implements View.OnClickListener {
-//    private int[] aa = new int[10000];
+    //    private int[] aa = new int[10000];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +23,24 @@ public class MemoryActivity extends Activity implements View.OnClickListener {
         this.findViewById(R.id.test).setOnClickListener(this);
 
 //        SingleInstance.getInstance().addContext(this);
+        TestUtils.getMemoryInfo(this);
 
     }
 
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, LeakActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, LeakActivity.class));
 
+
+    }
+
+    private void a() {
+        b();
+    }
+
+    private void b() {
+        a();
     }
 
     @Override

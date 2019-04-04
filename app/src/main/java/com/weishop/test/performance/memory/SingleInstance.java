@@ -12,16 +12,19 @@ import java.util.List;
 public class SingleInstance {
     private static List<Context> contexts = new ArrayList();
     private static SingleInstance INSTANCE;
+    private final Context mContext;
 
-    private SingleInstance() {
+    private SingleInstance(Context context) {
+        this.mContext = context;
     }
 
-    public static SingleInstance getInstance() {
+    public static SingleInstance getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = new SingleInstance();
+            INSTANCE = new SingleInstance(context);
         }
         return INSTANCE;
     }
+
 
     public void addContext(Context context) {
         contexts.add(context);

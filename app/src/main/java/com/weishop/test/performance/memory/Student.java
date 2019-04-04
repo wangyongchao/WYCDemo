@@ -1,9 +1,10 @@
 package com.weishop.test.performance.memory;
 
+import com.weishop.test.util.AppUtils;
+
 public class Student {
 
-    //    new byte[1024 * 1024 * 380];
-    private int[] a = new int[1024 * 1024];
+    private byte[] bigSize = new byte[2 * AppUtils._1MB];
 
     private String id;
 

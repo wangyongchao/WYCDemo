@@ -31,6 +31,13 @@ public class MyApplication extends Application {
 
     }
 
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        System.out.println("onLowMemory");
+        TestUtils.getMemoryInfo(this);
+    }
+
     private void init() {
         testSleep();
     }

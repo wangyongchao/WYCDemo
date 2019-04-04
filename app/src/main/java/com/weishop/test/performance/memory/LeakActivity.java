@@ -24,7 +24,7 @@ public class LeakActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leak);
         this.findViewById(R.id.leak).setOnClickListener(this);
-
+        SingleInstance.getInstance(this);
 
     }
 
@@ -51,18 +51,7 @@ public class LeakActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        activity = this;
-//        createInnerClass();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-
-                }
-
-            }
-        }).start();
 
 
     }

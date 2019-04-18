@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dianping.logan.Logan;
 import com.weishop.test.performance.memory.LeakActivity;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -102,25 +103,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        Toast.makeText(this, "dfasdf",Toast.LENGTH_LONG).show();
-
-//        FeedBackWindowManager.getInstance().showWindow("dsfa");
-//        startActivity(new Intent(this, PerformanceActivity.class));
-//        MyThread myThread = new MyThread("testCpu");
-//        myThread.start();
-
-        if (v.getId() == R.id.linear_btn) {
-            try {
-                Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testCpuPro.trace");
-                A();
-                Debug.stopMethodTracing();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("a=" + a + ",b=" + b + ",c=" + c + ",d=" + d);
-        }
-
+        Logan.w("test logan", 1);
     }
 
     private void A() throws Exception {

@@ -8,13 +8,14 @@ public class Algorithm {
 
     public static void main(String[] args) {
 
-        int[] arr = {45, 33, 36, 22, 5, 1, 33, 60};
-        print(arr);
-        xier_sort1(arr);
-        print(arr);
+        int[] aArr = {45, 33, 36, 22, 5, 1, 33, 60};
+        int[] bArr = new int[aArr.length];
+
 
 
     }
+
+
 
     /**
      * 冒泡排序
@@ -83,11 +84,11 @@ public class Algorithm {
 
     /**
      * 希尔排序是插入排序一种，只不过步长不是1，减少移动的次数，提高效率
+     *
      * @param arr {45, 33, 36, 22, 5, 1, 33, 60}
      *            5，1，33，36，22，45，33，60
      *            33，1，5，36，22，45，33，60
      *            1，5，22，33，36，45，
-     *
      */
     public static void xier_sort1(int[] arr) {
         int j = 0;

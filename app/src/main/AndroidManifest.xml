@@ -32,7 +32,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".performance.memory.LeakActivity"></activity>
         <activity android:name=".activitycharacter.AActivity"></activity>
         <activity android:name=".activitycharacter.BActivity"></activity>

@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.os.Debug;
 import android.os.Environment;
 
+import com.dianping.logan.Logan;
+import com.dianping.logan.LoganConfig;
 import com.github.moduth.blockcanary.BlockCanary;
 import com.weishop.test.performance.AppBlockCanaryContext;
 import com.weishop.test.util.TestUtils;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,8 +30,19 @@ public class MyApplication extends Application {
 
 //        Debug.stopMethodTracing();
 //        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+        initLog();
 
+    }
 
+    private void initLog() {
+        LoganConfig config = new LoganConfig.Builder()
+                .setCachePath(getApplicationContext().getFilesDir().getAbsolutePath())
+                .setPath(getApplicationContext().getExternalFilesDir(null).getAbsolutePath()
+                        + File.separator + "logan_v1")
+                .setEncryptKey16("0123456789012345".getBytes())
+                .setEncryptIV16("0123456789012345".getBytes())
+                .build();
+        Logan.init(config);
     }
 
     @Override

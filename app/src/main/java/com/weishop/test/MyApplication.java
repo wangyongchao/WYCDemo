@@ -3,6 +3,7 @@ package com.weishop.test;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
@@ -10,6 +11,7 @@ import android.os.Environment;
 
 import com.dianping.logan.Logan;
 import com.dianping.logan.LoganConfig;
+import com.didi.virtualapk.PluginManager;
 import com.github.moduth.blockcanary.BlockCanary;
 import com.weishop.test.performance.AppBlockCanaryContext;
 import com.weishop.test.util.TestUtils;
@@ -23,14 +25,21 @@ import java.util.concurrent.TimeUnit;
 public class MyApplication extends Application {
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        PluginManager.getInstance(base).init();
+
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
+
 //        Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testcpu.trace");
 //        init();
 
 //        Debug.stopMethodTracing();
 //        BlockCanary.install(this, new AppBlockCanaryContext()).start();
-        initLog();
 
     }
 
@@ -49,7 +58,6 @@ public class MyApplication extends Application {
     public void onLowMemory() {
         super.onLowMemory();
         System.out.println("onLowMemory");
-        TestUtils.getMemoryInfo(this);
     }
 
     private void init() {

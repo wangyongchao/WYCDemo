@@ -23,7 +23,7 @@
         android:debuggable="true"
         android:label="@string/app_name">
         <activity
-            android:name="com.weishop.test.performance.memory.MemoryActivity"
+            android:name="com.weishop.test.plugin.PluginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

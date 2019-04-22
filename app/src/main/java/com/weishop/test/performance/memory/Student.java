@@ -4,7 +4,7 @@ import com.weishop.test.util.AppUtils;
 
 public class Student {
 
-    private byte[] bigSize = new byte[2 * AppUtils._1MB];
+    private byte[] bigSize = new byte[100 * AppUtils._1MB];
 
     private String id;
 

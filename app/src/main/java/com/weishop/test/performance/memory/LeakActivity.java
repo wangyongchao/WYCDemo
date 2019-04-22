@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.View;
 
 import com.weishop.test.R;
+import com.weishop.test.util.TestUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -25,6 +26,8 @@ public class LeakActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_leak);
         this.findViewById(R.id.leak).setOnClickListener(this);
         SingleInstance.getInstance(this);
+
+        TestUtils.getMemoryInfo(this);
 
     }
 
@@ -51,8 +54,8 @@ public class LeakActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
-
+        System.gc();
+        Student student = new Student("dfsafd");
 
     }
 

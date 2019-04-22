@@ -10,9 +10,7 @@ import java.util.Iterator;
 
 public class LinearTest {
     public static void main(String[] args) {
-        yueSeFuHuan();
-
-
+        testCustomLinkedList();
     }
 
     /**
@@ -21,7 +19,7 @@ public class LinearTest {
     private static void yueSeFuHuan() {
         YueSeFuHuan yueSeFuHuan = new YueSeFuHuan(5);
         yueSeFuHuan.iterator();
-        yueSeFuHuan.start(3,2);
+        yueSeFuHuan.start(3, 2);
     }
 
 
@@ -144,5 +142,31 @@ public class LinearTest {
         arrayList.remove(2);
 
     }
+
+    private static void testCustomLinkedList() {
+        ListNode listNode = createLinkedListByHead();
+        ListNode.Node headerNode = listNode.getHeaderNode();
+        ListNode.Node node = headerNode.next;
+
+        while (node != null) {
+            System.out.print(node.data);
+            node = node.next;
+        }
+
+
+    }
+
+    private static ListNode createLinkedListByHead() {
+        ListNode<String> listNode = new ListNode<>();
+
+        for (int i = 0; i < 10; i++) {
+            ListNode.Node node = new ListNode.Node();
+            node.data = String.valueOf(i);
+            listNode.addNode(node);
+        }
+        return listNode;
+
+    }
+
 
 }

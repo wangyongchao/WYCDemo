@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.weishop.test.R;
+import com.weishop.test.performance.memory.Student;
 
 
 /**
@@ -60,5 +61,7 @@ public class CustomView extends View {
     protected void onDraw(Canvas canvas) {
         System.out.println("onDraw");
         super.onDraw(canvas);
+
+        Student student = new Student("s");
     }
 }

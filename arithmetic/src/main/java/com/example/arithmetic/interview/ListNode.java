@@ -16,8 +16,8 @@ public class ListNode<E> {
     }
 
     public static class Node<E> {
-        E data;
-        Node<E> next;
+        public E data;
+        public Node<E> next;
     }
 
 }

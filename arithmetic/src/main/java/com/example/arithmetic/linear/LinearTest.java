@@ -10,7 +10,6 @@ import java.util.Iterator;
 
 public class LinearTest {
     public static void main(String[] args) {
-        testCustomLinkedList();
     }
 
     /**
@@ -140,31 +139,6 @@ public class LinearTest {
 
         arrayList.add(3, 4);
         arrayList.remove(2);
-
-    }
-
-    private static void testCustomLinkedList() {
-        ListNode listNode = createLinkedListByHead();
-        ListNode.Node headerNode = listNode.getHeaderNode();
-        ListNode.Node node = headerNode.next;
-
-        while (node != null) {
-            System.out.print(node.data);
-            node = node.next;
-        }
-
-
-    }
-
-    private static ListNode createLinkedListByHead() {
-        ListNode<String> listNode = new ListNode<>();
-
-        for (int i = 0; i < 10; i++) {
-            ListNode.Node node = new ListNode.Node();
-            node.data = String.valueOf(i);
-            listNode.addNode(node);
-        }
-        return listNode;
 
     }
 

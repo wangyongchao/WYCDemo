@@ -37,7 +37,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
         Intent bindIntent = new Intent(this, LocalService.class);
         switch (v.getId()) {
             case R.id.start:
-                Intent intent = new Intent(this, LocalService.class);
+                Intent intent = new Intent(this, MyIntentService.class);
                 intent.putExtra("name", "dafds" + (++count));
                 startService(intent);
 
@@ -60,19 +60,19 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
                 unbindService(myServiceConnection);
                 break;
             case R.id.another:
-                startActivity(new Intent(this, LeakActivity.class));
+//                startActivity(new Intent(this, LeakActivity.class));
 //                bindIntent.setAction("bbbb");
-//                bindService(bindIntent, new ServiceConnection() {
-//                    @Override
-//                    public void onServiceConnected(ComponentName name, IBinder service) {
-//                        System.out.println("onServiceConnected another=" + service);
-//                    }
-//
-//                    @Override
-//                    public void onServiceDisconnected(ComponentName name) {
-//
-//                    }
-//                }, BIND_AUTO_CREATE);
+                bindService(bindIntent, new ServiceConnection() {
+                    @Override
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        System.out.println("onServiceConnected another=" + service);
+                    }
+
+                    @Override
+                    public void onServiceDisconnected(ComponentName name) {
+
+                    }
+                }, BIND_AUTO_CREATE);
                 break;
         }
 
@@ -85,6 +85,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
         public void onServiceConnected(ComponentName name, IBinder service) {
             System.out.println("onServiceConnected service=" + service);
             LocalService.LocalBinder binder = (LocalService.LocalBinder) service;
+            LocalService localService = binder.getService();
             binder.startDownload();
 //            try {
 //                MyAIDLService myAIDLService = MyAIDLService.Stub.asInterface(service);

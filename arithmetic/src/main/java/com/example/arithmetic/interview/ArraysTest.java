@@ -8,8 +8,7 @@ public class ArraysTest {
 
     public static void main(String[] args) {
         long[] aArr = {45, 33, 36, 22, 5, 1, 33, 60};
-        multiply1(aArr);
-        multiply2(aArr);
+
 
 
     }

@@ -26,12 +26,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Process;
 import android.os.RemoteCallbackList;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -108,11 +108,13 @@ public class RemoteService extends Service {
     // BEGIN_INCLUDE(exposing_a_service)
     @Override
     public IBinder onBind(Intent intent) {
-        System.out.println("onBind");
+        String name = intent.getStringExtra("name");
+        System.out.println("onBind ="+name);
         // Select the interface to return.  If your service only implements
         // a single interface, you can just return it here without checking
         // the Intent.
         if (IRemoteService.class.getName().equals(intent.getAction())) {
+            System.out.println("remote binder="+mBinder);
             return mBinder;
         }
         if (ISecondary.class.getName().equals(intent.getAction())) {
@@ -146,22 +148,24 @@ public class RemoteService extends Service {
 
         @Override
         public Rect inRect(Rect rect) throws RemoteException {
-            System.out.println("inRect=" + rect);
+            System.out.println(" service inRect=" + rect);
+            rect.bottom = 111;
             return rect;
 
         }
 
         @Override
         public Rect outRect(Rect rect) throws RemoteException {
+            System.out.println("outRect=" + rect);
             rect.bottom = 11;
             rect.top = 11;
-            System.out.println("outRect=" + rect);
             return rect;
         }
 
         @Override
         public Rect inoutRect(Rect rect) throws RemoteException {
             System.out.println("inoutRec=" + rect);
+            rect.bottom = 111;
             return rect;
         }
     };
@@ -307,9 +311,13 @@ public class RemoteService extends Service {
      */
     // BEGIN_INCLUDE(calling_a_service)
     public static class Binding extends Activity {
-        /** The primary interface we will be calling on the service. */
+        /**
+         * The primary interface we will be calling on the service.
+         */
         IRemoteService mService = null;
-        /** Another interface we use on the service. */
+        /**
+         * Another interface we use on the service.
+         */
         ISecondary mSecondaryService = null;
 
         Button mKillButton;
@@ -346,6 +354,7 @@ public class RemoteService extends Service {
         private ServiceConnection mConnection = new ServiceConnection() {
             public void onServiceConnected(ComponentName className,
                                            IBinder service) {
+                System.out.println("local binder="+service);
                 // This is called when the connection with the service has been
                 // established, giving us the service object we can use to
                 // interact with the service.  We are communicating with our
@@ -365,7 +374,7 @@ public class RemoteService extends Service {
                     rect.right = 22;
                     rect.top = 23;
 //                    Rect rect1 = mService.inRect(rect);
-                    System.out.println("rect=" + rect);
+//                    System.out.println("rect=" + rect);
                     Rect rect1 = mService.outRect(rect);
 //                    Rect rect1 = mService.inoutRect(rect);
                     System.out.println("rect1=" + rect1 + ",rect=" + rect);
@@ -419,6 +428,7 @@ public class RemoteService extends Service {
                 // installed that replace the remote service by implementing
                 // the same interface.
                 Intent intent = new Intent(Binding.this, RemoteService.class);
+                intent.putExtra("name","first");
                 intent.setAction(IRemoteService.class.getName());
                 bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
                 intent.setAction(ISecondary.class.getName());

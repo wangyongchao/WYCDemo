@@ -7,25 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.weishop.test.R;
-import com.weishop.test.data.ListViewAdapter;
-import com.weishop.test.util.TestUtils;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class BlockActivity extends Activity implements View.OnClickListener {
     private TextView textView;

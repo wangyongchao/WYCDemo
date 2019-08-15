@@ -58,16 +58,11 @@ public class LocalService extends Service {
     @Override
     public void onCreate() {
         System.out.println("LocalService onCreate");
-//        try {
-//            Thread.sleep(21000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Display a notification about us starting. We put an icon in the
         // status bar.
-        showNotification();
+//        showNotification();
     }
 
 
@@ -90,7 +85,7 @@ public class LocalService extends Service {
 
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.
-        return START_REDELIVER_INTENT;
+        return START_STICKY;
     }
 
 
@@ -112,7 +107,7 @@ public class LocalService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        System.out.println("LocalService onBind");
+        System.out.println("LocalService onBind binder="+binder);
         return binder;
     }
 

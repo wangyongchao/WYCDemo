@@ -89,4 +89,28 @@
     bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
     cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
     the big cheese.</string>
+
+    <string name="accountSpinnerLabel">Account</string>
+    <string name="addContactButtonLabel">Add Contact</string>
+    <string name="addContactTitle">Add Contact</string>
+    <string name="allAccounts">All Accounts</string>
+    <string name="contactCreationFailure">Contact creation failed, check logs.</string>
+    <string name="contactEmailLabel">Contact Email</string>
+    <string name="contactNameLabel">Contact Name</string>
+    <string name="contactPhoneLabel">Contact Phone</string>
+    <string name="save">Save</string>
+    <string name="selectAccountLabel">Select</string>
+    <string name="selectLabel">Select label</string>
+    <string name="showInvisible">Show Invisible Contacts (Only)</string>
+    <string name="targetAccountLabel">Target Account</string>
+    <string name="undefinedTypeLabel">(Undefined)</string>
+
+    <string name="activity_pick_contact">Content/Provider/Pick Contact</string>
+    <string name="pick_contact_msg">Invoke Contacts to pick various kinds of
+        contact data.  None of these require that the caller hold the
+        READ_CONTACTS permission.</string>
+    <string name="pick_contact">Pick a Contact</string>
+    <string name="pick_person">Pick a Person</string>
+    <string name="pick_phone">Pick a Phone</string>
+    <string name="pick_address">Pick an Address</string>
 </resources>

@@ -2,6 +2,7 @@
 package com.weishop.test.plugin;
 
 import android.app.Activity;
+import android.app.ActivityThread;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -46,10 +47,13 @@ public class PluginActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        ActivityThread activityThread = ActivityThread.currentActivityThread();
+        String processName = activityThread.getProcessName();
+        System.out.println(processName);
 
 
-        Intent intent = new Intent();
-        intent.setClassName("com.example.plugina", "com.example.plugina.MainActivity");
-        startActivity(intent);
+//        Intent intent = new Intent();
+//        intent.setClassName("com.example.plugina", "com.example.plugina.MainActivity");
+//        startActivity(intent);
     }
 }

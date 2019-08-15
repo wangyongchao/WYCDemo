@@ -4,20 +4,18 @@ package com.weishop.test.performance;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
 import android.os.Environment;
-import android.os.Trace;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.weishop.test.data.ListViewAdapter;
+import com.weishop.test.list.ListData;
+import com.weishop.test.list.draglistview.ListViewAdapter;
 import com.weishop.test.R;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
     private TextView textView;
     private ListView mListView;
     private ListViewAdapter mAdapter;
-    private List<String> mData = new ArrayList<String>();
+    private List<ListData> mData = new ArrayList<ListData>();
 
     static {
 //        Debug.startMethodTracing("startTime");
@@ -47,7 +45,6 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
 
     private void initData() {
         for (int i = 0; i < 1000; i++) {
-            mData.add("item" + i);
         }
         mAdapter = new ListViewAdapter(this);
         mListView.setAdapter(mAdapter);

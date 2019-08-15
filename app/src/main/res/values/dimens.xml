@@ -10,6 +10,7 @@
     <dimen name="corner">3px</dimen>
     <dimen name="font_size">11sp</dimen>
     <dimen name="width">16sp</dimen>
-
+    <dimen name="view_width">150dp</dimen>
+    <dimen name="view_height">150dp</dimen>
 
 </resources>

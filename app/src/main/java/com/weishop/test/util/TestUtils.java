@@ -30,6 +30,68 @@ public class TestUtils {
 
     public static List<Context> contexts = new ArrayList<>();
     public static List<View> views = new ArrayList<>();
+    public final static String[] imageUrls = new String[]{
+            "https://img-my.csdn.net/uploads/201508/05/1438760758_3497.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760758_6667.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760757_3588.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760756_3304.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760755_6715.jpeg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760726_5120.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760726_8364.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760725_4031.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760724_9463.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760724_2371.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760707_4653.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760706_6864.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760706_9279.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760704_2341.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760704_5707.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760685_5091.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760685_4444.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760684_8827.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760683_3691.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760683_7315.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760663_7318.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760662_3454.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760662_5113.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760661_3305.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760661_7416.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760589_2946.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760589_1100.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760588_8297.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760587_2575.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760587_8906.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760550_2875.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760550_9517.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760549_7093.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760549_1352.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760548_2780.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760531_1776.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760531_1380.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760530_4944.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760530_5750.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760529_3289.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760500_7871.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760500_6063.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760499_6304.jpeg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760499_5081.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760498_7007.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760478_3128.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760478_6766.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760477_1358.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760477_3540.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760476_1240.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760446_7993.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760446_3641.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760445_3283.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760444_8623.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760444_6822.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760422_2224.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760421_2824.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760420_2660.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760420_7188.jpg",
+            "https://img-my.csdn.net/uploads/201508/05/1438760419_4123.jpg",
+    };
 
 
     public static boolean OPEN = true;
@@ -58,7 +120,7 @@ public class TestUtils {
 
     }
 
-    public static int getScreenHeight(Activity activity) {
+    public static int getScreenHeight(Context activity) {
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -68,7 +130,7 @@ public class TestUtils {
 
     }
 
-    public static int getScreenWidth(Activity activity) {
+    public static int getScreenWidth(Context activity) {
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -83,7 +145,7 @@ public class TestUtils {
      * MemoryInfo.availMem:系统当前可用的内存大小
      * MemoryInfo.lowMemory:现在系统是否处于低内存的情况
      * MemoryInfo.threshold：低内存的临界值，低于这个值的情况下，系统会有限杀死后台进程或者一些无关联的进程。
-     *
+     * <p>
      * Runtime.maxMemory:当前堆内存可以扩展的最大内存
      * Runtime.freeMemory:当前堆内存可用的内存，没有扩展的情况下
      * Runtime.totalMemory:当前堆内存的大小
@@ -95,7 +157,7 @@ public class TestUtils {
         float totalMemory = caculateMunit(Runtime.getRuntime().totalMemory());
         float freeMemory = caculateMunit(Runtime.getRuntime().freeMemory());
 
-        System.out.println("maxMemory="+maxMemory+",totalMemory="+totalMemory+",freeMemory="+freeMemory);
+        System.out.println("maxMemory=" + maxMemory + ",totalMemory=" + totalMemory + ",freeMemory=" + freeMemory);
 
         //系统内存相关属性
         ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);

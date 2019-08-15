@@ -1,7 +1,5 @@
 package com.test;
 
-import java.lang.reflect.Method;
-
 /**
  * Created by wangyongchao on 17/1/19.
  */
@@ -9,14 +7,14 @@ import java.lang.reflect.Method;
 public class GetSex {
 
     public static void main(String[] args) {
+        int flags = 0;
 
-        try {
-            Class clazz=Class.forName("com.example.arithmetic.algorithm.TestArrayList");
-            Object o = clazz.newInstance();
-            Method method = clazz.getMethod("checkedAdd");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        int a = 2;
+        int b = 3;
+        flags |= a;
+        flags |=b;
+        System.out.println(flags);
+
 
     }
 }

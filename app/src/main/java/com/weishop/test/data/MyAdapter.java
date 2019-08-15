@@ -1,13 +1,13 @@
 
 package com.weishop.test.data;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.weishop.test.R;
+import com.weishop.test.list.recycler.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.item1);
+            mTextView = (TextView) v.findViewById(R.id.name_view);
         }
     }
 
@@ -63,6 +63,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 //        mDataset.add(position, "Insert One");
         mDataset.add("Insert One");
         notifyDataSetChanged();
+    }
+
+    public void setData(List<String> data){
+        mDataset.clear();
+        mDataset.addAll(data);
     }
 
     public void removeData(int position) {

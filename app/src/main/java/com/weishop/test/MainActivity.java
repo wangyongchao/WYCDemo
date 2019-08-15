@@ -2,6 +2,7 @@
 package com.weishop.test;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.dianping.logan.Logan;
 import com.weishop.test.performance.memory.LeakActivity;
+import com.weishop.test.service.LocalService;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -63,6 +65,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mTextview = (TextView) findViewById(R.id.text);
         mTextview.setOnClickListener(this);
 
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startService(new Intent(MainActivity.this, LocalService.class));
+
+            }
+        }, 10*1000);
 
     }
 

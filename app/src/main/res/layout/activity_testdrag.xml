@@ -13,7 +13,7 @@
         android:visibility="gone"
         android:text="@string/linear_test" />
 
-    <com.weishop.test.draglistview.lib.DragSortListView
+    <com.weishop.test.list.draglistview.lib.DragSortListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

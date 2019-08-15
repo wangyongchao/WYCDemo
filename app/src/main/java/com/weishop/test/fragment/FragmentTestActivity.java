@@ -2,32 +2,21 @@
 package com.weishop.test.fragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.annotation.RequiresApi;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TextView;
 
 import com.weishop.test.R;
 import com.weishop.test.activitycharacter.AActivity;
 import com.weishop.test.activitycharacter.BActivity;
-import com.weishop.test.data.ListViewAdapter;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FragmentTestActivity extends TabActivity implements View.OnClickListener {
     //    Fragment1 fragment1;

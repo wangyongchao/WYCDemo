@@ -1,8 +1,14 @@
-package com.example.arithmetic.linear;
+package com.example.arithmetic.interview;
 
 public class ListNode<E> {
     private Node header = new Node();
+    private Node tail = new Node();
 
+    /**
+     * 尾插法1
+     *
+     * @param node
+     */
     public void addNode(Node node) {
         Node temp = header;
         while (temp.next != null) {
@@ -10,6 +16,25 @@ public class ListNode<E> {
         }
         temp.next = node;
     }
+
+    /**
+     * 尾插法2
+     *
+     * @param node
+     */
+    public void insertNodeTail(Node node) {
+        tail.next = node;
+        tail = node;
+    }
+
+    /**
+     * 头插法
+     */
+    public void insertNodeHeader(Node node) {
+        node.next = header.next;
+        header.next = node;
+    }
+
 
     public Node getHeaderNode() {
         return header;

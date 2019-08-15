@@ -15,7 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.weishop.test.recycler.RecyclerView;
+import com.weishop.test.list.recycler.RecyclerView;
 
 
 /**

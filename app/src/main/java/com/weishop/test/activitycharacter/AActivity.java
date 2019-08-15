@@ -2,8 +2,6 @@
 package com.weishop.test.activitycharacter;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,19 +24,12 @@ public class AActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_a);
         findViewById(R.id.aaa).setOnClickListener(this);
 
-
-        FragmentManager fragmentManager = this.getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragment1 = new Fragment1();
-        fragmentTransaction.add(fragment1, "permission");
-        fragmentTransaction.commit();
     }
 
     @Override
     public void onClick(View v) {
-//        Intent intent = new Intent(AActivity.this, BActivity.class);
-//        startActivity(intent);
-        fragment1.getPermisson();
+        Intent intent = new Intent(AActivity.this, BActivity.class);
+        startActivity(intent);
 
     }
 

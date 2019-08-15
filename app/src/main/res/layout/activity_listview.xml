@@ -5,7 +5,7 @@
 
     <Button
         android:id="@+id/start"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text6" />
 
@@ -13,8 +13,11 @@
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"
-        android:layout_below="@id/start"></ListView>
+        android:layout_below="@id/start"
+        android:background="@color/content_background"
+        android:overScrollMode="always"
+        android:overScrollHeader="@drawable/aaa"
+        android:requiresFadingEdge="vertical"></ListView>
 
 
 </RelativeLayout>

@@ -43,6 +43,22 @@ public class ListNode<E> {
     public static class Node<E> {
         public E data;
         public Node<E> next;
+
+        @Override
+        public int hashCode() {
+            if(data==null){
+                return -1;
+            }
+            return data.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || !(o instanceof Node)) {
+                return false;
+            }
+            return data.equals(((Node) o).data);
+        }
     }
 
 }

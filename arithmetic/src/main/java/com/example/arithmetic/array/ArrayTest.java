@@ -11,7 +11,7 @@ public class ArrayTest {
                 {18, 21, 23, 26, 30}
         };
         int[] clone = nums.clone();
-        System.out.println(nums==clone);
+        System.out.println(nums == clone);
 //        int[] results = new int[nums.length];
 //        multiply(nums, results);
 //        print(results);

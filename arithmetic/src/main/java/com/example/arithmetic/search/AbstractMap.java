@@ -23,8 +23,13 @@
  *
  */
 
-package java.util;
-import java.util.Map.Entry;
+package com.example.arithmetic.search;
+import java.util.AbstractCollection;
+import java.util.AbstractSet;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This class provides a skeletal implementation of the <tt>Map</tt>
@@ -141,7 +146,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws NullPointerException {@inheritDoc}
      */
     public boolean containsKey(Object key) {
-        Iterator<Map.Entry<K,V>> i = entrySet().iterator();
+        Iterator<Entry<K,V>> i = entrySet().iterator();
         if (key==null) {
             while (i.hasNext()) {
                 Entry<K,V> e = i.next();
@@ -277,7 +282,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws IllegalArgumentException      {@inheritDoc}
      */
     public void putAll(Map<? extends K, ? extends V> m) {
-        for (Map.Entry<? extends K, ? extends V> e : m.entrySet())
+        for (Entry<? extends K, ? extends V> e : m.entrySet())
             put(e.getKey(), e.getValue());
     }
 
@@ -324,7 +329,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * }
      *}</pre>
      */
-    transient Set<K>        keySet;
+    transient Set<K> keySet;
     transient Collection<V> values;
 
     /**
@@ -515,11 +520,11 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      *
      * @implSpec
      * This implementation iterates over <tt>entrySet()</tt>, calling
-     * {@link Map.Entry#hashCode hashCode()} on each element (entry) in the
+     * {@link Entry#hashCode hashCode()} on each element (entry) in the
      * set, and adding up the results.
      *
      * @return the hash code value for this map
-     * @see Map.Entry#hashCode()
+     * @see Entry#hashCode()
      * @see Object#equals(Object)
      * @see Set#equals(Object)
      */
@@ -690,7 +695,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         public boolean equals(Object o) {
             if (!(o instanceof Map.Entry))
                 return false;
-            Map.Entry<?,?> e = (Map.Entry<?,?>)o;
+            Entry<?,?> e = (Entry<?,?>)o;
             return eq(key, e.getKey()) && eq(value, e.getValue());
         }
 
@@ -821,7 +826,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         public boolean equals(Object o) {
             if (!(o instanceof Map.Entry))
                 return false;
-            Map.Entry<?,?> e = (Map.Entry<?,?>)o;
+            Entry<?,?> e = (Entry<?,?>)o;
             return eq(key, e.getKey()) && eq(value, e.getValue());
         }
 

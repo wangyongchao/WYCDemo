@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,8 @@ import static android.content.Context.ACTIVITY_SERVICE;
  * Created by wangyongchao on 15/11/18.
  */
 public class TestUtils {
+
+    public final static String TAG = "wangyongchao";
 
     public static Context applicationContext;
 
@@ -115,7 +118,7 @@ public class TestUtils {
         float density = dm.density;
         int densityDpi = dm.densityDpi;
 
-        System.out.println("titlebarheight=" + titleBarHeight + ",statusBarHeight="
+        Log.d(TAG,"titlebarheight=" + titleBarHeight + ",statusBarHeight="
                 + statusBarHeight + ",width=" + width + ",height=" + height + ",density=" + density + ",densityDpi=" + densityDpi);
 
     }
@@ -157,7 +160,7 @@ public class TestUtils {
         float totalMemory = caculateMunit(Runtime.getRuntime().totalMemory());
         float freeMemory = caculateMunit(Runtime.getRuntime().freeMemory());
 
-        System.out.println("maxMemory=" + maxMemory + ",totalMemory=" + totalMemory + ",freeMemory=" + freeMemory);
+        Log.d(TAG,"maxMemory=" + maxMemory + ",totalMemory=" + totalMemory + ",freeMemory=" + freeMemory);
 
         //系统内存相关属性
         ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
@@ -168,7 +171,7 @@ public class TestUtils {
         boolean lowMemory = info.lowMemory;
         float threshold = caculateMunit(info.threshold);
 
-        System.out.println("totalMem=" + totalMem + "，availMem=" + availMem +
+        Log.d(TAG,"totalMem=" + totalMem + "，availMem=" + availMem +
                 ",lowMemory=" + lowMemory + ",threshold=" + threshold);
 
 

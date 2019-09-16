@@ -16,7 +16,7 @@ public class SingleInstance {
     private static List<Context> contexts = new ArrayList();
     private static SingleInstance INSTANCE;
     private final Context mContext;
-    private byte[] a =new byte[100*AppUtils._1MB];
+
 
 
     private SingleInstance(Context context) {

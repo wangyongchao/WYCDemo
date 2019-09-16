@@ -1,6 +1,5 @@
 package com.example.arithmetic.tree;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,8 +9,7 @@ import java.util.List;
 public class TreeTest {
 
     public static void main(String[] args) {
-        testHuffmanTree();
-
+        testBinaryTree();
 
     }
 

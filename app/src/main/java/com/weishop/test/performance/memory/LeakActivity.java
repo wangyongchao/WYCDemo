@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.View;
 
 import com.weishop.test.R;
+import com.weishop.test.util.AppUtils;
 import com.weishop.test.util.TestUtils;
 
 import java.lang.ref.WeakReference;
@@ -17,6 +18,8 @@ public class LeakActivity extends Activity implements View.OnClickListener {
 
 //    private static Activity activity;
 
+    private byte[] a = new byte[30 * AppUtils._1MB];
+
     private MyHandler handler = new MyHandler(this);
 
 
@@ -25,7 +28,7 @@ public class LeakActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leak);
         this.findViewById(R.id.leak).setOnClickListener(this);
-        SingleInstance.getInstance(this);
+        System.out.println(a.length);
 
         TestUtils.getMemoryInfo(this);
 

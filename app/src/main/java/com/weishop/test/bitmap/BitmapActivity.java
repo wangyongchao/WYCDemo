@@ -2,9 +2,11 @@
 package com.weishop.test.bitmap;
 
 import android.app.Activity;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,7 +14,10 @@ import android.widget.ImageView;
 import com.weishop.test.R;
 import com.weishop.test.util.TestUtils;
 
-public class BitmapActivity extends Activity {
+import java.io.IOException;
+import java.io.InputStream;
+
+public class BitmapActivity extends Activity implements View.OnClickListener {
     private ImageView imageView;
 
     @Override
@@ -30,17 +35,18 @@ public class BitmapActivity extends Activity {
         setContentView(R.layout.activity_bitmap);
         imageView = (ImageView) findViewById(R.id.testBitmap);
         Button btnView = findViewById(R.id.btn);
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-                int byteCount = bitmap.getByteCount();
-                float caculateMunit = TestUtils.caculateMunit(byteCount);
-                System.out.println("caculateMunit="+caculateMunit+",with="+bitmap.getWidth()+",height="+bitmap.getHeight());
-                TestUtils.getMemoryInfo(BitmapActivity.this);
-//                loadBitmap();
-            }
-        });
+        btnView.setOnClickListener(this);
+
+        TestUtils.getProperty(this);
+
+
+    }
+
+    /**
+     * 压缩bitmap
+     */
+    private void compressBitmap() {
+
 
     }
 
@@ -72,5 +78,36 @@ public class BitmapActivity extends Activity {
 
     }
 
+    private void testAssetBitmap() {
+        try {
+            AssetManager assetManager = getAssets();
+            InputStream inputStream = assetManager.open("test.jpg");
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            printBimtapPropertities(bitmap);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void testBitmap() {
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+        printBimtapPropertities(bitmap);
+    }
+
+    private void printBimtapPropertities(Bitmap bitmap) {
+        int byteCount = bitmap.getByteCount();
+        float caculateMunit = TestUtils.caculateMunit(byteCount);
+        Log.d(TestUtils.TAG, "caculateMunit=" + caculateMunit + ",with=" + bitmap.getWidth() + ",height=" + bitmap.getHeight());
+        TestUtils.getMemoryInfo(BitmapActivity.this);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Bitmap bitmap = BitmapDecodeUtil.decodeBitmap(this, R.drawable.test);
+        printBimtapPropertities(bitmap);
+    }
 }

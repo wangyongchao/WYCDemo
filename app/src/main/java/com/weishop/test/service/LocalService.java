@@ -27,6 +27,7 @@ import android.os.RemoteException;
 
 import com.weishop.test.R;
 import com.weishop.test.activitycharacter.AActivity;
+import com.weishop.test.performance.memory.LeakActivity;
 
 public class LocalService extends Service {
     private NotificationManager mNM;
@@ -82,6 +83,9 @@ public class LocalService extends Service {
             System.out.println("LocalService onStartCommand intent=" + intent + ",flags=" + flags
                     + ",startId=" + startId + ",name=" + intent.getStringExtra("name"));
         }
+        this.startActivity(new Intent(this,LeakActivity.class));
+
+
 
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.

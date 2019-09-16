@@ -7,12 +7,186 @@ import java.util.ArrayList;
 public class LinkedTest {
 
     public static void main(String[] args) {
-//        ListNode listNode = createLinkedListByHead();
+        ListNode listNode = createLinkedListByHead();
 //        printListByStack(listNode.getHeaderNode().next);
 //        createIntersectionNode();
+//        ListNode<String> orderListNode = createOrderListNode();
+//        ListNode.Node newHeader = reverseListByRecursion(listNode.getHeaderNode());
+//        printListFromHeadToTail(newHeader);
 
-        createCycleList();
+        createSortListNode();
+
     }
+
+    private static void createSortListNode() {
+        ListNode<String> listNode1 = new ListNode<>();
+        ListNode<String> listNode2 = new ListNode<>();
+
+        ListNode.Node<Integer> node = new ListNode.Node<>();
+        node.data = 1;
+        listNode1.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = 3;
+        listNode1.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = 7;
+        listNode1.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = 2;
+        listNode2.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = 6;
+        listNode2.addNode(node);
+
+        ListNode.Node sortHeader = mergeSortList(listNode1.getHeaderNode().next, listNode2.getHeaderNode().next);
+
+        printListFromHeadToTail(sortHeader);
+
+
+    }
+
+    /**
+     * 合并两个有序的链表，合并完后也是有序的
+     * 1->3->7
+     * 2->6
+     * 合并后:1->2->3->6->7
+     *
+     * @param node1
+     * @param node2
+     * @return
+     */
+    private static ListNode.Node mergeSortList(ListNode.Node<Integer> node1, ListNode.Node<Integer> node2) {
+        if (node1 == null)
+            return node2;
+        if (node2 == null)
+            return node1;
+        if (node1.data < node2.data) {
+            node1.next = mergeSortList(node1.next, node2);
+            return node1;
+        } else {
+            node2.next = mergeSortList(node1, node2.next);
+            return node2;
+        }
+
+    }
+
+
+    /**
+     * 从查找链表的倒数第k个结点
+     * 链表长度为N。设两个指针p1和p2,先让p1移动k个结点，然后再让p1和p2同时移动，当p1到达末尾时候，p2指向的结点就是倒数第k个结点。
+     * p1和p2始终相差k个结点。p1到末尾，p2和末尾相差k个结点，就是倒数第k个结点。
+     *
+     * @param header
+     */
+    private static ListNode.Node findKthToTail(ListNode.Node header, int k) {
+        if (header == null || k <= 0) {
+            return null;
+        }
+        int p1_k = k;
+        ListNode.Node p1 = header;
+        ListNode.Node p2 = header;
+        while (p1_k > 0 && p1.next != null) {
+            p1 = p1.next;
+            p1_k--;
+        }
+        if (p1_k > 0) {
+            return null;
+        }
+        while (p1 != null) {
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        return p2;
+
+    }
+
+
+    /**
+     * 创建有序的重复元素链表
+     *
+     * @return
+     */
+    private static ListNode<String> createOrderListNode() {
+        ListNode<String> listNode = new ListNode<>();
+
+        ListNode.Node<String> node = new ListNode.Node<>();
+        node.data = "a1";
+        listNode.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = "a2";
+        listNode.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = "a2";
+        listNode.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = "a3";
+        listNode.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = "a3";
+        listNode.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = "a3";
+        listNode.addNode(node);
+
+        node = new ListNode.Node<>();
+        node.data = "a4";
+        listNode.addNode(node);
+
+        return listNode;
+    }
+
+    /**
+     * 删除重复元素
+     * Given 1->1->2, return 2.
+     * Given 1->1->2->3->3->4, return 2->4.
+     *
+     * @param head
+     * @return
+     */
+    private static ListNode.Node<String> deleteDuplicates2(ListNode.Node<String> head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode.Node<String> next = head.next;
+        if (head.data == next.data) {
+            while (next != null && (head.data == next.data)) {
+                next = next.next;
+            }
+            return deleteDuplicates2(next);
+        } else {
+            head.next = deleteDuplicates2(head.next);
+            return head;
+        }
+
+    }
+
+
+    /**
+     * 删除重复元素
+     * Given 1->1->2, return 1->2.
+     * Given 1->1->2->3->3, return 1->2->3.
+     *
+     * @param head
+     * @return
+     */
+    private static ListNode.Node<String> deleteDuplicates(ListNode.Node<String> head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        head.next = deleteDuplicates(head.next);
+
+        return head.data == head.next.data ? head.next : head;
+    }
+
 
     /**
      * 创建环链表
@@ -206,6 +380,23 @@ public class LinkedTest {
     }
 
     /**
+     * 使用递归反转链表
+     *
+     * @param header
+     * @return
+     */
+    private static ListNode.Node reverseListByRecursion(ListNode.Node header) {
+        if (header == null || header.next == null) {
+            return header;
+        }
+        ListNode.Node nextNode = header.next;
+        ListNode.Node newHeader = reverseListByRecursion(header.next);
+        nextNode.next = header;
+        header.next = null;
+        return newHeader;
+    }
+
+    /**
      * 采用头插法反转链表
      *
      * @param node
@@ -278,9 +469,9 @@ public class LinkedTest {
      * @param node
      * @return
      */
-    public static void printListFromHeadToTail(ListNode.Node<String> node) {
+    public static <E> void printListFromHeadToTail(ListNode.Node<E> node) {
         while (node != null) {
-            System.out.print(node.data);
+            System.out.print(node.data.toString());
             node = node.next;
         }
     }

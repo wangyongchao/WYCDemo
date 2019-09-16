@@ -10,9 +10,10 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.weishop.test.R;
 import com.weishop.test.list.ListData;
 import com.weishop.test.list.draglistview.ListViewAdapter;
-import com.weishop.test.R;
+import com.weishop.test.util.TestUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,7 +45,9 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
     }
 
     private void initData() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < TestUtils.imageUrls.length; i++) {
+            ListData listData = new ListData("item" + i, TestUtils.imageUrls[i]);
+            mData.add(listData);
         }
         mAdapter = new ListViewAdapter(this);
         mListView.setAdapter(mAdapter);

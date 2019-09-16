@@ -37,7 +37,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
         Intent bindIntent = new Intent(this, LocalService.class);
         switch (v.getId()) {
             case R.id.start:
-                Intent intent = new Intent(this, MyIntentService.class);
+                Intent intent = new Intent(this, LocalService.class);
                 intent.putExtra("name", "dafds" + (++count));
                 startService(intent);
 

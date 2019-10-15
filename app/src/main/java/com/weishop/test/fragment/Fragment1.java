@@ -2,67 +2,82 @@
 package com.weishop.test.fragment;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.weishop.test.R;
+import com.weishop.test.util.TestUtils;
 
-import java.util.Random;
-
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment implements RefreshDataImpl{
 
     private EditText editText;
     private InputMethodManager inputMethodManager;
-    private int REQUEST_CODE_MUTI=100;
+    private int REQUEST_CODE_MUTI = 100;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("Fragment1 onCreate");
+        Log.d(TestUtils.TAG, "Fragment1 onCreate");
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TestUtils.TAG, "Fragment1 onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TestUtils.TAG, "Fragment1 onPause");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return null;
+        Log.d(TestUtils.TAG, "Fragment1 onCreateView");
+        return inflater.inflate(R.layout.fragment1, container, false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.d(TestUtils.TAG, "Fragment1 onDestroyView");
+        super.onDestroyView();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        editText = (EditText) view.findViewById(R.id.editText);
-//        TextView textView = (TextView) view.findViewById(R.id.fragment_text);
-//        textView.setText(new Random().nextInt(7) + "");
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        System.out.println("Fragment1 onDestroy");
+        Log.d(TestUtils.TAG, "Fragment1 onDestroy");
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        System.out.println("Fragment1 onAttach");
+        Log.d(TestUtils.TAG, "Fragment1 onAttach");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        System.out.println("Fragment1 onDetach");
+        Log.d(TestUtils.TAG, "Fragment1 onDetach");
     }
 
 
@@ -84,6 +99,11 @@ public class Fragment1 extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("onActivityResult");
+    }
+
+    @Override
+    public void refreshData() {
+
     }
 }
 

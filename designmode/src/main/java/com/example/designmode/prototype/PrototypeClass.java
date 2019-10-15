@@ -8,6 +8,8 @@ public class PrototypeClass implements Cloneable {
 
     public Object object = new Object();
 
+    public int a = 2;
+
     public void addValues(String value) {
         list.add(value);
     }
@@ -23,6 +25,7 @@ public class PrototypeClass implements Cloneable {
     @Override
     protected PrototypeClass clone() throws CloneNotSupportedException {
         PrototypeClass prototypeClass = (PrototypeClass) super.clone();
+        list = (ArrayList<String>) prototypeClass.list.clone();
         return prototypeClass;
     }
 
@@ -33,8 +36,8 @@ public class PrototypeClass implements Cloneable {
             prototypeClass.addValues("aaa");
             PrototypeClass clone = prototypeClass.clone();
             clone.addValues("bbbb");
-            System.out.println(clone + "," + clone.getValues());
-            System.out.println(prototypeClass + "," +prototypeClass.getValues());
+            System.out.println(clone + "," + clone.getValues() + "," + clone.a);
+            System.out.println(prototypeClass + "," + prototypeClass.getValues() + "," + prototypeClass.a);
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }

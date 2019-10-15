@@ -24,7 +24,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.name_view);
+            mTextView = (TextView) v.findViewById(R.id.item1);
         }
     }
 
@@ -65,9 +65,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void setData(List<String> data){
-        mDataset.clear();
-        mDataset.addAll(data);
+    public void setData(List<String> data) {
+        mDataset = data;
     }
 
     public void removeData(int position) {

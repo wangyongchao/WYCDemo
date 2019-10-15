@@ -2,12 +2,13 @@
 package com.weishop.test.fragment.fragmenttabhost;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.View;
 
 import com.weishop.test.fragment.Fragment1;
 import com.weishop.test.fragment.Fragment2;
 import com.weishop.test.R;
+import com.weishop.test.util.TestUtils;
 
 public class FragmentTabHostActivity extends android.support.v4.app.FragmentActivity implements
         View.OnClickListener {
@@ -17,6 +18,7 @@ public class FragmentTabHostActivity extends android.support.v4.app.FragmentActi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TestUtils.TAG, "FragmentTabHostActivity onCreate");
         setContentView(R.layout.activity_fragmenthost);
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
@@ -27,6 +29,13 @@ public class FragmentTabHostActivity extends android.support.v4.app.FragmentActi
         mTabHost.addTab(mTabHost.newTabSpec("contacts").setIndicator("Contacts"), Fragment2.class,
                 null);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TestUtils.TAG, "FragmentTabHostActivity onResume");
     }
 
     @Override
@@ -35,8 +44,14 @@ public class FragmentTabHostActivity extends android.support.v4.app.FragmentActi
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TestUtils.TAG, "FragmentTabHostActivity onPause");
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        System.out.println("FragmentTabHostActivity onDestroy");
+        Log.d(TestUtils.TAG, "FragmentTabHostActivity onDestroy");
     }
 }

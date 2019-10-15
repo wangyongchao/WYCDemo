@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  */
 
 public class AppUtils {
+    public static String COMMON_TAG = "common_tag";
     private static String TAG = "AppUtils";
     private static final String CPU_NAME_REGEX = "cpu[0-9]+";
     private static final String CPU_LOCATION = "/sys/devices/system/cpu/";

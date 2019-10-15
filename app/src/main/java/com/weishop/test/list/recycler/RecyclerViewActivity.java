@@ -61,6 +61,7 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
         System.out.println("RecyclerViewActivity oncreate after");
 
         findViewById(R.id.delete).setOnClickListener(this);
+        findViewById(R.id.display).setOnClickListener(this);
 
     }
 
@@ -77,7 +78,7 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
     }
 
     private void initData() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             mData.add("item" + i);
         }
 
@@ -85,7 +86,16 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        mAdapter.notifyItemChanged(1);
+        if (R.id.display == v.getId()) {
+            initData();
+            mData.add("3q32434");
+            mData.add("3q32434");
+            mAdapter.notifyDataSetChanged();
+//            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mData.clear();
+//            mRecyclerView.setVisibility(View.GONE);
+        }
 
     }
 }

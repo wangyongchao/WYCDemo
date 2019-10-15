@@ -16,4 +16,6 @@
     <color name="shadow70">#ffd987</color>
     <color name="shadow90">#ffce65</color>
     <color name="redh">#f13232</color>
+    <color name="color_cc">#cc000000</color>
+    <color name="studycenter_color_ff5e50">#FF5E50</color>
 </resources>

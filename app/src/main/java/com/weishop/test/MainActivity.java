@@ -8,8 +8,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Debug;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
@@ -21,8 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dianping.logan.Logan;
-import com.weishop.test.performance.memory.LeakActivity;
-import com.weishop.test.service.LocalService;
+import com.weishop.test.util.TestUtils;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -43,12 +40,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        int has = ContextCompat.checkSelfPermission(this, Manifest.permission.SYSTEM_ALERT_WINDOW);
+//        int has = ContextCompat.checkSelfPermission(this, Manifest.permission
+//        .SYSTEM_ALERT_WINDOW);
 //        if(has== PackageManager.PERMISSION_GRANTED){
 //            System.out.println("PERMISSION_GRANTED");
 //        }else if(has==PackageManager.PERMISSION_DENIED){
 //            System.out.println("PERMISSION_DENIED");
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SYSTEM_ALERT_WINDOW}, 12345);
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
+//            .SYSTEM_ALERT_WINDOW}, 12345);
 //        }
 
         setContentView(R.layout.activity_main);
@@ -68,10 +67,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startService(new Intent(MainActivity.this, LocalService.class));
+                TestUtils.getProperty(MainActivity.this);
 
             }
-        }, 10*1000);
+        }, 10 * 1000);
 
     }
 
@@ -113,6 +112,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Logan.w("test logan", 1);
+        Intent intent = new Intent();
+
     }
 
     private void A() throws Exception {
@@ -151,7 +152,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 case MotionEvent.ACTION_DOWN:
                     orginalDrawable = v.getBackground();
                     if (orginalDrawable != null) {
-                        orginalDrawable.setColorFilter(Color.parseColor("#33F13232"), PorterDuff.Mode.SRC_ATOP);
+                        orginalDrawable.setColorFilter(Color.parseColor("#33F13232"),
+                                PorterDuff.Mode.SRC_ATOP);
                     } else {
                         stateDrawable = new ColorDrawable(Color.parseColor("#33F13232"));
                         v.setBackgroundDrawable(stateDrawable);

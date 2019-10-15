@@ -21,8 +21,9 @@
         android:debuggable="true"
         android:label="@string/app_name">
         <activity
-            android:name=".bitmap.BitmapActivity"
-            android:label="@string/app_name">
+            android:name=".mvp.MvpTestActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Design">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,7 +89,9 @@
         <activity android:name=".contentprovider.ContactManager" />
         <activity android:name=".contentprovider.ContactAdder" />
 
-        <activity android:name=".contentprovider.PickContact" android:label="@string/activity_pick_contact">
+        <activity
+            android:name=".contentprovider.PickContact"
+            android:label="@string/activity_pick_contact">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.SAMPLE_CODE" />

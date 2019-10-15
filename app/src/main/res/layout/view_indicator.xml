@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_indicator"
+    android:layout_width="0px"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="任务"
+    android:textColor="@color/studycenter_color_ff5e50"
+    android:textSize="16sp" />

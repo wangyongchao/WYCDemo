@@ -22,6 +22,7 @@ import com.weishop.test.performance.memory.LruCache;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -90,7 +91,8 @@ public class ListViewAdapter extends BaseAdapter {
             } else {
                 viewHolder.imageView.setImageDrawable(new ColorDrawable(Color.TRANSPARENT));
                 viewHolder.imageView.setBackgroundColor(Color.GRAY);
-                ListViewAdapter.BitmapWorkerTask task = new ListViewAdapter.BitmapWorkerTask(viewHolder.imageView);
+                ListViewAdapter.BitmapWorkerTask task =
+                        new ListViewAdapter.BitmapWorkerTask(viewHolder.imageView, this);
                 task.execute(data.imgUrl);
             }
         }
@@ -172,12 +174,15 @@ public class ListViewAdapter extends BaseAdapter {
      *
      * @author guolin
      */
-    class BitmapWorkerTask extends AsyncTask<String, Void, BitmapDrawable> {
+    static class BitmapWorkerTask extends AsyncTask<String, Void, BitmapDrawable> {
 
-        private ImageView mImageView;
+        WeakReference<ListViewAdapter> weakReference;
+        WeakReference<ImageView> imageViewWeakReference;
 
-        public BitmapWorkerTask(ImageView imageView) {
-            mImageView = imageView;
+        public BitmapWorkerTask(ImageView imageView, ListViewAdapter adapter) {
+
+            imageViewWeakReference = new WeakReference<ImageView>(imageView);;
+            weakReference = new WeakReference<ListViewAdapter>(adapter);
         }
 
         @Override
@@ -185,15 +190,17 @@ public class ListViewAdapter extends BaseAdapter {
             String imageUrl = params[0];
             // 在后台开始下载图片
             Bitmap bitmap = downloadBitmap(imageUrl);
-            BitmapDrawable drawable = new BitmapDrawable(mContext.getResources(), bitmap);
-            addBitmapToMemoryCache(imageUrl, drawable);
+            ListViewAdapter listViewAdapter = weakReference.get();
+            BitmapDrawable drawable = new BitmapDrawable(listViewAdapter.mContext.getResources(), bitmap);
+            listViewAdapter.addBitmapToMemoryCache(imageUrl, drawable);
             return drawable;
         }
 
         @Override
         protected void onPostExecute(BitmapDrawable drawable) {
-            if (mImageView != null && drawable != null) {
-                mImageView.setImageDrawable(drawable);
+            ImageView imageView = imageViewWeakReference.get();
+            if (imageView != null && drawable != null) {
+                imageView.setImageDrawable(drawable);
             }
         }
 

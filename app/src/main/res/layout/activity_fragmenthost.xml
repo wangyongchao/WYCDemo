@@ -11,12 +11,12 @@
         android:layout_height="0dip"
         android:layout_weight="1" />
 
-    <android.support.v4.app.FragmentTabHost
+    <com.weishop.test.fragment.fragmenttabhost.FragmentTabHost
         android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v4.app.FragmentTabHost>
+    </com.weishop.test.fragment.fragmenttabhost.FragmentTabHost>
 
 
 </LinearLayout>

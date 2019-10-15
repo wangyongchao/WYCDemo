@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,9 +14,10 @@
 
     <EditText
         android:id="@+id/editText"
-        android:background="@color/content_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"/>
+        android:layout_centerInParent="true"
+        android:background="@color/content_background"
+        android:minHeight="100dp" />
 
-</FrameLayout>
+</RelativeLayout>

@@ -2,9 +2,9 @@ package com.weishop.test.mvp.base;
 
 public interface BaseView extends IView {
 
-    public void showLoading();
+    void showLoading();
 
-    public void hideLoading();
+    void hideLoading();
 
 
 }

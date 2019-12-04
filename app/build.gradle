@@ -59,26 +59,6 @@ android {
 }
 
 
-task findbugs(type: FindBugs) {
-    //toolVersion = "2.0.1"
-    ignoreFailures = true//发现警告的时候是否终止编译
-    effort = "max"//分析的级别，min，default，max，级别越高精度越高越容易找到bug，相应占用内存越高
-    reportLevel = "low"
-//报告的bug级别，low,medium,high,设置low所有的bug都报告;设置medium,报告，medium，high;设置high,至报告high
-    excludeFilter = file("./findbugs.xml") //指定过滤文件，不报告的bug类型
-//    includeFilter 哪些bug需要报告
-    classes = files("$project.buildDir/intermediates/classes/prod/debug/com/weishop/")//要分析的二进制文件目录
-    source = fileTree('src/main/java/')
-    classpath = files()
-    reports {
-        xml.enabled = false
-        html.enabled = true
-        html {
-            destination "$project.buildDir/findbugs.html"
-        }
-    }
-}
-
 project.configurations.all {
 
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
@@ -95,13 +75,12 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:27.1.1'
-    compile 'com.android.support:support-v4:27.1.1'
-    compile 'com.android.support:multidex:1.0.3'
-    compile 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 
-    compile 'io.reactivex:rxandroid:1.2.1'
-
-    compile 'io.reactivex:rxjava:1.2.3'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'com.airbnb.android:lottie:2.6.1'
     implementation 'com.robinhood.ticker:ticker:2.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

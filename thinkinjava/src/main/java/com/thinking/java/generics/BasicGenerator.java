@@ -1,7 +1,9 @@
 //: net/mindview/util/BasicGenerator.java
 // Automatically create a Generator, given a class
 // with a default (no-arg) constructor.
-package net.mindview.util;
+package com.thinking.java.generics;
+
+import net.mindview.util.Generator;
 
 public class BasicGenerator<T> implements Generator<T> {
     private Class<T> type;
@@ -10,6 +12,7 @@ public class BasicGenerator<T> implements Generator<T> {
         this.type = type;
     }
 
+    @Override
     public T next() {
         try {
             // Assumes type is a public class:

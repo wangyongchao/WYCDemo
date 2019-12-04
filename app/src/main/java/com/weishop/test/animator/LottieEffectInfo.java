@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.util.JsonReader;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -36,15 +37,15 @@ public class LottieEffectInfo {
         this.targetFileName = Arrays.asList(targetFileNames);
     }
 
-    public void setTargetFileFilter(String[] targetFileNames){
+    public void setTargetFileFilter(String[] targetFileNames) {
         this.targetFileName = Arrays.asList(targetFileNames);
     }
 
-    public Bitmap fetchBitmap(LottieAnimationView animationView,String fileName,
+    public Bitmap fetchBitmap(LottieAnimationView animationView, String fileName,
                               String bitmapId, int width, int height) {
         Bitmap resultBitMap = null;
         if (targetFileName != null && targetFileName.contains(fileName)) {
-            return fetchTargetBitMap(animationView,fileName, bitmapId,width, height);
+            return fetchTargetBitMap(animationView, fileName, bitmapId, width, height);
         } else {
             InputStream in = null;
             try {
@@ -68,7 +69,8 @@ public class LottieEffectInfo {
 
 
     /**
-     *  从asset 中 获取lottie所需要的图片
+     * 从asset 中 获取lottie所需要的图片
+     *
      * @param fileName
      * @param width
      * @param height
@@ -76,15 +78,15 @@ public class LottieEffectInfo {
      * @return
      */
     public Bitmap fetchBitmapFromAssets(LottieAnimationView animationView,
-                                        String fileName,String bitmapId,int width,
-                                        int height,Context context){
+                                        String fileName, String bitmapId, int width,
+                                        int height, Context context) {
         Bitmap resultBitMap = null;
         if (targetFileName != null && targetFileName.contains(fileName)) {
-            return fetchTargetBitMap(animationView,fileName, bitmapId,width, height);
+            return fetchTargetBitMap(animationView, fileName, bitmapId, width, height);
         } else {
             InputStream in = null;
             try {
-                in = context.getAssets().open(imgDir+File.separator+fileName);
+                in = context.getAssets().open(imgDir + File.separator + fileName);
                 resultBitMap = BitmapFactory.decodeStream(in);
                 in.close();
             } catch (Exception e) {
@@ -99,12 +101,13 @@ public class LottieEffectInfo {
                 }
             }
         }
-        return  resultBitMap;
+        return resultBitMap;
     }
 
 
     /**
      * 获取 json 文件字符串内容
+     *
      * @return
      */
     public String getJsonStr() {
@@ -138,10 +141,11 @@ public class LottieEffectInfo {
 
     /**
      * 从assets 中获取 json
+     *
      * @param context
      * @return
      */
-    public String getJsonStrFromAssets(Context context){
+    public String getJsonStrFromAssets(Context context) {
         String jsonStr = null;
         BufferedReader reader = null;
         try {
@@ -166,10 +170,26 @@ public class LottieEffectInfo {
                 }
             }
         }
-        return  jsonStr;
+        return jsonStr;
     }
 
 
+    /**
+     * 从assets 中获取 Reader
+     *
+     * @param context
+     * @return
+     */
+    public JsonReader getJsonReader(Context context) {
+        JsonReader jsonReader = null;
+        try {
+            InputStream in = context.getAssets().open(jsonFilePath);
+            jsonReader = new JsonReader(new InputStreamReader(in));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonReader;
+    }
 
 
     /**
@@ -180,7 +200,7 @@ public class LottieEffectInfo {
      * @param height
      * @return
      */
-    public Bitmap fetchTargetBitMap(LottieAnimationView animationView,String fileName,
+    public Bitmap fetchTargetBitMap(LottieAnimationView animationView, String fileName,
                                     String bitmapId, int width, int height) {
         return null;
     }

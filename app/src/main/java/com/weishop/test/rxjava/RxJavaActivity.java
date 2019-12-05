@@ -37,6 +37,7 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
 
     private TextView mTextView;
     private Subscription mSubscription;
+    private DemoTest demoTest = new DemoTest();
 
 
     @Override
@@ -55,10 +56,9 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.request) {
-            mSubscription.request(128);  //注意这句代码
+            demoTest.request();  //注意这句代码
         } else {
-
-            testFlowable1();
+            demoTest.test();
         }
     }
 

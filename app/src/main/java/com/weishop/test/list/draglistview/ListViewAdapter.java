@@ -107,20 +107,6 @@ public class ListViewAdapter extends BaseAdapter {
         }
     }
 
-    private void testRead() {
-        try {
-            File externalStorageDirectory = Environment.getExternalStorageDirectory();
-            File file = new File(externalStorageDirectory, "/test/testimage.jpg");
-            FileInputStream fileInputStream = new FileInputStream(file);
-            byte[] bytes = new byte[1024];
-            int read = 0;
-            while ((read = fileInputStream.read(bytes)) != -1) {
-                System.out.println("lenght=" + read);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void setData(List<ListData> data) {
         if (data != null && data.size() > 0) {
@@ -181,7 +167,8 @@ public class ListViewAdapter extends BaseAdapter {
 
         public BitmapWorkerTask(ImageView imageView, ListViewAdapter adapter) {
 
-            imageViewWeakReference = new WeakReference<ImageView>(imageView);;
+            imageViewWeakReference = new WeakReference<ImageView>(imageView);
+            ;
             weakReference = new WeakReference<ListViewAdapter>(adapter);
         }
 
@@ -191,7 +178,8 @@ public class ListViewAdapter extends BaseAdapter {
             // 在后台开始下载图片
             Bitmap bitmap = downloadBitmap(imageUrl);
             ListViewAdapter listViewAdapter = weakReference.get();
-            BitmapDrawable drawable = new BitmapDrawable(listViewAdapter.mContext.getResources(), bitmap);
+            BitmapDrawable drawable = new BitmapDrawable(listViewAdapter.mContext.getResources(),
+                    bitmap);
             listViewAdapter.addBitmapToMemoryCache(imageUrl, drawable);
             return drawable;
         }

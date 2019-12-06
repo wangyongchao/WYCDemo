@@ -1,10 +1,15 @@
 
 package com.weishop.test.mvp.base;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.util.Preconditions;
 
-public abstract class BaseMvpActivity<P extends BasePresenter> extends Activity implements BaseView {
+/**
+ * 需要使用mvp的可以继承此类，activity本身充当view角色
+ *
+ * @param <P>
+ */
+public abstract class BaseMvpActivity<P extends IPresenter> extends BaseActivity implements IView<P> {
 
     protected P mPresenter;
 
@@ -12,21 +17,12 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends Activity 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
+        Preconditions.checkNotNull(mPresenter);
         mPresenter.attachView(this);
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mPresenter.onStart();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        mPresenter.onRestart();
-    }
+    protected abstract P createPresenter();
 
     @Override
     protected void onResume() {
@@ -41,18 +37,8 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends Activity 
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        mPresenter.onStop();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detachView(this);
     }
-
-    public abstract P createPresenter();
-
-
 }

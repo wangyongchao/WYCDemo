@@ -3,7 +3,7 @@ package com.weishop.test.mvp.base;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
-public abstract class BasePresenter<V extends BaseView> implements IPresenter<V> {
+public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
 
     protected Reference<V> weakReference;
 
@@ -30,20 +30,14 @@ public abstract class BasePresenter<V extends BaseView> implements IPresenter<V>
 
     }
 
+    @Override
+    public void onResume() {
 
-    protected void onStart() {
     }
 
-    protected void onRestart() {
-    }
+    @Override
+    public void onPause() {
 
-    protected void onResume() {
-    }
-
-    protected void onPause() {
-    }
-
-    protected void onStop() {
     }
 
 

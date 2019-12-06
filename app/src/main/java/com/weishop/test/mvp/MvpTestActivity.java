@@ -13,8 +13,8 @@ import com.weishop.test.mvp.base.BaseMvpActivity;
 
 import java.util.List;
 
-public class MvpTestActivity extends BaseMvpActivity<TestPresenter> implements View.OnClickListener,
-        AbsListView.OnScrollListener, TestView {
+public class MvpTestActivity extends BaseMvpActivity<TestContract.Presenter> implements View.OnClickListener,
+        AbsListView.OnScrollListener, TestContract.View {
 
     private ListView mListView;
     private ListViewAdapter mAdapter;
@@ -46,13 +46,13 @@ public class MvpTestActivity extends BaseMvpActivity<TestPresenter> implements V
 
         findViewById(R.id.start).setOnClickListener(this);
 
-        mPresenter.testData();
+        mPresenter.initData();
 
 
     }
 
     @Override
-    public TestPresenter createPresenter() {
+    protected TestContract.Presenter createPresenter() {
         return new TestPresenter();
     }
 
@@ -84,10 +84,10 @@ public class MvpTestActivity extends BaseMvpActivity<TestPresenter> implements V
 
     }
 
-
     @Override
-    public void test(List<ListData> data) {
+    public void showData(List<ListData> data) {
         mAdapter.setData(data);
         mAdapter.notifyDataSetChanged();
     }
+
 }

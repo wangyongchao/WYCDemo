@@ -2,11 +2,8 @@ package com.weishop.test.mvp;
 
 import com.weishop.test.list.ListData;
 import com.weishop.test.mvp.base.BasePresenter;
-import com.weishop.test.mvp.base.IView;
 import com.weishop.test.util.TestUtils;
 
-import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 

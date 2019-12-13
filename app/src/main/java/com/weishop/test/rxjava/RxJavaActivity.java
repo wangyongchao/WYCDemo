@@ -51,6 +51,11 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.d("onResume");
+    }
 
     @Override
     public void onClick(View v) {

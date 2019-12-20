@@ -1,8 +1,11 @@
 package com.weishop.test.rxjava;
 
+import android.support.v4.util.Pair;
+
 import com.weishop.test.data.Course;
 import com.weishop.test.data.Student;
 import com.weishop.test.util.LogUtils;
+import com.weishop.test.util.TestUtils;
 
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
@@ -26,6 +29,7 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
@@ -44,7 +48,7 @@ public class DemoTest {
     private Subscription subscription;
 
     public void test() {
-        testContact1();
+        testZip();
     }
 
     /**
@@ -409,6 +413,36 @@ public class DemoTest {
         return listFlowable;
 
 
+    }
+
+    private void testZip() {
+        Observable<String> firstNames = Observable.just("James", "Jean-Luc", "Benjamin", "222");
+        Observable<String> lastNames = Observable.just("Kirk", "Picard", "Sisko");
+        Observable.zip(firstNames, lastNames, new BiFunction<String,
+                String, Pair<String,String>>() {
+            @Override
+            public Pair apply(String s, String s2) throws Exception {
+                return new Pair<String,String>(s,s2);
+            }
+        }).subscribe(new Consumer<Pair<String, String>>() {
+            @Override
+            public void accept(Pair<String, String> pair) throws Exception {
+            }
+        });
+        firstNames.zipWith(lastNames, new BiFunction<String, String, String>() {
+            @Override
+            public String apply(String first, String last) throws Exception {
+
+                return first + " " + last;
+            }
+        }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                LogUtils.d(s);
+            }
+        });
+//        firstNames.zipWith(lastNames, (first, last) -> first + " " + last)
+//                .subscribe(item -> LogUtils.d(item));
     }
 
     /**

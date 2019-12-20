@@ -1,0 +1,36 @@
+//: net/mindview/util/BasicGenerator.java
+// Automatically create a Generator, given a class
+// with a default (no-arg) constructor.
+package com.weishop.test.util;
+
+import com.weishop.test.data.Student;
+
+public class BasicGenerator<T> implements Generator<T> {
+    private Class<T> type;
+
+    public BasicGenerator(Class<T> type) {
+        this.type = type;
+    }
+
+    @Override
+    public T next() {
+        try {
+            // Assumes type is a public class:
+            return type.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Produce a Default generator given a type token:
+    public static <T> Generator<T> create(Class<T> type) {
+        return new BasicGenerator<T>(type);
+    }
+
+    public static void main(String[] args) {
+        Generator<Student> studentGenerator = BasicGenerator.create(Student.class);
+        for (int i = 0; i < 10; i++) {
+            studentGenerator.next();
+        }
+    }
+} ///:~

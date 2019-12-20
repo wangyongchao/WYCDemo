@@ -204,6 +204,20 @@ public class DemoTest {
     }
 
     public void testObservable() {
+//        List<Student> students = buildStudents();
+//        Observable.just(students).map(new Function<List<Student>, Object>() {
+//            @Override
+//            public Object apply(List<Student> students) throws Exception {
+//                return null;
+//            }
+//        }).subscribe(new Consumer<Object>() {
+//            @Override
+//            public void accept(Object o) throws Exception {
+//
+//            }
+//        });
+
+
 //        Observable<String> just = Observable.just("A", "B", "C");
 //        just.subscribe(new Consumer<String>() {
 //            @Override

@@ -1,5 +1,7 @@
 package com.weishop.test.data;
 
+import com.weishop.test.util.Generator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,4 +47,11 @@ public class Student {
         }
         return info;
     }
+
+    public static Generator<Student> generator =
+            new Generator<Student>() {
+                public Student next() {
+                    return new Student();
+                }
+            };
 }

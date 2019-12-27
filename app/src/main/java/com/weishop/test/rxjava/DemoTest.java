@@ -419,10 +419,10 @@ public class DemoTest {
         Observable<String> firstNames = Observable.just("James", "Jean-Luc", "Benjamin", "222");
         Observable<String> lastNames = Observable.just("Kirk", "Picard", "Sisko");
         Observable.zip(firstNames, lastNames, new BiFunction<String,
-                String, Pair<String,String>>() {
+                String, Pair<String, String>>() {
             @Override
             public Pair apply(String s, String s2) throws Exception {
-                return new Pair<String,String>(s,s2);
+                return new Pair<String, String>(s, s2);
             }
         }).subscribe(new Consumer<Pair<String, String>>() {
             @Override
@@ -569,6 +569,43 @@ public class DemoTest {
 
             }
         });
+
+    }
+
+    /**
+     * 测试5中观察者
+     */
+    private void testObservers() {
+        //Observable
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(1);
+                emitter.onComplete();
+            }
+        }).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Integer value) {
+                LogUtils.d("onNext =" + value);
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
 
     }
 

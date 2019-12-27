@@ -38,6 +38,7 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
     private TextView mTextView;
     private Subscription mSubscription;
     private DemoTest demoTest = new DemoTest();
+    private CreateOperator createOperator = new CreateOperator();
 
 
     @Override
@@ -59,12 +60,7 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.request) {
-            demoTest.request();  //注意这句代码
-        } else {
-            demoTest.test();
-        }
+        createOperator.testObservable();
     }
 
 

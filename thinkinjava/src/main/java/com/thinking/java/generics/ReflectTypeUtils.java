@@ -1,38 +1,29 @@
-package com.classloader.test;
+package com.thinking.java.generics;
 
-import java.lang.annotation.Annotation;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
-public class Test1 {
-    public static void main(String[] args) {
-        CallBack<TestClass> testClassCallBack = new CallBack<TestClass>() {
+/**
+ * 泛型相关
+ */
+public class ReflectTypeUtils {
 
-            @Override
-            public void onCallBack(TestClass testClass) {
-
-            }
-        };
-        CallBack callBack = new CallBackImpl();
-        callBack.onCallBack();
-//        Type[] genericInterfaces = testClassCallBack.getClass().getGenericInterfaces();
-//        for(int i=0;i<genericInterfaces.length;i++){
-//            System.out.println(genericInterfaces[i].getTypeName());
-//        }
-        Type parameterizedType = getParameterizedType(testClassCallBack.getClass(),
-                CallBack.class, 0);
-        Class aClass = (Class) parameterizedType;
-        Annotation[] annotations = aClass.getAnnotations();
-        Annotation[] annotationsByType = aClass.getAnnotationsByType(SuppressWarnings.class);
-        int length = annotationsByType.length;
-        System.out.println(annotations.length);
-
-
+    private ReflectTypeUtils() {
     }
 
+    /**
+     * 返回泛型类的第{@param paramIndex}泛型类型
+     * 比如Map<String, Object>, 若paramIndex为0,则返回String.class
+     *
+     * @param ownerType
+     * @param declaredClass
+     * @param paramIndex
+     * @return
+     */
     public static Type getParameterizedType(Type ownerType, Class<?> declaredClass,
                                             int paramIndex) {
 
@@ -50,7 +41,7 @@ public class Test1 {
             clazz = (Class<?>) ownerType;
         }
 
-        // 非匿名内部类 callback时创建的实现类对象，callBack.getClass() ==CallBackImpl.class 相等
+        // 非匿名内部类
         if (declaredClass == clazz) {
 
             if (ats != null) {
@@ -88,6 +79,7 @@ public class Test1 {
 
         return null;
     }
+
 
     private static Type getTrueType(Type type, TypeVariable<?>[] typeVariables,
                                     Type[] actualTypes) {

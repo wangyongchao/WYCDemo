@@ -1,5 +1,6 @@
 package com.thinking.java.generics;//: generics/FilledListMaker.java
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 

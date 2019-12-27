@@ -1,5 +1,5 @@
 package com.classloader.test;
 
 public interface CallBack<T> {
-    void onCallBack();
+    void onCallBack(T t);
 }

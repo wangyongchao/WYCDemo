@@ -32,11 +32,16 @@ import io.reactivex.SingleEmitter;
 import io.reactivex.SingleObserver;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by wangyongchao on 2019/12/27 15:58
  */
 public class CreateOperator {
+
+    public void test() {
+        testJust();
+    }
 
 
     /**
@@ -44,7 +49,7 @@ public class CreateOperator {
      * Observable
      * Observer
      */
-    public void testObservable() {
+    private void testObservable() {
         //Observable
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
@@ -84,7 +89,7 @@ public class CreateOperator {
      * Publisher
      * Subscriber
      */
-    public void testFlowable() {
+    private void testFlowable() {
         Flowable.create(new FlowableOnSubscribe<Integer>() {
             @Override
             public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
@@ -121,7 +126,7 @@ public class CreateOperator {
     /**
      *
      */
-    public void testFlowableJust() {
+    private void testFlowableJust() {
         Flowable.create(new FlowableOnSubscribe<Integer>() {
             @Override
             public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
@@ -162,7 +167,7 @@ public class CreateOperator {
      * Single
      * SingleObserver 观察者
      */
-    public void testSingle() {
+    private void testSingle() {
         Single.create(new SingleOnSubscribe<Integer>() {
             @Override
             public void subscribe(SingleEmitter<Integer> emitter) throws Exception {
@@ -194,7 +199,7 @@ public class CreateOperator {
      * Completable 被观察者
      * CompletableObserver 观察者
      */
-    public void testCompletable() {
+    private void testCompletable() {
         Completable.create(new CompletableOnSubscribe() {
             @Override
             public void subscribe(CompletableEmitter emitter) throws Exception {
@@ -225,7 +230,7 @@ public class CreateOperator {
      * 没有onNext方法，同样需要onSuccess发射数据，
      * 且只能发射0或1个数据，多发也不再处理
      */
-    public void testMayBe() {
+    private void testMayBe() {
         Maybe.create(new MaybeOnSubscribe<Integer>() {
             @Override
             public void subscribe(MaybeEmitter<Integer> emitter) throws Exception {
@@ -256,7 +261,7 @@ public class CreateOperator {
         });
     }
 
-    public void testFlowableToSingle() {
+    private void testFlowableToSingle() {
         List<Student> students = buildStudents();
         Flowable.fromIterable(students).subscribe(new FlowableSubscriber<Student>() {
             @Override
@@ -289,8 +294,33 @@ public class CreateOperator {
 
     }
 
+    private void testJust() {
+        List<Student> students = buildStudents();
+        Observable.just(students).subscribeOn(Schedulers.io()).subscribe(new Observer<List<Student>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-    public List<Student> buildStudents() {
+            }
+
+            @Override
+            public void onNext(List<Student> students) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+
+    private List<Student> buildStudents() {
         List<Student> studentsList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Student student = new Student();

@@ -60,7 +60,7 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        createOperator.testObservable();
+        createOperator.test();
     }
 
 

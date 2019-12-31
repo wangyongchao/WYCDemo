@@ -19,7 +19,7 @@ import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 
-public class RxUtils {
+public class HttpUtils {
 
 
 

@@ -22,6 +22,7 @@ import com.dianping.logan.Logan;
 import com.weishop.test.R;
 import com.weishop.test.util.TestUtils;
 
+import java.io.File;
 import java.io.IOException;
 
 public class OkhttpActivity extends Activity implements View.OnClickListener {
@@ -41,8 +42,8 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         try {
-            testOkhttp.test();
-//            get();
+            testOkhttp.testAsync();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

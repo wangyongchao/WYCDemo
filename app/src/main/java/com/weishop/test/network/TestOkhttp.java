@@ -93,7 +93,7 @@ public class TestOkhttp {
     }
 
     /**
-     * 响应缓存
+     * 响应缓存  cacheControl() 控制缓存
      */
     public void testResponseCache() throws Exception {
         Request request = new Request.Builder()

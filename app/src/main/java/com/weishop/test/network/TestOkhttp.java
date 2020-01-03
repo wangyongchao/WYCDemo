@@ -10,16 +10,25 @@ import com.squareup.moshi.Moshi;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.EventListener;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -54,11 +63,12 @@ public class TestOkhttp {
                     try {
 
                         Cache cache = new Cache(mContext.getExternalCacheDir(), cacheSize);
+//                        builder.cache(cache); //需要缓存的时候用
+                        builder.eventListener(new DefaultEventListener());
                         HttpUtils.createSslFactory(builder,
                                 new InputStream[]{mContext.getAssets().open("charlesCertificate" +
                                         ".pem")});
                         mOkHttpClient = builder
-                                .cache(cache)
                                 .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
                     } catch (IOException e) {
@@ -70,6 +80,79 @@ public class TestOkhttp {
         }
 
     }
+
+    private class DefaultEventListener extends EventListener {
+        @Override
+        public void callStart(Call call) {
+            System.out.println("callStart =" + call.request().url());
+        }
+
+        @Override
+        public void dnsStart(Call call, String domainName) {
+            System.out.println("dnsStart =" + call.request().url() + "," +
+                    "domainName=" + domainName);
+        }
+
+        @Override
+        public void dnsEnd(Call call, String domainName, List<InetAddress> inetAddressList) {
+            String address = "";
+            if (inetAddressList != null) {
+                for (int i = 0; i < inetAddressList.size(); i++) {
+                    InetAddress inetAddress = inetAddressList.get(i);
+                    address = address + inetAddress.toString()+",";
+                }
+
+            }
+            System.out.println("dnsEnd =" + call.request().url() + "," +
+                    "domainName=" + domainName + ",address=" + address);
+        }
+
+        @Override
+        public void connectStart(Call call,
+                                 InetSocketAddress inetSocketAddress,
+                                 Proxy proxy) {
+            String hostName = "";
+            if (inetSocketAddress != null) {
+
+                hostName = inetSocketAddress.toString();
+            }
+            System.out.println("connectStart =" + call.request().url() + "," +
+                    "hostName=" + hostName);
+        }
+
+        @Override
+        public void connectEnd(Call call, InetSocketAddress inetSocketAddress
+                , Proxy proxy, Protocol protocol) {
+            String hostName = "";
+            if (inetSocketAddress != null) {
+
+                hostName = inetSocketAddress.toString();
+            }
+            System.out.println("connectEnd =" + call.request().url() + "," +
+                    "hostName=" + hostName);
+        }
+
+        @Override
+        public void requestHeadersStart(Call call) {
+            System.out.println("requestHeadersStart =" + call.request().url());
+        }
+
+        @Override
+        public void requestBodyStart(Call call) {
+            System.out.println("requestBodyStart =" + call.request().url());
+        }
+
+        @Override
+        public void responseBodyStart(Call call) {
+            System.out.println("responseBodyStart =" + call.request().url());
+        }
+
+        @Override
+        public void callFailed(Call call, IOException ioe) {
+            System.out.println("callFailed =" + call.request().url() + ",ioe=" + ioe);
+        }
+    }
+
 
     public void test() {
         try {
@@ -84,12 +167,48 @@ public class TestOkhttp {
             @Override
             public void run() {
                 try {
-                    testResponseCache();
+                    testCancelCall();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+    }
+
+    /**
+     * 使用cancel可以立即停止一个正在进行的调用。如果当前线程正在写请求或者正在
+     * 读取一个相应，将会抛出IOException。同步或者异步都可以取消。
+     */
+    public void testCancelCall() {
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        Request request = new Request.Builder()
+                .url("http://httpbin.org/delay/2") // This URL is served with a 2 second delay.
+                .build();
+
+        final long startNanos = System.nanoTime();
+        final Call call = mOkHttpClient.newCall(request);
+
+        // Schedule a job to cancel the call in 1 second.
+        executor.schedule(new Runnable() {
+            @Override
+            public void run() {
+                System.out.printf("%.2f Canceling call.%n",
+                        (System.nanoTime() - startNanos) / 1e9f);
+                call.cancel();
+                System.out.printf("%.2f Canceled call.%n",
+                        (System.nanoTime() - startNanos) / 1e9f);
+            }
+        }, 1, TimeUnit.SECONDS);
+
+        System.out.printf("%.2f Executing call.%n", (System.nanoTime() - startNanos) / 1e9f);
+        try (Response response = call.execute()) {
+            System.out.printf("%.2f Call was expected to fail, but completed: %s%n",
+                    (System.nanoTime() - startNanos) / 1e9f, response);
+        } catch (IOException e) {
+            System.out.printf("%.2f Call failed as expected: %s%n",
+                    (System.nanoTime() - startNanos) / 1e9f, e);
+        }
+
     }
 
     /**

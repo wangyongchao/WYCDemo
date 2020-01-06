@@ -19,9 +19,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Authenticator;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Connection;
+import okhttp3.Credentials;
 import okhttp3.EventListener;
 import okhttp3.FormBody;
 import okhttp3.Headers;
@@ -33,12 +36,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okhttp3.Route;
 import okio.BufferedSink;
 
 /**
  * Created by wangyongchao on 2019/12/30 17:10
  */
-public class TestOkhttp {
+public class TestRecipesOkhttp {
 
     private final int cacheSize = 10 * 1024 * 1024; // 10 MiB
     public static String redirect = "http://publicobject.com/helloworld.txt";//get请求永久重定向
@@ -50,7 +54,7 @@ public class TestOkhttp {
     private final Context mContext;
     private OkHttpClient mOkHttpClient;
 
-    public TestOkhttp(Context context) {
+    public TestRecipesOkhttp(Context context) {
         this.mContext = context;
         initOkHttpClient();
     }
@@ -69,6 +73,9 @@ public class TestOkhttp {
                                 new InputStream[]{mContext.getAssets().open("charlesCertificate" +
                                         ".pem")});
                         mOkHttpClient = builder
+                                .connectTimeout(10, TimeUnit.SECONDS)
+//                                .writeTimeout(10, TimeUnit.SECONDS)
+//                                .readTimeout(30, TimeUnit.SECONDS)
                                 .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
                     } catch (IOException e) {
@@ -99,7 +106,7 @@ public class TestOkhttp {
             if (inetAddressList != null) {
                 for (int i = 0; i < inetAddressList.size(); i++) {
                     InetAddress inetAddress = inetAddressList.get(i);
-                    address = address + inetAddress.toString()+",";
+                    address = address + inetAddress.toString() + ",";
                 }
 
             }
@@ -133,6 +140,12 @@ public class TestOkhttp {
         }
 
         @Override
+        public void connectionReleased(Call call, Connection connection) {
+            System.out.println("connectionReleased =" + call.request().url() + "," +
+                    "connection=" + connection.toString());
+        }
+
+        @Override
         public void requestHeadersStart(Call call) {
             System.out.println("requestHeadersStart =" + call.request().url());
         }
@@ -151,6 +164,8 @@ public class TestOkhttp {
         public void callFailed(Call call, IOException ioe) {
             System.out.println("callFailed =" + call.request().url() + ",ioe=" + ioe);
         }
+
+
     }
 
 
@@ -167,12 +182,108 @@ public class TestOkhttp {
             @Override
             public void run() {
                 try {
-                    testCancelCall();
+                    testAuthentication();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+    }
+
+
+    /**
+     * 拦截器是个非常强大机制，可以监控，重写，重试所有的调用。
+     */
+    private void testInterceptors() {
+
+    }
+
+
+    //----------------------------------------
+
+    /**
+     * 授权访问
+     * okhttp可以自动重试未授权的请求，当服务器返回响应码401未授权的时候，
+     * authenticator.Authenticator 会被自动调用提供授权。为了避免多次重试，可以在某种条件下，返回null。
+     * Authorization 请求头
+     */
+    private void testAuthentication() throws Exception {
+
+        OkHttpClient okHttpClient = mOkHttpClient.newBuilder()
+                .authenticator(new Authenticator() {
+                    @Override
+                    public Request authenticate(Route route, Response response) throws IOException {
+                        System.out.println("authenticate");
+                        if (response.request().header("Authorization") != null) {
+                            //请求头中已经有授权，不用多次重试
+                            return null; // Give up, we've already attempted to authenticate.
+                        }
+
+                        System.out.println("Authenticating for response: " + response);
+                        System.out.println("Challenges: " + response.challenges());
+                        String credential = Credentials.basic("jesse", "password1");
+                        return response.request().newBuilder()
+                                .header("Authorization", credential)
+                                .build();
+                    }
+                })
+                .build();
+        Request request = new Request.Builder()
+                .url("http://publicobject.com/secrets/hellosecret.txt")
+                .build();
+
+        try (Response response = okHttpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+            System.out.println(response.body().string());
+        }
+
+    }
+
+    /**
+     * 个性化配置,每一个请求单独设置请求参数
+     * mOkHttpClient.newBuilder()
+     */
+    public void testConfiguration() throws Exception {
+        Request request = new Request.Builder()
+                .url("http://httpbin.org/delay/1") // This URL is served with a 1 second delay.
+                .build();
+
+        // Copy to customize OkHttp for this request.
+        OkHttpClient client1 = mOkHttpClient.newBuilder()
+                .readTimeout(500, TimeUnit.MILLISECONDS)
+                .build();
+        try (Response response = client1.newCall(request).execute()) {
+            System.out.println("Response 1 succeeded: " + response);
+        } catch (IOException e) {
+            System.out.println("Response 1 failed: " + e);
+        }
+
+        // Copy to customize OkHttp for this request.
+        OkHttpClient client2 = mOkHttpClient.newBuilder()
+                .readTimeout(3000, TimeUnit.MILLISECONDS)
+                .build();
+        try (Response response = client2.newCall(request).execute()) {
+            System.out.println("Response 2 succeeded: " + response);
+        } catch (IOException e) {
+            System.out.println("Response 2 failed: " + e);
+        }
+    }
+
+    /**
+     * 链接超时
+     * connectTimeout(10, TimeUnit.SECONDS)
+     *
+     * @throws Exception
+     */
+    public void testTimeout() throws Exception {
+        Request request = new Request.Builder()
+                .url("http://httpbin.org/delay/20") // This URL is served with a 2 second delay.
+                .build();
+
+        try (Response response = mOkHttpClient.newCall(request).execute()) {
+            System.out.println("Response completed: " + response);
+        }
     }
 
     /**
@@ -536,5 +647,44 @@ public class TestOkhttp {
                 }
             }
         });
+    }
+
+
+    private void get() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    GetExample example = new GetExample();
+                    String response = example.run("https://raw.github" +
+                            ".com/square/okhttp/master/README" +
+                            ".md");
+//                    String response = example.run("https://www.baidu.com");
+                    System.out.println(response);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
+
+    private void post() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    PostExample postExample = new PostExample();
+                    String json = postExample.bowlingJson("Jesse", "Jake");
+                    String response = postExample.post("http://www.roundsapp.com/post", json);
+                    System.out.println(response);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
     }
 }

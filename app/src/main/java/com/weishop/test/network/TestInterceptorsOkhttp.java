@@ -76,6 +76,7 @@ public class TestInterceptorsOkhttp {
                                 .connectTimeout(10, TimeUnit.SECONDS)
 //                                .writeTimeout(10, TimeUnit.SECONDS)
 //                                .readTimeout(30, TimeUnit.SECONDS)
+                                .addInterceptor(new LoggingInterceptor())
                                 .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
                     } catch (IOException e) {
@@ -194,18 +195,22 @@ public class TestInterceptorsOkhttp {
     /**
      * 拦截器是个非常强大机制，可以监控，重写，重试所有的调用。
      * 拦截器有两种 应用拦截器和网络拦截器
+     * 注册有一个应用拦截器addInterceptor
+     * 本例子中http://www.publicobject.com/helloworld.txt
+     * 会重定向到https://www.publicobject.com/helloworld.txt
+     * OkHttp 会自动的跟踪重定向
+     *
+     *我们的应用拦截器只会调用一次并且从chain.proceed(request)返回的response就是重定向后的
+     * response
      */
     private void testInterceptors() throws Exception {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new LoggingInterceptor())
-                .build();
 
         Request request = new Request.Builder()
                 .url("http://www.publicobject.com/helloworld.txt")
                 .header("User-Agent", "OkHttp Example")
                 .build();
 
-        Response response = client.newCall(request).execute();
+        Response response = mOkHttpClient.newCall(request).execute();
         response.body().close();
 
     }

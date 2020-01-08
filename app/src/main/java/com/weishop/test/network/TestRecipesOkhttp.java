@@ -171,7 +171,7 @@ public class TestRecipesOkhttp {
 
     public void test() {
         try {
-            runAsynchronousGet(httpsGetURl);
+            runAsynchronousGet(redirect);
         } catch (Exception e) {
             e.printStackTrace();
         }

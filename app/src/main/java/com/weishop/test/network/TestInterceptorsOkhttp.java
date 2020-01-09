@@ -43,6 +43,7 @@ import okio.Okio;
 
 /**
  * Created by wangyongchao on 2019/12/30 17:10
+ * 拦截器测试
  */
 public class TestInterceptorsOkhttp {
 
@@ -52,6 +53,10 @@ public class TestInterceptorsOkhttp {
     //get请求重定向
     public static String httpsGetHello = "https://publicobject.com/helloworld.txt";//get
     public static String httpsGetBaidu = "https://www.baidu.com";//get
+    //http 2.0 多路复用
+    public static String https2 = "https://http2.golang.org/gophertiles?latency=0";//get
+    public static String https2_gophertiles1 = "https://http2.golang.org/gophertiles?x=0&y=0&cachebust=1578550891964614272&latency=0";//get
+    public static String https2_gophertiles2 = "https://http2.golang.org/gophertiles?x=1&y=0&cachebust=1578550891964614272&latency=0";//get
     // 请求https
     private final Context mContext;
     private OkHttpClient mOkHttpClient;
@@ -68,7 +73,7 @@ public class TestInterceptorsOkhttp {
                     OkHttpClient.Builder builder = new OkHttpClient.Builder();
                     try {
 
-                        Cache cache = new Cache(mContext.getExternalCacheDir(), cacheSize);
+//                        Cache cache = new Cache(mContext.getExternalCacheDir(), cacheSize);
 //                        builder.cache(cache); //需要缓存的时候用
                         builder.eventListener(new DefaultEventListener());
                         HttpUtils.createSslFactory(builder,
@@ -78,7 +83,7 @@ public class TestInterceptorsOkhttp {
                                 .connectTimeout(10, TimeUnit.SECONDS)
 //                                .writeTimeout(10, TimeUnit.SECONDS)
 //                                .readTimeout(30, TimeUnit.SECONDS)
-                                .addInterceptor(new GzipRequestInterceptor())
+                                .addInterceptor(new LoggingInterceptor())
                                 .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
                     } catch (Exception e) {
@@ -105,7 +110,7 @@ public class TestInterceptorsOkhttp {
             @Override
             public void run() {
                 try {
-                    postFile();
+                    testInterceptors();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -135,7 +140,7 @@ public class TestInterceptorsOkhttp {
     private void testInterceptors() throws Exception {
 
         Request request = new Request.Builder()
-                .url(redirect)
+                .url(https2)
                 .header("User-Agent", "OkHttp Example")
                 .build();
 

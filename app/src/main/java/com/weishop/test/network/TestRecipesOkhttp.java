@@ -41,6 +41,7 @@ import okio.BufferedSink;
 
 /**
  * Created by wangyongchao on 2019/12/30 17:10
+ * okhttp基本使用
  */
 public class TestRecipesOkhttp {
 

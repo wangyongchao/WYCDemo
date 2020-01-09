@@ -11,13 +11,13 @@ import java.io.IOException;
 
 public class OkhttpActivity extends Activity implements View.OnClickListener {
 
-    private TestInterceptorsOkhttp testOkhttp;
+    private Testhttp2Okhttp testOkhttp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_okhttp);
-        testOkhttp = new TestInterceptorsOkhttp(this);
+        testOkhttp = new Testhttp2Okhttp(this);
         this.findViewById(R.id.send).setOnClickListener(this);
 
 

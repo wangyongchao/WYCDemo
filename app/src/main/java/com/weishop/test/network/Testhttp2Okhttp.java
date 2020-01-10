@@ -57,13 +57,14 @@ public class Testhttp2Okhttp {
                     try {
 
                         builder.eventListener(new DefaultEventListener());
+//                        builder.eventListenerFactory() 为每个调用设置监听事件
 //                        HttpUtils.createSslFactory(builder,
 //                                new InputStream[]{mContext.getAssets().open("charlesCertificate" +
 //                                        ".pem")});
                         mOkHttpClient = builder
                                 .connectTimeout(10, TimeUnit.SECONDS)
-//                                .writeTimeout(10, TimeUnit.SECONDS)
-//                                .readTimeout(30, TimeUnit.SECONDS)
+                                .writeTimeout(10, TimeUnit.SECONDS)
+                                .readTimeout(10, TimeUnit.SECONDS)
                                 .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
                     } catch (Exception e) {
@@ -90,7 +91,7 @@ public class Testhttp2Okhttp {
             @Override
             public void run() {
                 try {
-                    testDuoluFuyong();
+                    post();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -101,31 +102,37 @@ public class Testhttp2Okhttp {
 
     /**
      * 测试多路复用
+     * okhttp中支持连接重用，发往一个主机的共享一个连接
      *
      * @throws Exception
      */
     private void testDuoluFuyong() throws Exception {
 
         Request request = new Request.Builder()
-                .url(httpsGetURl)
+                .url(https2)
                 .build();
 
         try (Response response = mOkHttpClient.newCall(request).execute()) {
             if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
             System.out.println("response11111111111");
         }
-        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println(
+                "------------------------------------------------------------------------------------");
 
-        Request request2 = new Request.Builder()
-                .url(httpsGetURl)
-                .build();
+//        Request request2 = new Request.Builder()
+//                .url(https2_gophertiles1)
+//                .build();
+//
+//        try (Response response = mOkHttpClient.newCall(request2).execute()) {
+//            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+//            System.out.println("response22222222");
+//        }
 
-        try (Response response = mOkHttpClient.newCall(request2).execute()) {
-            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-            System.out.println("response22222222");
-        }
+        post();
 
-        System.out.println("------------------------------------------------------------------------------------");
+
+        System.out.println(
+                "------------------------------------------------------------------------------------");
 
         Request request3 = new Request.Builder()
                 .url(https2_gophertiles2)
@@ -138,5 +145,31 @@ public class Testhttp2Okhttp {
 
     }
 
+    void post() throws IOException {
+        MediaType JSON = MediaType.get("application/json; charset=utf-8");
+        String json = bowlingJson("Jesse", "Jake");
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url("https://support.google.com/chrome/?p=ui_security_indicator")
+//                .url("http://www.roundsapp.com/post")
+                .post(body)
+                .build();
+        try (Response response = mOkHttpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            System.out.println("response post json");
+        }
+    }
+
+    String bowlingJson(String player1, String player2) {
+        return "{'winCondition':'HIGH_SCORE',"
+                + "'name':'Bowling',"
+                + "'round':4,"
+                + "'lastSaved':1367702411696,"
+                + "'dateStarted':1367702378785,"
+                + "'players':["
+                + "{'name':'" + player1 + "','history':[10,8,6,7,8],'color':-13388315,'total':39},"
+                + "{'name':'" + player2 + "','history':[6,10,5,10,10],'color':-48060,'total':41}"
+                + "]}";
+    }
 
 }

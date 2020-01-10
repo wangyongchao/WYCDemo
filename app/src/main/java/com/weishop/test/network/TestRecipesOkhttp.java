@@ -67,19 +67,19 @@ public class TestRecipesOkhttp {
                     OkHttpClient.Builder builder = new OkHttpClient.Builder();
                     try {
 
-                        Cache cache = new Cache(mContext.getExternalCacheDir(), cacheSize);
+//                        Cache cache = new Cache(mContext.getExternalCacheDir(), cacheSize);
 //                        builder.cache(cache); //需要缓存的时候用
                         builder.eventListener(new DefaultEventListener());
-                        HttpUtils.createSslFactory(builder,
-                                new InputStream[]{mContext.getAssets().open("charlesCertificate" +
-                                        ".pem")});
+//                        HttpUtils.createSslFactory(builder,
+//                                new InputStream[]{mContext.getAssets().open("charlesCertificate" +
+//                                        ".pem")}); charles证书
+                        HttpUtils.createAllFactory(builder);//信任所有证书
                         mOkHttpClient = builder
                                 .connectTimeout(10, TimeUnit.SECONDS)
 //                                .writeTimeout(10, TimeUnit.SECONDS)
 //                                .readTimeout(30, TimeUnit.SECONDS)
-                                .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -172,7 +172,7 @@ public class TestRecipesOkhttp {
 
     public void test() {
         try {
-            runAsynchronousGet(redirect);
+            runAsynchronousGet();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -183,7 +183,7 @@ public class TestRecipesOkhttp {
             @Override
             public void run() {
                 try {
-                    testAuthentication();
+                    postForm();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -617,12 +617,11 @@ public class TestRecipesOkhttp {
     /**
      * 异步get请求
      *
-     * @param url
      * @throws Exception
      */
-    public void runAsynchronousGet(String url) throws Exception {
+    public void runAsynchronousGet() throws Exception {
         Request request = new Request.Builder()
-                .url(url)
+                .url(httpsGetHello)
                 .build();
 
         mOkHttpClient.newCall(request).enqueue(new Callback() {

@@ -2,9 +2,12 @@
 package com.weishop.test;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,14 +15,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dianping.logan.Logan;
 import com.weishop.test.util.TestUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -72,6 +78,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }, 10 * 1000);
 
+
     }
 
     @Override
@@ -84,6 +91,108 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         System.out.println("onSaveInstanceState PersistableBundle");
+    }
+
+    private Bitmap createMsgBitmap(int width, int height, String msg, int textSize, int textColor) {
+        Bitmap resultBitmap = null;
+        if (TextUtils.isEmpty(msg)) {
+            return resultBitmap;
+        }
+        if (msg.length() > 5) {
+            msg = msg.substring(0, 5) + "...";
+        }
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setFilterBitmap(true);
+        paint.setTextSize(textSize);
+        paint.setColor(textColor);
+        paint.setTextAlign(Paint.Align.LEFT);
+        int textWidth = (int) paint.measureText(msg);
+        if (textWidth > width) {
+            width = textWidth;
+        }
+
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        int textHeight = (int) (fm.descent - fm.ascent);
+        if (textHeight > height) {
+            height = textHeight;
+        }
+        System.out.println("textwidth=" + textWidth + ",width=" + width);
+
+        resultBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(resultBitmap);
+        Rect fontRect = new Rect();
+        paint.getTextBounds(msg, 0, msg.length(), fontRect);
+        Rect drawRect = new Rect(0, 0, width, height - textHeight / 2);
+        Paint.FontMetricsInt fontMetricsInt = paint.getFontMetricsInt();
+        int baseLine =
+                (drawRect.bottom + drawRect.bottom - fontMetricsInt.bottom - fontMetricsInt.top) / 2;
+        canvas.drawText(msg, 0, baseLine, paint);
+        return resultBitmap;
+    }
+
+
+    private Bitmap createMsgBitmap2(int width, int height, String msg, int textSize,
+                                    int textColor) {
+        Bitmap resultBitmap = null;
+        if (TextUtils.isEmpty(msg)) {
+            return resultBitmap;
+        }
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setFilterBitmap(true);
+        paint.setTextSize(textSize);
+        paint.setColor(textColor);
+        paint.setTextAlign(Paint.Align.CENTER);
+
+        float textwidth = paint.measureText(msg);
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        //文字基准线的下部距离-文字基准线的上部距离 = 文字高度
+        float textheight = fm.descent - fm.ascent;
+
+
+        Rect fontRect = new Rect();
+        paint.getTextBounds(msg, 0, msg.length(), fontRect);
+
+        resultBitmap = Bitmap.createBitmap((int) textwidth,
+                (int) textheight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(resultBitmap);
+
+        Rect drawRect = new Rect(0, 0, fontRect.right, fontRect.bottom);
+        Paint.FontMetricsInt fontMetricsInt = paint.getFontMetricsInt();
+        int baseLine =
+                (drawRect.bottom + drawRect.bottom - fontMetricsInt.bottom - fontMetricsInt.top) / 2;
+        canvas.drawText(msg, 0, baseLine, paint);
+        return resultBitmap;
+    }
+
+    private List<String> getStrList(String text, int length) {
+        int size = text.length() / length;
+        if (text.length() % length != 0) {
+            size += 1;
+        }
+        return getStrList(text, length, size);
+    }
+
+    private List<String> getStrList(String text, int length, int size) {
+        List<String> list = new ArrayList<String>();
+        for (int index = 0; index < size; index++) {
+            String childStr = substring(text, index * length,
+                    (index + 1) * length);
+            list.add(childStr);
+        }
+        return list;
+    }
+
+    private String substring(String text, int f, int t) {
+        if (f > text.length()) {
+            return null;
+        }
+        if (t > text.length()) {
+            return text.substring(f, text.length());
+        } else {
+            return text.substring(f, t);
+        }
     }
 
     @Override
@@ -111,9 +220,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Logan.w("test logan", 1);
-        Intent intent = new Intent();
-
+        int whitec = getResources().getColor(android.R.color.white);
+        int nameTextSize =
+                (int) getResources().getDimension(R.dimen.group_3v3_ceremony_name_size);
+        Bitmap bitmap = createMsgBitmap(129, 22, "王永朝名字大于", nameTextSize, whitec);
+        imageView.setImageBitmap(bitmap);
     }
 
     private void A() throws Exception {

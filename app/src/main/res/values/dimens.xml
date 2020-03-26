@@ -13,4 +13,6 @@
     <dimen name="view_width">150dp</dimen>
     <dimen name="view_height">150dp</dimen>
 
+    <dimen name="group_3v3_ceremony_name_size">10sp</dimen>
+
 </resources>

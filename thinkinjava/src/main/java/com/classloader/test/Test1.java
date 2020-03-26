@@ -17,7 +17,7 @@ public class Test1 {
             }
         };
         CallBack callBack = new CallBackImpl();
-        callBack.onCallBack();
+//        callBack.onCallBack();
 //        Type[] genericInterfaces = testClassCallBack.getClass().getGenericInterfaces();
 //        for(int i=0;i<genericInterfaces.length;i++){
 //            System.out.println(genericInterfaces[i].getTypeName());

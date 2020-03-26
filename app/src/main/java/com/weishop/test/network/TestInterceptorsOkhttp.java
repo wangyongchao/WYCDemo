@@ -69,103 +69,24 @@ public class TestInterceptorsOkhttp {
                         Cache cache = new Cache(mContext.getExternalCacheDir(), cacheSize);
 //                        builder.cache(cache); //需要缓存的时候用
                         builder.eventListener(new DefaultEventListener());
-                        HttpUtils.createSslFactory(builder,
-                                new InputStream[]{mContext.getAssets().open("charlesCertificate" +
-                                        ".pem")});
+//                        HttpUtils.createSslFactory(builder,
+//                                new InputStream[]{mContext.getAssets().open("charlesCertificate" +
+//                                        ".pem")});
                         mOkHttpClient = builder
                                 .connectTimeout(10, TimeUnit.SECONDS)
 //                                .writeTimeout(10, TimeUnit.SECONDS)
 //                                .readTimeout(30, TimeUnit.SECONDS)
-                                .addInterceptor(new LoggingInterceptor())
-                                .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
+//                                .addInterceptor(new LoggingInterceptor())
+                                .addNetworkInterceptor(new LoggingInterceptor())
+//                                .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
             }
         }
-
-    }
-
-    private class DefaultEventListener extends EventListener {
-        @Override
-        public void callStart(Call call) {
-            System.out.println("callStart =" + call.request().url());
-        }
-
-        @Override
-        public void dnsStart(Call call, String domainName) {
-            System.out.println("dnsStart =" + call.request().url() + "," +
-                    "domainName=" + domainName);
-        }
-
-        @Override
-        public void dnsEnd(Call call, String domainName, List<InetAddress> inetAddressList) {
-            String address = "";
-            if (inetAddressList != null) {
-                for (int i = 0; i < inetAddressList.size(); i++) {
-                    InetAddress inetAddress = inetAddressList.get(i);
-                    address = address + inetAddress.toString() + ",";
-                }
-
-            }
-            System.out.println("dnsEnd =" + call.request().url() + "," +
-                    "domainName=" + domainName + ",address=" + address);
-        }
-
-        @Override
-        public void connectStart(Call call,
-                                 InetSocketAddress inetSocketAddress,
-                                 Proxy proxy) {
-            String hostName = "";
-            if (inetSocketAddress != null) {
-
-                hostName = inetSocketAddress.toString();
-            }
-            System.out.println("connectStart =" + call.request().url() + "," +
-                    "hostName=" + hostName);
-        }
-
-        @Override
-        public void connectEnd(Call call, InetSocketAddress inetSocketAddress
-                , Proxy proxy, Protocol protocol) {
-            String hostName = "";
-            if (inetSocketAddress != null) {
-
-                hostName = inetSocketAddress.toString();
-            }
-            System.out.println("connectEnd =" + call.request().url() + "," +
-                    "hostName=" + hostName);
-        }
-
-        @Override
-        public void connectionReleased(Call call, Connection connection) {
-            System.out.println("connectionReleased =" + call.request().url() + "," +
-                    "connection=" + connection.toString());
-        }
-
-        @Override
-        public void requestHeadersStart(Call call) {
-            System.out.println("requestHeadersStart =" + call.request().url());
-        }
-
-        @Override
-        public void requestBodyStart(Call call) {
-            System.out.println("requestBodyStart =" + call.request().url());
-        }
-
-        @Override
-        public void responseBodyStart(Call call) {
-            System.out.println("responseBodyStart =" + call.request().url());
-        }
-
-        @Override
-        public void callFailed(Call call, IOException ioe) {
-            System.out.println("callFailed =" + call.request().url() + ",ioe=" + ioe);
-        }
-
 
     }
 
@@ -206,12 +127,47 @@ public class TestInterceptorsOkhttp {
     private void testInterceptors() throws Exception {
 
         Request request = new Request.Builder()
-                .url("http://www.publicobject.com/helloworld.txt")
+                .url("http://publicobject.com/helloworld.txt")
                 .header("User-Agent", "OkHttp Example")
                 .build();
 
         Response response = mOkHttpClient.newCall(request).execute();
         response.body().close();
+
+    }
+
+
+    /**
+     * 响应缓存  cacheControl() 控制缓存
+     */
+    public void testResponseCache() throws Exception {
+        Request request = new Request.Builder()
+                .url("https://publicobject.com/helloworld.txt")
+                .build();
+
+        String response1Body;
+        try (Response response1 = mOkHttpClient.newCall(request).execute()) {
+            if (!response1.isSuccessful())
+                throw new IOException("Unexpected code " + response1);
+
+            response1Body = response1.body().string();
+            System.out.println("Response 1 response:          " + response1);
+            System.out.println("Response 1 cache response:    " + response1.cacheResponse());
+            System.out.println("Response 1 network response:  " + response1.networkResponse());
+        }
+
+        String response2Body;
+        try (Response response2 = mOkHttpClient.newCall(request).execute()) {
+            if (!response2.isSuccessful())
+                throw new IOException("Unexpected code " + response2);
+
+            response2Body = response2.body().string();
+            System.out.println("Response 2 response:          " + response2);
+            System.out.println("Response 2 cache response:    " + response2.cacheResponse());
+            System.out.println("Response 2 network response:  " + response2.networkResponse());
+        }
+
+        System.out.println("Response 2 equals Response 1? " + response1Body.equals(response2Body));
 
     }
 

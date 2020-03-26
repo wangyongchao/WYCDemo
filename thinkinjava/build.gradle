@@ -2,7 +2,8 @@ apply plugin: 'java-library'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
+    compile 'com.alibaba:fastjson:1.2.10'
 }
 
 sourceCompatibility = "1.8"

@@ -7,10 +7,16 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/send"
+        android:id="@+id/send_sync"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send" />
+        android:text="send 同步请求" />
+
+    <Button
+        android:id="@+id/send_async"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send 异步请求" />
 
 
 </LinearLayout>

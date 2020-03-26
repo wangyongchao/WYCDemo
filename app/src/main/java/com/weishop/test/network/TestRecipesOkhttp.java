@@ -1,7 +1,6 @@
 package com.weishop.test.network;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Environment;
 
 import com.squareup.moshi.JsonAdapter;
@@ -27,6 +26,7 @@ import okhttp3.Connection;
 import okhttp3.Credentials;
 import okhttp3.EventListener;
 import okhttp3.FormBody;
+import okhttp3.Handshake;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -67,7 +67,7 @@ public class TestRecipesOkhttp {
                     try {
 
                         Cache cache = new Cache(mContext.getExternalCacheDir(), cacheSize);
-//                        builder.cache(cache); //需要缓存的时候用
+                        builder.cache(cache); //需要缓存的时候用
                         builder.eventListener(new DefaultEventListener());
                         HttpUtils.createSslFactory(builder,
                                 new InputStream[]{mContext.getAssets().open("charlesCertificate" +
@@ -78,7 +78,7 @@ public class TestRecipesOkhttp {
 //                                .readTimeout(30, TimeUnit.SECONDS)
                                 .hostnameVerifier(new HttpUtils.TrustAllHostnameVerifier())
                                 .retryOnConnectionFailure(true).build();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -88,85 +88,6 @@ public class TestRecipesOkhttp {
 
     }
 
-    private class DefaultEventListener extends EventListener {
-        @Override
-        public void callStart(Call call) {
-            System.out.println("callStart =" + call.request().url());
-        }
-
-        @Override
-        public void dnsStart(Call call, String domainName) {
-            System.out.println("dnsStart =" + call.request().url() + "," +
-                    "domainName=" + domainName);
-        }
-
-        @Override
-        public void dnsEnd(Call call, String domainName, List<InetAddress> inetAddressList) {
-            String address = "";
-            if (inetAddressList != null) {
-                for (int i = 0; i < inetAddressList.size(); i++) {
-                    InetAddress inetAddress = inetAddressList.get(i);
-                    address = address + inetAddress.toString() + ",";
-                }
-
-            }
-            System.out.println("dnsEnd =" + call.request().url() + "," +
-                    "domainName=" + domainName + ",address=" + address);
-        }
-
-        @Override
-        public void connectStart(Call call,
-                                 InetSocketAddress inetSocketAddress,
-                                 Proxy proxy) {
-            String hostName = "";
-            if (inetSocketAddress != null) {
-
-                hostName = inetSocketAddress.toString();
-            }
-            System.out.println("connectStart =" + call.request().url() + "," +
-                    "hostName=" + hostName);
-        }
-
-        @Override
-        public void connectEnd(Call call, InetSocketAddress inetSocketAddress
-                , Proxy proxy, Protocol protocol) {
-            String hostName = "";
-            if (inetSocketAddress != null) {
-
-                hostName = inetSocketAddress.toString();
-            }
-            System.out.println("connectEnd =" + call.request().url() + "," +
-                    "hostName=" + hostName);
-        }
-
-        @Override
-        public void connectionReleased(Call call, Connection connection) {
-            System.out.println("connectionReleased =" + call.request().url() + "," +
-                    "connection=" + connection.toString());
-        }
-
-        @Override
-        public void requestHeadersStart(Call call) {
-            System.out.println("requestHeadersStart =" + call.request().url());
-        }
-
-        @Override
-        public void requestBodyStart(Call call) {
-            System.out.println("requestBodyStart =" + call.request().url());
-        }
-
-        @Override
-        public void responseBodyStart(Call call) {
-            System.out.println("responseBodyStart =" + call.request().url());
-        }
-
-        @Override
-        public void callFailed(Call call, IOException ioe) {
-            System.out.println("callFailed =" + call.request().url() + ",ioe=" + ioe);
-        }
-
-
-    }
 
 
     public void test() {
@@ -182,7 +103,7 @@ public class TestRecipesOkhttp {
             @Override
             public void run() {
                 try {
-                    testAuthentication();
+                    testResponseCache();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -327,7 +248,7 @@ public class TestRecipesOkhttp {
      */
     public void testResponseCache() throws Exception {
         Request request = new Request.Builder()
-                .url("http://publicobject.com/helloworld.txt")
+                .url("https://publicobject.com/helloworld.txt")
                 .build();
 
         String response1Body;
@@ -662,8 +583,7 @@ public class TestRecipesOkhttp {
 //                    String response = example.run("https://www.baidu.com");
                     System.out.println(response);
                 } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    e.printStackTrace();}
 
             }
         }).start();

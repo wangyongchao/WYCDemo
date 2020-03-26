@@ -52,7 +52,8 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
     private void startBubbleAnimation() {
         String bubbleResPath = LOTTIE_RES_ASSETS_ROOTDIR + "bubble_enter/images";
         String bubbleJsonPath = LOTTIE_RES_ASSETS_ROOTDIR + "bubble_enter/data.json";
-        final LottieEffectInfo bubbleEffectInfo = new LottieEffectInfo(bubbleResPath, bubbleJsonPath);
+        final LottieEffectInfo bubbleEffectInfo = new LottieEffectInfo(bubbleResPath,
+                bubbleJsonPath);
         try {
             JSONObject jsonObject = new JSONObject(bubbleEffectInfo.getJsonStrFromAssets(this));
             bubbleView.setAnimation(jsonObject);
@@ -64,8 +65,10 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
             @Override
             public Bitmap fetchBitmap(LottieImageAsset lottieImageAsset) {
                 String fileName = lottieImageAsset.getFileName();
-                return bubbleEffectInfo.fetchBitmapFromAssets(bubbleView, lottieImageAsset.getFileName(),
-                        lottieImageAsset.getId(), lottieImageAsset.getWidth(), lottieImageAsset.getHeight(), AnimatorActivity.this);
+                return bubbleEffectInfo.fetchBitmapFromAssets(bubbleView,
+                        lottieImageAsset.getFileName(),
+                        lottieImageAsset.getId(), lottieImageAsset.getWidth(),
+                        lottieImageAsset.getHeight(), AnimatorActivity.this);
             }
         };
         bubbleView.setImageAssetDelegate(imageAssetDelegate);
@@ -81,13 +84,40 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        testTranslate();
+        testScore();
     }
 
     private void testXml() {
         Animator animator = AnimatorInflater.loadAnimator(this, R.animator.translate);
         animator.setTarget(mTestText);
         animator.start();
+
+    }
+
+    private void testScore() {
+        AnimatorSet animatorSet = new AnimatorSet();
+
+        ObjectAnimator alphaObjectAnimator = ObjectAnimator.ofFloat(mTestText, "alpha", 0f, 1f);
+        alphaObjectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Object animatedValue = animation.getAnimatedValue();
+                System.out.println("animatedValue=" + animatedValue);
+            }
+        });
+
+        ObjectAnimator scaleObjectAnimator = ObjectAnimator.ofFloat(mTestText, "scaleX", 0, 1f);
+        scaleObjectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Object animatedValue = animation.getAnimatedValue();
+                float scaleY = mTestText.getScaleY();
+                System.out.println("animatedValue=" + animatedValue + ",scaleY=" + scaleY);
+            }
+        });
+        animatorSet.play(alphaObjectAnimator).with(scaleObjectAnimator);
+        animatorSet.setDuration(1000);
+        animatorSet.start();
 
     }
 
@@ -100,7 +130,8 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
         float translationX = mTestText.getTranslationX();
         float distance = mTestText.getLeft() + mTestText.getMeasuredWidth();
         //先从屏幕外移动
-        ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(mTestText, "translationX", -distance, translationX);
+        ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(mTestText, "translationX",
+                -distance, translationX);
 
         ObjectAnimator rotateAnimator = ObjectAnimator.ofFloat(mTestText, "rotation", 0f, 360f);
 
@@ -165,8 +196,9 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
     private void testTranslate() {
         float translationX = mTestText.getTranslationX();
         System.out.println("translationX=" + translationX + ",getLeft=" + mTestText.getLeft());
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTestText, "translationX", translationX, -mTestText
-                .getLeft(), translationX);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTestText, "translationX",
+                translationX, -mTestText
+                        .getLeft(), translationX);
         objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

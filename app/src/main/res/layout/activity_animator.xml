@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:background="@drawable/livebusiness_zhandui_btn_click"
             android:text="张三为你点赞,努力的自己就是最好的自己!"
             android:textColor="#5e2718"
             android:textSize="12sp" />

@@ -11,14 +11,15 @@ import java.io.IOException;
 
 public class OkhttpActivity extends Activity implements View.OnClickListener {
 
-    private TestInterceptorsOkhttp testOkhttp;
+    private TestSourceOkhttp testOkhttp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_okhttp);
-        testOkhttp = new TestInterceptorsOkhttp(this);
-        this.findViewById(R.id.send).setOnClickListener(this);
+        testOkhttp = new TestSourceOkhttp(this);
+        this.findViewById(R.id.send_sync).setOnClickListener(this);
+        this.findViewById(R.id.send_async).setOnClickListener(this);
 
 
     }
@@ -26,7 +27,11 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         try {
-            testOkhttp.testAsync();
+            if(R.id.send_async==v.getId()){
+                testOkhttp.testAsynch();
+            }else {
+                testOkhttp.testSync();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

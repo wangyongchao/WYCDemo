@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    file="livebusiness/drawable-xxhdpi/img_teampk_contribute_win.png"
+    android:src="@drawable/auto0115img_teampk_contribute_win" />

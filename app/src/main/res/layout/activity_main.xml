@@ -53,7 +53,6 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fdsafsdfsdf"
         android:textSize="16sp"
         android:gravity="center" />
 

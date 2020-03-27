@@ -3,8 +3,23 @@ package com.analyzelog;
 /**
  * 日志分析程序
  */
-public interface Analyzer {
+public abstract class Analyzer {
+    Analyzer mNextAnalyzer;
 
-    void startAnalyzer();
+    public void nextAnalyzer(Analyzer analyzer) {
+        this.mNextAnalyzer = analyzer;
+    }
+
+    public void begin(Response response) {
+        startAnalyzer(response);
+        if (mNextAnalyzer != null) {
+            mNextAnalyzer.begin(response);
+        } else {
+            response.release();
+        }
+    }
+
+    protected abstract void startAnalyzer(Response response);
+
 
 }

@@ -1,4 +1,4 @@
-package com.analyzelog;
+package com.test;
 
 import com.google.common.base.Splitter;
 
@@ -16,26 +16,17 @@ public class TestString {
 
     public static void main(String[] args) {
 
-        String strDate = "2020-03-23 14:46:51";
+        String strDate = "2020-03-23 06:46:51";
 
         String strDate2 = "2020-03-23 15:46:50";
 
-        String strDate3 = "2020-03-23 14:46:50";
+        String strDate3 = "2020-03-23 16:46:50";
 
         Date date1 = formatDate(strDate);
         Date date2 = formatDate(strDate2);
         Date date3 = formatDate(strDate3);
-        List<Date> dates = new ArrayList<>();
-        dates.add(date1);
-        dates.add(date2);
-        dates.add(date3);
-        Collections.sort(dates, new Comparator<Date>() {
-            @Override
-            public int compare(Date date, Date t1) {
-                return date.compareTo(t1);
-            }
-        });
-        System.out.println(dates);
+
+        System.out.println(date3.after(date2));
 
 
     }

@@ -7,84 +7,50 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 输出数据
  */
-public class OutputAnalyzer implements Analyzer {
-    private List<LogBean> mLogBeans = new ArrayList<>();
-    private List<LogBean> mTagLogBeans = new ArrayList<>();
-    private List<LogBean> mEventIdLogBeans = new ArrayList<>();
-    private String mFileName;
-    private String mTAG;
-    private String mEventId;//直播中eventid都是live_debug_message，别的业务都是eventId=tag
+public class OutputAnalyzer extends Analyzer {
+    private final Director.Mode mMode;
+    private List<LogBean> mLogBeans;
+    private List<LogBean> mTagLogBeans;
+    private List<LogBean> mEventIdLogBeans;
+    private File mDestFile;
 
 
-    public OutputAnalyzer(List<LogBean> logBeans, List<LogBean> tagBeans,
-                          List<LogBean> eventBeans, String fileName, String tag, String eventId) {
-        this.mLogBeans.addAll(logBeans);
-        this.mTagLogBeans.addAll(tagBeans);
-        this.mEventIdLogBeans.addAll(eventBeans);
-        this.mFileName = fileName;
-        this.mTAG = tag;
-        this.mEventId = eventId;
+    public OutputAnalyzer(File destFile, Director.Mode mode) {
+        this.mDestFile = destFile;
+        this.mMode = mode;
     }
 
     @Override
-    public void startAnalyzer() {
-        outputAllData();
-        if (mTAG != null) {
-            outputByTag();
-        }
-        if (mEventId != null) {
-            outputByEventId();
+    public void startAnalyzer(Response response) {
+        System.out.println("start OutputAnalyzer mode=" + mMode);
+        mLogBeans = response.getLogBeans();
+        mTagLogBeans = response.getTagLogBeans();
+        mEventIdLogBeans = response.getEventIdLogBeans();
+        if (Director.Mode.EVNENTID == mMode) {
+            output(mEventIdLogBeans);
+        } else if (Director.Mode.TAG == mMode) {
+            output(mTagLogBeans);
+        } else {
+            output(mLogBeans);
         }
         System.out.println("over-------------------------------");
 
     }
 
-    /**
-     * 根据Tag
-     */
-    private void outputByTag() {
-        File file = new File(mFileName);
-        String name = file.getName();
-        String formatName = name.substring(0, name.lastIndexOf(".")) + "_" + mTAG + ".html";
-        File formatFile = new File(file.getParent(), formatName);
-        output(formatFile, mTagLogBeans,formatName);
-    }
-
-    /**
-     * 根据eventId
-     */
-    private void outputByEventId() {
-        File file = new File(mFileName);
-        String name = file.getName();
-        String formatName = name.substring(0, name.lastIndexOf(".")) + "_" + mEventId + ".html";
-        File formatFile = new File(file.getParent(), formatName);
-        output(formatFile, mEventIdLogBeans,formatName);
-    }
-
-    /**
-     * 输出所有的日志 按照时间排列
-     */
-    private void outputAllData() {
-        File file = new File(mFileName);
-        String name = file.getName();
-        String formatName = name.substring(0, name.lastIndexOf(".")) + "_all.html";
-        File formatFile = new File(file.getParent(), formatName);
-        output(formatFile, mLogBeans,formatName);
-
-    }
-
-    private static void output(File file, List<LogBean> logBeans,String h5Title) {
+    private void output(List<LogBean> logBeans) {
+        if (logBeans == null || logBeans.isEmpty()) {
+            return;
+        }
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter(file);
+            fileWriter = new FileWriter(mDestFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(String.format(Html.header,h5Title));
+            bufferedWriter.write(String.format(Html.header, mDestFile.getName()));
             bufferedWriter.flush();
 
             for (int j = 0; j < logBeans.size(); j++) {

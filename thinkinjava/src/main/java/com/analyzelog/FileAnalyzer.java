@@ -13,20 +13,21 @@ import java.util.regex.Pattern;
 /**
  * 日志分析程序
  */
-public class FileAnalyzer implements Analyzer{
-    private String mFileName = "D:/logfile/demo_ceshi.txt";
-    private ArrayList<String> mJonsStrings = new ArrayList<>();
+public class FileAnalyzer extends Analyzer {
+    private File mSourceFile;
+    ArrayList<String> mJonsStrings = new ArrayList<>();
 
-    public FileAnalyzer(String fileName) {
-        this.mFileName = fileName;
+    public FileAnalyzer(File sourceFile) {
+        this.mSourceFile = sourceFile;
     }
 
     @Override
-    public void startAnalyzer() {
+    public void startAnalyzer(Response response) {
+        System.out.println("start FileAnalyzer");
         mJonsStrings.clear();
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader(new File(mFileName));
+            fileReader = new FileReader(mSourceFile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -43,7 +44,7 @@ public class FileAnalyzer implements Analyzer{
                 }
             }
         }
-
+        response.setJsonStrings(mJonsStrings);
     }
 
     private void parseLineString(String line) {

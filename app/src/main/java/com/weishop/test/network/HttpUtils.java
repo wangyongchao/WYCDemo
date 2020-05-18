@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.KeyManagementException;
 import java.security.KeyStore;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 import javax.net.ssl.HostnameVerifier;
@@ -22,7 +25,18 @@ import okhttp3.OkHttpClient;
 public class HttpUtils {
 
 
+    public static void createAllFactory(OkHttpClient.Builder clientBuilder) {
+        X509TrustManager x509TrustManager = initX509TrustManager();
+        SSLSocketFactory sslSocketFactory = null;
+        try {
+            sslSocketFactory = initSSLFactory(x509TrustManager);
+            clientBuilder.sslSocketFactory(sslSocketFactory, x509TrustManager);
+            clientBuilder.hostnameVerifier(new TrustAllHostnameVerifier());
+        } catch (Exception e) {
 
+        }
+
+    }
 
 
     /**
@@ -72,5 +86,33 @@ public class HttpUtils {
         public boolean verify(String hostname, SSLSession session) {
             return true;
         }
+    }
+
+    //这里默认让所有https请求通行,并没有做其他校验
+    public static SSLSocketFactory initSSLFactory(X509TrustManager trustManager) throws NoSuchAlgorithmException, KeyManagementException {
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(null, new TrustManager[]{trustManager}, new SecureRandom());
+        return sslContext.getSocketFactory();
+    }
+
+    public static X509TrustManager initX509TrustManager() {
+
+        X509TrustManager trustManager = new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) {
+
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) {
+
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        };
+        return trustManager;
     }
 }

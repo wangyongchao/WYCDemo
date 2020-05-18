@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
  */
 public class FileAnalyzer extends Analyzer {
     private File mSourceFile;
+    private int lineNume = 0;
     ArrayList<String> mJonsStrings = new ArrayList<>();
 
     public FileAnalyzer(File sourceFile) {
@@ -24,6 +25,7 @@ public class FileAnalyzer extends Analyzer {
     @Override
     public void startAnalyzer(Response response) {
         System.out.println("start FileAnalyzer");
+        lineNume = 0;
         mJonsStrings.clear();
         FileReader fileReader = null;
         try {
@@ -31,6 +33,7 @@ public class FileAnalyzer extends Analyzer {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
+                lineNume++;
                 parseLineString(line);
             }
         } catch (Exception e) {
@@ -48,23 +51,55 @@ public class FileAnalyzer extends Analyzer {
     }
 
     private void parseLineString(String line) {
-        line = cutString(line);
+        //如果是数组  String s = "[{\"s_l0\"},{\"s_l1\"}]";
+        if (line.startsWith("[") && line.endsWith("]")) {
+            String cusString = cutArrayString(line);
+            String patternstr = ",{\"s_l0\":";
+
+            int indexOf = cusString.indexOf(patternstr);
+
+            while (indexOf != -1) {
+                String jsonString = cusString.substring(0, indexOf);
+                parseJsonStringObject(jsonString);
+                cusString = cusString.substring(indexOf + 1);
+                indexOf = cusString.indexOf(patternstr);
+            }
+            parseJsonStringObject(cusString);
+        } else {
+            parseJsonStringObject(line);
+        }
+
+
+    }
+
+    private void parseJsonStringObject(String str) {
+        str = cutString(str);
         String patternstr = "\",\"s_l[0-9]+\":\"";
         Pattern pattern = Pattern.compile(patternstr);
-        List<String> strings = Splitter.on(pattern).splitToList(line);
+        List<String> strings = Splitter.on(pattern).splitToList(str);
         for (int i = 0; i < strings.size(); i++) {
             String s = strings.get(i);
             if (i == 0) {
                 String subpatternstr = "\"s_l[0-9]+\":\"";
                 Pattern subpattern = Pattern.compile(subpatternstr);
                 List<String> substrings = Splitter.on(subpattern).splitToList(s);
-                mJonsStrings.add(substrings.get(1));
-            } else {
-                mJonsStrings.add(s);
+                s = substrings.get(1);
             }
+//            System.out.println("-------------------"+lineNume);
+//            System.out.println(s);
+            mJonsStrings.add(s);
         }
     }
 
+
+    private static String cutArrayString(String str) {
+        String firstString = "[";
+        String lastString = "]";
+        int firstIndex = str.indexOf(firstString);
+        int lastIndex = str.lastIndexOf(lastString);
+        return str.substring(firstIndex + firstString.length(), lastIndex);
+
+    }
 
     private String cutString(String str) {
         String firstString = "{";

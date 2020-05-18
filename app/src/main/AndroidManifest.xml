@@ -18,12 +18,12 @@
 
     <application
         android:name="com.weishop.test.MyApplication"
-        android:debuggable="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:label="@string/app_name">
         <activity
-            android:name=".network.OkhttpActivity"
+            android:name=".animator.LottileActivity"
             android:label="@string/app_name"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.Design">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

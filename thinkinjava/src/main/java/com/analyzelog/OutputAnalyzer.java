@@ -44,6 +44,7 @@ public class OutputAnalyzer extends Analyzer {
 
     private void output(List<LogBean> logBeans) {
         if (logBeans == null || logBeans.isEmpty()) {
+            System.out.println("no log mode="+mMode);
             return;
         }
         FileWriter fileWriter = null;

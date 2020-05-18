@@ -24,9 +24,13 @@ public class TreeTest {
      * 构建二叉树
      */
     private static void testBinaryTree() {
-        String tree = "A,B,D,H,#,K,#,#,#,E,#,#,C,F,I,#,#,#,G,#,J,#,#";
+//        String tree = "A,B,D,H,#,K,#,#,#,E,#,#,C,F,I,#,#,#,G,#,J,#,#";
+        String tree = "A,B,D,G,#,#,H,#,#,#,C,E,#,I,#,#,F,#,#";
         BinaryTree binaryTree = new BinaryTree(tree);
+        binaryTree.preOrderTraverse(binaryTree.getRoot());
+        System.out.println();
         binaryTree.orderTraverseUnRecursion(binaryTree.getRoot());
+
     }
 
     /**

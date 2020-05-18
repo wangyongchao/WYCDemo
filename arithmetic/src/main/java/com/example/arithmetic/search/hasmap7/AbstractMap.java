@@ -1,29 +1,29 @@
 /*
- * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
- * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Copyright (c) 1997, 2010, Oracle and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
  *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
  *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
  */
 
-package com.example.arithmetic.search;
+package com.example.arithmetic.search.hasmap7;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -83,8 +83,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation returns <tt>entrySet().size()</tt>.
+     * <p>This implementation returns <tt>entrySet().size()</tt>.
      */
     public int size() {
         return entrySet().size();
@@ -93,8 +92,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation returns <tt>size() == 0</tt>.
+     * <p>This implementation returns <tt>size() == 0</tt>.
      */
     public boolean isEmpty() {
         return size() == 0;
@@ -103,8 +101,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation iterates over <tt>entrySet()</tt> searching
+     * <p>This implementation iterates over <tt>entrySet()</tt> searching
      * for an entry with the specified value.  If such an entry is found,
      * <tt>true</tt> is returned.  If the iteration terminates without
      * finding such an entry, <tt>false</tt> is returned.  Note that this
@@ -134,8 +131,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation iterates over <tt>entrySet()</tt> searching
+     * <p>This implementation iterates over <tt>entrySet()</tt> searching
      * for an entry with the specified key.  If such an entry is found,
      * <tt>true</tt> is returned.  If the iteration terminates without
      * finding such an entry, <tt>false</tt> is returned.  Note that this
@@ -166,8 +162,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation iterates over <tt>entrySet()</tt> searching
+     * <p>This implementation iterates over <tt>entrySet()</tt> searching
      * for an entry with the specified key.  If such an entry is found,
      * the entry's value is returned.  If the iteration terminates without
      * finding such an entry, <tt>null</tt> is returned.  Note that this
@@ -201,8 +196,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation always throws an
+     * <p>This implementation always throws an
      * <tt>UnsupportedOperationException</tt>.
      *
      * @throws UnsupportedOperationException {@inheritDoc}
@@ -217,8 +211,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation iterates over <tt>entrySet()</tt> searching for an
+     * <p>This implementation iterates over <tt>entrySet()</tt> searching for an
      * entry with the specified key.  If such an entry is found, its value is
      * obtained with its <tt>getValue</tt> operation, the entry is removed
      * from the collection (and the backing map) with the iterator's
@@ -267,8 +260,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation iterates over the specified map's
+     * <p>This implementation iterates over the specified map's
      * <tt>entrySet()</tt> collection, and calls this map's <tt>put</tt>
      * operation once for each entry returned by the iteration.
      *
@@ -289,8 +281,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation calls <tt>entrySet().clear()</tt>.
+     * <p>This implementation calls <tt>entrySet().clear()</tt>.
      *
      * <p>Note that this implementation throws an
      * <tt>UnsupportedOperationException</tt> if the <tt>entrySet</tt>
@@ -309,34 +300,14 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * Each of these fields are initialized to contain an instance of the
      * appropriate view the first time this view is requested.  The views are
      * stateless, so there's no reason to create more than one of each.
-     *
-     * <p>Since there is no synchronization performed while accessing these fields,
-     * it is expected that java.util.Map view classes using these fields have
-     * no non-final fields (or any fields at all except for outer-this). Adhering
-     * to this rule would make the races on these fields benign.
-     *
-     * <p>It is also imperative that implementations read the field only once,
-     * as in:
-     *
-     * <pre> {@code
-     * public Set<K> keySet() {
-     *   Set<K> ks = keySet;  // single racy read
-     *   if (ks == null) {
-     *     ks = new KeySet();
-     *     keySet = ks;
-     *   }
-     *   return ks;
-     * }
-     *}</pre>
      */
-    transient Set<K> keySet;
-    transient Collection<V> values;
+    transient volatile Set<K> keySet = null;
+    transient volatile Collection<V> values = null;
 
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation returns a set that subclasses {@link AbstractSet}.
+     * <p>This implementation returns a set that subclasses {@link AbstractSet}.
      * The subclass's iterator method returns a "wrapper object" over this
      * map's <tt>entrySet()</tt> iterator.  The <tt>size</tt> method
      * delegates to this map's <tt>size</tt> method and the
@@ -349,9 +320,8 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * method will not all return the same set.
      */
     public Set<K> keySet() {
-        Set<K> ks = keySet;
-        if (ks == null) {
-            ks = new AbstractSet<K>() {
+        if (keySet == null) {
+            keySet = new AbstractSet<K>() {
                 public Iterator<K> iterator() {
                     return new Iterator<K>() {
                         private Iterator<Entry<K,V>> i = entrySet().iterator();
@@ -386,16 +356,14 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
                     return AbstractMap.this.containsKey(k);
                 }
             };
-            keySet = ks;
         }
-        return ks;
+        return keySet;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @implSpec
-     * This implementation returns a collection that subclasses {@link
+     * <p>This implementation returns a collection that subclasses {@link
      * AbstractCollection}.  The subclass's iterator method returns a
      * "wrapper object" over this map's <tt>entrySet()</tt> iterator.
      * The <tt>size</tt> method delegates to this map's <tt>size</tt>
@@ -408,9 +376,8 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * method will not all return the same collection.
      */
     public Collection<V> values() {
-        Collection<V> vals = values;
-        if (vals == null) {
-            vals = new AbstractCollection<V>() {
+        if (values == null) {
+            values = new AbstractCollection<V>() {
                 public Iterator<V> iterator() {
                     return new Iterator<V>() {
                         private Iterator<Entry<K,V>> i = entrySet().iterator();
@@ -445,9 +412,8 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
                     return AbstractMap.this.containsValue(v);
                 }
             };
-            values = vals;
         }
-        return vals;
+        return values;
     }
 
     public abstract Set<Entry<K,V>> entrySet();
@@ -464,8 +430,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * <tt>equals</tt> method works properly across different implementations
      * of the <tt>Map</tt> interface.
      *
-     * @implSpec
-     * This implementation first checks if the specified object is this map;
+     * <p>This implementation first checks if the specified object is this map;
      * if so it returns <tt>true</tt>.  Then, it checks if the specified
      * object is a map whose size is identical to the size of this map; if
      * not, it returns <tt>false</tt>.  If so, it iterates over this map's
@@ -483,7 +448,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
 
         if (!(o instanceof Map))
             return false;
-        Map<?,?> m = (Map<?,?>) o;
+        Map<K,V> m = (Map<K,V>) o;
         if (m.size() != size())
             return false;
 
@@ -518,8 +483,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * <tt>m1</tt> and <tt>m2</tt>, as required by the general contract of
      * {@link Object#hashCode}.
      *
-     * @implSpec
-     * This implementation iterates over <tt>entrySet()</tt>, calling
+     * <p>This implementation iterates over <tt>entrySet()</tt>, calling
      * {@link Entry#hashCode hashCode()} on each element (entry) in the
      * set, and adding up the results.
      *
@@ -575,7 +539,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @return a shallow copy of this map
      */
     protected Object clone() throws CloneNotSupportedException {
-        AbstractMap<?,?> result = (AbstractMap<?,?>)super.clone();
+        AbstractMap<K,V> result = (AbstractMap<K,V>)super.clone();
         result.keySet = null;
         result.values = null;
         return result;
@@ -584,8 +548,6 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * Utility method for SimpleEntry and SimpleImmutableEntry.
      * Test for equality, checking for nulls.
-     *
-     * NB: Do not replace with Object.equals until JDK-8015417 is resolved.
      */
     private static boolean eq(Object o1, Object o2) {
         return o1 == null ? o2 == null : o1.equals(o2);
@@ -695,7 +657,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         public boolean equals(Object o) {
             if (!(o instanceof Map.Entry))
                 return false;
-            Entry<?,?> e = (Entry<?,?>)o;
+            Entry e = (Entry)o;
             return eq(key, e.getKey()) && eq(value, e.getValue());
         }
 
@@ -826,7 +788,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         public boolean equals(Object o) {
             if (!(o instanceof Map.Entry))
                 return false;
-            Entry<?,?> e = (Entry<?,?>)o;
+            Entry e = (Entry)o;
             return eq(key, e.getKey()) && eq(value, e.getValue());
         }
 

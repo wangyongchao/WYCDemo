@@ -10,9 +10,13 @@
     <dimen name="corner">3px</dimen>
     <dimen name="font_size">11sp</dimen>
     <dimen name="width">16sp</dimen>
-    <dimen name="view_width">150dp</dimen>
-    <dimen name="view_height">150dp</dimen>
+    <dimen name="view_width">39dp</dimen>
+    <dimen name="view_height">75dp</dimen>
 
     <dimen name="group_3v3_ceremony_name_size">10sp</dimen>
+
+    <dimen name="group_3v3_lottile_bg_margin_top">9dp</dimen>
+    <dimen name="group_3v3_lottile_bg_margin_bottom">31dp</dimen>
+    <dimen name="group_3v3_lottile_bg_margin_horizontal">115dp</dimen>
 
 </resources>

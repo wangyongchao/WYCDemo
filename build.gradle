@@ -3,6 +3,10 @@
 
 buildscript {
     repositories {
+        maven {
+            url mvn_repo_path
+
+        }
         jcenter()
         google()
     }
@@ -20,6 +24,10 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url mvn_repo_path
+
+        }
         jcenter()
         google()
     }

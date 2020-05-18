@@ -14,13 +14,13 @@ public class BinaryTree<E> {
     private String[] treeNodes;
     private int index = 0;
     private Entry pre;
-    private Entry header = new Entry("header");
+    private Entry header = new Entry();
 
     /**
      *
      */
     public BinaryTree(String tree) {
-        root = new Entry("");
+        root = new Entry();
         treeNodes = tree.split(",");
         index = 0;
         createTreeByPreOrder(root);
@@ -32,7 +32,7 @@ public class BinaryTree<E> {
      * @param <E>
      */
     private static class Entry<E> {
-        public Entry(E data) {
+        public Entry() {
             this.data = data;
         }
 
@@ -44,19 +44,42 @@ public class BinaryTree<E> {
 
         @Override
         public String toString() {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("data:" + data);
-            stringBuilder.append(",");
-            stringBuilder.append("left:" + (leftChild != null ? leftChild.data : null));
-            stringBuilder.append(",");
-            stringBuilder.append("right:" + (rightChild != null ? rightChild.data : null));
-            stringBuilder.append(",");
-            stringBuilder.append("ltag:" + ltag);
-            stringBuilder.append(",");
-            stringBuilder.append("rtag:" + rtag);
-            return stringBuilder.toString();
+            return data.toString();
+        }
+//
+//        @Override
+//        public String toString() {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            stringBuilder.append("data:" + data);
+//            stringBuilder.append(",");
+//            stringBuilder.append("left:" + (leftChild != null ? leftChild.data : null));
+//            stringBuilder.append(",");
+//            stringBuilder.append("right:" + (rightChild != null ? rightChild.data : null));
+//            stringBuilder.append(",");
+//            stringBuilder.append("ltag:" + ltag);
+//            stringBuilder.append(",");
+//            stringBuilder.append("rtag:" + rtag);
+//            return stringBuilder.toString();
+//        }
+
+    }
+
+
+    /**
+     * 递归创建二叉树
+     */
+    public int createTreeByRecursion(Entry entry, int index) {
+        String data = treeNodes[index];
+        if (data.equals("#")) {
+            return index + 1;
         }
 
+        entry.data = data;
+        entry.leftChild = new Entry();
+        int left = createTreeByRecursion(entry.leftChild, index + 1);
+        entry.rightChild = new Entry();
+        int right = createTreeByRecursion(entry.rightChild, left);
+        return right;
     }
 
 
@@ -122,9 +145,9 @@ public class BinaryTree<E> {
         if (entry == null) {
             return;
         }
-        System.out.println(entry);
-        preOrderTraverse(entry.ltag == 0 ? entry.leftChild : null);
-        preOrderTraverse(entry.rtag == 0 ? entry.rightChild : null);
+        System.out.print(entry);
+        preOrderTraverse(entry.leftChild);
+        preOrderTraverse(entry.rightChild);
     }
 
 
@@ -217,8 +240,8 @@ public class BinaryTree<E> {
             return null;
         } else {
             entry.data = data;
-            entry.leftChild = createTreeByPreOrder(new Entry(""));
-            entry.rightChild = createTreeByPreOrder(new Entry(""));
+            entry.leftChild = createTreeByPreOrder(new Entry());
+            entry.rightChild = createTreeByPreOrder(new Entry());
             return entry;
         }
 
@@ -229,11 +252,11 @@ public class BinaryTree<E> {
      * #H#K#D#B#E#A#I#F#C#G#J#
      */
     public Entry createTreeByInOrder(Entry entry) {
-        entry.leftChild = createTreeByInOrder(new Entry(""));
+        entry.leftChild = createTreeByInOrder(new Entry());
         String data = treeNodes[index];
         index++;
         entry.data = data;
-        entry.rightChild = createTreeByInOrder(new Entry(""));
+        entry.rightChild = createTreeByInOrder(new Entry());
 
         return entry;
 
@@ -242,7 +265,6 @@ public class BinaryTree<E> {
     /**
      * 中序线索化二叉树
      *
-     * @param entry
      * @return
      */
 
@@ -355,8 +377,6 @@ public class BinaryTree<E> {
         threadBinaryTreeByPreOrder(entry.ltag == 0 ? entry.leftChild : null);
         threadBinaryTreeByPreOrder(entry.rtag == 0 ? entry.rightChild : null);
     }
-
-
 
 
 }

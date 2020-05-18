@@ -5,8 +5,14 @@ import android.app.Activity;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -64,7 +70,8 @@ public class BitmapActivity extends Activity implements View.OnClickListener {
         int imageHeight = options.outHeight;
         int imageWidth = options.outWidth;
         String imageType = options.outMimeType;
-        System.out.println("imageHeight=" + imageHeight + ",imageWidth=" + imageWidth + ",imageType=" + imageType);
+        System.out.println("imageHeight=" + imageHeight + ",imageWidth=" + imageWidth + "," +
+                "imageType=" + imageType);
         int inSampleSize = TestUtils.calculateInSampleSize(options, factWidth, factHeight);
 
         options.inJustDecodeBounds = false;
@@ -100,14 +107,57 @@ public class BitmapActivity extends Activity implements View.OnClickListener {
     private void printBimtapPropertities(Bitmap bitmap) {
         int byteCount = bitmap.getByteCount();
         float caculateMunit = TestUtils.caculateMunit(byteCount);
-        Log.d(TestUtils.TAG, "caculateMunit=" + caculateMunit + ",with=" + bitmap.getWidth() + ",height=" + bitmap.getHeight());
+        Log.d(TestUtils.TAG, "caculateMunit=" + caculateMunit + ",with=" + bitmap.getWidth() + "," +
+                "height=" + bitmap.getHeight());
         TestUtils.getMemoryInfo(BitmapActivity.this);
     }
 
 
     @Override
     public void onClick(View v) {
-        Bitmap bitmap = BitmapDecodeUtil.decodeBitmap(this, R.drawable.test);
-        printBimtapPropertities(bitmap);
+        int view_width = (int) getResources().getDimension(R.dimen.view_width);
+        int view_height = (int) getResources().getDimension(R.dimen.view_height);
+        Drawable drawable1 = getResources().getDrawable(R.drawable.livebusiness_group3v3_header_bg);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.img_29);
+        BitmapDrawable drawable2 = new BitmapDrawable(bitmap2);
+        Drawable drawables[] = {drawable1,drawable2};
+        LayerDrawable layerDrawable = new LayerDrawable(drawables);
+        layerDrawable.setLayerSize(0,view_height,view_height);
+        layerDrawable.setLayerSize(1,view_width,view_width);
+        layerDrawable.setLayerGravity(1, Gravity.CENTER);
+
+
+        imageView.setImageBitmap(drawable2bitmap(layerDrawable));
+
+    }
+
+    public static Bitmap drawable2bitmap(Drawable drawable) {
+
+        if (drawable == null) {
+            return null;
+        }
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable d = (BitmapDrawable) drawable;
+            return d.getBitmap();
+        }
+
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+
+        if (width <= 0 || height <= 0) {
+            return null;
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Rect bounds = new Rect();
+        bounds.left = 0;
+        bounds.right = width;
+        bounds.top = 0;
+        bounds.bottom = height;
+        drawable.setBounds(bounds);
+        drawable.draw(canvas);
+        return bitmap;
     }
 }

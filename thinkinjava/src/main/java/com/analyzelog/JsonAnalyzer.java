@@ -18,10 +18,16 @@ public class JsonAnalyzer extends Analyzer {
         System.out.println("start JsonAnalyzer size=" + jsonStrings.size() + "change bean");
         List<LogBean> logBeans = new ArrayList<>(jsonStrings.size());
         for (int i = 0; i < jsonStrings.size(); i++) {
-            String jsonString = jsonStrings.get(i);
-            LogBean logBean = JSON.parseObject(jsonString, LogBean.class);
-            logBean.setOriginalJsonStr(jsonString);
-            logBeans.add(logBean);
+            String jsonString;
+            try {
+                jsonString = jsonStrings.get(i);
+                System.out.println(jsonString);
+                LogBean logBean = JSON.parseObject(jsonString, LogBean.class);
+                logBean.setOriginalJsonStr(jsonString);
+                logBeans.add(logBean);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         response.setLogBeans(logBeans);
         jsonStrings.clear();

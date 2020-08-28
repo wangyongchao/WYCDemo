@@ -8,9 +8,9 @@ import java.util.Calendar;
 
 public class Test {
     public static void main(String[] args) {
+        byte [] bytes =new byte[20];
+        System.out.println(new String(bytes));
 
-        getTimeTip(System.currentTimeMillis());
-        getTimeTip(1569600000000l);
     }
 
     public static void getTimeTip(long time) {

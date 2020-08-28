@@ -16,24 +16,40 @@
         android:layout_centerInParent="true" />
 
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/testText_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/start"
-        android:background="#fbf2d7"
-        android:visibility="visible">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/testText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/livebusiness_zhandui_btn_click"
-            android:text="张三为你点赞,努力的自己就是最好的自己!"
+            android:drawableLeft="@drawable/icon_livebusiness_vote_gold"
+            android:drawablePadding="3dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="+3"
             android:textColor="#5e2718"
             android:textSize="12sp" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/testText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/icon_livebusiness_vote_energy"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:text="+3"
+            android:textColor="#5e2718"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -5,18 +5,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 import com.weishop.test.R;
 import com.weishop.test.util.AppUtils;
 
-import java.lang.ref.WeakReference;
-
 public class LeakActivity extends Activity implements View.OnClickListener {
 
 
     private byte[] a = new byte[30 * AppUtils._1MB];
+    private MyHandler myHandler;
 
 
     @Override
@@ -24,38 +22,15 @@ public class LeakActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leak);
 
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.d("wyc", "run");
-                    Thread.sleep(100 * 60 * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        findViewById(R.id.leak).setOnClickListener(this);
+        myHandler = new MyHandler();
 
     }
 
-    static class MyHandler extends Handler {
-        WeakReference<LeakActivity> weakReference;
-
-
-        public MyHandler(LeakActivity activity) {
-            weakReference = new WeakReference<LeakActivity>(activity);
-        }
-
-
+    class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (weakReference.get() == null) {
-                return;
-            }
-
-            LeakActivity leakActivity = weakReference.get();
         }
     }
 
@@ -65,11 +40,5 @@ public class LeakActivity extends Activity implements View.OnClickListener {
 
     }
 
-    class InnerClass {
-        public void inner() {
-
-        }
-
-    }
 
 }

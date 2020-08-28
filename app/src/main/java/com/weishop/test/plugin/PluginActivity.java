@@ -3,12 +3,10 @@ package com.weishop.test.plugin;
 
 import android.app.Activity;
 import android.app.ActivityThread;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 
-import com.didi.virtualapk.PluginManager;
 import com.weishop.test.R;
 
 import java.io.File;
@@ -26,7 +24,7 @@ public class PluginActivity extends Activity implements View.OnClickListener {
         String pluginPath = Environment.getExternalStorageDirectory().getAbsolutePath().concat("/plugina.apk");
         File plugin = new File(pluginPath);
         try {
-            PluginManager.getInstance(this).loadPlugin(plugin);
+//            PluginManager.getInstance(this).loadPlugin(plugin);
         } catch (Exception e) {
             e.printStackTrace();
         }

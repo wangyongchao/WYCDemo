@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp"
+    android:gravity="center_horizontal">
+
+
+    <ProgressBar
+        android:id="@+id/pb_vote_bar_graph_bar"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/shape_live_business_vote_bar_selected" />
+
+    <ImageView
+        android:id="@+id/live_business_img_vote_thumb_monkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/live_business_img_vote_graph_bar_monkey" />
+
+</RelativeLayout>

@@ -220,11 +220,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int whitec = getResources().getColor(android.R.color.white);
-        int nameTextSize =
-                (int) getResources().getDimension(R.dimen.group_3v3_ceremony_name_size);
-        Bitmap bitmap = createMsgBitmap(129, 22, "王永朝名字大于", nameTextSize, whitec);
-        imageView.setImageBitmap(bitmap);
+
     }
 
     private void A() throws Exception {

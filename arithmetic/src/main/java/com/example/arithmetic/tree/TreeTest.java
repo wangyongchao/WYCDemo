@@ -1,6 +1,9 @@
 package com.example.arithmetic.tree;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by wangyongchao on 2018/8/14.
@@ -27,9 +30,9 @@ public class TreeTest {
 //        String tree = "A,B,D,H,#,K,#,#,#,E,#,#,C,F,I,#,#,#,G,#,J,#,#";
         String tree = "A,B,D,G,#,#,H,#,#,#,C,E,#,I,#,#,F,#,#";
         BinaryTree binaryTree = new BinaryTree(tree);
-        binaryTree.preOrderTraverse(binaryTree.getRoot());
-        System.out.println();
-        binaryTree.orderTraverseUnRecursion(binaryTree.getRoot());
+        System.out.println("层序遍历");
+        int list = binaryTree.maxDepthByBFS(binaryTree.getRoot());
+        System.out.println(list);
 
     }
 

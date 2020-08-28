@@ -25,6 +25,7 @@ import org.json.JSONObject;
 public class AnimatorActivity extends Activity implements View.OnClickListener {
     private static final String LOTTIE_RES_ASSETS_ROOTDIR = "interaction/";
     private TextView mTestText;
+    private TextView mTestText1;
     private View textLayout;
     private LottieAnimationView bubbleView;
 
@@ -37,6 +38,7 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
         bubbleView = findViewById(R.id.bubble);
         textLayout = findViewById(R.id.testText_layout);
         mTestText = (TextView) findViewById(R.id.testText);
+        mTestText1 = (TextView) findViewById(R.id.testText1);
         findViewById(R.id.start).setOnClickListener(this);
 
         textLayout.postDelayed(new Runnable() {
@@ -84,7 +86,7 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        testScore();
+        startAppearAnima();
     }
 
     private void testXml() {
@@ -106,18 +108,117 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
             }
         });
 
-        ObjectAnimator scaleObjectAnimator = ObjectAnimator.ofFloat(mTestText, "scaleX", 0, 1f);
-        scaleObjectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        float translationY = mTestText.getTranslationY();
+        System.out.println("translationY=" + translationY);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTestText, "translationY",
+                translationY, -mTestText
+                        .getLeft(), translationY);
+        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 Object animatedValue = animation.getAnimatedValue();
-                float scaleY = mTestText.getScaleY();
-                System.out.println("animatedValue=" + animatedValue + ",scaleY=" + scaleY);
+                float translationX = mTestText.getTranslationX();
+                System.out.println("animatedValue=" + animatedValue + ",translationX=" + translationX + ",getLeft=" +
+                        mTestText.getLeft());
             }
         });
-        animatorSet.play(alphaObjectAnimator).with(scaleObjectAnimator);
+        animatorSet.play(alphaObjectAnimator).with(objectAnimator);
         animatorSet.setDuration(1000);
         animatorSet.start();
+
+    }
+
+    /**
+     * 能量金币放出现效果
+     */
+    private void startAppearAnima() {
+
+        float translationY = textLayout.getTranslationY();
+        System.out.println("startAppearAnima translationY=" + translationY);
+        ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(textLayout, "translationY",
+                30, translationY);
+        ObjectAnimator alphaObjectAnimator = ObjectAnimator.ofFloat(textLayout, "alpha", 0f, 1f);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                startScaleAnima();
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                textLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        animatorSet.setDuration(300);
+        animatorSet.play(translateAnimator).with(alphaObjectAnimator);
+        animatorSet.start();
+
+
+    }
+
+    /**
+     * 能量金币放大效果
+     */
+    private void startScaleAnima() {
+        ObjectAnimator scalexGoldObjectAnimator = ObjectAnimator.ofFloat(mTestText, "scaleX", 0f,
+                1.2f, 1f);
+        ObjectAnimator scaleyGoldObjectAnimator = ObjectAnimator.ofFloat(mTestText, "scaleY", 0f,
+                1.2f, 1f);
+
+
+        ObjectAnimator scalexAnergyObjectAnimator = ObjectAnimator.ofFloat(mTestText1, "scaleX",
+                0f, 1.2f, 1f);
+        ObjectAnimator scaleyAnergyObjectAnimator = ObjectAnimator.ofFloat(mTestText1, "scaleY",
+                0f, 1.2f, 1f);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                startDisappearAnima();
+
+            }
+        });
+        animatorSet.setDuration(1000);
+        animatorSet.play(scalexGoldObjectAnimator).with(scaleyGoldObjectAnimator)
+                .with(scalexAnergyObjectAnimator).with(scaleyAnergyObjectAnimator);
+        animatorSet.start();
+    }
+
+    /**
+     * 能量金币放消失效果
+     */
+    private void startDisappearAnima() {
+
+        float translationY = textLayout.getTranslationY();
+        System.out.println("startDisappearAnima translationY=" + translationY);
+        ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(textLayout, "translationY",
+                translationY, -30);
+        ObjectAnimator alphaObjectAnimator = ObjectAnimator.ofFloat(textLayout, "alpha", 1f, 0f);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+            }
+        });
+
+        animatorSet.setDuration(300);
+        animatorSet.play(translateAnimator).with(alphaObjectAnimator);
+        animatorSet.start();
+
 
     }
 
@@ -193,7 +294,30 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
     /**
      * 移动
      */
-    private void testTranslate() {
+    private void testTranslateY() {
+        textLayout.setVisibility(View.VISIBLE);
+        float translationY = textLayout.getTranslationY();
+        System.out.println("translationY=" + translationY + ",getTop=" + textLayout.getTop());
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(textLayout, "translationY",
+                30, translationY);
+        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Object animatedValue = animation.getAnimatedValue();
+                float translationY = textLayout.getTranslationY();
+                System.out.println("animatedValue=" + animatedValue + ",translationY=" + translationY);
+            }
+        });
+        objectAnimator.setDuration(300);
+        objectAnimator.start();
+
+
+    }
+
+    /**
+     * 移动
+     */
+    private void testTranslateX() {
         float translationX = mTestText.getTranslationX();
         System.out.println("translationX=" + translationX + ",getLeft=" + mTestText.getLeft());
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTestText, "translationX",

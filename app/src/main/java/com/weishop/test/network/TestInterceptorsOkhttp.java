@@ -3,9 +3,6 @@ package com.weishop.test.network;
 import android.content.Context;
 import android.os.Environment;
 
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

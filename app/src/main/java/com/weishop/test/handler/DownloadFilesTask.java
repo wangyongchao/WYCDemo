@@ -40,7 +40,7 @@ public class DownloadFilesTask extends AsyncTask<String, Integer, Long> {
     }
 
     /**
-     * 发布进去
+     * 发布进度
      *
      * @param values
      */

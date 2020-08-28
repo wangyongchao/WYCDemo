@@ -5,10 +5,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.MessageQueue;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.weishop.test.R;
+import com.weishop.test.util.LogUtils;
 
 import java.net.URL;
 
@@ -37,10 +40,18 @@ public class HandlerActivity extends Activity implements View.OnClickListener {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println(Thread.currentThread().getName() + ",");
+                LogUtils.d(Thread.currentThread().getName() + ",");
 
             }
         };
+
+        handlerThread.getLooper().getQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+            @Override
+            public boolean queueIdle() {
+                LogUtils.d("queueIdle");
+                return false;
+            }
+        });
 
         downloadFilesTask = new DownloadFilesTask();
 
@@ -50,14 +61,11 @@ public class HandlerActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.handler) {
-//            handler.sendEmptyMessage(0);
-            for (int i = 0; i < 3; i++) {
-                downloadFilesTask = new DownloadFilesTask();
-                downloadFilesTask.execute("url" + i);
-            }
+
+
 
         } else {
-//            handlerThread.quit();
+            handler.sendEmptyMessage(0);
         }
 
     }

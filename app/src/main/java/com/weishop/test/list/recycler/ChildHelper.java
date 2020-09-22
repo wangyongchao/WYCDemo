@@ -200,7 +200,7 @@ class ChildHelper {
      * This can be used to find a disappearing view by position.
      *
      * @param position The adapter position of the item.
-     * @param type     View type, can be {@link android.support.v7.widget.RecyclerView#INVALID_TYPE}.
+     * @param type     View type, can be {@link androidx.recyclerview.widget.RecyclerView#INVALID_TYPE}.
      * @return         A hidden view with a valid ViewHolder that matches the position and type.
      */
     View findHiddenNonRemovedView(int position, int type) {
@@ -209,7 +209,7 @@ class ChildHelper {
             final View view = mHiddenViews.get(i);
             RecyclerView.ViewHolder holder = mCallback.getChildViewHolder(view);
             if (holder.getLayoutPosition() == position && !holder.isInvalid() &&
-                    (type == android.support.v7.widget.RecyclerView.INVALID_TYPE || holder.getItemViewType() == type)) {
+                    (type == androidx.recyclerview.widget.RecyclerView.INVALID_TYPE || holder.getItemViewType() == type)) {
                 return view;
             }
         }

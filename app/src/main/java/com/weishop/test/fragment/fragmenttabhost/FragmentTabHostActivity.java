@@ -10,7 +10,9 @@ import com.weishop.test.fragment.Fragment2;
 import com.weishop.test.R;
 import com.weishop.test.util.TestUtils;
 
-public class FragmentTabHostActivity extends android.support.v4.app.FragmentActivity implements
+import androidx.fragment.app.FragmentActivity;
+
+public class FragmentTabHostActivity extends FragmentActivity implements
         View.OnClickListener {
 
     FragmentTabHost mTabHost;

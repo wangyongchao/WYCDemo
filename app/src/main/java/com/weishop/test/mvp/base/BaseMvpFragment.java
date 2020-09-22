@@ -1,8 +1,8 @@
 package com.weishop.test.mvp.base;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.util.Preconditions;
+import androidx.fragment.app.Fragment;
+import androidx.core.util.Preconditions;
 
 public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView<P> {
 

@@ -3,7 +3,7 @@ package com.weishop.test.custom.view;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v4.view.MotionEventCompat;
+import androidx.core.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.weishop.test.util.TestUtils;
 
-import static android.support.v4.widget.ExploreByTouchHelper.INVALID_ID;
+import static androidx.customview.widget.ExploreByTouchHelper.INVALID_ID;
 
 public class DragRelativeLayout extends RelativeLayout {
     private final Rect mTempRect = new Rect();

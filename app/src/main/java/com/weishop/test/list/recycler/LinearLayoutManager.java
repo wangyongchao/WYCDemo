@@ -20,10 +20,10 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.accessibility.AccessibilityEventCompat;
-import android.support.v4.view.accessibility.AccessibilityRecordCompat;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityEventCompat;
+import androidx.core.view.accessibility.AccessibilityRecordCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -316,7 +316,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements
 
     /**
      * Sets the orientation of the layout.
-     * {@link android.support.v7.widget.LinearLayoutManager} will do its best to
+     * {@link androidx.recyclerview.widget.LinearLayoutManager} will do its best to
      * keep scroll position.
      *
      * @param orientation {@link #HORIZONTAL} or {@link #VERTICAL}
@@ -404,7 +404,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements
      * <p>
      * Returns the amount of extra space that should be laid out by
      * LayoutManager. By default,
-     * {@link android.support.v7.widget.LinearLayoutManager} lays out 1 extra
+     * {@link androidx.recyclerview.widget.LinearLayoutManager} lays out 1 extra
      * page of items while smooth scrolling and 0 otherwise. You can override
      * this method to implement your custom layout pre-cache logic.
      * </p>
@@ -1325,7 +1325,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements
      *            change but we may consider moving it out of this view so
      *            passing around as a parameter for now, rather than accessing
      *            {@link #mLayoutState}
-     * @see android.support.v7.widget.LinearLayoutManager.LayoutState#mLayoutDirection
+     * @see androidx.recyclerview.widget.LinearLayoutManager.LayoutState#mLayoutDirection
      */
     private void recycleByLayoutState(RecyclerView.Recycler recycler, LayoutState layoutState) {
         if (!layoutState.mRecycle) {
@@ -1341,7 +1341,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements
     /**
      * The magic functions :). Fills the given layout, defined by the
      * layoutState. This is fairly independent from the rest of the
-     * {@link android.support.v7.widget.LinearLayoutManager} and with little
+     * {@link androidx.recyclerview.widget.LinearLayoutManager} and with little
      * change, can be made publicly available as a helper class.
      *
      * @param recycler Current recycler that is attached to RecyclerView

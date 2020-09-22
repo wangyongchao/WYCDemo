@@ -16,7 +16,7 @@
 
 package com.weishop.test.list.recycler;
 
-import android.support.v4.util.Pools;
+import androidx.core.util.Pools;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -577,7 +577,7 @@ class AdapterHelper implements OpReorderer.Callback {
                     if (op.positionStart <= position) {
                         final int end = op.positionStart + op.itemCount;
                         if (end > position) {
-                            return android.support.v7.widget.RecyclerView.NO_POSITION;
+                            return androidx.recyclerview.widget.RecyclerView.NO_POSITION;
                         }
                         position -= op.itemCount;
                     }

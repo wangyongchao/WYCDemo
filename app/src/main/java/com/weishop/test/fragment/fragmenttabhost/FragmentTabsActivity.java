@@ -2,7 +2,9 @@
 package com.weishop.test.fragment.fragmenttabhost;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import com.weishop.test.fragment.Fragment1;
 import com.weishop.test.fragment.Fragment2;
 import com.weishop.test.util.TestUtils;
 
-public class FragmentTabsActivity extends android.support.v4.app.FragmentActivity implements
+public class FragmentTabsActivity extends FragmentActivity implements
         View.OnClickListener {
 
     FragmentTabHost mTabHost;

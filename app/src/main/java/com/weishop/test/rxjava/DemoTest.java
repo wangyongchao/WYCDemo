@@ -1,11 +1,10 @@
 package com.weishop.test.rxjava;
 
-import android.support.v4.util.Pair;
+import androidx.core.util.Pair;
 
 import com.weishop.test.data.Course;
 import com.weishop.test.data.Student;
 import com.weishop.test.util.LogUtils;
-import com.weishop.test.util.TestUtils;
 
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;

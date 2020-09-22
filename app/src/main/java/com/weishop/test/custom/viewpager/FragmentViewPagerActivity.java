@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.weishop.test.R;
-import com.weishop.test.custom.CustomActivity;
 import com.weishop.test.custom.viewpager.source.ViewPager;
 import com.weishop.test.util.TestUtils;
 
-public class FragmentViewPagerActivity extends android.support.v4.app.FragmentActivity implements
+import androidx.fragment.app.FragmentActivity;
+
+public class FragmentViewPagerActivity extends FragmentActivity implements
         View.OnClickListener {
     private ViewPager viewPager;
 

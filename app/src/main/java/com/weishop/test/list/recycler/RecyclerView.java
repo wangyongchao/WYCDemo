@@ -28,25 +28,26 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
-import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
-import android.support.v4.os.TraceCompat;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.view.InputDeviceCompat;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.NestedScrollingChild;
-import android.support.v4.view.NestedScrollingChildHelper;
-import android.support.v4.view.ScrollingView;
-import android.support.v4.view.VelocityTrackerCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewConfigurationCompat;
-import android.support.v4.view.accessibility.AccessibilityEventCompat;
-import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
-import android.support.v4.view.accessibility.AccessibilityRecordCompat;
-import android.support.v4.widget.EdgeEffectCompat;
-import android.support.v4.widget.ScrollerCompat;
-import android.support.v7.recyclerview.R;
-import android.support.v7.widget.LinearSmoothScroller;
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
+import androidx.core.os.TraceCompat;
+import androidx.collection.ArrayMap;
+import androidx.core.view.InputDeviceCompat;
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.NestedScrollingChild;
+import androidx.core.view.NestedScrollingChildHelper;
+import androidx.core.view.ScrollingView;
+import androidx.core.view.VelocityTrackerCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewConfigurationCompat;
+import androidx.core.view.accessibility.AccessibilityEventCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
+import androidx.core.view.accessibility.AccessibilityRecordCompat;
+import androidx.core.widget.EdgeEffectCompat;
+import androidx.core.widget.ScrollerCompat;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -63,6 +64,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.Interpolator;
 
+import com.weishop.test.R;
 import com.weishop.test.util.TestUtils;
 
 import java.lang.reflect.Constructor;
@@ -1086,7 +1088,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
      * Recycled view pools allow multiple RecyclerViews to share a common pool of scrap views.
      * This can be useful if you have multiple RecyclerViews with adapters that use the same
      * view types, for example if you have several data sets with the same kinds of item views
-     * displayed by a {@link android.support.v4.view.ViewPager ViewPager}.
+     * displayed by a {@link ViewPager ViewPager}.
      *
      * @param pool Pool to set. If this parameter is null a new pool will be created and used.
      */
@@ -1287,9 +1289,9 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
      * Convenience method to scroll to a certain position.
      *
      * RecyclerView does not implement scrolling logic, rather forwards the call to
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#scrollToPosition(int)}
+     * {@link androidx.recyclerview.widget.RecyclerView.LayoutManager#scrollToPosition(int)}
      * @param position Scroll to this adapter position
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#scrollToPosition(int)
+     * @see androidx.recyclerview.widget.RecyclerView.LayoutManager#scrollToPosition(int)
      */
     public void scrollToPosition(int position) {
         if (mLayoutFrozen) {
@@ -1471,7 +1473,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
      * LayoutManager. </p>
      *
      * @return The horizontal offset of the scrollbar's thumb
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollOffset
+     * @see androidx.recyclerview.widget.RecyclerView.LayoutManager#computeHorizontalScrollOffset
      * (RecyclerView.Adapter)
      */
     @Override
@@ -1536,7 +1538,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
      * LayoutManager.</p>
      *
      * @return The vertical offset of the scrollbar's thumb
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollOffset
+     * @see androidx.recyclerview.widget.RecyclerView.LayoutManager#computeVerticalScrollOffset
      * (RecyclerView.Adapter)
      */
     @Override
@@ -5540,7 +5542,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
          *
          * <p>The adapter may publish a variety of events describing specific changes.
          * Not all adapters may support all change types and some may fall back to a generic
-         * {@link android.support.v7.widget.RecyclerView.AdapterDataObserver#onChanged()
+         * {@link androidx.recyclerview.widget.RecyclerView.AdapterDataObserver#onChanged()
          * "something changed"} event if more specific data is not available.</p>
          *
          * <p>Components registering observers with an adapter are responsible for

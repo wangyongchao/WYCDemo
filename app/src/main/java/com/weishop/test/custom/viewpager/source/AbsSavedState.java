@@ -18,8 +18,8 @@ package com.weishop.test.custom.viewpager.source;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.os.ParcelableCompat;
-import android.support.v4.os.ParcelableCompatCreatorCallbacks;
+import androidx.core.os.ParcelableCompat;
+import androidx.core.os.ParcelableCompatCreatorCallbacks;
 
 /**
  * A {@link Parcelable} implementation that should be used by inheritance

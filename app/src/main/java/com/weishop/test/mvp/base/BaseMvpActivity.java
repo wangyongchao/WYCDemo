@@ -2,7 +2,7 @@
 package com.weishop.test.mvp.base;
 
 import android.os.Bundle;
-import android.support.v4.util.Preconditions;
+import androidx.core.util.Preconditions;
 
 /**
  * 需要使用mvp的可以继承此类，activity本身充当view角色

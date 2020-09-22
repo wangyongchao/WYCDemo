@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    file="app/drawable-xxhdpi/app_to_customer.png"
+    android:src="@drawable/drawable_no" />

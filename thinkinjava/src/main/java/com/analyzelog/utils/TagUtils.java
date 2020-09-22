@@ -23,6 +23,9 @@ public class TagUtils {
     //小组游戏
     public static String LIVEVOTE = "LiveVote";
 
+    //rtcvideo pager
+    public static String RTCLOG = "rtcLog";
+
 
 
 }

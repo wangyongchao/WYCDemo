@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/liancheng_item_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:layout_gravity="right"
+    android:background="@drawable/bg_live_business_chat_intera_bg"
+    android:orientation="horizontal"
+    android:paddingLeft="3dp"
+    android:paddingRight="15dp">
+
+    <TextView
+        android:id="@+id/item_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_live_business_chat_intera_muti"
+        android:gravity="center"
+        android:text="666"
+        android:textColor="#fff3bd"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/item_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="4dp"
+        android:text="x2668"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+
+</LinearLayout>
+
+

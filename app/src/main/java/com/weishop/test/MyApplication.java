@@ -5,7 +5,8 @@ import android.content.Context;
 
 import com.dianping.logan.Logan;
 import com.dianping.logan.LoganConfig;
-import com.weishop.test.util.CrashHandler;
+import com.squareup.leakcanary.LeakCanary;
+import com.weishop.test.util.LogUtils;
 
 import java.io.File;
 
@@ -25,12 +26,14 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-//        Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testcpu.trace");
+//        Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testcpu
+//        .trace");
 //        init();
 
 //        Debug.stopMethodTracing();
 //        BlockCanary.install(this, new AppBlockCanaryContext()).start();
-        CrashHandler.getInstance().init(this);
+//        CrashHandler.getInstance().init(this);
+        LeakCanary.install(this);
 
     }
 
@@ -48,7 +51,7 @@ public class MyApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        System.out.println("onLowMemory");
+        LogUtils.d("MyApplication onLowMemory");
     }
 
     private void init() {

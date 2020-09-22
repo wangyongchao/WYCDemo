@@ -1,11 +1,11 @@
 package com.weishop.test.webview;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Menu;
@@ -18,25 +18,36 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.weishop.test.R;
 import com.weishop.test.util.TestUtils;
 
-import java.io.File;
 import java.util.Map;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 
 public class WebViewActivity extends Activity implements View.OnClickListener {
 
 
     WebView mWebView;
-    //    String mUrl = "http://bitkiller.duapp.com/jsobj.html";
+        String mUrl = "https://leetcode-cn.com/problems/binary-tree-inorder-traversal/";
     String mUrl1 = "file:///android_asset/html/test.html";
     String mUrl2 = "file:///android_asset/html/test2.html";
     String mUrl3 = "file:///android_asset/html/js3.html";
     Object mJsObj = new JSInterface();
     SoundPoolHelper soundPoolHelper;
+    private ImageView imageView;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        ResourcesHelper.replaceContextRes(newBase);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +60,7 @@ public class WebViewActivity extends Activity implements View.OnClickListener {
         mWebView.addJavascriptInterface(new JSInterface(), "jsInterface");
         soundPoolHelper = new SoundPoolHelper(this, 5, AudioManager.STREAM_MUSIC);
         findViewById(R.id.startbtan).setOnClickListener(this);
-        findViewById(R.id.stopbtan).setOnClickListener(this);
+        imageView=findViewById(R.id.imageview);
     }
 
     @Override
@@ -116,23 +127,15 @@ public class WebViewActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        File externalFilesDir = this.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-//        System.out.println("externalFilesDir="+externalFilesDir);
-//        File file = new File(externalFilesDir, "war_bg.mp3");
-//        if (v.getId() == R.id.startbtan) {
-//            soundPoolHelper.playMusic(file.getAbsolutePath(), 0.6f, true);
-//        } else {
-//            if (soundPoolHelper != null) {
-//                soundPoolHelper.stopMusic(file.getAbsolutePath());
-//            }
-//        }
 
-        File externalFilesDir = this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+//        mWebView.loadUrl(mUrl);
 
-        System.out.println("externalFilesDir=" + externalFilesDir);
-        String mUrl1 = "file:///" + externalFilesDir.getAbsolutePath() + "/html/test.html";
-        mWebView.loadUrl(mUrl1);
 
+        Glide.with(this).
+                load(R.drawable.app_to_customer).
+                apply(RequestOptions.centerCropTransform())
+                .transition(withCrossFade())
+                .into(imageView);
     }
 
     class JSInterface {

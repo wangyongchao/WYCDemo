@@ -14,7 +14,7 @@ import com.weishop.test.util.TestUtils;
 
 public class MyLinearLayout extends LinearLayout {
 
-    private  Paint paint;
+    private Paint paint;
 
     public MyLinearLayout(Context context) {
         super(context);
@@ -122,15 +122,34 @@ public class MyLinearLayout extends LinearLayout {
         return super.onTouchEvent(ev);
     }
 
+    /**
+     * activity_process_view
+     * android:layout_marginTop="50dp"
+     * android:paddingBottom="70dp"
+     * <p>
+     * widthMeasureSpec EXACTLY size 1080
+     * heightMeasureSpec AT_MOST 1881-50dp=1731
+     *
+     * textview
+     * android:layout_width="match_parent"
+     * android:layout_height="wrap_content"
+     * Linearlayout 建议的textview的测量高度和宽度
+     * widthMeasureSpec EXACTLY size 1080
+     * heightMeasureSpec AT_MOST 1881-50dp-70dp=1521
+     *
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        System.out.println("MyLinearLayout onMeasure");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        TestUtils.printMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        System.out.println("MyLinearLayout onLayout");
         super.onLayout(changed, l, t, r, b);
     }
 

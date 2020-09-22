@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-include ':thinkinjava',':testapp'
-=======
-include ':app',':testapp'
->>>>>>> 0eea0652c818ec402a82f711003eb7df95412f86
-

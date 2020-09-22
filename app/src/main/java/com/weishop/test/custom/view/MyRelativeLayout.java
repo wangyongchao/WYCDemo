@@ -24,55 +24,8 @@ public class MyRelativeLayout extends RelativeLayout {
     }
 
     @Override
-    protected void onAttachedToWindow() {
-        System.out.println("onAttachedToWindow");
-        super.onAttachedToWindow();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        System.out.println("onDetachedFromWindow");
-        super.onDetachedFromWindow();
-    }
-
-    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        final int actionMasked = MotionEventCompat.getActionMasked(ev);
-        final int actionIndex = MotionEventCompat.getActionIndex(ev);
-        int pointerId = MotionEventCompat.getPointerId(ev, actionIndex);
-        float x =  MotionEventCompat.getX(ev,actionIndex);
-        float y = MotionEventCompat.getY(ev,actionIndex);
-        float rawX = ev.getRawX();
-        float rawY = ev.getRawY();
-        int action = ev.getAction();
-        String strAction = null;
-
-        switch (action & MotionEventCompat.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
-                strAction = "ACTION_DOWN";
-                break;
-            case MotionEvent.ACTION_POINTER_DOWN:
-                strAction = "ACTION_POINTER_DOWN";
-                break;
-            case MotionEvent.ACTION_POINTER_UP:
-                strAction = "ACTION_POINTER_UP";
-                break;
-            case MotionEvent.ACTION_MOVE:
-                strAction = "ACTION_MOVE";
-                break;
-            case MotionEvent.ACTION_UP:
-                strAction = "ACTION_UP";
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                strAction = "ACTION_CANCEL";
-                break;
-        }
-        if (TestUtils.OPEN) {
-            System.out.println("MyRelativeLayout dispatchTouchEvent action=" + strAction + ",x="
-                    + x + ",y=" + y + ",rawX=" + rawX + ",rawY=" + rawY + ",actionMasked="
-                    + actionMasked + ",actionIndex=" + actionIndex+",pointerId="+pointerId);
-        }
-
+        TestUtils.printEvent(ev, "dispatchTouchEvent", null);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -110,8 +63,8 @@ public class MyRelativeLayout extends RelativeLayout {
     public boolean onTouchEvent(MotionEvent ev) {
         final int actionMasked = MotionEventCompat.getActionMasked(ev);
         final int actionIndex = MotionEventCompat.getActionIndex(ev);
-        float x =  MotionEventCompat.getX(ev,actionIndex);
-        float y = MotionEventCompat.getY(ev,actionIndex);
+        float x = MotionEventCompat.getX(ev, actionIndex);
+        float y = MotionEventCompat.getY(ev, actionIndex);
         int pointerId = MotionEventCompat.getPointerId(ev, actionIndex);
         float rawX = ev.getRawX();
         float rawY = ev.getRawY();
@@ -139,7 +92,7 @@ public class MyRelativeLayout extends RelativeLayout {
         if (TestUtils.OPEN) {
             System.out.println("MyRelativeLayout dispatchTouchEvent action=" + strAction + ",x="
                     + x + ",y=" + y + ",rawX=" + rawX + ",rawY=" + rawY + ",actionMasked="
-                    + actionMasked + ",actionIndex=" + actionIndex+",pointerId="+pointerId);
+                    + actionMasked + ",actionIndex=" + actionIndex + ",pointerId=" + pointerId);
         }
 
         return true;

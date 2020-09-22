@@ -1,68 +1,65 @@
 
 package com.weishop.test.data;
 
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.weishop.test.R;
-import com.weishop.test.list.recycler.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    private final Context mContext;
     private List<String> mDataset = new ArrayList<>();
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public TextView mTextView;
+        public View view;
 
         public ViewHolder(View v) {
             super(v);
             mTextView = (TextView) v.findViewById(R.id.item1);
+            view=v;
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter() {
+    public MyAdapter(Context context) {
+        this.mContext=context;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_view, parent, false);
-        // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         System.out.println("onBindViewHolder position=" + position);
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+        if(position % 2==0){
+            holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+        }else {
+            holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.item_background));
+        }
         holder.mTextView.setText(mDataset.get(position));
 
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
 
-    public void addData(int position) {
-//        mDataset.add(position, "Insert One");
-        mDataset.add("Insert One");
-        notifyDataSetChanged();
+    public void addData(int position,String newItem) {
+        mDataset.add(newItem);
+        notifyItemInserted(position);
     }
 
     public void setData(List<String> data) {

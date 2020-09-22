@@ -5,19 +5,23 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import static android.content.Context.ACTIVITY_SERVICE;
@@ -100,26 +104,18 @@ public class TestUtils {
     public static boolean OPEN = true;
 
     public static void getProperty(Activity context) {
-        Rect frame = new Rect();
-        context.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        int statusBarHeight = frame.top;
-
-        int contentTop = context.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
-        // statusBarHeight是上面所求的状态栏的高度
-        int titleBarHeight = contentTop - statusBarHeight;
 
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         display.getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;// 不包括虚拟按键，view显示的高度
+        int screenHeight = dm.heightPixels;
+        int screenWidth = dm.widthPixels;
         float density = dm.density;
         int densityDpi = dm.densityDpi;
 
-        Log.d(TAG,"titlebarheight=" + titleBarHeight + ",statusBarHeight="
-                + statusBarHeight + ",width=" + width + ",height=" + height + ",density=" + density + ",densityDpi=" + densityDpi);
+        LogUtils.d("screenHeight=" + screenHeight + ",screenWidth="
+                + screenWidth + ",densityDpi=" + densityDpi + ",density=" + density);
 
     }
 
@@ -144,6 +140,28 @@ public class TestUtils {
     }
 
     /**
+     * 获取分辨率
+     */
+    public static void getRatio(Activity context) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+
+
+        DisplayMetrics metrics1 = new DisplayMetrics();
+        metrics1 = context.getApplicationContext().getResources().getDisplayMetrics();
+        int width1 = metrics1.widthPixels;
+        int height1 = metrics1.heightPixels;
+
+        LogUtils.d("width=" + width + ",height="
+                + height + ",width1=" + width1 + ",height1=" + height1);
+
+
+    }
+
+
+    /**
      * MemoryInfo.totalMem:系统总的内存大小
      * MemoryInfo.availMem:系统当前可用的内存大小
      * MemoryInfo.lowMemory:现在系统是否处于低内存的情况
@@ -160,10 +178,12 @@ public class TestUtils {
         float totalMemory = caculateMunit(Runtime.getRuntime().totalMemory());
         float freeMemory = caculateMunit(Runtime.getRuntime().freeMemory());
 
-        Log.d(TAG,"maxMemory=" + maxMemory + ",totalMemory=" + totalMemory + ",freeMemory=" + freeMemory);
+        Log.d(TAG, "当前可扩展的最大内存maxMemory=" + maxMemory
+                + ",当前堆内存大小totalMemory=" + totalMemory + ",当前堆可用内存freeMemory=" + freeMemory);
 
         //系统内存相关属性
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        ActivityManager activityManager =
+                (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo info = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(info);
         float totalMem = caculateMunit(info.totalMem);
@@ -171,11 +191,38 @@ public class TestUtils {
         boolean lowMemory = info.lowMemory;
         float threshold = caculateMunit(info.threshold);
 
-        Log.d(TAG,"totalMem=" + totalMem + "，availMem=" + availMem +
+        Log.d(TAG, "totalMem=" + totalMem + "，availMem=" + availMem +
                 ",lowMemory=" + lowMemory + ",threshold=" + threshold);
 
 
     }
+
+    /**
+     * MemoryInfo.totalMem:系统总的内存大小
+     * MemoryInfo.availMem:系统当前可用的内存大小
+     * MemoryInfo.lowMemory:现在系统是否处于低内存的情况
+     * MemoryInfo.threshold：低内存的临界值，低于这个值的情况下，系统会有限杀死后台进程或者一些无关联的进程。
+     * <p>
+     * Runtime.maxMemory:app堆内存可以扩展的最大内存
+     * Runtime.freeMemory:当前堆内存可用的内存，没有扩展的情况下
+     * Runtime.totalMemory:当前堆内存的大小,在没有扩展的情况下。
+     * totalMemory-freeMemory:就是当前已经占用的堆内存的大小
+     *
+     * @param context
+     */
+    public static void getAppHeapMemoryInfo(Context context) {
+        float maxMemory = caculateMunit(Runtime.getRuntime().maxMemory());
+        float totalMemory = caculateMunit(Runtime.getRuntime().totalMemory());
+        float freeMemory = caculateMunit(Runtime.getRuntime().freeMemory());
+        float used = totalMemory - freeMemory;
+
+        Log.d(TAG, "当前可扩展的最大内存maxMemory=" + maxMemory
+                + "M,当前堆内存大小totalMemory=" + totalMemory
+                + "M,当前堆可用内存freeMemory=" + freeMemory + ",已经使用的内存=" + used);
+
+
+    }
+
 
     /**
      * 转化为M
@@ -228,6 +275,7 @@ public class TestUtils {
                     strAction = "ACTION_CANCEL";
                     break;
             }
+
             String other = ",";
             if (values != null && values.size() > 0) {
                 Set<String> set = values.keySet();
@@ -239,11 +287,23 @@ public class TestUtils {
                 }
             }
             if (TestUtils.OPEN) {
-                System.out.println(name + "=" + strAction + ",x=" + x
+                LogUtils.d(name + "=" + strAction + ",x=" + x
                         + ",y=" + y + ",rawX=" + rawX + ",rawY=" + rawY + other);
             }
         }
     }
+
+    public static void printMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int widthmode = View.MeasureSpec.getMode(widthMeasureSpec);
+        int widthsize = View.MeasureSpec.getSize(widthMeasureSpec);
+
+        int heightmode = View.MeasureSpec.getMode(heightMeasureSpec);
+        int heightsize = View.MeasureSpec.getSize(heightMeasureSpec);
+
+        LogUtils.d("widthmode=" + TestUtils.getStringMeasureMod(widthmode) + ",widthsize=" + widthsize
+                + ",heightmode=" + TestUtils.getStringMeasureMod(heightmode) + ",heightsize=" + heightsize);
+    }
+
 
     public static String getStringMeasureMod(int mode) {
         String strMode = null;
@@ -274,5 +334,40 @@ public class TestUtils {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static boolean createDumpFile(Context context) {
+        String LOG_PATH = "/dump.gc/";
+        boolean bool = false;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ssss", Locale.getDefault());
+        String createTime = sdf.format(new Date(System.currentTimeMillis()));
+        String state = android.os.Environment.getExternalStorageState();
+
+        // 判断SdCard是否存在并且是可用的
+        if (android.os.Environment.MEDIA_MOUNTED.equals(state)) {
+            File file = new File(Environment.getExternalStorageDirectory().getPath() + LOG_PATH);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+
+            String hprofPath = file.getAbsolutePath();
+            if (!hprofPath.endsWith("/")) {
+                hprofPath += "/";
+            }
+
+            hprofPath += createTime + ".hprof";
+            try {
+                LogUtils.d("hprofPath=" + hprofPath);
+                android.os.Debug.dumpHprofData(hprofPath);
+                bool = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            bool = false;
+            Log.d("nsz", "no sdcard!");
+        }
+
+        return bool;
     }
 }

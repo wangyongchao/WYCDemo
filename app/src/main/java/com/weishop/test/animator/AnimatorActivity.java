@@ -10,6 +10,10 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,12 +26,22 @@ import com.weishop.test.util.TestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
 public class AnimatorActivity extends Activity implements View.OnClickListener {
     private static final String LOTTIE_RES_ASSETS_ROOTDIR = "interaction/";
     private TextView mTestText;
     private TextView mTestText1;
+    private TextScaleView mTestViewProperty;
     private View textLayout;
     private LottieAnimationView bubbleView;
+    private LiangChengLayout liangChengLayout;
+    private ChangeOrderLayout changeOrderLayout;
+    private int key = 0;
+    private int number = 500;
+    private boolean isOpen = true;
+    private LinkedBlockingQueue<String> concurrentLinkedQueue = new LinkedBlockingQueue<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +49,16 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
 
 
         setContentView(R.layout.activity_animator);
+        liangChengLayout = findViewById(R.id.lcl_layout);
+        changeOrderLayout = findViewById(R.id.col_layout);
         bubbleView = findViewById(R.id.bubble);
         textLayout = findViewById(R.id.testText_layout);
         mTestText = (TextView) findViewById(R.id.testText);
         mTestText1 = (TextView) findViewById(R.id.testText1);
+        mTestViewProperty = (TextScaleView) findViewById(R.id.test_view_porperty);
         findViewById(R.id.start).setOnClickListener(this);
+        findViewById(R.id.end).setOnClickListener(this);
+        findViewById(R.id.end1).setOnClickListener(this);
 
         textLayout.postDelayed(new Runnable() {
             @Override
@@ -49,7 +68,73 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
             }
         }, 100);
 
+//        startConsumer();
     }
+
+    private volatile boolean isNextStart = true;
+
+
+    private Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            String key = (String) msg.obj;
+            number = number + 10;
+            liangChengLayout.handleNewData(key, number);
+        }
+    };
+
+
+    private void startConsumer() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (isOpen) {
+                    if (isNextStart) {
+                        try {
+                            String key = concurrentLinkedQueue.take();
+                            Message obtain = Message.obtain();
+                            obtain.obj = key;
+                            handler.sendMessageDelayed(obtain, 1000);
+                            isNextStart = false;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+
+
+            }
+        });
+        thread.setName("consumerThread");
+        thread.start();
+    }
+
+    public void notifyNext() {
+        isNextStart = true;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+//        int id = v.getId();
+//        if (id == R.id.start) {
+//            isOpen = true;
+//            concurrentLinkedQueue.offer(String.valueOf(key++));
+//        } else if (id == R.id.end){
+//            concurrentLinkedQueue.offer(String.valueOf(2));
+//        }else {
+//            concurrentLinkedQueue.offer(String.valueOf(3));
+//        }
+
+        mTestViewProperty.smoothAddValue(5);
+
+    }
+
+
+
 
     private void startBubbleAnimation() {
         String bubbleResPath = LOTTIE_RES_ASSETS_ROOTDIR + "bubble_enter/images";
@@ -83,11 +168,6 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
         bubbleView.playAnimation();
     }
 
-
-    @Override
-    public void onClick(View v) {
-        startAppearAnima();
-    }
 
     private void testXml() {
         Animator animator = AnimatorInflater.loadAnimator(this, R.animator.translate);
@@ -159,6 +239,35 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
         animatorSet.start();
 
 
+    }
+
+    /**
+     * 进入动效
+     */
+    private void startEnter() {
+        mTestViewProperty.setPivotX(mTestViewProperty.getWidth());
+        mTestViewProperty.setPivotY(mTestViewProperty.getHeight());
+        ObjectAnimator scalexObjectAnimator = ObjectAnimator.ofFloat(mTestViewProperty, "scaleX",
+                0f,
+                1f);
+        ObjectAnimator scaleyObjectAnimator = ObjectAnimator.ofFloat(mTestViewProperty, "scaleY",
+                0f,
+                1f);
+
+        ObjectAnimator alphaObjectAnimator = ObjectAnimator.ofFloat(textLayout, "alpha", 0f, 1f);
+
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+            }
+        });
+        animatorSet.setDuration(400);
+        animatorSet.play(scalexObjectAnimator).with(scaleyObjectAnimator).with(alphaObjectAnimator);
+        animatorSet.start();
     }
 
     /**

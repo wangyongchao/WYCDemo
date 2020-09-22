@@ -9,11 +9,60 @@
         android:layout_height="wrap_content"
         android:text="@string/text6" />
 
+    <Button
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start"
+        android:text="end" />
+
+    <Button
+        android:id="@+id/end1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/end"
+        android:text="end1" />
+
+    <com.weishop.test.animator.LiangChengLayout
+        android:id="@+id/lcl_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:animateLayoutChanges="true" />
+
+
+    <com.weishop.test.animator.ChangeOrderLayout
+        android:id="@+id/col_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:animateLayoutChanges="true" />
+
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_live_business_chat_intera_bg">
+
+        <com.weishop.test.animator.TextScaleView
+            android:id="@+id/test_view_porperty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:text="+1" />
+    </FrameLayout>
 
 
     <LinearLayout
@@ -29,11 +78,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
             android:drawableLeft="@drawable/icon_livebusiness_vote_gold"
             android:drawablePadding="3dp"
-            android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="+3"
             android:textColor="#5e2718"
             android:textSize="12sp" />
 
@@ -51,5 +99,6 @@
             android:textSize="12sp" />
 
     </LinearLayout>
+
 
 </RelativeLayout>

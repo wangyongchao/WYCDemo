@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.weishop.test.custom.view.MyFrameLayout
+        android:id="@+id/myframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/title_background" />
+
+</merge>

@@ -4,10 +4,13 @@ package com.weishop.test.list.recycler;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.weishop.test.R;
-import com.weishop.test.custom.view.DividerItemDecoration;
 import com.weishop.test.data.MyAdapter;
 
 import java.util.ArrayList;
@@ -36,12 +39,16 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL_LIST));
+                DividerItemDecoration.VERTICAL));
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);// listview功能
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        defaultItemAnimator.setAddDuration(1000);
+        defaultItemAnimator.setRemoveDuration(1000);
+        mRecyclerView.setItemAnimator(defaultItemAnimator);
 
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
 //        gridLayoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
@@ -54,31 +61,28 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
         initData();
 
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter();
+        mAdapter = new MyAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setData(mData);
         mAdapter.notifyDataSetChanged();
-        System.out.println("RecyclerViewActivity oncreate after");
 
         findViewById(R.id.delete).setOnClickListener(this);
-        findViewById(R.id.display).setOnClickListener(this);
+        findViewById(R.id.add).setOnClickListener(this);
 
     }
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        System.out.println("attachBaseContext");
         super.attachBaseContext(newBase);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("RecyclerViewActivity onresume");
     }
 
     private void initData() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             mData.add("item" + i);
         }
 
@@ -86,15 +90,12 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (R.id.display == v.getId()) {
-            initData();
-            mData.add("3q32434");
-            mData.add("3q32434");
-            mAdapter.notifyDataSetChanged();
-//            mRecyclerView.setVisibility(View.VISIBLE);
+        if (R.id.add == v.getId()) {
+            mAdapter.addData(mAdapter.getItemCount(),"new item");
+
         } else {
-            mData.clear();
-//            mRecyclerView.setVisibility(View.GONE);
+//            mAdapter.removeData(mAdapter.getItemCount()-1);
+            mAdapter.notifyItemMoved(0,3);
         }
 
     }

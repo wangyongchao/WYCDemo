@@ -35,11 +35,7 @@ public class BinaryTree<E> {
      *
      * @param <E>
      */
-    private static class Entry<E> {
-        public Entry() {
-            this.data = data;
-        }
-
+    public static class Entry<E> {
         E data;
         Entry leftChild;
         Entry rightChild;
@@ -50,21 +46,6 @@ public class BinaryTree<E> {
         public String toString() {
             return data.toString();
         }
-//
-//        @Override
-//        public String toString() {
-//            StringBuilder stringBuilder = new StringBuilder();
-//            stringBuilder.append("data:" + data);
-//            stringBuilder.append(",");
-//            stringBuilder.append("left:" + (leftChild != null ? leftChild.data : null));
-//            stringBuilder.append(",");
-//            stringBuilder.append("right:" + (rightChild != null ? rightChild.data : null));
-//            stringBuilder.append(",");
-//            stringBuilder.append("ltag:" + ltag);
-//            stringBuilder.append(",");
-//            stringBuilder.append("rtag:" + rtag);
-//            return stringBuilder.toString();
-//        }
 
     }
 
@@ -508,26 +489,29 @@ public class BinaryTree<E> {
 
     /**
      * 后序遍历非递归算法
+     * 先遍历左子树，再遍历右子树，然后输出子树的根
      * KHDEBIFJGCA
      */
     public void postOrderTraverseUnRecursion(Entry root) {
-        Stack<Entry> stack = new Stack<>();
-        Stack<Entry> output = new Stack<>();
-
         Entry entry = root;
-        while (entry != null || stack.size() != 0) {
+        Entry last = null;
+        Stack<Entry> stack = new Stack<>();
+        while (entry != null || !stack.isEmpty()) {
             if (entry != null) {
-                output.push(entry);
                 stack.push(entry);
-                entry = entry.rightChild;
-            } else {
-                entry = stack.pop();
                 entry = entry.leftChild;
+            } else {
+                Entry peek = stack.peek();
+                if (peek.rightChild != null && peek.rightChild != last) {
+                    entry = peek.rightChild;
+                } else {
+                    System.out.println(entry.data);
+                    last = stack.pop();
+                }
+
             }
         }
-        while (output.size() > 0) {
-            System.out.print(output.pop());
-        }
+
     }
 
 
@@ -676,7 +660,6 @@ public class BinaryTree<E> {
     /**
      * 前序线索化二叉树
      *
-     * @param entry
      * @return
      */
     public void threadBinaryTreeByPreOrder(Entry root) {

@@ -8,12 +8,9 @@ import android.os.Message;
 import android.view.View;
 
 import com.weishop.test.R;
-import com.weishop.test.util.AppUtils;
 
 public class LeakActivity extends Activity implements View.OnClickListener {
 
-
-    private byte[] a = new byte[30 * AppUtils._1MB];
     private MyHandler myHandler;
 
 
@@ -37,8 +34,14 @@ public class LeakActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        myHandler.sendEmptyMessageDelayed(100, 100000);
 
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        myHandler.removeMessages(100);
+    }
 }

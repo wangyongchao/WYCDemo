@@ -106,18 +106,20 @@ public class BitmapDecodeUtil {
     public static Bitmap compressBitmap(Context context, InputStream is, int maxWidth, int maxHeight) {
         checkParam(context);
         checkParam(is);
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(is, null, opt);
-        int height = opt.outHeight;
-        int width = opt.outWidth;
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(is, null, options);
+        int height = options.outHeight;
+        int width = options.outWidth;
         int sampleSize = computeSampleSize(width, height, maxWidth, maxHeight);
-        BitmapFactory.Options options = getBitmapOptions(context);
-        options.inSampleSize = sampleSize;
-        return BitmapFactory.decodeStream(is, null, options);
+//        BitmapFactory.Options options = getBitmapOptions(context);
+        BitmapFactory.Options options1 = new BitmapFactory.Options();
+        options1.inSampleSize = sampleSize;
+        options1.inJustDecodeBounds=false;
+        return BitmapFactory.decodeStream(is, null, options1);
     }
 
-    private static int computeSampleSize(int width, int height, int maxWidth, int maxHeight) {
+    public static int computeSampleSize(int width, int height, int maxWidth, int maxHeight) {
         int inSampleSize = 1;
         if (height > maxHeight || width > maxWidth) {
             final int heightRate = Math.round((float) height / (float) maxHeight);

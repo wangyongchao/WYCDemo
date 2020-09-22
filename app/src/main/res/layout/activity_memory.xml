@@ -5,17 +5,24 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/memory"
+    <TextView
+        android:id="@+id/count_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Memory" />
+        android:text="count" />
 
     <Button
         android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="test" />
+
+
+    <Button
+        android:id="@+id/memory_growth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="模拟内存增长" />
 
 
 </LinearLayout>

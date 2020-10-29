@@ -3,6 +3,11 @@ package com.kttest
 /**
  * kotlin基础语法
  */
+fun test(args:String) {
+    val maxof = BasicTest.maxof(3, 4)
+    println(maxof)
+}
+
 class BasicTest {
 
     companion object {

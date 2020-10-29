@@ -1,10 +1,10 @@
-package com.weishop.test.mvp.base;
+package com.weishop.test.mvp.framework;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.core.util.Preconditions;
 
-public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView<P> {
+import com.weishop.test.mvp.framework.utils.Preconditions;
+
+public abstract class BaseMvpFragment<P extends IPresenter> extends BaseFragment implements IView<P> {
 
     protected P mPresenter;
 
@@ -20,16 +20,25 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     protected abstract P createPresenter();
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        mPresenter.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.onPause();
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
 
     @Override
     public void onDestroy() {

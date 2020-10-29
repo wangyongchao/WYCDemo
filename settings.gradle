@@ -1,1 +1,1 @@
-include ':app',':arithmetic',':thinkinjava'
+include ':app',':arithmetic',':thinkinjava',':kttest'

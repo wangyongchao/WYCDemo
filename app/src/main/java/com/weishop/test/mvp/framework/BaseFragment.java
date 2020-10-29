@@ -1,6 +1,7 @@
-package com.weishop.test.mvp.base;
+package com.weishop.test.mvp.framework;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 

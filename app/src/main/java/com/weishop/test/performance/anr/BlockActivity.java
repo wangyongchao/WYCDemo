@@ -43,7 +43,7 @@ public class BlockActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        blockBroadCastReciver();
+        blockByIO();
     }
 
     private void blockBroadCastReciver(){

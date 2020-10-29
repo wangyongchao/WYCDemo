@@ -11,13 +11,13 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="500dp"
             android:background="@android:color/black"
             android:gravity="center"
             android:text="title"
             android:textColor="@color/red" />
 
-        <ListView
+        <com.weishop.test.custom.view.event.CustomListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="500dp"
@@ -26,7 +26,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="500dp"
             android:background="@android:color/black"
             android:gravity="center"
             android:text="bottom1"

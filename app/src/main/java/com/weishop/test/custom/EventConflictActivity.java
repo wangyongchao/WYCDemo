@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.weishop.test.R;
+import com.weishop.test.custom.view.CustomScrollView;
 import com.weishop.test.util.LogUtils;
 
 import java.util.ArrayList;
@@ -32,7 +33,9 @@ public class EventConflictActivity extends Activity implements View.OnClickListe
 //                LogUtils.d("scrollView scrollY="+scrollY+",oldScrollY="+oldScrollY);
 //            }
 //        });
+        CustomScrollView customScrollView = findViewById(R.id.scrollview);
         mListView = (ListView) findViewById(R.id.listview);
+        customScrollView.setListView(mListView);
 
         String[] data = getResources().getStringArray(R.array.names);
 

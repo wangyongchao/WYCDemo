@@ -17,8 +17,9 @@ class KTBasic {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-            val eval = evalWithLogging(Sum((Sum(Num(1), Num(2))), Num(4)))
-            println(eval)
+//            val eval = evalWithLogging(Sum((Sum(Num(1), Num(2))), Num(4)))
+//            println(eval)
+            testFor()
 
 
         }
@@ -102,7 +103,22 @@ class KTBasic {
                     }
 
                 }
+        fun fizzBuzz(i:Int)=when{
+            i % 15==0 -> "FizzBuzz"
+            i %3 ==0 -> "Fizz"
+            i % 5==0 -> "Bizz"
+            else -> i
+        }
 
+        fun testFor(){
+          for (i in 1 ..100){
+             println( fizzBuzz(i))
+          }
+
+            for (i in 100 downTo 1 step 2){
+                println( fizzBuzz(i))
+            }
+        }
 
     }
 

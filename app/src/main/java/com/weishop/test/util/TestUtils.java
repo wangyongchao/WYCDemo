@@ -370,4 +370,13 @@ public class TestUtils {
 
         return bool;
     }
+
+    public static  String getExceptionDetail(StackTraceElement[] stackTrace ) {
+        StringBuffer stringBuffer = new StringBuffer();
+        int length = stackTrace.length;
+        for (int i = 0; i < length; i++) {
+            stringBuffer.append("\t"+stackTrace[i].toString()+"\n");
+        }
+        return stringBuffer.toString();
+    }
 }

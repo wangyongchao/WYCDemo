@@ -2,6 +2,9 @@
 package com.weishop.test;
 
 import android.app.Activity;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,21 +13,36 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+
 import androidx.annotation.NonNull;
+
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.weishop.test.activitycharacter.BActivity;
+import com.weishop.test.util.LogUtils;
 import com.weishop.test.util.TestUtils;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -80,6 +98,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
     }
+
+    private void start() {
+        LogUtils.d("start");
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -220,8 +243,155 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+//        startActivity(new Intent(this, BActivity.class));
+//        getDeviceIMEiHook(this);
+        start();
+        Log.d("dfad","dsaf");
 
     }
+
+    private void test() {
+        NetworkInterface printer = (NetworkInterface) new MyProxy(this).getProxy(NetworkInterface.class);
+        try {
+            printer.getHardwareAddress();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        getNewMac();
+    }
+
+    /**
+     * 通过网络接口取
+     *
+     * @return
+     */
+    private static String getNewMac() {
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return null;
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    res1.append(String.format("%02X:", b));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                return res1.toString();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public static String getDeviceMac(Context context) {
+        String mMicAddress = "";
+        WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        if (wm != null) {
+            mMicAddress = wm.getConnectionInfo().getMacAddress();
+        }
+        return mMicAddress;
+    }
+
+    public static String getDeviceMac1(Context context) {
+        String mMicAddress = "";
+        WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        if (wm != null) {
+            WifiInfo connectionInfo = wm.getConnectionInfo();
+            LogUtils.d("connectionInfo=" + connectionInfo);
+        }
+        return mMicAddress;
+    }
+
+    private String getPhoneIMEI() {
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Service.TELEPHONY_SERVICE);
+        return tm.getDeviceId();
+    }
+
+    public void getDeviceIMEiHook(Context context) {
+
+        try {
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+            Method getITelephony = TelephonyManager.class.getDeclaredMethod("getITelephony");
+            getITelephony.setAccessible(true);
+            Object object = getITelephony.invoke(tm, null);
+            Class aClass = Class.forName("com.android.internal.telephony.ITelephony");
+            Object proxyInstance = Proxy.newProxyInstance(context.getClass().getClassLoader(), new
+                    Class[]{aClass}, new InvocationHandler() {
+
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    // 操作交由 sOriginService 处理，不拦截通知
+                    String name = method.getName();
+                    LogUtils.d("name=" + name);
+                    Object invoke = method.invoke(object, args);
+                    if ("getConnectionInfo".equals(name)) {
+                        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+                        String exceptionDetail = TestUtils.getExceptionDetail(stackTrace);
+                        LogUtils.d(exceptionDetail);
+                    }
+
+                    return invoke;
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getDeviceMacHook(Context context) {
+        String mMicAddress = "";
+        WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        try {
+            Field mService = WifiManager.class.getDeclaredField("mService");
+            mService.setAccessible(true);
+            Object object = mService.get(wm);
+            Class aClass = Class.forName("android.net.wifi.IWifiManager");
+            Object proxyInstance = Proxy.newProxyInstance(context.getClass().getClassLoader(), new
+                    Class[]{aClass}, new InvocationHandler() {
+
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    // 操作交由 sOriginService 处理，不拦截通知
+                    String name = method.getName();
+                    LogUtils.d("name=" + name);
+                    Object invoke = method.invoke(object, args);
+                    if ("getConnectionInfo".equals(name)) {
+                        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+                        String exceptionDetail = TestUtils.getExceptionDetail(stackTrace);
+                        LogUtils.d(exceptionDetail);
+
+
+                    }
+
+                    return method.invoke(object, args);
+
+                }
+            });
+            LogUtils.d("object=" + object + ",aClass=" + aClass);
+            Field sServiceField = WifiManager.class.getDeclaredField("mService");
+            sServiceField.setAccessible(true);
+            sServiceField.set(wm, proxyInstance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mMicAddress;
+    }
+
+    private void hookWifiManager() {
+
+    }
+
 
     private void A() throws Exception {
         a++;

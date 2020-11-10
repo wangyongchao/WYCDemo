@@ -42,7 +42,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        System.out.println("onBindViewHolder position=" + position);
         if(position % 2==0){
             holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }else {

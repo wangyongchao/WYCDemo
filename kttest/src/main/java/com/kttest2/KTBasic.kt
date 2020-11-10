@@ -3,6 +3,7 @@ package com.kttest
 import com.kttest2.Color
 import com.kttest2.Person
 import java.lang.Exception
+import java.util.*
 
 
 class KTBasic {
@@ -17,7 +18,7 @@ class KTBasic {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-           println(Color.ORANGE.rgb())
+          println(isLetter('e'))
 
 
         }
@@ -37,6 +38,34 @@ class KTBasic {
 
         //表达式函数体
 //        fun max(a: Int, b: Int) = if (a > b) a else b
+
+        //for 循环可以迭代字符区间或数字区间
+        fun testForMap(){
+            var binaryReps=TreeMap<Char,String>()
+            for(c in 'A'.. 'F'){
+                val binary=Integer.toBinaryString(c.toInt())
+                binaryReps[c]=binary
+            }
+            for ((letter,binary) in binaryReps){
+                println("$letter=$binary")
+            }
+        }
+
+        /**
+         * 使用for循环迭代list
+         */
+        fun testForList(){
+            var list= arrayListOf("10","11","20")
+            for ((index,element) in list.withIndex()){
+                println("$index=$element")
+            }
+        }
+
+        /**
+         * 检查集合或区间的成员
+         */
+        fun isLetter(c:Char)=c in 'a' ..'z' || c in 'A' .. 'Z'
+
 
 
 

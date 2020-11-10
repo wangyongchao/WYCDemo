@@ -3,8 +3,6 @@ package com.weishop.test;
 import android.app.Application;
 import android.content.Context;
 
-import com.dianping.logan.Logan;
-import com.dianping.logan.LoganConfig;
 import com.weishop.test.util.LogUtils;
 
 import java.io.File;
@@ -29,7 +27,7 @@ public class MyApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
 //        PluginManager.getInstance(base).init();
-        initXCrash();
+//        initXCrash();
     }
 
     @Override
@@ -44,6 +42,8 @@ public class MyApplication extends Application {
 //        BlockCanary.install(this, new AppBlockCanaryContext()).start();
 //        CrashHandler.getInstance().init(this);
 //        LeakCanary.install(this);
+
+        // Check whether current device is supported (also initialize Dexposed framework if not yet)
 
     }
 
@@ -115,14 +115,14 @@ public class MyApplication extends Application {
     }
 
     private void initLog() {
-        LoganConfig config = new LoganConfig.Builder()
-                .setCachePath(getApplicationContext().getFilesDir().getAbsolutePath())
-                .setPath(getApplicationContext().getExternalFilesDir(null).getAbsolutePath()
-                        + File.separator + "logan_v1")
-                .setEncryptKey16("0123456789012345".getBytes())
-                .setEncryptIV16("0123456789012345".getBytes())
-                .build();
-        Logan.init(config);
+//        LoganConfig config = new LoganConfig.Builder()
+//                .setCachePath(getApplicationContext().getFilesDir().getAbsolutePath())
+//                .setPath(getApplicationContext().getExternalFilesDir(null).getAbsolutePath()
+//                        + File.separator + "logan_v1")
+//                .setEncryptKey16("0123456789012345".getBytes())
+//                .setEncryptIV16("0123456789012345".getBytes())
+//                .build();
+//        Logan.init(config);
     }
 
     @Override

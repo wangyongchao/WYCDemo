@@ -37,14 +37,12 @@ public class ProducerConsumerTest {
             try {
                 for (int i = 1; i < proSize; i++) {
                     while (resources.size() >= maxSize) {
-                        System.out.println("当前仓库已满，等待消费...");
                         try {
                             addCondition.await();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                    System.out.println("已经生产产品数: " + i + "\t现仓储量总量:" + resources.size());
                     resources.add(i);
                     removeCondition.signal();
                 }
@@ -64,22 +62,20 @@ public class ProducerConsumerTest {
                 lock.lock();
                 try {
                     while (resources.size() <= 0) {
-                        System.out.println(threadName + " 当前仓库没有产品，请稍等...");
                         try {
-                            // 进入阻塞状态
+                            // 锟斤拷锟斤拷锟斤拷锟斤拷状态
                             System.out.println("enter await");
                             removeCondition.await();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                    // 消费数据
+                    // 锟斤拷锟斤拷锟斤拷锟斤拷
                     int size = resources.size();
                     for (int i = 0; i < size; i++) {
                         Integer remove = resources.remove();
-                        System.out.println(threadName + " 当前消费产品编号为：" + remove);
                     }
-                    // 唤醒生产者
+                    // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
                     addCondition.signal();
                 } finally {
                     System.out.println("finally");

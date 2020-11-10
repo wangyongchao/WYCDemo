@@ -40,7 +40,7 @@ import io.reactivex.schedulers.Schedulers;
 public class CreateOperator {
 
     public void test() {
-        testJust();
+        testSingle();
     }
 
 
@@ -171,23 +171,25 @@ public class CreateOperator {
         Single.create(new SingleOnSubscribe<Integer>() {
             @Override
             public void subscribe(SingleEmitter<Integer> emitter) throws Exception {
-                emitter.onSuccess(1);
-                emitter.onError(new RuntimeException());
+//                emitter.onSuccess(1);
+                emitter.onError(new Exception());
 
             }
         }).subscribe(new SingleObserver<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                LogUtils.d("onSubscribe");
             }
 
             @Override
             public void onSuccess(Integer o) {
+                LogUtils.d("onSuccess");
 
             }
 
             @Override
             public void onError(Throwable e) {
+                LogUtils.d("onError");
 
             }
         });

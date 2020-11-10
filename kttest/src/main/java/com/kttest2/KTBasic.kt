@@ -1,13 +1,12 @@
 package com.kttest
 
 import com.kttest2.Color
-import com.kttest2.Person
-import java.lang.Exception
-import java.util.*
+import com.kttest2.zhinengzhuanhuan.Expr
+import com.kttest2.zhinengzhuanhuan.Num
+import com.kttest2.zhinengzhuanhuan.Sum
 
 
 class KTBasic {
-
 
 
     companion object {
@@ -18,18 +17,27 @@ class KTBasic {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-          println(isLetter('e'))
+//            val eval = evalWithLogging(Sum((Sum(Num(1), Num(2))), Num(4)))
+//            println(eval)
+            testFor()
 
 
         }
 
-        fun mix(c1:Color,c2:Color){
-            when(setOf(c1,c2)){
-                setOf(Color.ORANGE,Color.GREEN)->"yewllow"
-                setOf(Color.ORANGE,Color.GREEN)->"dfadsf"
+        fun mix(c1: Color, c2: Color) {
+            when (setOf(c1, c2)) {
+                setOf(Color.ORANGE, Color.GREEN) -> "yewllow"
+                setOf(Color.ORANGE, Color.GREEN) -> "dfadsf"
                 else -> throw Exception()
             }
         }
+
+        fun mixOptimized(c1: Color, c2: Color) =
+                when {
+                    //没有提供表达式参数，布尔表达式就是参数
+                    (c1 == Color.GREEN && c2 == Color.ORANGE) -> "sdfadsf"
+                    else -> throw Exception()
+                }
 
         //代码块函数体
         fun max(a: Int, b: Int): Int {
@@ -39,35 +47,78 @@ class KTBasic {
         //表达式函数体
 //        fun max(a: Int, b: Int) = if (a > b) a else b
 
-        //for 循环可以迭代字符区间或数字区间
-        fun testForMap(){
-            var binaryReps=TreeMap<Char,String>()
-            for(c in 'A'.. 'F'){
-                val binary=Integer.toBinaryString(c.toInt())
-                binaryReps[c]=binary
-            }
-            for ((letter,binary) in binaryReps){
-                println("$letter=$binary")
-            }
+//        fun eval(e: Expr):Int{
+//
+//            if(e is Num){
+        //智能转换
+//                return e.value
+//            }
+//
+//            if(e is Sum){
+//                return  eval(e.left)+ eval(e.right)
+//            }
+//
+//            throw IllegalArgumentException("unknown exception")
+//
+//        }
+
+        //表达式函数体
+//        fun eval(e: Expr): Int =
+//                if (e is Num) {
+//                    e.value
+//                } else if (e is Sum) {
+//                    eval(e.left) + eval(e.right)
+//                } else {
+//                    throw IllegalArgumentException("unknown exception")
+//                }
+
+
+        //使用when表达式
+        fun eval(e: Expr): Int =
+                when (e) {
+                    is Num ->
+                        e.value
+                    is Sum ->
+                        eval(e.left) + eval(e.right)
+                    else ->
+                        throw IllegalArgumentException("unknown exception")
+
+                }
+
+        //if 和when使用代码块作为函数体
+        fun evalWithLogging(e: Expr): Int =
+                when (e) {
+                    is Num -> {
+                        println("num ${e.value}")
+                        e.value //代码块中最后一句就是返回结果
+                    }
+                    is Sum -> {
+                        val left = evalWithLogging(e.left)
+                        var right = evalWithLogging(e.right)
+                        println("sum : $left+$right")
+                        left + right
+                    }
+                    else -> {
+                        throw java.lang.IllegalArgumentException("unknown exception")
+                    }
+
+                }
+        fun fizzBuzz(i:Int)=when{
+            i % 15==0 -> "FizzBuzz"
+            i %3 ==0 -> "Fizz"
+            i % 5==0 -> "Bizz"
+            else -> i
         }
 
-        /**
-         * 使用for循环迭代list
-         */
-        fun testForList(){
-            var list= arrayListOf("10","11","20")
-            for ((index,element) in list.withIndex()){
-                println("$index=$element")
+        fun testFor(){
+          for (i in 1 ..100){
+             println( fizzBuzz(i))
+          }
+
+            for (i in 100 downTo 1 step 2){
+                println( fizzBuzz(i))
             }
         }
-
-        /**
-         * 检查集合或区间的成员
-         */
-        fun isLetter(c:Char)=c in 'a' ..'z' || c in 'A' .. 'Z'
-
-
-
 
     }
 

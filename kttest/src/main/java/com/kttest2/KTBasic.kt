@@ -19,7 +19,8 @@ class KTBasic {
         fun main(args: Array<String>) {
 //            val eval = evalWithLogging(Sum((Sum(Num(1), Num(2))), Num(4)))
 //            println(eval)
-            testFor()
+            val notDigit = recognize('r')
+            println(notDigit)
 
 
         }
@@ -103,22 +104,38 @@ class KTBasic {
                     }
 
                 }
-        fun fizzBuzz(i:Int)=when{
-            i % 15==0 -> "FizzBuzz"
-            i %3 ==0 -> "Fizz"
-            i % 5==0 -> "Bizz"
+
+        fun fizzBuzz(i: Int) = when {
+            i % 15 == 0 -> "FizzBuzz"
+            i % 3 == 0 -> "Fizz"
+            i % 5 == 0 -> "Bizz"
             else -> i
         }
 
-        fun testFor(){
-          for (i in 1 ..100){
-             println( fizzBuzz(i))
-          }
+        fun testFor() {
+            for (i in 1..100) {
+                println(fizzBuzz(i))
+            }
 
-            for (i in 100 downTo 1 step 2){
-                println( fizzBuzz(i))
+            for (i in 100 downTo 1 step 2) {
+                println(fizzBuzz(i))
             }
         }
+
+        /**
+         * in 判断是否在某个区间
+         */
+        fun isNotDigit(c: Char) = c !in '0'..'9'
+
+        /**
+         * in 可以用在when当判断条件
+         */
+        fun recognize(c: Char) = when (c) {
+            in '0'..'9' -> "it is a digit!"
+            in 'a'..'z', in 'A'..'Z' -> "it is a letter"
+            else -> "i dont know"
+        }
+
 
     }
 

@@ -18,9 +18,13 @@ import xcrash.XCrash;
  * Created by wangyongchao on 16/7/1.
  */
 public class MyApplication extends Application {
+    private static MyApplication instance;
 
 
     private String clientId = "dsfa323234342";
+    public static MyApplication getInstance(){
+        return instance;
+    }
 
 
     @Override
@@ -33,6 +37,9 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance=this;
+
+
 
 //        Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/test/testcpu
 //        .trace");

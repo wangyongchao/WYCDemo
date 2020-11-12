@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.weishop.test.activitycharacter.BActivity;
+import com.weishop.test.util.AutoPlayHelper;
 import com.weishop.test.util.LogUtils;
 import com.weishop.test.util.TestUtils;
 
@@ -63,6 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AutoPlayHelper.getInstance();
 
 //        int has = ContextCompat.checkSelfPermission(this, Manifest.permission
 //        .SYSTEM_ALERT_WINDOW);

@@ -4,6 +4,9 @@ import com.kttest2.Color
 import com.kttest2.zhinengzhuanhuan.Expr
 import com.kttest2.zhinengzhuanhuan.Num
 import com.kttest2.zhinengzhuanhuan.Sum
+import java.io.BufferedReader
+import java.lang.NumberFormatException
+import kotlin.contracts.Returns
 
 
 class KTBasic {
@@ -135,6 +138,20 @@ class KTBasic {
             in 'a'..'z', in 'A'..'Z' -> "it is a letter"
             else -> "i dont know"
         }
+
+        /**
+         * try catch
+         */
+      fun readNumber(read:BufferedReader):Int ?{
+          try {
+              var line =read.readLine()
+              return  Integer.parseInt(line)
+          }catch (e:NumberFormatException){
+              return null
+          }finally {
+              read.close()
+          }
+      }
 
 
     }

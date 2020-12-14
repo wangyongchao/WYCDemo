@@ -31,7 +31,7 @@
             android:name="xposedminversion"
             android:value="82"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".custom.viewpager.FragmentViewPagerActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

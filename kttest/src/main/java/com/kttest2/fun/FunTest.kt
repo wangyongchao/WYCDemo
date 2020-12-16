@@ -18,7 +18,7 @@ class FunTest {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-            testString()
+            testParsePath()
 
         }
 
@@ -152,6 +152,36 @@ class FunTest {
             println("12.345-6.A".split("\\.|-".toRegex()))
             println("12.345-6.A".split(".","-"))
         }
+
+        /**
+         * 三元字符串 不用转义
+         */
+        fun testParsePath(){
+            var path="/Users/yole/kotlin-book/chapter.adoc"
+            val directory = path.substringBeforeLast("/")//返回最后一个"/"之前的字符串
+            val fullName = path.substringAfterLast("/")//返回最后一个"/"之后的字符串
+            val fileName = fullName.substringBeforeLast(".")
+            val extName = fullName.substringAfterLast(".")
+            println("directory=$directory,fullName=$fullName,fileName=$fileName,extName=$extName")
+
+            val regex="""(.+)/(.+)\.(.+)""".toRegex()
+            val matchEntire = regex.matchEntire(path)
+            if(matchEntire!=null){
+                val (directory, filename, extension) = matchEntire.destructured
+                println("dir:$directory,name:$fileName,extension:$extension")
+            }
+        }
+
+        /**
+         * 局部函数
+         */
+        fun testLocalFun(){
+
+
+        }
+
+
+
 
     }
 

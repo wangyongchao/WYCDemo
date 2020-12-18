@@ -31,7 +31,8 @@
             android:name="xposedminversion"
             android:value="82"/>
         <activity
-            android:name=".constraint.ConstraintActivity"
+            android:name=".constraint.MainActivity"
+            android:theme="@style/Theme.AppCompat"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -28,6 +28,18 @@ android {
         abortOnError false
     }
 
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res',
+                            'src/main/res-constraint',
+                    ]
+        }
+
+    }
+
 //    splits {
 //        abi {
 //            enable true

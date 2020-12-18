@@ -1,34 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/image"
+    <TextView
+        android:id="@+id/tv_a"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/app_to_customer"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/item_background"
+        android:gravity="center"
+        android:text="A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="新闻fgsadgdfgsd4352345fdsg.....sdfggkjhjhg发顺丰水电费"
-        app:layout_constraintLeft_toRightOf="@id/image"
-        app:layout_constraintTop_toTopOf="@id/image" />
 
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="6分钟"
-        app:layout_constraintLeft_toRightOf="@id/image"
-        app:layout_constraintTop_toBottomOf="@id/content" />
+        android:text="TextView"
+        android:background="@color/item_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_a" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

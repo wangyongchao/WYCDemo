@@ -1,0 +1,33 @@
+layout_constraintCircle:约束一个布局的中心点相对于另一个布局的中心点
+
+layout_constraintCircleRadius：这个布局的中心点相对于另一个布局中心点的距离,相当于以另一个布局的中心点画以此值为半径的圆
+
+layout_constraintCircleAngle:相对于另一个布局所画的圆，偏移多少度
+
+layout_goneMarginLeft="@+id/a":当a布局设置为gone的时候，当前布局距离左边的距离
+
+ android:layout_width="0dp":约束布局里面的view，充满父布局是match_constraint即是0dp，其他布局是match_parent
+  app:layout_constraintWidth_default="percent",  app:layout_constraintWidth_percent="0.5" 控件的宽度占父元素多少比例
+
+  layout_constraintDimensionRatio:设置控件的宽高比，layout_height和layout_width至少有一个设置为0dp。
+  android:layout_width="0dp",android:layout_height="50dp" 约束宽度，高度是固定的，"H,16:9"代表高度和宽度比例,
+  "W,16:9"代表宽度和高度比例,默认是宽高比例。
+   android:layout_width="50dp",android:layout_height="0dp" 约束高度，宽度是固定已知的，"H,16:9"代表宽度和高度的比例,
+    "W,16:9"代表高度和宽度的比例。
+    android:layout_width="0dp",android:layout_height="0dp" 如果是横向布局，代表宽度固定，约束高度，"W,16:9"代表高度和宽度的比例。"H:16:9"
+代表宽度和高度的比例。
+android:layout_width="0dp",android:layout_height="0dp" 如果是垂直布局，代表高度固定，约束宽度，"W,16:9"代表宽度和高度的比例。"H:16:9"代表高度和宽度的比例
+代表宽度和高度的比例。
+
+Chains:链条，如果一组控件通过双向连接连接在一起，则被认为是一个链条。链条提供了在一个轴上(横向或者竖向)的一组相似的行为。
+在链条的第一个元素上设置了layout_constraintHorizontal_chainStyle or layout_constraintVertical_chainStyle属性后，链条的行为会
+随着设置的属性的值的不同而变化。默认是CHAIN_SPREAD(spread),只有在第一个元素设置才生效。
+CHAIN_SPREAD(spread)：元素会被散开,平均分配整个空间。spread情况下如果某个元素设置了MATCH_CONSTRAINT(0dp),则该元素
+会占用除了其他元素该占的空间外的剩下的所有空间。可以通过layout_constraintHorizontal_weight属性指定元素所占的比重。
+CHAIN_SPREAD_INSIDE(spread_inside):两端的结点不会被散开，中间的元素平均分配空间
+CHAIN_PACKED(packed):元素会被聚集在一起，然后居中展示。设置bias 后会整体偏向左边或者右边。
+
+GuideLine：不展示在屏幕上面, android:orientation="vertical"垂直方向的guideline宽度0，高度是constraintlayout的高度。
+app:layout_constraintGuide_percent="0.15"：表示guideline距离屏幕左边的距离占整个屏幕宽度的15%
+android:orientation="horizontal" 水平方向的guideline高度是0，宽度等于constraintlayout的宽度。
+app:layout_constraintGuide_percent="0.15"：表示guideline距离屏幕顶部的距离占整个屏幕高度的15%

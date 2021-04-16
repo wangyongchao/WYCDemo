@@ -2,14 +2,18 @@
 
     <style name="AppBaseTheme" parent="android:Theme.Light"></style>
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="attr_one">attr one from theme</item>
-        <item name="attr_two">attr two from theme</item>
-        <item name="attr_three">attr three from theme</item>
-        <item name="attr_four">attr four from theme</item>
-        <item name="CustomizeStyle">@style/CustomizeStyleInTheme</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
+        <!-- appbar的背景颜色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+
+        <!-- 状态栏的背景颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- 控制各个控件被选中时候的颜色-->
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowTranslucentStatus">false</item>
     </style>
 
     <style name="CustomizeStyleInTheme">
@@ -57,6 +61,23 @@
         <item name="colorPrimary">#607D8B</item>
         <item name="colorPrimaryDark">#455A64</item>
         <item name="colorAccent">#FFAB40</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="GreenText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#00FF00</item>
+    </style>
+
+    <style name="GreenText.Small" parent="GreenText.Large">
+    </style>
+
+    <style name="GreenText.Large" parent="GreenText">
+        <item name="android:textColor">#FFFF00</item>
+    </style>
+
+    <style name="Other">
+        <item name="android:textColor">#FFFF00</item>
     </style>
 
 </resources>

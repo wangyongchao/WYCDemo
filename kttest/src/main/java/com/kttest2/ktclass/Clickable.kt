@@ -1,4 +1,4 @@
-package com.kttest2.`class`
+package com.kttest2.ktclass
 
 interface Clickable {
     fun click()

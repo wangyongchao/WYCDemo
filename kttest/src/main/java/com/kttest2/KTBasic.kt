@@ -20,10 +20,10 @@ class KTBasic {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-//            val eval = evalWithLogging(Sum((Sum(Num(1), Num(2))), Num(4)))
+            val eval = evalWithLogging(Sum((Sum(Num(1), Num(2))), Num(4)))
 //            println(eval)
-            val notDigit = recognize('r')
-            println(notDigit)
+//            val notDigit = recognize('r')
+//            println(notDigit)
 
 
         }
@@ -95,6 +95,7 @@ class KTBasic {
                     is Num -> {
                         println("num ${e.value}")
                         e.value //代码块中最后一句就是返回结果
+
                     }
                     is Sum -> {
                         val left = evalWithLogging(e.left)
@@ -102,6 +103,7 @@ class KTBasic {
                         println("sum : $left+$right")
                         left + right
                     }
+
                     else -> {
                         throw java.lang.IllegalArgumentException("unknown exception")
                     }

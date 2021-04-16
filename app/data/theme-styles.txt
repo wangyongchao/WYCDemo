@@ -1,0 +1,12 @@
+style和themes：
+style只能用到view上面
+themes可以被样式，布局，控件等引用
+
+继承style 通过指定parent
+也可以通过名称前面加上前缀"."继承，例如GreenText.Large，但是只能试自己定义的，不能是平台定义的
+如果既有parent又有"."的话，parent优先会覆盖"."继承的属性
+
+从5.0以后可以为view指定android:theme属性，view本身和子view都支持
+
+style层级关系
+TextView 中可以通过android:textAppearance指定文字的样式，但是style样式会覆盖textAppearance中指定的属性。

@@ -319,37 +319,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return tm.getDeviceId();
     }
 
-    public void getDeviceIMEiHook(Context context) {
 
-        try {
-            TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
-            Method getITelephony = TelephonyManager.class.getDeclaredMethod("getITelephony");
-            getITelephony.setAccessible(true);
-            Object object = getITelephony.invoke(tm, null);
-            Class aClass = Class.forName("com.android.internal.telephony.ITelephony");
-            Object proxyInstance = Proxy.newProxyInstance(context.getClass().getClassLoader(), new
-                    Class[]{aClass}, new InvocationHandler() {
-
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                    // 操作交由 sOriginService 处理，不拦截通知
-                    String name = method.getName();
-                    LogUtils.d("name=" + name);
-                    Object invoke = method.invoke(object, args);
-                    if ("getConnectionInfo".equals(name)) {
-                        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-                        String exceptionDetail = TestUtils.getExceptionDetail(stackTrace);
-                        LogUtils.d(exceptionDetail);
-                    }
-
-                    return invoke;
-
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static String getDeviceMacHook(Context context) {
         String mMicAddress = "";

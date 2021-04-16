@@ -1,4 +1,4 @@
-package com.kttest2.`class`
+package com.kttest2.ktclass
 
 /**
  * kotlin中默认都是final的不能被继承或者重写

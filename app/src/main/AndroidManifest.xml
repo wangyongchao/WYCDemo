@@ -4,6 +4,9 @@
 
     <uses-sdk android:targetSdkVersion="26" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,25 +17,26 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <application
-        android:name="com.weishop.test.MyApplication"
-        android:networkSecurityConfig="@xml/network_security_config"
+        android:name=".MyApplication"
+        android:label="@string/app_name"
         android:largeHeap="true"
-        android:requestLegacyExternalStorage="true"
-        android:label="@string/app_name">
+        android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true">
+
         <meta-data
             android:name="xposedmodule"
-            android:value="true"/>
+            android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="xpDemo"/>
+            android:value="xpDemo" />
         <meta-data
             android:name="xposedminversion"
-            android:value="82"/>
+            android:value="82" />
+
         <activity
-            android:name=".constraint.MainActivity"
-            android:theme="@style/Theme.AppCompat"
+            android:name="com.weishop.test.coordinatorlayout.AvatarActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,32 +44,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".performance.memory.LeakActivity"></activity>
-        <activity android:name=".bitmap.BitmapActivity"></activity>
+        <activity android:name=".performance.memory.LeakActivity" />
+        <activity android:name=".bitmap.BitmapActivity" />
         <activity
             android:name=".activitycharacter.BActivity"
-            android:taskAffinity="com.bbb"></activity>
+            android:label="B"
+            android:taskAffinity="com.bbb" />
         <activity
             android:name=".activitycharacter.CActivity"
-            android:launchMode="standard"></activity>
+            android:launchMode="standard" />
         <activity
             android:name=".activitycharacter.DActivity"
-            android:launchMode="standard"></activity>
+            android:launchMode="standard" />
 
-        <service android:name="com.weishop.test.service.LocalService">
+        <service android:name=".service.LocalService">
             <intent-filter>
                 <action android:name="com.weishop.test.action.service" />
             </intent-filter>
-
         </service>
-
-        <service android:name=".service.MyIntentService" />
-        <!-- BEGIN_INCLUDE(remote_service_declaration) -->
+        <service android:name=".service.MyIntentService" /> <!-- BEGIN_INCLUDE(remote_service_declaration) -->
         <service
             android:name=".service.MessengerService"
             android:process=":remote" />
-
         <service
             android:name=".service.RemoteService"
             android:process=":remote" />
@@ -76,42 +76,38 @@
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
-        </activity>
-
-        <!--<activity android:name=".service.RemoteService$Binding"-->
-        <!--android:label="@string/activity_remote_service_binding">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN" />-->
-        <!--<category android:name="android.intent.category.SAMPLE_CODE" />-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
-
+        </activity> <!-- <activity android:name=".service.RemoteService$Binding" -->
+        <!-- android:label="@string/activity_remote_service_binding"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.SAMPLE_CODE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
             android:name=".service.RemoteService$BindingOptions"
             android:label="@string/activity_remote_service_binding_options">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
         </activity>
-
         <activity android:name=".contentprovider.ContactManager" />
         <activity android:name=".contentprovider.ContactAdder" />
-
         <activity
             android:name=".contentprovider.PickContact"
             android:label="@string/activity_pick_contact">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
         </activity>
         <activity android:name=".list.draglistview.ListviewActivity" />
         <activity android:name=".list.recycler.RecyclerViewActivity" />
-
-
     </application>
 
 </manifest>

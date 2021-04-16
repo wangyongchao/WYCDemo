@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/content_background">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dependentView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="top|left"
+        android:background="@color/shadow40"
+        android:gravity="center"
+        android:text="dependentView1" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dependentView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="top|center_horizontal"
+        android:background="@color/shadow40"
+        android:gravity="center"
+        android:text="dependentView2" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/behaviorView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="top|right"
+        android:background="@color/red"
+        android:gravity="center"
+        app:layout_behavior=".coordinatorlayout.behavior.DependentBehavior"
+        android:text="behaviorView" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

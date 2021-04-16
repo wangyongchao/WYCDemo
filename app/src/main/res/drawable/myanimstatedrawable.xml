@@ -1,0 +1,26 @@
+<!-- res/drawable/myanimstatedrawable.xml -->
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- provide a different drawable for each state-->
+    <item
+        android:id="@+id/pressed"
+        android:drawable="@drawable/icon_group3v3_pk_energy_progress_blue"
+        android:state_pressed="true" />
+    <item
+        android:id="@+id/ddefault"
+        android:drawable="@drawable/icon_group3v3_pk_energy_progress_red" />
+
+    <!-- specify a transition -->
+    <transition
+        android:fromId="@+id/ddefault"
+        android:toId="@+id/pressed">
+        <animation-list>
+            <item
+                android:drawable="@drawable/zbst"
+                android:duration="15" />
+            <item
+                android:drawable="@drawable/lanse"
+                android:duration="15" />
+        </animation-list>
+    </transition>
+</animated-selector>

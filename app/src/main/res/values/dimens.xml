@@ -3,7 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="image_width">500dp</dimen>
 
     <dimen name="item_height">67dp</dimen>
     <dimen name="section_div_height">20dp</dimen>
@@ -18,5 +17,23 @@
     <dimen name="group_3v3_lottile_bg_margin_top">9dp</dimen>
     <dimen name="group_3v3_lottile_bg_margin_bottom">31dp</dimen>
     <dimen name="group_3v3_lottile_bg_margin_horizontal">115dp</dimen>
+    <!--
+    Because the window insets on round devices are larger than 15dp, this padding only applies
+    to square screens.
+    -->
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+
+    <!--
+    This padding applies to both square and round screens. The total padding between the buttons
+    and the window insets is box_inset_layout_padding (above variable) on square screens and
+    inner_frame_layout_padding (below variable) on round screens.
+    -->
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
+
+
+    <!-- dimensions -->
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_final_width">32dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
 
 </resources>

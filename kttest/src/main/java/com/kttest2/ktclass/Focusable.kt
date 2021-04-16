@@ -1,4 +1,4 @@
-package com.kttest2.`class`
+package com.kttest2.ktclass
 
 interface Focusable {
     fun setFocus(b: Boolean) = println("I ${if (b) "got" else "lost"} focus")

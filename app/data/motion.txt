@@ -1,0 +1,140 @@
+<MotionScene>
+根元素 必须包含一个或者多个<Transition>元素，如果包含多个的话，MotionLayout
+根据用户的行为选择最合适的一个。可以包含<ConstraintSet>指定<Transition>的开始和结束场景，如果<Transition>中
+ 指定的属性motion:constraintSetStart是布局的话，可以省略<ConstraintSet>标签。
+
+<Transition>
+motion:constraintSetStart，motion:constraintSetEnd:指向<ConstraintSet>或者一个layout
+<onClick> 运动序列由用户触摸触发
+<onSwipe> 运动序列由用户滑动触发
+<KeyFrameSet> 制定运动过程中的中间位置
+
+<onSwipe>
+motion:dragScale:view移动的距离是滑动距离的多少倍，默认是1，如果小于1说明view移动比滑动慢，如果大于1，说明view移动比滑动快
+motion:onTouchUp 当手指弹出时候继续移动还是停止等状态
+
+<ConstraintSet>
+指定运动序列中所有view在某一个点的属性和位置。必须包含<Constraint> 标签
+
+<Constraint>
+指定运动序列中一个元素的位置和属性。包含constraintlayout的所有属性。
+
+<CustomAttribute>
+ 自定义属性， motion:attributeName="BackgroundColor"指定要改变的属性
+
+<KeyFrameSet> 可以改变view的运动轨迹
+
+<KeyPosition> 指定在运动序列中某个时刻view的位置，这个可以调整运动的默认轨迹。
+motion:framePosition 如果设置为25，代表整个运动距离的1/4后，到达该点。
+motion:keyPositionType ，parentRelative，deltaRelative，pathRelative 解释percentX 和 percentY
+parentRelative:percentX 和 percentY相对于父元素的view，X代表水平方向，从0(左边)到1(右边).Y代表垂直方向，从顶部(0)到底部(1)
+例如，如果想让元素到达父元素的右边中间，需要设置percentX=1,percentY=0.5
+
+deltaRelative:相对于试图在整个运动过程中的距离。X代表水平轴，Y代表垂直方向的轴，0代表该轴的开始位置，1代表终点位置。
+例如，假如目标view向上移动100dp，向右移动100dp。但是你想让view在整个运动轨迹的1/4时候，先向下移动40dp，然后回来。为了这样做，需要设置
+framePosition =25，keyPositionType =deltaRelative，percentY =-0.4。framePosition是1——99,25是1/4.
+
+pathRelative:X轴是目标试图移动的方向。设置一个非0的percentY会使试图偏离移动方向
+
+<KeyAttribute>：设置运动序列过程中某个特定时刻view的标准属性。例如可见性，android:rotation，android:scaleX
+例如设置view运动到一半的时候，放到2倍，旋转45度
+
+
+
+CoordinatorLayout :是一个增强的的FrameLayout,主要有两个作用
+1.作为顶级试图使用.
+2.实现子view之间的联动效果。
+
+AppBarLayout 是一个垂直的LinearLayout，它实现了许多material design Appbar的特性，支持滚动特性
+ app:layout_scrollFlags每个值的意思：
+
+ 什么都不设置:固定在顶部，scrollview滚动的时候始终固定在顶部。
+
+ scroll(SCROLL_FLAG_SCROLL)：如果某个view在NestedScrollView朝某个方向滚动的时候想要滚出屏幕，就设置此值，没有设置的将被固定在屏幕顶部。
+ 如果当前view之前的兄弟结点都没有设置此值，则当前view设置此值的话也是无效。因为AppBarLayout是垂直布局，当前view之前的兄弟结点不设置
+ 的话没办法滚动。
+
+enterAlways(SCROLL_FLAG_ENTER_ALWAYS):必须结合scroll一起使用“scroll|enterAlways"，当ScrollView滚动的时候，先滚动完全显示view，让view立即可见，然后再滚动
+显示Scrollview的内容。被称为"快速返回"模式,默认情况是scrollview先滚动到顶部，然后滚动显示view。
+
+enterAlwaysCollapsed(SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED):enterAlways的附加值，必须三个一起使用才生效“scroll|enterAlwaysCollapsed|enterAlways"。
+当scrollview滚动的时候，先滚动显示此view的minheight的距离，然后再滚动scrollview的内容到顶部，
+然后再滚动viewheight-minheight距离完全显示view。
+
+exitUntilCollapsed(SCROLL_FLAG_EXIT_UNTIL_COLLAPSED)：view离开屏幕的时候折叠显示。
+scrollView滚动的时候，先滚动view，滚动的距离是height-minheight，
+然后折叠显示view剩余的部分，然后再滚动scrollview的内容。
+
+scroll|exitUntilCollapsed|enterAlways|enterAlwaysCollapsed:exitUntilCollapsed是内容滚出屏幕的时候保证view的最小高度固定在顶端，
+enterAlwaysCollapsed是内容滚进来的时候view的最小高度先显示。一起使用的话，需要设置minheight为height/2,不然向下滚动会有白边。
+
+snap(SCROLL_FLAG_SNAP):当滚动结束的时候，如果view是部分可见，则滚动断裂直接滚动到最终边界。比如如果是离开屏幕的滚动，
+滚动结束后view只有25%的内容可见，则直接滚动view离开屏幕。如果是进入的滚动，滚动结束后，view已经显示了75%,则直接滚动到完全显示view。
+
+
+以上三个基本上都要结合scroll一起使用
+
+addOnOffsetChangedListener verticalOffset 垂直方向的偏移量，就是appbarlayout滚出或者滚进屏幕的高度。
+
+
+
+自定义behavior
+自定义主要依赖以下几个方法:
+
+  /**
+     * parent:代表CoordinatorLayout
+     * child 代表设置behavior的View
+     * dependency:依赖的view，coordinatorlayout布局中没有设置behavior的view
+     * 作用：确定依赖项
+     * 在layout过程中，这个方法至少会调用一次，如果返回true，CoordinatorLayout会认为是child和dependency是一对
+     * 依赖的view。coordinatorlayout会先对dependency view进行布局，然后再对child进行布局。dependency view的大小或者位置
+     * 发生变化后，会调用onDependentViewChanged方法。
+     */
+    override fun layoutDependsOn(parent: CoordinatorLayout, child: View, dependency: View): Boolean {
+        val layoutDependsOn = dependency.id == R.id.dependentView1
+
+        LogUtils.d("layoutDependsOn parent=${parent},child=${child},dependency=${dependency},layoutDependsOn=${layoutDependsOn}")
+        return layoutDependsOn
+    }
+
+    /**
+     * 依赖view发生变化以后，childview会在此方法中响应。
+     * 当依赖view的位置或者大小发生变化后，这个方法会被调用。然后在此方法中更新child view的大小或者位置，如果改变了child view的大小
+     * 或者位置，则返回true
+     */
+    override fun onDependentViewChanged(parent: CoordinatorLayout, child: View, dependency: View): Boolean {
+        LogUtils.d("onDependentViewChanged parent=${parent},child=${child},dependency=${dependency}")
+        val offset = dependency.top - child.top
+        ViewCompat.offsetTopAndBottom(child, offset)
+        return true
+    }
+
+
+
+CollapsingToolbarLayout:继承自FrameLayout,ToolBar的包装类，子类中必须还有ToolBar，一个可折叠的appbar。作为Appbarlayout的直接子类使用。
+CollapsingToolbarLayout继承自FrameLayout，所以子view之间会存在覆盖的关系。Appbarlayout中的子view都会随着内容试图滚动，
+如果想让某些子view内容试图滚动的时候不变化，有些子view内容试图滚动的时候也跟随滚动，可以用CollapsingToolbarLayout
+特性：
+1.当CollapsingToolbarLayout中的布局完全显示时，标题会变大；当布局滑出屏幕的时候，标题会变小。标题外观可以通过expandedTitleTextAppearance和
+collapsedTitleTextAppearance分别设置展开和折叠时候的外观。
+
+2.layout_collapseMode：pin,parallx,none
+pin:当ScrollView滚动的时候，当前view固定，直到滑动到此view的底部的时候，此view才跟着滑动方向滑动。
+none：当ScrollView滚动的时候，此view也跟着滚动
+parallx：当ScrollView滚动的时候,此view会有视差效果，所谓视差就是可以设置此view滚动快慢，
+例如如果 app:layout_collapseParallaxMultiplier="1",则此view 不会滚动，直到scrollview即内容区域覆盖当前view。0.1的时候滚动速率
+比原来稍慢一点，0.9的时候和原来滚动速率相比基本不滚动。数字越大和原来滚动速率差别越大。1的时候就不滚动。
+如果CollapsingToolbarLayout子view中有toolbar，则会置顶展示。并且标题会放置在toolbar上面
+
+3.沉浸式内容
+ToolBar折叠到顶部固定的时候的背景颜色，可以通过app:contentScrim设置
+
+4.沉浸式状态栏
+
+
+
+
+
+
+问题：
+scene_01.xml 和scene_02.xml移动的时候不一样

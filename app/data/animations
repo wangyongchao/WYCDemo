@@ -1,0 +1,33 @@
+动画种类：
+一.bitmap动画
+drawable graphics
+二.UI可见和运动的动画
+属性动画
+三.物理运动动画
+Spring Animation,Filing Animation
+四.布局改变动画:
+Android 4.4(api 19) transition framework框架
+五.Activity之间的动画
+
+属性动画：
+ObjectAnimator必须同时有get和set方法
+某些属性还需要调用view的invalidate方法，在onAnimationUpdate()这个回调中调用，例如Drawable的setclolor属性
+当ViewGroup中的view发生布局变化时候执行动画,当子view消失的时候，添加的时候，移除的时候
+
+属性动画和补间动画区别
+属性动画是Android3.0之后引进的，它更改的是动画的实际属性，在Tween Animation(补间动画)中，
+其改变的是View的内容的绘制效果，真正的View的属性并没有改变，比如你将你的Button位置移动之后你再次点击Button是没有任何点击效果的，
+或者是你如何缩放你的Button大小，缩放后的有效的点击区域还是只有你当初初始的Button的大小的点击区域，
+其位置和大小的属性并没有改变。而在Property Animator(属性动画)中，改变的是动画的实际属性，如Button的缩放，
+Button的位置和大小属性值都会发生改变。而且Property Animation不止可以应用于View，还可以应用于任何对象，
+Property Animation只是表示一个值在一段时间内的改变，当值改变时要做什么事情完全是你自己决定的。
+
+drawable动画
+AnimationDrawable 帧动画
+AnimatedVectorDrawable 矢量图改变矢量图的属性
+
+显示或隐藏view的时候使用动画
+淡入淡出动效
+卡片划入划出动效，多用于fragment
+
+

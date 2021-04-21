@@ -1,0 +1,6 @@
+Add the app bar:
+标题栏 ActionBar
+从3.0开始使用默认主题的应用有一个ActionBar作为app的bar。这就导致不同版本的Actionbar行为不一样。
+ToolBar作为替代ActionBar的工具使用，集成到support包。Toolbar支持Android2.0及以上的版本，ActionBar只能支持
+Android5.0及以上版本。
+https://www.jianshu.com/p/a44c119d6ef7

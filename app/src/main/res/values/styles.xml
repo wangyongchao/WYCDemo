@@ -13,7 +13,7 @@
         <!-- 控制各个控件被选中时候的颜色-->
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:windowTranslucentStatus">false</item>
+<!--        <item name="android:windowTranslucentStatus">false</item>-->
     </style>
 
     <style name="CustomizeStyleInTheme">
@@ -80,4 +80,27 @@
         <item name="android:textColor">#FFFF00</item>
     </style>
 
+    <style name="td_toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="td_toolbar_title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="BottomDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/no_color</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="td_toolbar_popup_theme" parent="@style/ThemeOverlay.AppCompat.Light"></style>
 </resources>

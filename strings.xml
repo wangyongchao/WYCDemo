@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 1.4.3版本新增   -->
+    <string name="replace_with">Replace with</string>
+    <string name="replace_exercise">Replace Exercise</string>
+    <string name="replace_complete">Replacement Completed</string><!-- replace_complete -->
+    <string name="operation_completed">Operation completed</string><!-- operation_completed -->
+    <string name="save_successfully">Saved successfully</string><!-- save_successfully -->
+    <string name="continue_with">Continue with</string>
+    <string name="drive_syncing_data">Synchronizing data</string>
+    <string name="last_sync">Last sync: %s</string>
+    <string name="login_out_sure">Are you sure you want to log out?</string>
+    <string name="log_out">Log out</string>
+    <string name="not_sync_with_ios">Note: Data under the same account is not shared between Android and iOS versions</string>
+    <string name="set_backup">Backup &amp; Restore</string>
+    <string name="sign_in_tips">Sign in and synchronize your data</string>
+    <string name="toast_log_in_account">Welcome! Your workout data will be safely stored in your account.</string>
+    <string name="sync_success_toast">Sync successful</string>
+    <string name="drive_sync_failed">Synchronization failed</string>
+    <string name="google_string" translatable="false">Google</string>
+    <string name="reset_app_dele_data">Are you sure to reset app and delete all data(including cloud data)?</string><!-- reset_app_dele_data -->
+    <string name="no_data_in_the_cloud">No data in the cloud</string><!-- no_data_in_the_cloud -->
+    <string name="sync_local_data_cloud">Sync the local data to the cloud?</string><!-- sync_local_data_cloud -->
+    <string name="sync_now">Sync now</string><!-- sync_now -->
+    <string name="delete_local_data">Delete local data</string><!-- delete_local_data -->
+    <string name="phone_storage_low">Your phone storage is running low! There is only %sM of remaining space.\n\nPlease delete some apps to make sure that the remaining space is more than 10M.</string><!-- phone_storage_low -->
+    <string name="level">Level</string><!-- level -->
+    <string name="sync_data">Sync data</string>
+</resources>

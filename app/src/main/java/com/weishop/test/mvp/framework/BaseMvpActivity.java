@@ -3,6 +3,7 @@ package com.weishop.test.mvp.framework;
 
 import android.os.Bundle;
 
+import com.weishop.test.mvp.framework.repo.ReflectTypeUtils;
 import com.weishop.test.mvp.framework.utils.Preconditions;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         Preconditions.checkNotNull(mPresenter);
         getLifecycle().addObserver(mPresenter);
         mPresenter.attachView(this);
+
 
     }
 

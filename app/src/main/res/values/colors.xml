@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#607d8b</color>
-    <color name="colorPrimaryDark">#78909c</color>
+    <color name="colorPrimary">#FF24387C</color>
+<!--    <color name="colorPrimaryDark">#78909c</color>-->
+    <color name="colorPrimaryDark">#FF24387C</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="item_background">#D0D0D0</color>
     <color name="title_background">#300000</color>
     <color name="content_background">#D0D0D0</color>
     <color name="content_color">#000000</color>
+    <color name="no_color">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="red">#ff0000</color>
     <color name="selector_background">#DAA520</color>
@@ -18,4 +20,6 @@
     <color name="redh">#f13232</color>
     <color name="color_cc">#cc000000</color>
     <color name="studycenter_color_ff5e50">#FF5E50</color>
+    <color name="black">#FF000000</color>
+    <color name="td_gray_d8">#D0D8D8D8</color>
 </resources>

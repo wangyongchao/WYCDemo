@@ -7,6 +7,8 @@ class ClassTest {
         @JvmStatic
         fun main(args: Array<String>) {
             constructTest()
+            args.map {  }
+
 
 
         }

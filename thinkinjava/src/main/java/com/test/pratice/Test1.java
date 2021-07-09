@@ -1,15 +1,15 @@
 package com.test.pratice;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
 
 /**
  * Created by wangyongchao on 16/11/23.
@@ -19,20 +19,10 @@ public class Test1 {
 
 
     public static void main(String[] args) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date nowDate = format.parse(format.format(Calendar.getInstance().getTime()));
-//            nowDate=format.parse("2020-11-11");
-            Date startDate = format.parse("2020-11-01");
-            Date endDate = format.parse("2020-11-11");
-            boolean effectiveDate = isEffectiveDate(nowDate, startDate, endDate);
-            System.out.println("effectiveDate=" + effectiveDate);
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
     }
+
 
     public static boolean isEffectiveDate(Date nowTime, Date startTime, Date endTime) {
         if (nowTime.getTime() == startTime.getTime()

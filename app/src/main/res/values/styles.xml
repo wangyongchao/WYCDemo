@@ -103,4 +103,9 @@
     </style>
 
     <style name="td_toolbar_popup_theme" parent="@style/ThemeOverlay.AppCompat.Light"></style>
+
+    <style name="TransparentTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

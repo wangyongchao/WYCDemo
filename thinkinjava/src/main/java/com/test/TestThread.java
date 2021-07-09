@@ -1,5 +1,7 @@
 package com.test;
 
+import com.thinking.java.concurrency.CachedThreadPool;
+
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -8,7 +10,6 @@ public class TestThread {
 
     public static void main(String[] args) {
 
-        testThreadPoll();
 
 
     }

@@ -42,9 +42,12 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -75,7 +78,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
 //            .SYSTEM_ALERT_WINDOW}, 12345);
 //        }
-
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.linear_btn).setOnClickListener(this);
@@ -245,12 +247,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        startActivity(new Intent(this, BActivity.class));
-//        getDeviceIMEiHook(this);
-        start();
-        Log.d("dfad","dsaf");
+
+        testDate();
+
 
     }
+
+    private void testDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
+        calendar.setTimeInMillis(System.currentTimeMillis());
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        String format = simpleDateFormat.format(calendar.getTime());
+        System.out.println(format);
+    }
+
 
     private void test() {
         NetworkInterface printer = (NetworkInterface) new MyProxy(this).getProxy(NetworkInterface.class);
@@ -318,7 +330,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         TelephonyManager tm = (TelephonyManager) this.getSystemService(Service.TELEPHONY_SERVICE);
         return tm.getDeviceId();
     }
-
 
 
     public static String getDeviceMacHook(Context context) {

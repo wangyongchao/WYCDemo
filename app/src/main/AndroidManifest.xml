@@ -34,7 +34,7 @@
             android:value="82" />
 
         <activity
-            android:name=".bar.BarActivity"
+            android:name=".jetpack.navigation.Navigation"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,7 +46,7 @@
         <activity android:name=".performance.memory.LeakActivity" />
         <activity android:name=".bitmap.BitmapActivity" />
         <activity
-            android:name=".activitycharacter.BActivity"
+            android:name=".activitycharacter.TransparentActivity"
             android:label="B" />
         <activity
             android:name=".activitycharacter.CActivity"

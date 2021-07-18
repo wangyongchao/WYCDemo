@@ -21,14 +21,15 @@ class TestObject {
     companion object{
         @JvmStatic
         fun main(args: Array<String>) {
-//            Payroll.persons.add(Person("eewwer"))
-//            val compare = CaseInsensitiveFileComparator.compare(File("/User"), File("/user"))
-//            println(compare)
-//           var files= listOf(File("/User"), File("/user"))
-//            //可以把object 对象传入一个函数内
-//            println(files.sortedWith(CaseInsensitiveFileComparator))
-//
-//            A.bar() //相当于静态方法或者静态变量
+
+            Payroll.persons.add(Person("eewwer"))
+            val compare = CaseInsensitiveFileComparator.compare(File("/User"), File("/user"))
+            println(compare)
+           var files= listOf(File("/User"), File("/user"))
+            //可以把object 对象传入一个函数内
+            println(files.sortedWith(CaseInsensitiveFileComparator))
+
+            A.bar() //相当于静态方法或者静态变量
 
 
             val newFacebookUser = User.newFacebookUser(33)

@@ -13,17 +13,37 @@ class Manipulator<T extends HasF> {
     // Error: cannot find symbol: method f():
     public void manipulate() {
         obj.f();
-        Type parameterizedType = ReflectTypeUtils.getParameterizedType(Manipulator.class,
-                this.getClass(), 0);
-        System.out.println("parameterizedType=" + parameterizedType.getTypeName());
+        TypeClass typeClass = new TypeClass(obj);
+        Type resultType = typeClass.getResultType();
+        System.out.println("parameterizedType=" + resultType);
+    }
+
+    class TypeClass<T> implements  HasF{
+        T t;
+
+        public TypeClass(T t) {
+            this.t = t;
+        }
+
+        public Type getResultType() {
+            return t == null ? String.class :
+                    ReflectTypeUtils.getParameterizedType(t.getClass(),
+                            HasF.class, 0);
+        }
+
+
+        @Override
+        public void f() {
+
+        }
     }
 }
 
 public class Manipulation {
     public static void main(String[] args) {
-        HasF hf = new HasF();
-        Manipulator<HasF> manipulator =
-                new Manipulator<HasF>(hf);
+        HasFChild hf = new HasFChild();
+        Manipulator<HasFChild> manipulator =
+                new Manipulator<HasFChild>(hf);
         manipulator.manipulate();
     }
 } ///:~

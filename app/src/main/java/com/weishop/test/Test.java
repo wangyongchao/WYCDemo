@@ -1,6 +1,9 @@
 package com.weishop.test;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by wangyongchao on 2018/6/5.
@@ -8,8 +11,7 @@ import java.util.Calendar;
 
 public class Test {
     public static void main(String[] args) {
-        byte [] bytes =new byte[20];
-        System.out.println(new String(bytes));
+
 
     }
 

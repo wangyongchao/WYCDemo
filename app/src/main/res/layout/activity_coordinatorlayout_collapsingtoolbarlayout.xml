@@ -7,7 +7,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -90,8 +90,7 @@
             android:layout_height="wrap_content"
             android:text="appbar 之内，Collapsing之外"
             android:textColor="@color/white"
-            android:textSize="10sp"
-            android:visibility="gone" />
+            android:textSize="10sp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

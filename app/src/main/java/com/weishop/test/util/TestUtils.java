@@ -6,6 +6,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -378,5 +379,9 @@ public class TestUtils {
             stringBuffer.append("\t"+stackTrace[i].toString()+"\n");
         }
         return stringBuffer.toString();
+    }
+
+    public static boolean isMainThread() {
+        return Looper.getMainLooper() == Looper.myLooper();
     }
 }

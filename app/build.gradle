@@ -67,6 +67,9 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 
@@ -82,9 +85,11 @@ project.configurations.all {
     }
 }
 
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -106,18 +111,30 @@ dependencies {
 //    implementation 'com.didi.virtualapk:core:0.9.8'
     testImplementation 'junit:junit:4.12'
     compileOnly 'com.google.android.wearable:wearable:2.5.0'
-//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
-    // 可选，如果你使用支持库的fragments的话
-    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
 
     implementation 'com.github.bumptech.glide:glide:4.1.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
     implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.5.7'
     implementation 'com.google.code.gson:gson:2.7'
-    implementation('androidx.lifecycle:lifecycle-common-java8:2.2.0')
+
     implementation 'de.hdodenhof:circleimageview:1.3.0'
 //    lintPublish project(':checks')
+
+    //leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+    // 可选，如果你使用支持库的fragments的话
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
+
+    //lifecycle
+    implementation('androidx.lifecycle:lifecycle-common-java8:2.2.0')
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+
+    //导航
+    // Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 }
 

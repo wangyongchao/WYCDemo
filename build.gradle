@@ -3,9 +3,13 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.4.30'
+        kotlin_version = '1.5.21'
         lintVersion = '26.5.0'
-        nav_version = "2.3.5"
+        nav_version = '2.3.5'
+        compile_Sdk_Version = 30
+        build_Tools_Version = '30.0.3'
+        min_Sdk_Version = 23
+        target_Sdk_Version = 30
     }
     repositories {
 //        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
@@ -14,7 +18,7 @@ buildscript {
     }
     dependencies {
 //        classpath 'com.android.tools.build:gradle:3.1.2'
-        classpath "com.android.tools.build:gradle:4.0.0"
+        classpath "com.android.tools.build:gradle:4.2.0"
         classpath 'me.tatarka:gradle-retrolambda:3.2.0'
 
         classpath 'com.didi.virtualapk:gradle:0.9.8.6'

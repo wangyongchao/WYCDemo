@@ -60,7 +60,7 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        createOperator.test();
+        testFlatMap();
     }
 
 
@@ -224,17 +224,23 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
                 LogUtils.d("apply=" + integer);
                 List<String> list = new ArrayList<String>();
                 list.add("string value" + integer.intValue());
-                list.add("string value" + integer.intValue());
-                list.add("string value" + integer.intValue());
+                return Observable.fromIterable(list);
+            }
+        }).concatMap(new Function<String, ObservableSource<String>>() {
+            @Override
+            public ObservableSource<String> apply(String str) throws Exception {
+                LogUtils.d("apply2=" + str);
+                List<String> list = new ArrayList<String>();
+                list.add("2  map" + str);
                 return Observable.fromIterable(list);
             }
         }).subscribe(new Consumer<String>() {
-            @Override
-            public void accept(String s) throws Exception {
-                LogUtils.d("s=" + s);
+                    @Override
+                    public void accept(String s) throws Exception {
+                        LogUtils.d("s=" + s);
 
-            }
-        });
+                    }
+                });
 
 
     }

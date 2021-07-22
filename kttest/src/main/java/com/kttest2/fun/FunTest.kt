@@ -25,7 +25,7 @@ class FunTest {
         fun testSet() {
             val hashSetOf = hashSetOf<Int>(2, 3, 4)
             println(hashSetOf.javaClass)//相当于Java 的getClass
-            println(hashSetOf.max())
+            println(hashSetOf.maxOrNull())
             val arrayListOf = arrayListOf(2, 3, 4)
             println(arrayListOf)
             println(arrayListOf.javaClass)
@@ -116,7 +116,7 @@ class FunTest {
         fun testSetFeature() {
             val hashSetOf = hashSetOf<Int>(2, 3, 4)
             println(hashSetOf.javaClass)//相当于Java 的getClass
-            hashSetOf.max()
+            hashSetOf.maxOrNull()
 
             val arrayListOf = arrayListOf(2, 3, 4)
             arrayListOf.last()

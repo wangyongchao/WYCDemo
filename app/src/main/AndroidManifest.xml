@@ -34,7 +34,7 @@
             android:value="82" />
 
         <activity
-            android:name=".rxjava.RxJavaActivity"
+            android:name=".kotlin.KTTestActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

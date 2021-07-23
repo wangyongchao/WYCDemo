@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.weishop.test.R
 import com.weishop.test.util.LogUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.util.*
 
@@ -20,6 +23,7 @@ class KTTestActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_kt)
         button1 = findViewById<Button>(R.id.btn1)
         button2 = findViewById<Button>(R.id.btn2)
+        testTextView=findViewById<TextView>(R.id.kttest);
 
         button1?.setOnClickListener(this)
         button2?.setOnClickListener(this)
@@ -30,12 +34,16 @@ class KTTestActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
     }
 
-    override fun onClick(v: View?) {
-        var date = Date(getDateZeroZone(System.currentTimeMillis()))
-        val dateTimeInstance = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT)
-        var format = dateTimeInstance.format(date)
-        LogUtils.d("format=${format}")
+    fun log(msg: Any?) {
+        LogUtils.d("[${Thread.currentThread().name}] $msg")
+    }
 
+    override fun onClick(v: View?) {
+        GlobalScope.launch(context = Dispatchers.Main) {
+            log("launch")
+            testTextView?.text="fadsfds"
+        }
+        LogUtils.d("after")
     }
 
 

@@ -39,6 +39,7 @@ class KTTestActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        //不会阻塞主线程
         GlobalScope.launch(context = Dispatchers.Main) {
             log("launch")
             testTextView?.text="fadsfds"

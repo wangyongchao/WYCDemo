@@ -136,5 +136,16 @@ dependencies {
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    /**
+     * architecture components 架构组件
+     */
+
+    //App Startup
+    implementation("androidx.startup:startup-runtime:1.0.0")
+    //workmanager
+    implementation("androidx.work:work-runtime-ktx:$work_version")
+    //datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
 }
 

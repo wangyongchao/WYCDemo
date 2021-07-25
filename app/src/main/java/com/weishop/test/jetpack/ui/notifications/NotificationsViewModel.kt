@@ -1,4 +1,4 @@
-package com.weishop.test.jetpack.navigation.ui.notifications
+package com.weishop.test.jetpack.ui.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

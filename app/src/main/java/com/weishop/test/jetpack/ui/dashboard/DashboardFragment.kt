@@ -1,4 +1,4 @@
-package com.weishop.test.jetpack.navigation.ui.notifications
+package com.weishop.test.jetpack.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,18 +11,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.weishop.test.R
 import com.weishop.test.util.LogUtils
 
-class NotificationsFragment : Fragment() {
+class DashboardFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var dashboardViewModel: DashboardViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LogUtils.d("NotificationsFragment onCreate")
+        LogUtils.d("DashboardFragment onCreate")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        LogUtils.d("NotificationsFragment onDestroy")
+        LogUtils.d("DashboardFragment onDestroy")
     }
 
     override fun onCreateView(
@@ -30,11 +30,11 @@ class NotificationsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-                ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        dashboardViewModel =
+                ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -1,4 +1,4 @@
-package com.weishop.test.jetpack.navigation.ui.dashboard
+package com.weishop.test.jetpack.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

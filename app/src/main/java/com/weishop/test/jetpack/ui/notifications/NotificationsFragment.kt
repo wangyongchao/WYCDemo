@@ -1,4 +1,4 @@
-package com.weishop.test.jetpack.navigation.ui.home
+package com.weishop.test.jetpack.ui.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,34 +11,32 @@ import androidx.lifecycle.ViewModelProvider
 import com.weishop.test.R
 import com.weishop.test.util.LogUtils
 
-class HomeFragment : Fragment() {
+class NotificationsFragment : Fragment() {
+
+    private lateinit var notificationsViewModel: NotificationsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LogUtils.d("HomeFragment onCreate")
+        LogUtils.d("NotificationsFragment onCreate")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        LogUtils.d("HomeFragment onDestroy")
+        LogUtils.d("NotificationsFragment onDestroy")
     }
-
-    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        notificationsViewModel =
+                ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
     }
-
-
 }

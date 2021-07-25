@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.weishop.test">
 
     <uses-sdk android:targetSdkVersion="26" />
@@ -34,7 +35,7 @@
             android:value="82" />
 
         <activity
-            android:name=".kotlin.KTTestActivity"
+            android:name=".jetpack.architecture.ArchitectureActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -106,6 +107,33 @@
         </activity>
         <activity android:name=".list.draglistview.ListviewActivity" />
         <activity android:name=".list.recycler.RecyclerViewActivity" />
+
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:exported="false"
+            android:enabled="false"/>
+
+        <!--tools:node="merge" 可以解决有冲突的条目
+        tools:node="remove" 移除对应的条目，合并过程中如果别的manifest也有也会被移除
+
+        -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="merge"
+            android:exported="false">
+            <!-- This entry makes ExampleLoggerInitializer discoverable. -->
+<!--            <meta-data  android:name="com.weishop.test.jetpack.navigation.architecture.initializer.WorkManagerInitializer"-->
+<!--                android:value="androidx.startup" />-->
+
+            <meta-data  android:name="com.weishop.test.jetpack.architecture.initializer.XcrashInitializer"
+                android:value="androidx.startup" />
+
+            <meta-data  android:name="com.weishop.test.jetpack.architecture.initializer.ArouteInitializer"
+                android:value="androidx.startup"
+                tools:node="remove"/>
+        </provider>
     </application>
 
 </manifest>

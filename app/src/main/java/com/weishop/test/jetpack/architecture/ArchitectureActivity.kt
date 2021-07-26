@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.weishop.test.R
+import com.weishop.test.databinding.ActivityArchitectureBinding
 import com.weishop.test.jetpack.architecture.datastore.EXAMPLE_COUNTER
 import com.weishop.test.jetpack.architecture.datastore.dataStore
 import com.weishop.test.util.LogUtils
@@ -20,11 +21,13 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 
 class ArchitectureActivity : AppCompatActivity() {
+    private lateinit var mBinding: ActivityArchitectureBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_architecture)
-        findViewById<Button>(R.id.test_btn).setOnClickListener {
+        mBinding = ActivityArchitectureBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
+        mBinding.testBtn.setOnClickListener {
             val flow = this.dataStore.data.map { preferences ->
                 preferences[EXAMPLE_COUNTER] ?: 0
             }
@@ -37,7 +40,7 @@ class ArchitectureActivity : AppCompatActivity() {
 
         }
 
-        findViewById<Button>(R.id.test_btn2).setOnClickListener {
+        mBinding.testBtn2.setOnClickListener {
 
             GlobalScope.launch {
 

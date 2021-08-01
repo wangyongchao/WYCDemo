@@ -11,6 +11,7 @@ buildscript {
         min_Sdk_Version = 23
         target_Sdk_Version = 30
         work_version = '2.5.0'
+        lifecycle_version = "2.3.1"
     }
     repositories {
 //        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}

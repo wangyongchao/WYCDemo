@@ -35,7 +35,7 @@
             android:value="82" />
 
         <activity
-            android:name=".jetpack.architecture.ArchitectureActivity"
+            android:name=".jetpack.architecture.lifecycle.LifeCycleActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

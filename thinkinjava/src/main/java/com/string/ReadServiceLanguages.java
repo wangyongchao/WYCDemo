@@ -33,16 +33,20 @@ public class ReadServiceLanguages {
      * 源文件路径 --文件夹层级，最好是统一放到一个文件下面
      * 例如：C:\Users\Administrator\Downloads\stringsdownload_20181229101711
      */
-    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20210616184918";
+    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20210728113916";
 
     /**
      * 目标项目路径----文件夹层级，最好是统一放到一个文件下面
      * 例如:D:\AndroidStudioWorkSpace\dev\new\trunk\app\src\main\res
      */
-    public static final String BASE_DES_PATH = "/Users/wangyongchao/zjworkspace/LoseBellyFat/app/src/main/res";
+    public static final String BASE_DES_PATH_LOSEBELLYFAT = "/Users/wangyongchao/zjworkspace/LoseBellyFat/app/src/main/res";
+    public static final String BASE_DES_PATH_YOGA = "/Users/wangyongchao/zjworkspace/YogaWorkout/app/src/main/res";
+    public static final String BASE_DES_PATH = BASE_DES_PATH_YOGA;
 
+    public static String languagesGradle_LoseBellyFat = "\"en\", \"de\", \"es\", \"fr\", \"fa\",\"it\", \"nl\", \"pt\", \"ru\", \"sv\",\"pl\",\"ja\",\"ko\",\"tr\",\"da\",\"ar\",\"in-rID\",\"zh-rCN\",\"zh-rTW\"";
+    public static String languagesGradle_yoga = "\"ar\", \"de\",\"en\", \"es\", \"fa\", \"fr\",\"in-rID\",\"it\", \"ja\", \"ko\", \"nl\", \"pl\",\"pt\",\"ru\",\"th\",\"tr\",\"uk\",\"vi\",\"zh-rCN\",\"zh-rTW\"";
 
-    public static String languagesGradle = "\"en\", \"de\", \"es\", \"fr\", \"fa\",\"it\", \"nl\", \"pt\", \"ru\", \"sv\",\"pl\",\"ja\",\"ko\",\"tr\",\"da\",\"ar\",\"in-rID\",\"zh-rCN\",\"zh-rTW\"";
+    public static String languagesGradle = languagesGradle_yoga;
 
 
     private static final String SERVICE_CONFIG = "_strings.xml";
@@ -96,6 +100,7 @@ public class ReadServiceLanguages {
         configMap.put("my",new FileConfig("my","my","my"));
         configMap.put("uk",new FileConfig("uk","uk","uk"));
         configMap.put("ur",new FileConfig("ur","ur","ur"));
+        configMap.put("th",new FileConfig("th","th","th"));
         configMap.put("vi",new FileConfig("vi","vi","vi"));
         configMap.put("in-rID",new FileConfig("in-rID","in_ID","in-rID"));
         configMap.put("in",new FileConfig("in","in_ID","in"));

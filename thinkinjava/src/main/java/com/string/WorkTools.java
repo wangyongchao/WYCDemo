@@ -6,6 +6,7 @@ package com.string;
  **/
 public class WorkTools {
     public static void main(String[] args) {
+        System.out.println("main");
         languages();
     }
 

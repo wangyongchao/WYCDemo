@@ -1,0 +1,5 @@
+https://developer.android.google.cn/topic/libraries/architecture/lifecycle#kotlin
+https://developer.android.google.cn/jetpack/guide#fetching_data
+1.保持ui控制器(Activity or Fragment)尽量简单。他们不能直接获取数据，使用ViewModel获取数据，使用LiveData观察数据的变化，以便于响应
+UI。
+2.尽量书写数据驱动ui的代码。

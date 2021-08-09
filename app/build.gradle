@@ -26,6 +26,9 @@ android {
         enabled = true
     }
 
+    /**
+     * 使用viewbinding
+     */
     buildFeatures {
         viewBinding = true
     }
@@ -112,9 +115,9 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
 
     //lifecycle
-    implementation('androidx.lifecycle:lifecycle-common-java8:2.2.0')
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
 
     //导航

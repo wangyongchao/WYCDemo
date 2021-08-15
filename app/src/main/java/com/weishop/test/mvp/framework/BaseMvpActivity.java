@@ -27,7 +27,7 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
 
 
     }
-·
+
     protected abstract P createPresenter();
 
 

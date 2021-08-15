@@ -3,11 +3,12 @@ package com.test.project;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class DemoTest {
+public class TimeTest {
     public static void main(String[] args) {
 
 //        TimeZone aDefault = TimeZone.getDefault();
@@ -19,16 +20,32 @@ public class DemoTest {
 //
 //        }
 
-        long currentTimeMillis = System.currentTimeMillis();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = dateFormat.format(currentTimeMillis);
-        System.out.println(format);
 
-        TimeZone timeZone = TimeZone.getTimeZone("Asia/Bangkok");
-        dateFormat.setTimeZone(timeZone);
-        format = dateFormat.format(currentTimeMillis);
-        System.out.println(format);
+        getTime(1627577228118012l);
 
+
+
+
+    }
+
+    /**
+     * 微秒转日期
+     * @param mms
+     */
+    private static void getTime(long mms){
+        long sec=mms / 1000;
+        Calendar instance = Calendar.getInstance();
+        instance.setTimeInMillis(sec);
+        DateFormat df1 = DateFormat.getDateTimeInstance();
+        System.out.println("time is=" +  df1.format(instance.getTime()));
+
+    }
+
+    private static void getAmericaTime(){
+        Calendar instance = Calendar.getInstance();
+        instance.setTimeInMillis(1627517912521012l);
+        DateFormat df1 = DateFormat.getDateTimeInstance();
+        System.out.println("America Los_Angeles time is=" +  df1.format(instance.getTime()));
     }
 
     private static void testTimezone(){

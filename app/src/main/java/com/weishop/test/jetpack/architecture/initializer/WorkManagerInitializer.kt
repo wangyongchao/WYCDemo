@@ -8,7 +8,6 @@ import com.weishop.test.util.LogUtils
 
 class WorkManagerInitializer : Initializer<WorkManager> {
     override fun create(context: Context): WorkManager {
-        LogUtils.d("WorkManagerInitializer create ${Thread.currentThread().name}")
         val configuration = Configuration.Builder().build()
         WorkManager.initialize(context,configuration)
         return WorkManager.getInstance(context)
@@ -16,7 +15,6 @@ class WorkManagerInitializer : Initializer<WorkManager> {
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        LogUtils.d("WorkManagerInitializer dependencies ${Thread.currentThread().name}")
         return mutableListOf()
     }
 }

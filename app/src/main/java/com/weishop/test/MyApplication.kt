@@ -9,12 +9,18 @@ import com.weishop.test.jetpack.architecture.initializer.ArouteInitializer
 import com.weishop.test.performance.AppBlockCanaryContext
 import com.weishop.test.util.CrashHandler
 import com.weishop.test.util.LogUtils
+import com.weishop.test.backgroudtask.ScreenBroadcastReceiver
+import android.content.Intent
+
+import android.content.IntentFilter
+
 
 /**
  * Created by wangyongchao on 16/7/1.
  */
 class MyApplication : Application() {
     private val clientId = "dsfa323234342"
+    private var mScreenBroadcastReceiver: ScreenBroadcastReceiver? = null
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         //        PluginManager.getInstance(base).init();
@@ -26,6 +32,14 @@ class MyApplication : Application() {
         //manifest中禁用自动初始化，改为手动初始化
         AppInitializer.getInstance(this).initializeComponent(ArouteInitializer::class.java)
 
+//        if (null == mScreenBroadcastReceiver)
+//            mScreenBroadcastReceiver = ScreenBroadcastReceiver()
+//        val intentFilter = IntentFilter()
+//        intentFilter.addAction(Intent.ACTION_SCREEN_ON) //解锁
+//        intentFilter.addAction(Intent.ACTION_SCREEN_OFF) //锁屏
+//        intentFilter.addAction(Intent.ACTION_USER_PRESENT) //开屏
+//        registerReceiver(mScreenBroadcastReceiver, intentFilter)
+
     }
 
     private fun intLeakCanary() {
@@ -33,7 +47,6 @@ class MyApplication : Application() {
         CrashHandler.getInstance().init(this)
         BlockCanary.install(this, AppBlockCanaryContext()).start()
     }
-
 
 
     private fun initLog() {

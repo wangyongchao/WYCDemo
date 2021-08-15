@@ -11,12 +11,10 @@ import java.io.File
 
 class XcrashInitializer : Initializer<Unit> {
     override fun create(context: Context) {
-        LogUtils.d("XcrashInitializer create")
         initXCrash()
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        LogUtils.d("XcrashInitializer dependencies")
 
         return mutableListOf(WorkManagerInitializer::class.java)
     }

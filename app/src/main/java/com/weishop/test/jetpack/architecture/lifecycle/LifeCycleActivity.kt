@@ -1,6 +1,7 @@
 package com.weishop.test.jetpack.architecture.lifecycle
 
 import android.content.Context
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.OnLifecycleEvent
 import com.weishop.test.databinding.ActivityArchitectureBinding
+import com.weishop.test.userinterface.AppBarChildActivity
 import com.weishop.test.util.LogUtils
 
 class LifeCycleActivity : AppCompatActivity() {
@@ -26,6 +28,7 @@ class LifeCycleActivity : AppCompatActivity() {
         lifecycle.addObserver(listener)
 
         mBinding.testBtn.setOnClickListener {
+            startActivity(Intent(this,AppBarChildActivity::class.java))
 
 
         }
@@ -39,13 +42,15 @@ class LifeCycleActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        super.onStart()
         LogUtils.d("LifeCycleActivity onStart")
+        super.onStart()
+
     }
 
     override fun onStop() {
-        super.onStop()
         LogUtils.d("LifeCycleActivity onStop")
+        super.onStop()
+
     }
 
 }

@@ -6,7 +6,6 @@ import com.weishop.test.util.LogUtils
 
 class ArouteInitializer :Initializer<Unit> {
     override fun create(context: Context) {
-        LogUtils.d("ArouteInitializer create")
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> {

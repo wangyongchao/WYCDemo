@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -35,7 +36,7 @@
             android:value="82" />
 
         <activity
-            android:name=".backgroudtask.BackGroudTaskActivity"
+            android:name=".jetpack.architecture.viewmodellivedata.ViewModelLiveDataActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +52,11 @@
             android:label="B" />
         <activity
             android:name=".activitycharacter.CActivity"
-            android:launchMode="standard" />
+            android:theme="@style/AppTheme.ReminderAlert"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:taskAffinity=":com.weishop.test.drink" />
         <activity
             android:name=".activitycharacter.DActivity"
             android:launchMode="standard" />

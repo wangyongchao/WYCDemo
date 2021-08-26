@@ -3,15 +3,76 @@ package com.kttest2.lambda
 /**
  * Kotlin的lambda表达式始终用花括号包围
  */
+
 class LambdaTest {
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            testSimpleLambda()
+            testSimpleScope()
 
 
         }
+
+        fun testSimpleScope(){
+            val listOf = listOf("403 Forbidden", "404 Not Found")
+            printMessagesWithPrefix(listOf,"Erro")
+            printProblemCounts(listOf)
+
+            run(::salute)//直接引用顶层函数,省略类名
+            val action={ person:Person,message:String->
+                sendEmail(person,message)
+            }
+            val nextAction=::sendEmail//action lambda被委托给sendEmail，可以直接引用sendEmail
+            nextAction(Person("scope",23),"dfadsf")
+
+            //构造方法引用
+            val createPerson=::Person
+            val p = createPerson("ALice", 29)
+            println(p)
+
+            //绑定引用
+            val p1=Person("Dmitry",34)
+            var personsAgeFunction=Person::age
+            println(personsAgeFunction(p1))//直接绑定p1 对象
+
+            //Kotlin 1.1计划支持绑定成员引用，它允许你使用成员引用语法捕捉特定实例对象上的方法引用
+            var dmitrysAgeFunction=p1::age
+            println(dmitrysAgeFunction())
+
+        }
+
+        private fun sendEmail(person: Person, message: String): Unit {
+            println("sendEmail $person,$message")
+        }
+
+        /**
+         * Kotlin允许在lambda内部访问非final变量甚至修改它们
+         * 从lambda内访问外部变量，我们称这些变量被lambda捕捉
+         */
+        fun printProblemCounts(reponses:Collection<String>){
+            var clientErros=0
+            var reponseErros=0
+            reponses.forEach {
+                //Kotlin允许在lambda内部访问非final变量甚至修改它们
+                if (it.startsWith("4")){
+                    clientErros++
+                }else if(it.startsWith("5")){
+                    reponseErros++
+                }
+            }
+            println("clientErros=$clientErros,reponseErros=$reponseErros")
+        }
+
+
+
+        fun printMessagesWithPrefix(messages:Collection<String>,prefix:String){
+            messages.forEach {
+                //可以直接方法prefix变量，不需要Java 中的final
+                println("$prefix $it")
+            }
+        }
+
 
         fun testSimpleLambda(){
             val pepole = initData()
@@ -25,6 +86,10 @@ class LambdaTest {
             pepole.maxByOrNull{person: Person -> person.age }
             //可以省略参数类型，和局部变量一样，如果lambda参数的类型可以被推导出来，你就不需要显式地指定它
             pepole.maxByOrNull{person -> person.age }
+
+            //成员引用
+            pepole.maxByOrNull(Person::age)
+
             //使用默认参数名称it代替命名参数。如果当前上下文期望的是只有一个参数的lambda且这个参数的类型可以推断出来，
             // 就会生成这个名称。仅在实参名称没有显式地指定时这个默认的名称才会生成。
             pepole.maxByOrNull{it.age }
@@ -164,3 +229,8 @@ class LambdaTest {
         }
     }
 }
+
+/**
+ * 顶层函数
+ */
+fun salute()= println("salute")

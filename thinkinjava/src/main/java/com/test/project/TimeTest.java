@@ -19,10 +19,15 @@ public class TimeTest {
 //            System.out.print(",id="+id);
 //
 //        }
-
-
-        getTime(1628959529655025l);
-
+        try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = sf.parse("2021-8-24 12:24:00");
+            long time = date.getTime()*1000;
+            System.out.println(time);
+            getTime2(1629779039994052l);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -30,25 +35,38 @@ public class TimeTest {
 
     /**
      * 微秒转日期
+     *
      * @param mms
      */
-    private static void getTime(long mms){
-        long sec=mms / 1000;
-        Calendar instance = Calendar.getInstance();
-        instance.setTimeInMillis(sec);
-        DateFormat df1 = DateFormat.getDateTimeInstance();
-        System.out.println("time is=" +  df1.format(instance.getTime()));
+    private static void getTime2(long mms) {
+        Date date = new Date(mms/1000);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss SSS");
+        System.out.println("time is=" + format.format(date));
 
     }
 
-    private static void getAmericaTime(){
+    /**
+     * 微秒转日期
+     *
+     * @param mms
+     */
+    private static void getTime(long mms) {
+        long sec = mms / 1000;
+        Calendar instance = Calendar.getInstance();
+        instance.setTimeInMillis(sec);
+        DateFormat df1 = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL);
+        System.out.println("time is=" + df1.format(instance.getTime()));
+
+    }
+
+    private static void getAmericaTime() {
         Calendar instance = Calendar.getInstance();
         instance.setTimeInMillis(1627517912521012l);
         DateFormat df1 = DateFormat.getDateTimeInstance();
-        System.out.println("America Los_Angeles time is=" +  df1.format(instance.getTime()));
+        System.out.println("America Los_Angeles time is=" + df1.format(instance.getTime()));
     }
 
-    private static void testTimezone(){
+    private static void testTimezone() {
         Date date = new Date();
         DateFormat dateFormat;
 

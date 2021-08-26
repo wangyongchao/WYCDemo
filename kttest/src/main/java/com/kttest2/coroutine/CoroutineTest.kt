@@ -60,15 +60,15 @@ class CoroutineTest {
 //            }
 
             //join LAZY 懒汉式，需要的时候再去启动协程
-//            runBlocking {
-//                log(1)
-//                val job = GlobalScope.launch(start = CoroutineStart.LAZY) {
-//                    log(2)
-//                }
-//                log(3)
-//                job.join()//挂起当前协程，直到job执行完成
-//                log(4)
-//            }
+            runBlocking {
+                log(1)
+                val job = GlobalScope.launch(start = CoroutineStart.LAZY) {
+                    log(2)
+                }
+                log(3)
+                job.join()//挂起当前协程，直到job执行完成
+                log(4)
+            }
 
             //DEFAULT 立即执行协程体，无论什么时候都可以被取消，如果cpu还没有调度协程，但是已经执行了cancle方法，调度的时候也不会执行协程
 //            runBlocking {

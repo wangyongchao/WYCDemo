@@ -1,6 +1,6 @@
-package com.kttest2.collectionsregion
+package com.kttest2.operatorOverrideAppoint.collectionsregion
 
-import com.kttest2.operatoroverride.Point
+import com.kttest2.operatorOverrideAppoint.Point
 
 
 data class Rectangle(var upperLeft: Point, val lowerRight: Point)

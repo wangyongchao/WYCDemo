@@ -1,4 +1,4 @@
-package com.kttest2.operatoroverride
+package com.kttest2.operatorOverrideAppoint
 
 class Person(var firstName:String,var lastName:String):Comparable<Person> {
     override fun compareTo(other: Person): Int {

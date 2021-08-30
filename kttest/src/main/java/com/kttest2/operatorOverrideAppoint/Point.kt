@@ -1,8 +1,14 @@
-package com.kttest2.operatoroverride
+package com.kttest2.operatorOverrideAppoint
 
 import java.lang.IndexOutOfBoundsException
 
+
+/**
+ * 数据类型默认生成解构声明
+ */
 data class Point(val x: Int, var y: Int) {
+
+
 
 
     /**

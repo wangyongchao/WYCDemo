@@ -1,6 +1,8 @@
-package com.kttest2.collectionsregion
+package com.kttest2.operatorOverrideAppoint.collectionsregion
 
-data class MutablePoint(var x:Int,var y:Int)
+data class MutablePoint(var x:Int,var y:Int){
+
+}
 
 operator fun MutablePoint.set(index:Int,value:Int){
     when(index){

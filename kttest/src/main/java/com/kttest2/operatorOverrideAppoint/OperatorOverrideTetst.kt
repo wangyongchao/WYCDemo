@@ -1,4 +1,4 @@
-package com.kttest2.operatoroverride
+package com.kttest2.operatorOverrideAppoint
 
 import java.math.BigDecimal
 
@@ -111,3 +111,5 @@ operator fun Char.times(count:Int):String{
 }
 
 operator fun BigDecimal.inc()=this+BigDecimal.ONE
+
+

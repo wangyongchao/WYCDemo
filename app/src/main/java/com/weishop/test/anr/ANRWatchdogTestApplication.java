@@ -27,6 +27,19 @@ public class ANRWatchdogTestApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        initANR();
+//    模拟anr
+//        long currentTimeMillis = System.currentTimeMillis();
+//        while (true){
+//            long time = System.currentTimeMillis();
+//            if(time-currentTimeMillis>20000){
+//                return;
+//            }
+//        }
+
+    }
+
+    private void initANR() {
         anrWatchDog
                 .setANRListener(new ANRWatchDog.ANRListener() {
                     @Override
@@ -36,8 +49,7 @@ public class ANRWatchdogTestApplication extends Application {
                         // Some tools like ACRA are serializing the exception, so we must make sure the exception serializes correctly
                         try {
                             new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(error);
-                        }
-                        catch (IOException ex) {
+                        } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
 
@@ -54,9 +66,9 @@ public class ANRWatchdogTestApplication extends Application {
                             Log.w("ANR-Watchdog-Demo", "Intercepted ANR that is too short (" + duration + " ms), postponing for " + ret + " ms.");
                         return ret;
                     }
-                })
-        ;
+                });
 
         anrWatchDog.start();
+        anrWatchDog.setIgnoreDebugger(true);
     }
 }

@@ -22,6 +22,18 @@ public class DActivity extends Activity implements View.OnClickListener {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        long currentTimeMillis = System.currentTimeMillis();
+        while (true){
+            long time = System.currentTimeMillis();
+            if(time-currentTimeMillis>20000){
+                return;
+            }
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -36,11 +48,7 @@ public class DActivity extends Activity implements View.OnClickListener {
         System.out.println("DActivity onRestart =" + this);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        System.out.println("DActivity onStart =" + this);
-    }
+
 
     @Override
     protected void onResume() {

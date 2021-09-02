@@ -2,6 +2,7 @@ package com.weishop.test.anr;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.weishop.test.R;
+import com.weishop.test.activitycharacter.DActivity;
 
 
 public class ANRActivity extends Activity {
@@ -60,6 +62,19 @@ public class ANRActivity extends Activity {
         }, 1000);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        long currentTimeMillis = System.currentTimeMillis();
+        while (true){
+            long time = System.currentTimeMillis();
+            if(time-currentTimeMillis>5000000){
+                return;
+            }
+        }
+    }
+
     private int mode = 0;
     private boolean crash = true;
 
@@ -76,8 +91,9 @@ public class ANRActivity extends Activity {
         minAnrDurationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                application.duration = application.duration % 6 + 2;
-                minAnrDurationButton.setText(application.duration + " seconds");
+//                application.duration = application.duration % 6 + 2;
+//                minAnrDurationButton.setText(application.duration + " seconds");
+                startActivity(new Intent(ANRActivity.this, DActivity.class));
             }
         });
 

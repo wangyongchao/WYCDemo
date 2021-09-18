@@ -73,7 +73,6 @@ public class ANRWatchDog extends Thread {
 
     private static final InterruptionListener DEFAULT_INTERRUPTION_LISTENER = new InterruptionListener() {
         @Override public void onInterrupted(InterruptedException exception) {
-            Log.w("ANRWatchdog", "Interrupted: " + exception.getMessage());
         }
     };
 
@@ -258,7 +257,6 @@ public class ANRWatchDog extends Thread {
             if (_tick != 0 && !_reported) {
                 //noinspection ConstantConditions
                 if (!_ignoreDebugger && (Debug.isDebuggerConnected() || Debug.waitingForDebugger())) {
-                    Log.w("ANRWatchdog", "An ANR was detected but ignored because the debugger is connected (you can prevent this with setIgnoreDebugger(true))");
                     _reported = true;
                     continue ;
                 }

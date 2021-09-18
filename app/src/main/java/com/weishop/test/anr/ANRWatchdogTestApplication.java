@@ -14,12 +14,13 @@ public class ANRWatchdogTestApplication extends Application {
 
     ANRWatchDog anrWatchDog = new ANRWatchDog(2000);
 
-    int duration = 4;
+    int duration = 5;
 
     final ANRWatchDog.ANRListener silentListener = new ANRWatchDog.ANRListener() {
         @Override
         public void onAppNotResponding(ANRError error) {
             Log.e("ANR-Watchdog-Demo", "", error);
+
         }
     };
 
@@ -67,7 +68,7 @@ public class ANRWatchdogTestApplication extends Application {
                         return ret;
                     }
                 });
-
+        anrWatchDog.setDaemon(true);
         anrWatchDog.start();
         anrWatchDog.setIgnoreDebugger(true);
     }

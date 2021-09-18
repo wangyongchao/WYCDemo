@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -33,10 +33,13 @@
             android:value="xpDemo" />
         <meta-data
             android:name="xposedminversion"
-            android:value="82" />
+            android:value="82" /> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".anr.ANRActivity"
+            android:name=".ads.AdsActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,11 +55,11 @@
             android:label="B" />
         <activity
             android:name=".activitycharacter.CActivity"
-            android:theme="@style/AppTheme.ReminderAlert"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:noHistory="true"
-            android:taskAffinity=":com.weishop.test.drink" />
+            android:taskAffinity=":com.weishop.test.drink"
+            android:theme="@style/AppTheme.ReminderAlert" />
         <activity
             android:name=".activitycharacter.DActivity"
             android:launchMode="standard" />
@@ -116,28 +119,29 @@
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"
             android:authorities="${applicationId}.workmanager-init"
-            android:exported="false"
-            android:enabled="false"/>
-
-        <!--tools:node="merge" 可以解决有冲突的条目
+            android:enabled="false"
+            android:exported="false" />
+        <!--
+tools:node="merge" 可以解决有冲突的条目
         tools:node="remove" 移除对应的条目，合并过程中如果别的manifest也有也会被移除
-
         -->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            tools:node="merge"
-            android:exported="false">
+            android:exported="false"
+            tools:node="merge">
+
             <!-- This entry makes ExampleLoggerInitializer discoverable. -->
-<!--            <meta-data  android:name="com.weishop.test.jetpack.navigation.architecture.initializer.WorkManagerInitializer"-->
-<!--                android:value="androidx.startup" />-->
+            <!-- <meta-data  android:name="com.weishop.test.jetpack.navigation.architecture.initializer.WorkManagerInitializer" -->
+            <!-- android:value="androidx.startup" /> -->
 
-            <meta-data  android:name="com.weishop.test.jetpack.architecture.initializer.XcrashInitializer"
+            <meta-data
+                android:name="com.weishop.test.jetpack.architecture.initializer.XcrashInitializer"
                 android:value="androidx.startup" />
-
-            <meta-data  android:name="com.weishop.test.jetpack.architecture.initializer.ArouteInitializer"
+            <meta-data
+                android:name="com.weishop.test.jetpack.architecture.initializer.ArouteInitializer"
                 android:value="androidx.startup"
-                tools:node="remove"/>
+                tools:node="remove" />
         </provider>
     </application>
 

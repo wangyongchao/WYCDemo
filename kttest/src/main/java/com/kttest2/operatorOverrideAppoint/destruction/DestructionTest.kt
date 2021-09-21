@@ -11,9 +11,41 @@ class DestructionTest {
     companion object{
         @JvmStatic
         fun main(args: Array<String>) {
-            testDestruction()
+            testMap()
 
         }
+
+        fun testMap(){
+            val mapOf = mapOf<String, String>("1" to "A", "2" to "B")
+            print(mapOf)
+
+
+        }
+
+        fun printMap(map:Map<String,String>){
+            for((key,value ) in map){
+                println("key=$key,value=$value")
+            }
+        }
+
+
+
+        fun testSplitFileName(){
+            val (name,ext) = splitFileName("test.txt")
+            println("name=$name,ext=$ext")
+
+
+
+        }
+
+        fun splitFileName(fileName:String):NameComponents{
+//            val result = fileName.split(".", limit = 2)
+//            return NameComponents(result[0],result[1])
+            var(name,ext)=fileName.split(".", limit = 2)
+            return NameComponents(name,ext)
+
+        }
+
 
         /**
          * 调用 componentN

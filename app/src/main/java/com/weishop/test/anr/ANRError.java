@@ -1,8 +1,10 @@
 package com.weishop.test.anr;
 
 import android.os.Looper;
+import android.util.Log;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -54,12 +56,13 @@ public class ANRError extends Error {
 
     @Override
     public Throwable fillInStackTrace() {
-        setStackTrace(new StackTraceElement[] {});
+        setStackTrace(new StackTraceElement[]{});
         return this;
     }
 
     static ANRError New(long duration, String prefix, boolean logThreadsWithoutStackTrace) {
         final Thread mainThread = Looper.getMainLooper().getThread();
+        Log.d("ANRWatchdog", mainThread.getStackTrace().toString());
 
         final Map<Thread, StackTraceElement[]> stackTraces = new TreeMap<Thread, StackTraceElement[]>(new Comparator<Thread>() {
             @Override
@@ -75,17 +78,7 @@ public class ANRError extends Error {
         });
 
         for (Map.Entry<Thread, StackTraceElement[]> entry : Thread.getAllStackTraces().entrySet())
-            if (
-                    entry.getKey() == mainThread
-                ||  (
-                        entry.getKey().getName().startsWith(prefix)
-                    &&  (
-                            logThreadsWithoutStackTrace
-                        ||
-                            entry.getValue().length > 0
-                        )
-                    )
-                )
+            if (entry.getKey() == mainThread|| (entry.getKey().getName().startsWith(prefix)&& (logThreadsWithoutStackTrace||entry.getValue().length > 0)))
                 stackTraces.put(entry.getKey(), entry.getValue());
 
         // Sometimes main is not returned in getAllStackTraces() - ensure that we list it

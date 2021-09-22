@@ -65,7 +65,6 @@ public class ANRActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-
         long currentTimeMillis = System.currentTimeMillis();
         while (true){
             long time = System.currentTimeMillis();
@@ -91,9 +90,8 @@ public class ANRActivity extends Activity {
         minAnrDurationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                application.duration = application.duration % 6 + 2;
-//                minAnrDurationButton.setText(application.duration + " seconds");
-                startActivity(new Intent(ANRActivity.this, DActivity.class));
+                application.duration = application.duration % 6 + 2;
+                minAnrDurationButton.setText(application.duration + " seconds");
             }
         });
 

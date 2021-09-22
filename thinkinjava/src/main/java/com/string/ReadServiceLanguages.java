@@ -33,7 +33,7 @@ public class ReadServiceLanguages {
      * 源文件路径 --文件夹层级，最好是统一放到一个文件下面
      * 例如：C:\Users\Administrator\Downloads\stringsdownload_20181229101711
      */
-    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20210728113916";
+    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20210913142756";
 
     /**
      * 目标项目路径----文件夹层级，最好是统一放到一个文件下面
@@ -41,7 +41,7 @@ public class ReadServiceLanguages {
      */
     public static final String BASE_DES_PATH_LOSEBELLYFAT = "/Users/wangyongchao/zjworkspace/LoseBellyFat/app/src/main/res";
     public static final String BASE_DES_PATH_YOGA = "/Users/wangyongchao/zjworkspace/YogaWorkout/app/src/main/res";
-    public static final String BASE_DES_PATH = BASE_DES_PATH_YOGA;
+    public static final String BASE_DES_PATH = BASE_DES_PATH_LOSEBELLYFAT;
 
     public static String languagesGradle_LoseBellyFat = "\"en\", \"de\", \"es\", \"fr\", \"fa\",\"it\", \"nl\", \"pt\", \"ru\", \"sv\",\"pl\",\"ja\",\"ko\",\"tr\",\"da\",\"ar\",\"in-rID\",\"zh-rCN\",\"zh-rTW\"";
     public static String languagesGradle_yoga = "\"ar\", \"de\",\"en\", \"es\", \"fa\", \"fr\",\"in-rID\",\"it\", \"ja\", \"ko\", \"nl\", \"pl\",\"pt\",\"ru\",\"th\",\"tr\",\"uk\",\"vi\",\"zh-rCN\",\"zh-rTW\"";

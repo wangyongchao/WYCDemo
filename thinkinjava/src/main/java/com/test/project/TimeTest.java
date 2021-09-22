@@ -9,29 +9,34 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class TimeTest {
+
+    public enum Source{
+        LIST("list"),EXE("exe");
+        private String mSource;
+
+        Source(String source) {
+            this.mSource=source;
+        }
+    }
+
+
     public static void main(String[] args) {
+        System.out.println(Source.LIST.mSource);
 
-//        TimeZone aDefault = TimeZone.getDefault();
-//        System.out.println(aDefault.getDisplayName());
+    }
 
-//        String[] availableIDs = TimeZone.getAvailableIDs();
-//        for (String id :availableIDs) {
-//            System.out.print(",id="+id);
-//
-//        }
+    private static void firebaseTime() {
         try {
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = sf.parse("2021-8-24 12:24:00");
-            long time = date.getTime()*1000;
+            Date date = sf.parse("2021-09-15 09:02:00");
+            long time = date.getTime() * 1000;
             System.out.println(time);
-            getTime2(1629779039994052l);
+//            getTime2(1631637626279111l);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
     }
+
 
     /**
      * 微秒转日期
@@ -39,7 +44,7 @@ public class TimeTest {
      * @param mms
      */
     private static void getTime2(long mms) {
-        Date date = new Date(mms/1000);
+        Date date = new Date(mms / 1000);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss SSS");
         System.out.println("time is=" + format.format(date));
 
@@ -54,7 +59,7 @@ public class TimeTest {
         long sec = mms / 1000;
         Calendar instance = Calendar.getInstance();
         instance.setTimeInMillis(sec);
-        DateFormat df1 = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL);
+        DateFormat df1 = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL);
         System.out.println("time is=" + df1.format(instance.getTime()));
 
     }

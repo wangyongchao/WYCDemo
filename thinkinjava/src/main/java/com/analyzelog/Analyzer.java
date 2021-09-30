@@ -15,7 +15,7 @@ public abstract class Analyzer {
         if (mNextAnalyzer != null) {
             mNextAnalyzer.begin(response);
         } else {
-            response.release();
+//            response.release();
         }
     }
 

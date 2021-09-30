@@ -6,43 +6,48 @@ import com.analyzelog.utils.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 加工数据
  */
 public class FilterAnalyzer extends Analyzer {
+    private final Map<String, String> mParams;
     private List<LogBean> mLogBeans;
-    private List<LogBean> mTagLogBeans = new ArrayList<>();
-    private List<LogBean> mEventIdLogBeans = new ArrayList<>();
-    private String mTAG;
-    private String mEventId;//直播中eventid都是live_debug_message，别的业务都是eventId=tag
+    private String mEventName;
     private String mStartDate; //查询日期开始日期
     private String mEndDate;//查询结束日期
+    private Director.FilterMode mMode;
+    private int itemCount = 1000;
 
-    public FilterAnalyzer(String tag, String eventId, String startDate, String endDate) {
-        this.mTAG = tag;
-        this.mEventId = eventId;
+    public FilterAnalyzer(Director.FilterMode mode, String eventName, Map<String, String> params, String startDate, String endDate) {
+        this.mEventName = eventName;
+        this.mParams = params;
         this.mStartDate = startDate;
         this.mEndDate = endDate;
+        this.mMode = mode;
     }
 
     @Override
     public void startAnalyzer(Response response) {
         mLogBeans = response.getLogBeans();
-        System.out.println("start FilterAnalyzer size=" + mLogBeans.size());
-        filterByDateRange();
         sortByDate(mLogBeans);
-        if (mTAG != null) {
-            filterByTag();
-        }
+        System.out.println("start FilterAnalyzer");
+        if (mMode == Director.FilterMode.ALL) {
 
-        if (mEventId != null) {
-            filterByEventId();
+
+        } else if (mMode == Director.FilterMode.CRASH) {
+            List<LogBean> logBeans = filterByCrash();
+            response.setCrashLogBeans(logBeans);
+            System.out.println("FilterAnalyzer end="+logBeans.size());
+
+        } else if (mMode == Director.FilterMode.ANR) {
+
         }
-        response.setTagLogBeans(mTagLogBeans);
-        response.setEventIdLogBeans(mEventIdLogBeans);
     }
 
     /**
@@ -52,7 +57,7 @@ public class FilterAnalyzer extends Analyzer {
         Iterator<LogBean> iterator = mLogBeans.iterator();
         while (iterator.hasNext()) {
             LogBean logBean = iterator.next();
-            String strDate = logBean.getData().getDate();
+            String strDate = null;
             Date date = Utils.formatDate(strDate);
             if (mStartDate != null && mEndDate != null) {
                 Date startDate = Utils.formatDate(mStartDate);
@@ -77,35 +82,32 @@ public class FilterAnalyzer extends Analyzer {
 
 
     /**
-     * 根据tag过滤
+     * 0,1,2
+     * 筛选crash 1,2,3,4,5
      */
-    private void filterByTag() {
-        mTagLogBeans.clear();
+    private List<LogBean> filterByCrash() {
+        List<Integer> result = new ArrayList<>();
         for (int i = 0; i < mLogBeans.size(); i++) {
             LogBean logBean = mLogBeans.get(i);
-            String tag = logBean.getData().getTag();
-            if (mTAG != null && mTAG.equals(tag)) {
-                mTagLogBeans.add(logBean);
+            if ("app_exception".equals(logBean.event_name)) {
+                result.add(i);
+                break;
             }
         }
-
-    }
-
-    /**
-     * 根据eventId过滤
-     */
-    private void filterByEventId() {
-        mEventIdLogBeans.clear();
-        for (int i = 0; i < mLogBeans.size(); i++) {
-            LogBean logBean = mLogBeans.get(i);
-            String eventid = logBean.getData().getEventid();
-            if (mEventId != null && mEventId.equals(eventid)) {
-                mEventIdLogBeans.add(logBean);
+        if (!result.isEmpty()) {
+            int size = result.size();
+            Integer integer = result.get(0);
+            if(integer-100<0){
+                integer=0;
+            }else {
+                integer=integer-100;
             }
+            System.out.println("filterByCrash ="+integer);
+            return mLogBeans.subList(integer, mLogBeans.size());
         }
-
-
+        return null;
     }
+
 
     /**
      * 根据日期排序

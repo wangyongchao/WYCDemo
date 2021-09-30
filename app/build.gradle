@@ -136,6 +136,7 @@ dependencies {
     //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
 
+    //google 广告
     implementation 'com.google.android.gms:play-services-ads:20.3.0'
 }
 

@@ -9,7 +9,7 @@ class LambdaTest {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            testFastAdapter()
+            testLambda()
 
 
         }
@@ -216,11 +216,13 @@ class LambdaTest {
             val result: (person: Person) -> Int = { person: Person ->
                 person.age
             }
-
+            println(result)
             val result2: (person: Person) -> Person? = {
                 it
             }
+
             val result21 = result2(Person("dsd", 2))
+            result21?.age//返回可null的类型
             val maxOf = persons.maxOf {
                 //只有一个参数的时候，可以使用it
                 it.age

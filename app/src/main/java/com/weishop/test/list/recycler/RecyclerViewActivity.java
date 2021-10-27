@@ -99,63 +99,63 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
 //            }
 //
 //        });
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                String state = "";
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    //RecyclerView 停止滚动的时候调用
-                    state = "SCROLL_STATE_IDLE";
-                    int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
-                    int lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
-                    for (int i = firstVisibleItemPosition; i < lastVisibleItemPosition; i++) {
-                        View view = mLayoutManager.findViewByPosition(i);
-                        Rect rect = new Rect();
-                        view.getGlobalVisibleRect(rect);
-                        LogUtils.d("i=" + i +",rect = " + rect);
-                    }
-
-
-                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    //正在通过手势滚动
-                    state = "SCROLL_STATE_DRAGGING";
-
-                } else if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
-                    //滑动后手拿开，通过惯性滚动
-                    state = "SCROLL_STATE_SETTLING";
-
-                }
-
-            }
-
-            /**
-             *
-             * @param recyclerView
-             * @param dx 水平方向每次滚动的距离
-             * @param dy 垂直方向每次滚动的距离
-             */
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                LogUtils.d("dx=" + dx + ",dy=" + dy);
-                //第一个可见的item在列表中的位置，以0开始
-                int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
-
-
-                //第一个完全可见的item在列表中的位置
-                int firstCompletelyVisibleItemPosition = mLayoutManager.findFirstCompletelyVisibleItemPosition();
-
-                //最后一个可见的item在列表中的位置,可以有遮盖，不是完全可见
-                int lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
-
-                //最后一个完全可见的item在列表中的位置,整个item都在屏幕中
-                int lastCompletelyVisibleItemPosition = mLayoutManager.findLastCompletelyVisibleItemPosition();
-//                LogUtils.d("firstVisibleItemPosition="+firstVisibleItemPosition
-//                        +",firstCompletelyVisibleItemPosition="+firstCompletelyVisibleItemPosition
-//                        +",lastVisibleItemPosition="+lastVisibleItemPosition
-//                        +",lastCompletelyVisibleItemPosition="+lastCompletelyVisibleItemPosition);
-
-            }
-        });
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                String state = "";
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    //RecyclerView 停止滚动的时候调用
+//                    state = "SCROLL_STATE_IDLE";
+//                    int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+//                    int lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
+//                    for (int i = firstVisibleItemPosition; i < lastVisibleItemPosition; i++) {
+//                        View view = mLayoutManager.findViewByPosition(i);
+//                        Rect rect = new Rect();
+//                        view.getGlobalVisibleRect(rect);
+//                        LogUtils.d("i=" + i +",rect = " + rect);
+//                    }
+//
+//
+//                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+//                    //正在通过手势滚动
+//                    state = "SCROLL_STATE_DRAGGING";
+//
+//                } else if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
+//                    //滑动后手拿开，通过惯性滚动
+//                    state = "SCROLL_STATE_SETTLING";
+//
+//                }
+//
+//            }
+//
+//            /**
+//             *
+//             * @param recyclerView
+//             * @param dx 水平方向每次滚动的距离
+//             * @param dy 垂直方向每次滚动的距离
+//             */
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+////                LogUtils.d("dx=" + dx + ",dy=" + dy);
+//                //第一个可见的item在列表中的位置，以0开始
+//                int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+//
+//
+//                //第一个完全可见的item在列表中的位置
+//                int firstCompletelyVisibleItemPosition = mLayoutManager.findFirstCompletelyVisibleItemPosition();
+//
+//                //最后一个可见的item在列表中的位置,可以有遮盖，不是完全可见
+//                int lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
+//
+//                //最后一个完全可见的item在列表中的位置,整个item都在屏幕中
+//                int lastCompletelyVisibleItemPosition = mLayoutManager.findLastCompletelyVisibleItemPosition();
+////                LogUtils.d("firstVisibleItemPosition="+firstVisibleItemPosition
+////                        +",firstCompletelyVisibleItemPosition="+firstCompletelyVisibleItemPosition
+////                        +",lastVisibleItemPosition="+lastVisibleItemPosition
+////                        +",lastCompletelyVisibleItemPosition="+lastCompletelyVisibleItemPosition);
+//
+//            }
+//        });
 
         findViewById(R.id.delete).setOnClickListener(this);
 

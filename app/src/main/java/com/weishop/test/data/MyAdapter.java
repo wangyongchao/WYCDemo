@@ -3,12 +3,15 @@ package com.weishop.test.data;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.weishop.test.R;
+import com.weishop.test.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LogUtils.d("onCreateViewHolder");
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_view, parent, false);
         ViewHolder vh = new ViewHolder(v);
@@ -42,6 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        LogUtils.d("onBindViewHolder position="+position);
         if(position % 2==0){
             holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }else {

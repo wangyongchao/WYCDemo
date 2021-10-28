@@ -13,7 +13,7 @@ class CollectionsRegionTest {
         @JvmStatic
         fun main(args: Array<String>) {
 
-            testIterator()
+            testRangeTo()
         }
 
         /**
@@ -21,7 +21,7 @@ class CollectionsRegionTest {
          */
         fun testIterator() {
             val newYear = LocalDate.ofYearDay(2017, 1)
-            var daysOff = newYear.minusDays(1)..newYear
+            var daysOff: ClosedRange<LocalDate> = newYear.minusDays(1)..newYear
             for (dayOff in daysOff) {
                 println(dayOff)
             }
@@ -41,6 +41,11 @@ class CollectionsRegionTest {
 
             (0..5).forEach {
                 println(it)
+            }
+
+            //调用IntRange的iterator
+            for (i in 0..5) {
+                println(i)
             }
 
 

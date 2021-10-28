@@ -24,6 +24,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".media.MediaActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="xposedmodule"
@@ -39,7 +42,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".ads.NativeAdsActivity"
+            android:name=".rxjava.RxJavaActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

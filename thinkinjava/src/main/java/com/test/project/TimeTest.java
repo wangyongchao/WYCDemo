@@ -22,7 +22,16 @@ public class TimeTest {
 
 
     public static void main(String[] args) {
-        firebaseTime();
+        getTime2(1633775289480198l);
+        getTime2(1633775196378165l);
+        getTime2(1633775193590151l);
+        getTime2(1633775190996137l);
+        getTime2(1633775170447101l);
+        getTime2(1633775075687055l);
+        getTime2(1633775070101040l);
+        getTime2(1633774534418067l);
+        getTime2(1633774371085081l);
+        getTime2(1633774364742066l);
 
 
     }

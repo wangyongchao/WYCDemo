@@ -33,13 +33,13 @@ public class ReadServiceLanguages {
      * 源文件路径 --文件夹层级，最好是统一放到一个文件下面
      * 例如：C:\Users\Administrator\Downloads\stringsdownload_20181229101711
      */
-    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20211028102021";
+    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20211105133716";
 
     /**
      * 目标项目路径----文件夹层级，最好是统一放到一个文件下面
      * 例如:D:\AndroidStudioWorkSpace\dev\new\trunk\app\src\main\res
      */
-    public static final String BASE_DES_PATH_PLANK = "/Users/wangyongchao/zjworkspace/PlankWorkout/thirtydayfit-lib/src/main/res";
+    public static final String BASE_DES_PATH_PLANK = "/Users/wangyongchao/zjworkspace/PlankWorkout/app/src/main/res";
     public static final String BASE_DES_PATH_LOSEBELLYFAT = "/Users/wangyongchao/zjworkspace/LoseBellyFat/app/src/main/res";
     public static final String BASE_DES_PATH_YOGA = "/Users/wangyongchao/zjworkspace/YogaWorkout/app/src/main/res";
     public static final String BASE_DES_PATH = BASE_DES_PATH_LOSEBELLYFAT;

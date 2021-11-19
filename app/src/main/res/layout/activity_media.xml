@@ -6,4 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".media.MediaActivity">
 
+
+    <Button
+        android:id="@+id/main_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="maintest"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/thread_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="threadtest"
+        app:layout_constraintLeft_toRightOf="@+id/main_test"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

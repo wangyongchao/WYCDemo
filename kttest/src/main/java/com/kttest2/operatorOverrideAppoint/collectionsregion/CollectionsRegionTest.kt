@@ -13,7 +13,7 @@ class CollectionsRegionTest {
         @JvmStatic
         fun main(args: Array<String>) {
 
-            testRangeTo()
+            accessByIndex()
         }
 
         /**

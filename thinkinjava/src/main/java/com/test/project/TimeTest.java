@@ -11,27 +11,20 @@ import java.util.TimeZone;
 public class TimeTest {
 
 
-    public enum Source{
-        LIST("list"),EXE("exe");
+    public enum Source {
+        LIST("list"), EXE("exe");
         private String mSource;
 
         Source(String source) {
-            this.mSource=source;
+            this.mSource = source;
         }
     }
 
 
     public static void main(String[] args) {
-        getTime2(1633775289480198l);
-        getTime2(1633775196378165l);
-        getTime2(1633775193590151l);
-        getTime2(1633775190996137l);
-        getTime2(1633775170447101l);
-        getTime2(1633775075687055l);
-        getTime2(1633775070101040l);
-        getTime2(1633774534418067l);
-        getTime2(1633774371085081l);
-        getTime2(1633774364742066l);
+        getTime2(1635306472007166l);// startup
+        getTime2(1635306476201167l);// startup
+        firebaseTime();
 
 
     }
@@ -39,7 +32,7 @@ public class TimeTest {
     private static void firebaseTime() {
         try {
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = sf.parse("2021-09-29 21:14:00");
+            Date date = sf.parse("2021-11-08 04:06:23");
             long time = date.getTime() * 1000;
             System.out.println(time);
 //            getTime2(1631637626279111l);

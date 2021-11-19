@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
@@ -32,6 +33,7 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.ReplaySubject;
 
 public class RxJavaActivity extends Activity implements View.OnClickListener {
 
@@ -39,6 +41,9 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
     private Subscription mSubscription;
     private DemoTest demoTest = new DemoTest();
     private CreateOperator createOperator = new CreateOperator();
+    private ReplaySubject<Integer> integerObservable;
+    private ObservableEmitter<Integer> mEmitter;
+    private int count=3;
 
 
     @Override
@@ -60,7 +65,35 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        testFlatMap();
+        if (v.getId() == R.id.get) {
+            testFlatMapX();
+        } else {
+            LogUtils.d("onClick 3");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    integerObservable.onNext(count++);
+                }
+            }).start();
+        }
+
+    }
+
+    private void testRealSubject() {
+        ReplaySubject<Integer> replaySubject = ReplaySubject.create();
+        LogUtils.d("emit=" + 1);
+        replaySubject.onNext(1);
+        LogUtils.d("emit=" + 2);
+        replaySubject.onNext(2);
+        LogUtils.d("emit=" + 3);
+        replaySubject.onNext(3);
+        replaySubject.onComplete();
+        replaySubject.subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                LogUtils.d("accept=" + integer);
+            }
+        });
     }
 
 
@@ -78,48 +111,50 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                LogUtils.d("subscribe");
+                LogUtils.d("Observable onNext 1");
                 emitter.onNext(1);
+
+                LogUtils.d("Observable onNext 2");
                 emitter.onNext(2);
+
+                LogUtils.d("Observable onNext 3");
                 emitter.onNext(3);
+
                 LogUtils.d("onComplete before");
                 emitter.onComplete();
                 LogUtils.d("onComplete after");
+
+                LogUtils.d("Observable onNext 4");
                 emitter.onNext(4);
+
             }
-        }).subscribe(new Consumer<Integer>() {
+        }).delay(5, TimeUnit.SECONDS).subscribe(new Observer<Integer>() {
+            Disposable disposable;
+
             @Override
-            public void accept(Integer integer) throws Exception {
-                LogUtils.d("Observer accept =" + integer);
+            public void onSubscribe(Disposable d) {
+                disposable = d;
+                LogUtils.d("Observer onSubscribe =" + d.isDisposed());
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                LogUtils.d("Observer onNext =" + integer);
+                if (integer.intValue() == 2) {
+                    disposable.dispose();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("Observer Throwable =" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d("Observer onComplete" + disposable.isDisposed());
             }
         });
-//                subscribe(new Observer<Integer>() {
-//            Disposable disposable;
-//
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//                disposable = d;
-//                LogUtils.d("Observer onSubscribe =" + d.toString());
-//            }
-//
-//            @Override
-//            public void onNext(Integer integer) {
-//                LogUtils.d("Observer onNext =" + integer);
-//                if (integer.intValue() == 2) {
-//                    disposable.dispose();
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                LogUtils.d("Observer Throwable =" + e.getMessage());
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                LogUtils.d("Observer onComplete");
-//            }
-//        });
 
     }
 
@@ -221,9 +256,10 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
         }).concatMap(new Function<Integer, ObservableSource<String>>() {
             @Override
             public ObservableSource<String> apply(Integer integer) throws Exception {
-                LogUtils.d("apply=" + integer);
+                LogUtils.d("apply1=" + integer);
                 List<String> list = new ArrayList<String>();
-                list.add("string value" + integer.intValue());
+                list.add("apply1 position1 " + integer.intValue());
+                list.add("apply1 position2 " + integer.intValue());
                 return Observable.fromIterable(list);
             }
         }).concatMap(new Function<String, ObservableSource<String>>() {
@@ -231,17 +267,89 @@ public class RxJavaActivity extends Activity implements View.OnClickListener {
             public ObservableSource<String> apply(String str) throws Exception {
                 LogUtils.d("apply2=" + str);
                 List<String> list = new ArrayList<String>();
-                list.add("2  map" + str);
+                list.add("apply2 position1 " + str);
+                list.add("apply2 position2 " + str);
                 return Observable.fromIterable(list);
             }
         }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                LogUtils.d("accept=" + s);
+
+            }
+        });
+
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void testFlatMapX() {
+
+//        integerObservable = Observable.create(new ObservableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+//                mEmitter = emitter;
+////                mEmitter.onNext(1);
+////                mEmitter.onNext(2);
+//
+//            }
+//        });
+
+
+        integerObservable = ReplaySubject.create();
+        integerObservable.concatMap(new Function<Integer, ObservableSource<String>>() {
+            @Override
+            public ObservableSource<String> apply(Integer integer) throws Exception {
+                LogUtils.d("concatMap1 apply" + integer + "," + Thread.currentThread().getName());
+                return Observable.create(new ObservableOnSubscribe<String>() {
                     @Override
-                    public void accept(String s) throws Exception {
-                        LogUtils.d("s=" + s);
+                    public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Exception {
+                        LogUtils.d("concatMap1 apply"+integer+" subscribe," + Thread.currentThread().getName());
+                        emitter.onNext("str=" + integer.intValue());
+                        emitter.onComplete();
 
                     }
-                });
+                }).subscribeOn(AndroidSchedulers.mainThread());
+            }
+        }).concatMap(new Function<String, ObservableSource<Person>>() {
+            @Override
+            public ObservableSource<Person> apply(String str) throws Exception {
+                LogUtils.d("concatMap2 apply" + str + "," + Thread.currentThread().getName());
+                return Observable.create(new ObservableOnSubscribe<Person>() {
+                    @Override
+                    public void subscribe(@NonNull ObservableEmitter<Person> emitter) throws Exception {
+                        LogUtils.d("concatMap2 apply"+str+" subscribe," + Thread.currentThread().getName());
+                        Person person = new Person(str);
+                        emitter.onNext(person);
+                        emitter.onComplete();
 
+                    }
+                }).delay(5, TimeUnit.SECONDS).subscribeOn(AndroidSchedulers.mainThread());
+            }
+        }).subscribe(new Observer<Person>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                LogUtils.d("onSubscribe");
+            }
+
+            @Override
+            public void onNext(@NonNull Person person) {
+                LogUtils.d("onNext " + person.getName() + "," + Thread.currentThread().getName());
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                LogUtils.d("onError " + e);
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d("onComplete");
+            }
+        });
+        integerObservable.onNext(1);
+        integerObservable.onNext(2);
+        integerObservable.onNext(3);
 
     }
 

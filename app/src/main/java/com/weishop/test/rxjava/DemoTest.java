@@ -47,7 +47,7 @@ public class DemoTest {
     private Subscription subscription;
 
     public void test() {
-        testZip();
+        testObservers();
     }
 
     /**
@@ -576,6 +576,7 @@ public class DemoTest {
      */
     private void testObservers() {
         //Observable
+        //Observable.create(new ObservableOnSubscribe<Integer>() {
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
@@ -585,7 +586,7 @@ public class DemoTest {
         }).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                LogUtils.d("onSubscribe =" + d.isDisposed());
             }
 
             @Override
@@ -596,12 +597,12 @@ public class DemoTest {
 
             @Override
             public void onError(Throwable e) {
-
+                LogUtils.d("onError =" + e);
             }
 
             @Override
             public void onComplete() {
-
+                LogUtils.d("onComplete");
             }
         });
 

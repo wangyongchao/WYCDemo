@@ -18,15 +18,20 @@ class CoroutineTest {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-            startMode()
+            test()
 
 
         }
 
         fun test() {
             runBlocking {
+                println("${Thread.currentThread().name} 1")
+                withContext(Dispatchers.IO){
+                    delay(5000)
+                    println("${Thread.currentThread().name} 2")
 
-
+                }
+                println("${Thread.currentThread().name} 3")
             }
         }
 

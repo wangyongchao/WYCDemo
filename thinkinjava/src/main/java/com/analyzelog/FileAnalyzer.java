@@ -27,14 +27,14 @@ public class FileAnalyzer extends Analyzer {
         System.out.println("start FileAnalyzer");
         lineNume = 0;
         mJonsStrings.clear();
+        StringBuffer stringBuffer = new StringBuffer();
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(mSourceFile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                lineNume++;
-                parseLineString(line);
+                stringBuffer.append(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,7 +47,51 @@ public class FileAnalyzer extends Analyzer {
                 }
             }
         }
-        response.setJsonStrings(mJonsStrings);
+        response.setJsonStrings(compress(stringBuffer.toString()));
+
+    }
+
+    /**
+     * 压缩json<br/>
+     * 将格式化的json字符串压缩为一行，去掉空格、tab，并把换行符改为显式的\r\n <br/>
+     * ！！！只能处理正确json字符串，不对json字符串做校验
+     * @param json
+     * @return
+     */
+    public static String compress(String json)
+    {
+        if (json == null)
+        {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        boolean skip = true;// true 允许截取(表示未进入string双引号)
+        boolean escaped = false;// 转义符
+        for (int i = 0; i < json.length(); i++)
+        {
+            char c = json.charAt(i);
+            if (!escaped && c == '\\')
+            {
+                escaped = true;
+            }
+            else
+            {
+                escaped = false;
+            }
+            if (skip)
+            {
+                if (c == ' ' || c == '\r' || c == '\n' || c == '\t')
+                {
+                    continue;
+                }
+            }
+            sb.append(c);
+            if (c == '"' && !escaped)
+            {
+                skip = !skip;
+            }
+        }
+        return sb.toString().replaceAll("\r\n", "\\\\r\\\\n");
     }
 
     private void parseLineString(String line) {

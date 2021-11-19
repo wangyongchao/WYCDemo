@@ -1,6 +1,7 @@
 package com.weishop.test.util;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -55,6 +56,10 @@ public class AppUtils {
      */
     private String toMb(Context context, int bytes) {
         return Formatter.formatFileSize(context, bytes);
+    }
+
+    public static boolean isMainThread(){
+        return Looper.getMainLooper()==Looper.myLooper();
     }
 
 

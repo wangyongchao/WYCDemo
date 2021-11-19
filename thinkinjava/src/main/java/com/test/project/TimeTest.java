@@ -10,25 +10,29 @@ import java.util.TimeZone;
 
 public class TimeTest {
 
-    public enum Source{
-        LIST("list"),EXE("exe");
+
+    public enum Source {
+        LIST("list"), EXE("exe");
         private String mSource;
 
         Source(String source) {
-            this.mSource=source;
+            this.mSource = source;
         }
     }
 
 
     public static void main(String[] args) {
-        System.out.println(Source.LIST.mSource);
+        getTime2(1635306472007166l);// startup
+        getTime2(1635306476201167l);// startup
+        firebaseTime();
+
 
     }
 
     private static void firebaseTime() {
         try {
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = sf.parse("2021-09-15 09:02:00");
+            Date date = sf.parse("2021-11-08 04:06:23");
             long time = date.getTime() * 1000;
             System.out.println(time);
 //            getTime2(1631637626279111l);

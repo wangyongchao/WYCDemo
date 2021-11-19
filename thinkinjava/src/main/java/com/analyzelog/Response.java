@@ -7,17 +7,17 @@ import java.util.List;
 
 public class Response {
 
-    private ArrayList<String> jsonStrings;
+    private String jsonString;
     private List<LogBean> logBeans;
-    private List<LogBean> mTagLogBeans = new ArrayList<>();
+    private List<LogBean> mCrashLogBeans = new ArrayList<>();
     private List<LogBean> mEventIdLogBeans = new ArrayList<>();
 
-    public void setJsonStrings(ArrayList<String> jsonStrings) {
-        this.jsonStrings = jsonStrings;
+    public void setJsonStrings(String jsonString) {
+        this.jsonString = jsonString;
     }
 
-    public ArrayList<String> getJsonStrings() {
-        return jsonStrings;
+    public String getJsonStrings() {
+        return jsonString;
     }
 
     public void setLogBeans(List<LogBean> logBeans) {
@@ -29,12 +29,12 @@ public class Response {
     }
 
 
-    public List<LogBean> getTagLogBeans() {
-        return mTagLogBeans;
+    public List<LogBean> getCrashLogBeans() {
+        return mCrashLogBeans;
     }
 
-    public void setTagLogBeans(List<LogBean> tagLogBeans) {
-        this.mTagLogBeans = tagLogBeans;
+    public void setCrashLogBeans(List<LogBean> crashLogBeans) {
+        this.mCrashLogBeans = crashLogBeans;
     }
 
     public List<LogBean> getEventIdLogBeans() {
@@ -46,21 +46,16 @@ public class Response {
     }
 
     public void release() {
-        if (jsonStrings != null) {
-            jsonStrings.clear();
-            jsonStrings = null;
-        }
 
         if (logBeans != null) {
             logBeans.clear();
             logBeans = null;
         }
 
-        if (mTagLogBeans != null) {
-            mTagLogBeans.clear();
-            mTagLogBeans = null;
+        if (mCrashLogBeans != null) {
+            mCrashLogBeans.clear();
+            mCrashLogBeans = null;
         }
-
         if (mEventIdLogBeans != null) {
             mEventIdLogBeans.clear();
             mEventIdLogBeans = null;

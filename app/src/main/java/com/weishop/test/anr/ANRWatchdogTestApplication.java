@@ -28,7 +28,7 @@ public class ANRWatchdogTestApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        initANR();
+//        initANR();
 //    模拟anr
 //        long currentTimeMillis = System.currentTimeMillis();
 //        while (true){

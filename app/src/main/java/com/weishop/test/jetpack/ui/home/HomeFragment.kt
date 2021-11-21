@@ -1,5 +1,6 @@
 package com.weishop.test.jetpack.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +14,26 @@ import com.weishop.test.util.LogUtils
 
 class HomeFragment : Fragment() {
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        LogUtils.d("HomeFragment onAttach $this")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        LogUtils.d("HomeFragment onDetach $this")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LogUtils.d("HomeFragment onCreate")
+        LogUtils.d("HomeFragment onCreate $this")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        LogUtils.d("HomeFragment onDestroy")
+        LogUtils.d("HomeFragment onDestroy $this")
     }
+
 
     private lateinit var homeViewModel: HomeViewModel
 

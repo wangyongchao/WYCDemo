@@ -42,14 +42,14 @@ class CustomLifeCycleActivity : Activity(),LifecycleOwner {
     }
 
     override fun onStart() {
-        super.onStart()
         registry.currentState=Lifecycle.State.STARTED
+        super.onStart()
         LogUtils.d("LifeCycleActivity onStart")
     }
 
     override fun onStop() {
-        super.onStop()
         registry.currentState=Lifecycle.State.DESTROYED
+        super.onStop()
         LogUtils.d("LifeCycleActivity onStop")
     }
 

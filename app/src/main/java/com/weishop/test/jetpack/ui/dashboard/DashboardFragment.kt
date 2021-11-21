@@ -1,5 +1,6 @@
 package com.weishop.test.jetpack.ui.dashboard
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +16,24 @@ class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        LogUtils.d("DashboardFragment onAttach $this")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        LogUtils.d("DashboardFragment onDetach $this")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LogUtils.d("DashboardFragment onCreate")
+        LogUtils.d("DashboardFragment onCreate $this")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        LogUtils.d("DashboardFragment onDestroy")
+        LogUtils.d("DashboardFragment onDestroy $this")
     }
 
     override fun onCreateView(

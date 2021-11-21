@@ -1,5 +1,6 @@
 package com.weishop.test.jetpack.ui.notifications
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +16,25 @@ class NotificationsFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        LogUtils.d("NotificationsFragment onAttach $this")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        LogUtils.d("NotificationsFragment onDetach $this")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LogUtils.d("NotificationsFragment onCreate")
+        LogUtils.d("NotificationsFragment onCreate $this")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        LogUtils.d("NotificationsFragment onDestroy")
+        LogUtils.d("NotificationsFragment onDestroy $this")
     }
 
     override fun onCreateView(

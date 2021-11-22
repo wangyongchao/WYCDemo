@@ -4,7 +4,9 @@ import com.kttest2.lambda.LambdaTest
 import com.kttest2.lambda.Person
 import java.lang.StringBuilder
 
-
+/**
+ * 作为函数参数
+ */
 class HightFunArgumentTest {
 
     companion object {

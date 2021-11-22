@@ -11,8 +11,7 @@ class TypeSystem {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-           var jnt=JavaNullableTest()
-            jnt.test()
+            testNullable()
 
         }
 
@@ -30,9 +29,11 @@ class TypeSystem {
             verifyUserInput(null)
             var email:String?=null
             //let 也能被可空的接受者调用
+            //email?.let 不执行，email.let为null也执行
             email.let {
                 //实参可能是null
-                println("$it")
+                it?.length
+                println("test $it")
             }
             printHashCode("null")
 

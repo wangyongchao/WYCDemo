@@ -1,7 +1,5 @@
 package com.kttest2.typesystem
 
-import java.lang.IllegalArgumentException
-
 /**
  * kotlin 类型系统
  * 注意必须使用问号结尾来标记类型为可空的，没有问号就是非空的。类型参数是这个规则唯一的例外。
@@ -24,10 +22,10 @@ class TypeSystem {
          * 可空类型的扩展函数中，this可能为null
 
          */
-        fun testNullable(){
+        fun testNullable() {
             verifyUserInput("")
             verifyUserInput(null)
-            var email:String?=null
+            var email: String? = null
             //let 也能被可空的接受者调用
             //email?.let 不执行，email.let为null也执行
             email.let {
@@ -37,13 +35,18 @@ class TypeSystem {
             }
             printHashCode("null")
 
+
+            var person: com.kttest2.lambda.Person? = null
+            val result = person?.name ?: 0
+            println(result)
+
         }
 
         /**
          * 泛型类型参数可null,推导出类型 Any?
          * 为类型T指明上界，就不能为Null
          */
-        fun <T :Any> printHashCode(t:T){
+        fun <T : Any> printHashCode(t: T) {
             println(t.hashCode())
 
         }
@@ -57,26 +60,27 @@ class TypeSystem {
          * CharSequence?.isNullOrEmpty() null或者""
          *  CharSequence?.isNullOrBlank() null或者"  "
          */
-        fun verifyUserInput(input:String?){
-            if(input.isNullOrBlank()){
+        fun verifyUserInput(input: String?) {
+            if (input.isNullOrBlank()) {
                 println("isNullOrBlank")
             }
         }
 
 
-        fun testLet(){
-            var email:String?="wangyongchao@163.com"
+        fun testLet() {
+            var email: String? = "wangyongchao@163.com"
             email.let {
 
             }
             //email不为空执行，lambda。为空什么都不执行。
-           var result= email?.let {
+            var result = email?.let {
                 sendEmail(email)
                 3
             }
 
         }
-        fun sendEmail(email:String){
+
+        fun sendEmail(email: String) {
             println("send email $email")
 
         }

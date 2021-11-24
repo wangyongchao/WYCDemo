@@ -1,6 +1,8 @@
 package com.kttest2.coroutine
 
 import kotlinx.coroutines.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
 fun log(msg: Any?) {
@@ -18,15 +20,27 @@ class CoroutineTest {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-            test()
+            testSuspendCoroutine()
 
 
+        }
+
+        fun testSuspendCoroutine() {
+            runBlocking {
+                println("${Thread.currentThread().name} 1")
+                withContext(Dispatchers.IO) {
+                    val remoteDataFromLocalCache = getRemoteDataFromLocalCache()
+                    println("remoteDataFromLocalCache=${remoteDataFromLocalCache}")
+                }
+                println("withContext after")
+            }
+            println("runBlocking after")
         }
 
         fun test() {
             runBlocking {
                 println("${Thread.currentThread().name} 1")
-                withContext(Dispatchers.IO){
+                withContext(Dispatchers.IO) {
                     delay(5000)
                     println("${Thread.currentThread().name} 2")
 
@@ -35,6 +49,18 @@ class CoroutineTest {
             }
         }
 
+        private suspend fun getRemoteDataFromLocalCache(): String = suspendCoroutine { cont ->
+            println("getRemoteDataFromLocalCache ${Thread.currentThread().name}")
+            Thread.sleep(5000)
+            println("getRemoteDataFromLocalCache after")
+            cont.resume("result ok")
+
+        }
+
+        /**
+         * 协程启动模式
+         * DEFAULT launch调用后，立即进入调度状态 .VM 上默认调度器的实现，就是开了一个线程池
+         */
         /**
          * 协程启动模式
          * DEFAULT launch调用后，立即进入调度状态 .VM 上默认调度器的实现，就是开了一个线程池
@@ -118,6 +144,9 @@ class CoroutineTest {
         /**
          * 协程取消
          */
+        /**
+         * 协程取消
+         */
         fun cancelCoroutine() {
             runBlocking {
                 var job = launch {
@@ -133,6 +162,9 @@ class CoroutineTest {
         }
 
 
+        /**
+         * 启动协程四种方式
+         */
         /**
          * 启动协程四种方式
          */
@@ -174,6 +206,9 @@ class CoroutineTest {
         }
 
 
+        /**
+         * 可以轻松开启10万个协程,一个线程中可以有多个协程
+         */
         /**
          * 可以轻松开启10万个协程,一个线程中可以有多个协程
          */

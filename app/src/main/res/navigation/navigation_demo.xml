@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_a">
+
+    <fragment
+        android:id="@+id/navigation_a"
+        android:name="com.weishop.test.jetpack.navigation.fragment.FragmentA"
+        tools:layout="@layout/fragment_a">
+
+        <action
+            android:id="@+id/action_to_b"
+            app:destination="@id/navigation_b"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="user_name"
+            android:defaultValue="zhangSan"
+            app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_b"
+        android:name="com.weishop.test.jetpack.navigation.fragment.FragmentB"
+        tools:layout="@layout/fragment_b">
+
+
+    </fragment>
+
+
+</navigation>

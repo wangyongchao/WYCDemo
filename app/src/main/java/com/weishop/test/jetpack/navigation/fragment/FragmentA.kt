@@ -1,0 +1,65 @@
+package com.weishop.test.jetpack.navigation.fragment
+
+import android.content.Context
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.weishop.test.R
+import com.weishop.test.databinding.FragmentABinding
+import com.weishop.test.util.TestUtils
+
+class FragmentA : Fragment() {
+
+    private var binding: FragmentABinding? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d(TestUtils.TAG, "FragmentA onAttach")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d(TestUtils.TAG, "FragmentA onDetach")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(TestUtils.TAG, "FragmentA onCreateView")
+        binding = FragmentABinding.inflate(inflater)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d(TestUtils.TAG, "FragmentA onViewCreated")
+        binding?.btn?.setOnClickListener {
+            val actionToB = FragmentADirections.actionToB()
+            findNavController().navigate(actionToB)
+//            binding?.root?.findNavController()?.navigate(R.id.action_to_b)
+            //id必须设置有navigationcontroler
+//            activity?.findNavController(R.id.nav_host_fragment)?.navigate(R.id.action_to_b)
+
+
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(TestUtils.TAG, "FragmentA onCreate")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+        Log.d(TestUtils.TAG, "FragmentA onDestroy")
+    }
+
+
+}

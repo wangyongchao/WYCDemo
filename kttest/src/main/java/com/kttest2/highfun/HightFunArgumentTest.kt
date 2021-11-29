@@ -4,17 +4,37 @@ import com.kttest2.lambda.LambdaTest
 import com.kttest2.lambda.Person
 import java.lang.StringBuilder
 
-
+/**
+ * 作为函数参数
+ */
 class HightFunArgumentTest {
 
     companion object {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            foo(null)
+
+        }
+
+        /**
+         * 高阶函数去除重复代码
+         */
+        fun testRemoveDuplicatesCode() {
+            val listOf = listOf(
+                SiteVisit("/", 34.0, OS.WINDOWS),
+                SiteVisit("/", 23.0, OS.MAC),
+                SiteVisit("/login", 39.0, OS.WINDOWS),
+                SiteVisit("/singup", 100.0, OS.IOS),
+                SiteVisit("/", 347.0, OS.ANDROID)
+            )
+
+
         }
 
 
+        /**
+         * 函数类型可空
+         */
         fun foo(callback: (() -> Unit)?) {
             println(callback?.invoke())
         }
@@ -133,8 +153,7 @@ class HightFunArgumentTest {
             val getAge = { person: Person -> person.age }
             pepole.maxByOrNull(getAge)
 
-            val joinToString =
-                pepole.joinToString(separator = ",", transform = { person: Person -> person.name })
+            val joinToString = pepole.joinToString(separator = ",", transform = { person: Person -> person.name })
             println(joinToString)
 
 
@@ -165,10 +184,7 @@ fun String.filter(predicate: (Char) -> Boolean): String {
  * 函数类型的参数默认值
  */
 fun <T> Collection<T>.joinToString(
-    separator: String = ", ",
-    prefix: String = "",
-    postfix: String = "",
-    transform: (T) -> String = { it.toString() }
+    separator: String = ", ", prefix: String = "", postfix: String = "", transform: (T) -> String = { it.toString() }
 ): String {
     val result = StringBuilder(prefix)
     for ((index, element) in this.withIndex()) {

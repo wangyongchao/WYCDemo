@@ -9,8 +9,7 @@ class LambdaTest {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            testLambda()
-
+            reciver()
 
         }
 
@@ -23,7 +22,7 @@ class LambdaTest {
             val action = { person: Person, message: String ->
                 sendEmail(person, message)
             }
-            val nextAction = ::sendEmail//action lambda被委托给sendEmail，可以直接引用sendEmail
+            val nextAction = ::sendEmail//nextAction lambda被委托给sendEmail，可以直接引用sendEmail
             nextAction(Person("scope", 23), "dfadsf")
 
             //构造方法引用
@@ -140,6 +139,7 @@ class LambdaTest {
                 sb.append(",222")
                 sb.toString()
             }
+            println(result)
 
             //如果lambda表达式是函数的最后一个实参，可以把{}写到()的外面,相当于上面得result
             /**
@@ -239,7 +239,7 @@ class LambdaTest {
             //default是一个lambda表达式，接收非null string类型，返回可空string类型
             val default: (element: String) -> String? = { it }
             val default1 = default("d")
-            println(default1)
+            println( default1?.length)
             var current = 3
            var d= current.apply {
                 current += 1

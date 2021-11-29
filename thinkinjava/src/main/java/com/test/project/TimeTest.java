@@ -22,8 +22,7 @@ public class TimeTest {
 
 
     public static void main(String[] args) {
-        getTime2(1635306472007166l);// startup
-        getTime2(1635306476201167l);// startup
+        getTime2(1637306270847100l);// startup
         firebaseTime();
 
 

@@ -13,16 +13,16 @@ import kotlin.jvm.functions.Function1;
 public class HightFunJava {
 
     public static void main(String[] args) {
-        HightFunTest.Companion.processTheAnswer(new Function1<Integer, Integer>() {
+        HightFunArgumentTest.Companion.processTheAnswer(new Function1<Integer, Integer>() {
             @Override
             public Integer invoke(Integer integer) {
                 return integer + 1;
             }
         });
 
-        HightFunTest.Companion.processTheAnswer(number -> number + 1);
+        HightFunArgumentTest.Companion.processTheAnswer(number -> number + 1);
 
-        HightFunTest.Companion.processTheJava(new Function1<Integer, Unit>() {
+        HightFunArgumentTest.Companion.processTheJava(new Function1<Integer, Unit>() {
             @Override
             public Unit invoke(Integer integer) {
                 return null;

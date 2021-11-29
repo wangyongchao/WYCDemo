@@ -1,17 +1,32 @@
-package com.kttest2.highfun
+package com.kttest2.highfun.returnfun
 
+import com.kttest2.highfun.joinToString
 import com.kttest2.lambda.LambdaTest
 import com.kttest2.lambda.Person
 
-
+/**
+ * 作为返回类型
+ */
 class HightFunReturnTest {
 
     companion object {
 
         @JvmStatic
         fun main(args: Array<String>) {
+            val calculator = getShippingCostCalculator(Delivery.STANDARD)
+            println("${calculator(Order(3))}")
         }
 
+
+        fun getShippingCostCalculator(delivery: Delivery): (Order) -> Double {
+
+            if (delivery == Delivery.STANDARD) {
+                return { order -> 6 + 2.1 * order.itemCount }
+            }
+
+            return { order -> 1.2 * order.itemCount }
+
+        }
 
         /**
          * //无参、无返回值的函数类型(Unit 返回类型不可省略)
@@ -49,8 +64,7 @@ class HightFunReturnTest {
             val getAge = { person: Person -> person.age }
             pepole.maxByOrNull(getAge)
 
-            val joinToString =
-                pepole.joinToString(separator = ",", transform = { person: Person -> person.name })
+            val joinToString = pepole.joinToString(separator = ",", transform = { person: Person -> person.name })
             println(joinToString)
 
 

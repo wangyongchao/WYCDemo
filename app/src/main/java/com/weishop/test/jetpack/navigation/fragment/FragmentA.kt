@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.weishop.test.R
 import com.weishop.test.databinding.FragmentABinding
 import com.weishop.test.util.TestUtils
@@ -40,11 +41,17 @@ class FragmentA : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TestUtils.TAG, "FragmentA onViewCreated")
         binding?.btn?.setOnClickListener {
-            val actionToB = FragmentADirections.actionToB()
+            val actionToB = FragmentADirections.actionAToB()
             findNavController().navigate(actionToB)
 //            binding?.root?.findNavController()?.navigate(R.id.action_to_b)
             //id必须设置有navigationcontroler
 //            activity?.findNavController(R.id.nav_host_fragment)?.navigate(R.id.action_to_b)
+//            findNavController().navigate(R.id.action_to_b,null, navOptions {
+//                anim {
+//                    enter=R.anim.slide_in_right
+//                    exit=R.anim.slide_in_left
+//                }
+//            })
 
 
         }
@@ -61,5 +68,9 @@ class FragmentA : Fragment() {
         Log.d(TestUtils.TAG, "FragmentA onDestroy")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(TestUtils.TAG, "FragmentA onDestroyView")
+    }
 
 }

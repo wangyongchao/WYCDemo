@@ -13,20 +13,26 @@ class HightFunArgumentTest {
 
         @JvmStatic
         fun main(args: Array<String>) {
-
+            testRemoveDuplicatesCode()
         }
 
         /**
          * 高阶函数去除重复代码
          */
         fun testRemoveDuplicatesCode() {
-            val listOf = listOf(
+            val log = listOf(
                 SiteVisit("/", 34.0, OS.WINDOWS),
                 SiteVisit("/", 23.0, OS.MAC),
                 SiteVisit("/login", 39.0, OS.WINDOWS),
                 SiteVisit("/singup", 100.0, OS.IOS),
                 SiteVisit("/", 347.0, OS.ANDROID)
             )
+            val result = log.filter { it.os == OS.WINDOWS }.map { it.duration }.average()
+            println(result)
+            log.averageDurationFor(OS.WINDOWS)
+            log.averageDurationFor1 {
+                it.os in setOf(OS.IOS, OS.ANDROID)
+            }
 
 
         }
@@ -153,7 +159,8 @@ class HightFunArgumentTest {
             val getAge = { person: Person -> person.age }
             pepole.maxByOrNull(getAge)
 
-            val joinToString = pepole.joinToString(separator = ",", transform = { person: Person -> person.name })
+            val joinToString =
+                pepole.joinToString(separator = ",", transform = { person: Person -> person.name })
             println(joinToString)
 
 
@@ -184,7 +191,10 @@ fun String.filter(predicate: (Char) -> Boolean): String {
  * 函数类型的参数默认值
  */
 fun <T> Collection<T>.joinToString(
-    separator: String = ", ", prefix: String = "", postfix: String = "", transform: (T) -> String = { it.toString() }
+    separator: String = ", ",
+    prefix: String = "",
+    postfix: String = "",
+    transform: (T) -> String = { it.toString() }
 ): String {
     val result = StringBuilder(prefix)
     for ((index, element) in this.withIndex()) {
@@ -197,3 +207,16 @@ fun <T> Collection<T>.joinToString(
     return result.toString()
 
 }
+
+/**
+ * 使用高阶函数抽取重复代码
+ */
+fun List<SiteVisit>.averageDurationFor(os: OS) =
+    filter { it.os == os }.map(SiteVisit::duration).average()
+
+
+/**
+ * 使用高阶函数抽取重复代码
+ */
+fun List<SiteVisit>.averageDurationFor1(predicate: (SiteVisit) -> Boolean) =
+    filter(predicate).map(SiteVisit::duration).average()

@@ -8,24 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.weishop.test.R
-import com.weishop.test.databinding.FragmentABinding
 import com.weishop.test.databinding.FragmentBBinding
+import com.weishop.test.databinding.FragmentCBinding
 import com.weishop.test.util.TestUtils
 
-class FragmentB : Fragment() {
+class FragmentC : Fragment() {
 
-    private var binding: FragmentBBinding? = null
+    private var binding: FragmentCBinding? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d(TestUtils.TAG, "FragmentB onAttach")
+        Log.d(TestUtils.TAG, "FragmentC onAttach")
     }
 
     override fun onDetach() {
         super.onDetach()
-        Log.d(TestUtils.TAG, "FragmentB onDetach")
+        Log.d(TestUtils.TAG, "FragmentC onDetach")
     }
 
     override fun onCreateView(
@@ -33,34 +32,35 @@ class FragmentB : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(TestUtils.TAG, "FragmentB onCreateView")
-        binding = FragmentBBinding.inflate(inflater)
+        Log.d(TestUtils.TAG, "FragmentC onCreateView")
+        binding = FragmentCBinding.inflate(inflater)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TestUtils.TAG, "FragmentB onViewCreated")
+        Log.d(TestUtils.TAG, "FragmentC onViewCreated")
         binding?.btn?.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_b_to_c)
+            Navigation.findNavController(view).navigate(R.id.action_c_to_a)
 
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TestUtils.TAG, "FragmentB onCreate")
+        Log.d(TestUtils.TAG, "FragmentC onCreate")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
-        Log.d(TestUtils.TAG, "FragmentB onDestroy")
+        Log.d(TestUtils.TAG, "FragmentC onDestroy")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TestUtils.TAG, "FragmentB onDestroyView")
+        Log.d(TestUtils.TAG, "FragmentC onDestroyView")
     }
 
 }

@@ -12,7 +12,7 @@ class CollectionFunctions {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            testJavaFunLambda("22")
+            testMap()
         }
 
         /**
@@ -214,6 +214,7 @@ class CollectionFunctions {
             val list = listOf<Int>(1, 2, 3, 4)
             var newList = list.map { it * it }
             println(newList)
+            println(list)
 
             var pepole = listOf<Person>(Person("zhangsan1", 20), Person("zhangsan2", 35))
             println(pepole.map { it.name })
@@ -236,7 +237,9 @@ class CollectionFunctions {
          */
         fun testFilter() {
             val list = listOf<Int>(1, 2, 3, 4)
-            println(list.filter { it % 2 == 0 })
+            val filter = list.filter { it % 2 == 0 }
+            println(filter)
+            println(list)
 
             val listOf = listOf(Person("zhangsan1", 20), Person("zhangsan2", 34))
             println(listOf.filter {

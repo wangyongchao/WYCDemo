@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_a">
 
         <action
-            android:id="@+id/action_to_b"
+            android:id="@+id/action_a_to_b"
             app:destination="@id/navigation_b"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -30,6 +30,29 @@
         android:name="com.weishop.test.jetpack.navigation.fragment.FragmentB"
         tools:layout="@layout/fragment_b">
 
+        <!--  这个action会跳转到c，popUpTo导致从c返回会直接返回到a，所以启动
+         c的时候b就会销毁 -->
+        <action
+            android:id="@+id/action_b_to_c"
+            app:destination="@id/navigation_c"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/navigation_a"
+            app:popUpToInclusive="false" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_c"
+        android:name="com.weishop.test.jetpack.navigation.fragment.FragmentC"
+        tools:layout="@layout/fragment_c">
+
+        <action
+            android:id="@+id/action_c_to_a"
+            app:popUpTo="@id/navigation_a"
+            app:popUpToInclusive="false" />
 
     </fragment>
 

@@ -18,6 +18,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+
         <argument
             android:name="user_name"
             android:defaultValue="zhangSan"
@@ -38,9 +39,15 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/navigation_a"
-            app:popUpToInclusive="false" />
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_b_to_activity"
+            app:destination="@id/sampleActivityDestination"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
@@ -54,7 +61,23 @@
             app:popUpTo="@id/navigation_a"
             app:popUpToInclusive="false" />
 
+        <!--        <action-->
+        <!--            android:id="@+id/action_c_to_a"-->
+        <!--            app:destination="@id/navigation_a"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+
     </fragment>
 
+    <!--    <activity-->
+    <!--        android:id="@+id/sampleActivityDestination"-->
+    <!--        android:name="com.weishop.test.jetpack.navigation.DestinationActivity" />-->
 
+    <activity
+        android:id="@+id/sampleActivityDestination"
+        app:action="android.intent.action.VIEW"
+        app:data="https://example.com"
+        app:targetPackage="${applicationId}" />
 </navigation>

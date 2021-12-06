@@ -41,8 +41,8 @@ class FragmentA : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TestUtils.TAG, "FragmentA onViewCreated")
         binding?.btn?.setOnClickListener {
-            val actionToB = FragmentADirections.actionAToB()
-            findNavController().navigate(actionToB)
+//            val actionToB = FragmentADirections.actionAToB()
+//            findNavController().navigate(actionToB)
 //            binding?.root?.findNavController()?.navigate(R.id.action_to_b)
             //id必须设置有navigationcontroler
 //            activity?.findNavController(R.id.nav_host_fragment)?.navigate(R.id.action_to_b)
@@ -52,6 +52,7 @@ class FragmentA : Fragment() {
 //                    exit=R.anim.slide_in_left
 //                }
 //            })
+            view.findNavController().navigate(R.id.action_a_to_b)
 
 
         }
@@ -66,6 +67,16 @@ class FragmentA : Fragment() {
         super.onDestroy()
         binding = null
         Log.d(TestUtils.TAG, "FragmentA onDestroy")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TestUtils.TAG, "FragmentA onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TestUtils.TAG, "FragmentA onPause")
     }
 
     override fun onDestroyView() {

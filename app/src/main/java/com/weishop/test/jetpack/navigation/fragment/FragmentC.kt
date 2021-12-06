@@ -52,6 +52,17 @@ class FragmentC : Fragment() {
         Log.d(TestUtils.TAG, "FragmentC onCreate")
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TestUtils.TAG, "FragmentC onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TestUtils.TAG, "FragmentC onPause")
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null

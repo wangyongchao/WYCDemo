@@ -28,6 +28,16 @@ class FragmentB : Fragment() {
         Log.d(TestUtils.TAG, "FragmentB onDetach")
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TestUtils.TAG, "FragmentB onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TestUtils.TAG, "FragmentB onPause")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +53,12 @@ class FragmentB : Fragment() {
         Log.d(TestUtils.TAG, "FragmentB onViewCreated")
         binding?.btn?.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_b_to_c)
+//            val navController = Navigation.findNavController(view)
+//            navController.navigateUp()
 
+        }
+        binding?.btnActivity?.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_b_to_activity)
         }
     }
 

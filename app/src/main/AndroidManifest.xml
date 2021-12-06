@@ -47,6 +47,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".jetpack.navigation.DestinationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="example.com"
+                    android:scheme="https" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".userinterface.AppBarChildActivity" />
         <activity android:name=".performance.memory.LeakActivity" />
         <activity android:name=".bitmap.BitmapActivity" />
@@ -116,7 +127,8 @@
         <activity android:name=".list.draglistview.ListviewActivity" />
         <activity android:name=".list.recycler.RecyclerViewActivity" />
 
-        <service android:name=".backgroudtask.job.JobSchedulerService"
+        <service
+            android:name=".backgroudtask.job.JobSchedulerService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider

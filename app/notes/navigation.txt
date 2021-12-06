@@ -1,0 +1,28 @@
+
+ popUpTo:假如从a跳转到b，然后再从b跳转到c，b到c的时候popUpTo是a，则b跳转到c的时候会同时把b销毁。这样c返回的时候会直接返回到a
+
+ popUpToInclusive:如果指定为true，则b跳转到c的时候会同时把b和a都销毁。这样从c返回的时候直接退出app。
+
+ a->b->c->a a会重新创建新的对象，如果要从c到第一个a，需要使用popUpTo
+
+<action
+            android:id="@+id/action_b_to_c"
+            app:destination="@id/navigation_c"
+            app:popUpTo="@id/navigation_a"
+            app:popUpToInclusive="false" />
+
+<navigation>
+    <activity
+    android:id="@+id/sampleActivityDestination"
+    android:name="com.weishop.test.jetpack.navigation.DestinationActivity" />
+
+     <activity
+            android:id="@+id/sampleActivityDestination"
+            app:action="android.intent.action.VIEW"
+            app:data="https://example.com"
+            app:targetPackage="${applicationId}" />
+ </navigation>
+ 可以显示指定activity的名称，跳转至指定的activity
+ 也可以值intent-filter隐士跳转至指定的activity
+
+navController.navigateUp():相当于工具类顶部的向上箭头返回键.

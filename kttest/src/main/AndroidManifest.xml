@@ -13,13 +13,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.OtherDestinationActivity">
+        <activity
+            android:name=".activity.OtherDestinationActivity"
+            android:theme="@style/Theme.AppCompat">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <data
                     android:host="example.com"
                     android:scheme="https" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

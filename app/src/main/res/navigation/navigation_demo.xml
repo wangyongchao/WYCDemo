@@ -93,5 +93,5 @@
         android:id="@+id/sampleActivityDestinationOuter"
         app:action="android.intent.action.VIEW"
         app:data="https://example.com"
-        app:targetPackage="com.kttest.demo" />
+        app:targetPackage="com.kttest" />
 </navigation>

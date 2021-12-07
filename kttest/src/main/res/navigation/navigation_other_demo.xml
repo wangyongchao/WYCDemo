@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_a"
+    tools:ignore="MissingDefaultResource">
+
+    <fragment
+        android:id="@+id/navigation_a"
+        android:name="com.kttest.activity.fragment.FragmentA"
+        tools:layout="@layout/fragment_a">
+
+        <action
+            android:id="@+id/action_a_to_b"
+            app:destination="@id/navigation_b" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_b"
+        android:name="com.kttest.activity.fragment.FragmentB"
+        tools:layout="@layout/fragment_b">
+
+
+    </fragment>
+
+
+</navigation>

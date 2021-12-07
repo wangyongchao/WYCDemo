@@ -18,8 +18,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <data
-                    android:host="other.com"
-                    android:scheme="other" />
+                    android:host="example.com"
+                    android:scheme="https" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

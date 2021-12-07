@@ -22,12 +22,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_activity"
+        android:id="@+id/btn_inner_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="goActivity"
+        android:text="goInnerActivity"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn" />
+
+    <Button
+        android:id="@+id/btn_outer_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="goOuterActivity"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_inner_activity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

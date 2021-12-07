@@ -49,6 +49,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_b_to_outer_activity"
+            app:destination="@id/sampleActivityDestinationOuter"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -80,4 +88,10 @@
         app:action="android.intent.action.VIEW"
         app:data="https://example.com"
         app:targetPackage="${applicationId}" />
+
+    <activity
+        android:id="@+id/sampleActivityDestinationOuter"
+        app:action="android.intent.action.VIEW"
+        app:data="https://example.com"
+        app:targetPackage="com.kttest.demo" />
 </navigation>

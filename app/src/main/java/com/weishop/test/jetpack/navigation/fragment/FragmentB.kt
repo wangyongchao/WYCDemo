@@ -57,8 +57,12 @@ class FragmentB : Fragment() {
 //            navController.navigateUp()
 
         }
-        binding?.btnActivity?.setOnClickListener {
+        binding?.btnInnerActivity?.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_b_to_activity)
+        }
+
+        binding?.btnOuterActivity?.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_b_to_outer_activity)
         }
     }
 

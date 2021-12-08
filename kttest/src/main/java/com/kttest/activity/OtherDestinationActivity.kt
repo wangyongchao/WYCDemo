@@ -17,7 +17,8 @@ class OtherDestinationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_other_dest)
-        Log.d(TAG, "OtherDestinationActivity pid=${Process.myPid()},taskId=${taskId}")
+        val navigationId = intent.getIntExtra("navigationId", -1)
+        Log.d(TAG, "OtherDestinationActivity pid=${Process.myPid()},taskId=${taskId},navigationId=${navigationId}")
 
 
     }

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -62,7 +63,8 @@ class FragmentB : Fragment() {
         }
 
         binding?.btnOuterActivity?.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_b_to_outer_activity)
+
+            Navigation.findNavController(view).navigate(R.id.action_b_to_outer_activity, bundleOf("navigationId" to R.id.navigation_a))
         }
     }
 

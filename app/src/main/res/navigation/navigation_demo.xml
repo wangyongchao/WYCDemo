@@ -92,6 +92,12 @@
     <activity
         android:id="@+id/sampleActivityDestinationOuter"
         app:action="android.intent.action.VIEW"
-        app:data="https://example.com"
-        app:targetPackage="com.kttest" />
+        app:dataPattern="https://example.com?navigationId={navigationId}"
+        app:targetPackage="com.kttest" >
+
+        <argument android:name="navigationId"
+            app:argType="integer"/>
+
+    </activity>
+
 </navigation>

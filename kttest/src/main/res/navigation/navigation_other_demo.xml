@@ -15,7 +15,9 @@
             android:id="@+id/action_a_to_b"
             app:destination="@id/navigation_b" />
 
-
+        <argument
+            android:name="navigationId"
+            app:argType="integer" />
 
     </fragment>
 

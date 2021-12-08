@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.kttest.R
 import com.kttest.activity.TAG
 import com.kttest.databinding.FragmentABinding
@@ -26,9 +27,7 @@ class FragmentA : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "FragmentA otheronCreateView")
         binding = FragmentABinding.inflate(inflater)
@@ -37,7 +36,9 @@ class FragmentA : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "FragmentA otheronViewCreated")
+        val arguments = findNavController().graph.arguments
+        val navArgument = arguments["navigationId"]
+        Log.d(TAG, "FragmentA otheronViewCreated ${navArgument?.defaultValue}")
         binding?.btn?.setOnClickListener {
 //            val actionToB = FragmentADirections.actionAToB()
 //            findNavController().navigate(actionToB)

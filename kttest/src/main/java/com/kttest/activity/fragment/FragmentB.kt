@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.kttest.R
 import com.kttest.activity.TAG
 import com.kttest.databinding.FragmentBBinding
@@ -37,40 +38,45 @@ class FragmentB : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        Log.d(TAG, "FragmentB OtheronCreateView")
+        Log.d(TAG, "FragmentB Other onCreateView")
         binding = FragmentBBinding.inflate(inflater)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "FragmentB OtheronViewCreated")
+        val arguments = findNavController().graph.arguments
+        val navArgument = arguments["navigationId"]
+        val navigationId: Int = navArgument?.defaultValue as Int
+        Log.d(TAG, "FragmentB other onViewCreated $navigationId")
         binding?.btn?.setOnClickListener {
-//            val navController = Navigation.findNavController(view)
-//            navController.navigateUp()
-
+            val navController = Navigation.findNavController(view)
+            val navigateUp = navController.navigateUp()
+            Log.d(TAG, "FragmentB other navigateUp $navigateUp")
+        }
+        binding?.btnPop?.setOnClickListener {
+            val navController = Navigation.findNavController(view)
+            navController.popBackStack(navigationId, false)
         }
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "FragmentB OtheronCreate")
+        Log.d(TAG, "FragmentB Other onCreate")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
-        Log.d(TAG, "FragmentB OtheronDestroy")
+        Log.d(TAG, "FragmentB Other onDestroy")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "FragmentB OtheronDestroyView")
+        Log.d(TAG, "FragmentB Other onDestroyView")
     }
 
 }

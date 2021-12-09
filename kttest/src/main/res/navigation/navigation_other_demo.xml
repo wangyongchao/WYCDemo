@@ -15,16 +15,13 @@
             android:id="@+id/action_a_to_b"
             app:destination="@id/navigation_b" />
 
-        <argument
-            android:name="navigationId"
-            app:argType="integer" />
-
     </fragment>
 
     <fragment
         android:id="@+id/navigation_b"
         android:name="com.kttest.activity.fragment.FragmentB"
         tools:layout="@layout/fragment_b">
+
 
 
     </fragment>

@@ -18,18 +18,18 @@ class FragmentA : Fragment() {
     private var binding: FragmentABinding? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d(TAG, "FragmentA otherother onAttach")
+        Log.d(TAG, "FragmentA other onAttach")
     }
 
     override fun onDetach() {
         super.onDetach()
-        Log.d(TAG, "FragmentA otheronDetach")
+        Log.d(TAG, "FragmentA other onDetach")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        Log.d(TAG, "FragmentA otheronCreateView")
+        Log.d(TAG, "FragmentA other onCreateView")
         binding = FragmentABinding.inflate(inflater)
         return binding?.root
     }
@@ -38,49 +38,41 @@ class FragmentA : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val arguments = findNavController().graph.arguments
         val navArgument = arguments["navigationId"]
-        Log.d(TAG, "FragmentA otheronViewCreated ${navArgument?.defaultValue}")
+        Log.d(TAG, "FragmentA other onViewCreated ${navArgument?.defaultValue}")
         binding?.btn?.setOnClickListener {
-//            val actionToB = FragmentADirections.actionAToB()
-//            findNavController().navigate(actionToB)
-//            binding?.root?.findNavController()?.navigate(R.id.action_to_b)
-            //id必须设置有navigationcontroler
-//            activity?.findNavController(R.id.nav_host_fragment)?.navigate(R.id.action_to_b)
-//            findNavController().navigate(R.id.action_to_b,null, navOptions {
-//                anim {
-//                    enter=R.anim.slide_in_right
-//                    exit=R.anim.slide_in_left
-//                }
-//            })
-            view.findNavController().navigate(R.id.action_a_to_b)
+            val navigateUp = view.findNavController().navigateUp()
+            Log.d(TAG, "FragmentA other navigateUp $navigateUp")
 
-
+        }
+        binding?.btnPop?.setOnClickListener {
+            view.findNavController().popBackStack()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "FragmentA otheronCreate")
+        Log.d(TAG, "FragmentA other onCreate")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
-        Log.d(TAG, "FragmentA otheronDestroy")
+        Log.d(TAG, "FragmentA other onDestroy")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "FragmentA otheronResume")
+        Log.d(TAG, "FragmentA other onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "FragmentA otheronPause")
+        Log.d(TAG, "FragmentA other onPause")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "FragmentA otheronDestroyView")
+        Log.d(TAG, "FragmentA other onDestroyView")
     }
 
 }

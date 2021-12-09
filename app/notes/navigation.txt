@@ -25,4 +25,7 @@
  可以显示指定activity的名称，跳转至指定的activity
  也可以值intent-filter隐士跳转至指定的activity
 
-navController.navigateUp():相当于工具类顶部的向上箭头返回键.
+navController.navigateUp():相当于工具类顶部的向上箭头返回键.针对整个导航图，
+返回到起始位置(startDestination)的时候会返回false，无法再返回
+navController.popBackStack(navigationId, false)可以指定id，返回目标地点。当该方法返回false的时候，说明已经到达起点。这时候获取
+view?.findNavController()?.currentDestination会返回null。也就是说此方法会把起点的fragment也弹出去。回到图的顶点。

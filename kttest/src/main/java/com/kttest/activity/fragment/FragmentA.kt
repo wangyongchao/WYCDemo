@@ -38,6 +38,7 @@ class FragmentA : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val arguments = findNavController().graph.arguments
         val navArgument = arguments["navigationId"]
+        val navigationId: Int = navArgument?.defaultValue as Int
         Log.d(TAG, "FragmentA other onViewCreated ${navArgument?.defaultValue}")
         binding?.btn?.setOnClickListener {
             val navigateUp = view.findNavController().navigateUp()
@@ -45,7 +46,8 @@ class FragmentA : Fragment() {
 
         }
         binding?.btnPop?.setOnClickListener {
-            view.findNavController().popBackStack()
+            val popBackStack = view.findNavController().popBackStack(navigationId,false)
+            Log.d(TAG, "FragmentA other popBackStack $popBackStack")
         }
     }
 

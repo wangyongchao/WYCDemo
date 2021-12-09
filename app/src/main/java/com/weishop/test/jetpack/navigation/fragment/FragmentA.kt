@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.weishop.test.R
 import com.weishop.test.databinding.FragmentABinding
+import com.weishop.test.util.LogUtils
 import com.weishop.test.util.TestUtils
 
 class FragmentA : Fragment() {
@@ -53,9 +54,20 @@ class FragmentA : Fragment() {
 //                }
 //            })
             view.findNavController().navigate(R.id.action_a_to_b)
-
-
         }
+
+        binding?.btnPop?.setOnClickListener {
+            view.findNavController().popBackStack()
+            printCurrent()
+        }
+
+        printCurrent()
+
+    }
+
+    private fun printCurrent() {
+        val currentDestination = view?.findNavController()?.currentDestination
+        LogUtils.d("currentDestination=$currentDestination")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

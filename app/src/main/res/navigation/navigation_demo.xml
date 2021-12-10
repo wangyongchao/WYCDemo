@@ -18,11 +18,10 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_a_to_dialog"
+            app:destination="@id/my_dialog_fragment" />
 
-        <argument
-            android:name="user_name"
-            android:defaultValue="zhangSan"
-            app:argType="string" />
 
     </fragment>
 
@@ -77,6 +76,11 @@
         <!--            app:popEnterAnim="@anim/slide_in_left"-->
         <!--            app:popExitAnim="@anim/slide_out_right" />-->
 
+
+        <action
+            android:id="@+id/action_c_to_dialog"
+            app:destination="@id/my_dialog_fragment" />
+
     </fragment>
 
     <!--    <activity-->
@@ -93,11 +97,20 @@
         android:id="@+id/sampleActivityDestinationOuter"
         app:action="android.intent.action.VIEW"
         app:dataPattern="https://example.com?navigationId={navigationId}"
-        app:targetPackage="com.kttest" >
+        app:targetPackage="com.kttest">
 
-        <argument android:name="navigationId"
-            app:argType="integer"/>
+        <argument
+            android:name="navigationId"
+            app:argType="integer" />
 
     </activity>
+
+    <dialog
+        android:id="@+id/my_dialog_fragment"
+        android:name="com.weishop.test.jetpack.navigation.MyDialogFragment">
+        <action
+            android:id="@+id/dialog_to_a"
+            app:destination="@id/navigation_a" />
+    </dialog>
 
 </navigation>

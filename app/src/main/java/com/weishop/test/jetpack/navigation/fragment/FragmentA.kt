@@ -29,9 +29,7 @@ class FragmentA : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         Log.d(TestUtils.TAG, "FragmentA onCreateView")
         binding = FragmentABinding.inflate(inflater)
@@ -57,8 +55,8 @@ class FragmentA : Fragment() {
         }
 
         binding?.btnPop?.setOnClickListener {
-            view.findNavController().popBackStack()
-            printCurrent()
+            view.findNavController().navigate(R.id.action_a_to_dialog)
+
         }
 
         printCurrent()

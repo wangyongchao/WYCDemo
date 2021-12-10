@@ -28,9 +28,7 @@ class FragmentC : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         Log.d(TestUtils.TAG, "FragmentC onCreateView")
         binding = FragmentCBinding.inflate(inflater)
@@ -43,6 +41,9 @@ class FragmentC : Fragment() {
         binding?.btn?.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_c_to_a)
 
+        }
+        binding?.btnPop?.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_c_to_dialog)
         }
     }
 

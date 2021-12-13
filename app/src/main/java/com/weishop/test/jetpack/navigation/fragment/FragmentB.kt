@@ -59,7 +59,9 @@ class FragmentB : Fragment() {
 
         }
         binding?.btnInnerActivity?.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_b_to_activity)
+//            Navigation.findNavController(view).navigate(R.id.action_b_to_activity)
+            val savedStateHandle = findNavController().previousBackStackEntry!!.savedStateHandle
+            savedStateHandle.set(FragmentA.LOGIN_SUCCESSFUL,true)
         }
 
         binding?.btnOuterActivity?.setOnClickListener {

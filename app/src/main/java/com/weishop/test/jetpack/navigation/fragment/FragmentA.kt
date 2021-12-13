@@ -16,6 +16,9 @@ import com.weishop.test.util.LogUtils
 import com.weishop.test.util.TestUtils
 
 class FragmentA : Fragment() {
+    companion object {
+        const val LOGIN_SUCCESSFUL: String = "LOGIN_SUCCESSFUL"
+    }
 
     private var binding: FragmentABinding? = null
     override fun onAttach(context: Context) {
@@ -55,12 +58,21 @@ class FragmentA : Fragment() {
         }
 
         binding?.btnPop?.setOnClickListener {
-            view.findNavController().navigate(R.id.action_a_to_dialog)
 
         }
 
-        printCurrent()
+        registerObserver()
 
+    }
+
+    private fun registerObserver() {
+        val navController = findNavController()
+        val currentBackStackEntry = navController.currentBackStackEntry!!
+        currentBackStackEntry.savedStateHandle.getLiveData<Boolean>(LOGIN_SUCCESSFUL)
+            .observe(currentBackStackEntry) {
+                LogUtils.d("registerObserver $it")
+
+            }
     }
 
     private fun printCurrent() {

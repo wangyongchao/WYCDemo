@@ -30,6 +30,12 @@ navController.navigateUp():相当于工具类顶部的向上箭头返回键.针�
 navController.popBackStack(navigationId, false)可以指定id，返回目标地点。当该方法返回false的时候，说明已经到达起点。这时候获取
 view?.findNavController()?.currentDestination会返回null。也就是说此方法会把起点的fragment也弹出去。回到图的顶点。
 
-Navigation中Fragment与Fragment之间的通信可以借助于livedata
-
 Dialog destinations例如DialogFragment，位于其它fragment上方，位于栈的顶部，如果导航到其它fragment，栈顶fragment都会被销毁。
+
+Navigation中Fragment与Fragment之间的通信可以借助于livedata
+Fragment与Fragment之间传递少量数据借助于argument，传递大量数据借助于viewModel
+
+Safe Args传递参数能保证参数的类型，可以安全传输。参数生成的类:build/generated/source/navigation-args/debug
+
+
+

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.weishop.test.MainNavigationDirections
 import com.weishop.test.R
 import com.weishop.test.databinding.FragmentBBinding
 import com.weishop.test.databinding.FragmentCBinding
@@ -43,7 +44,8 @@ class FragmentC : Fragment() {
 
         }
         binding?.btnPop?.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_c_to_dialog)
+            val actionGlobalFragmentA = MainNavigationDirections.actionGlobalFragmentA()
+            Navigation.findNavController(view).navigate(actionGlobalFragmentA)
         }
     }
 

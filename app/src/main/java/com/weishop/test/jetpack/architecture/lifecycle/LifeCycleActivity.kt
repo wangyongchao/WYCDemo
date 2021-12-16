@@ -19,6 +19,7 @@ class LifeCycleActivity : AppCompatActivity() {
     private lateinit var registry: LifecycleRegistry
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        LogUtils.d("LifeCycleActivity onCreate")
         super.onCreate(savedInstanceState)
         mBinding = ActivityArchitectureBinding.inflate(layoutInflater)
         setContentView(mBinding.root)

@@ -1,0 +1,12 @@
+Lifecycle
+LifecycleObserver:生命周期观察者，观察activity或者fragment的生命周期，在生命周期发生变化时候处理自己的业务。实现了次接口的类，都能感应生命周期
+Lifecycle：被观察者，存储实现了LifecycleObserver的观察者。子类LifecycleRegistry默认会在activity或者fragment初始化时候创建。
+LifecycleOwner:Lifecycle拥有者，只有一个方法@NonNull Lifecycle getLifecycle();通常是activity或者fragment
+onCreate,onStart,onResume会先调用自身的方法，再调用LifecycleObserver的方法。
+onPause,onStop,onDestroy会先调用LifecycleObserver的方法，然后再调用自身的方法。
+
+LiveData:
+LiveData observe必须放在主线程调用，否则会抛出异常，注册观察者的时候会传入LifecycleOwner，这样livedata就能感知activity或fragment的生命周期。
+setValue()必须再主线程中调用,postValue一般用在子线程中调用
+
+

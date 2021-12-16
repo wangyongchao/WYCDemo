@@ -25,7 +25,7 @@ class ViewModelLiveDataActivity : AppCompatActivity() {
 //            mBinding.displayContent.text = "$it dd"
 //        }
 
-        viewModel.saveStateLiveData.observe(this){
+        viewModel.saveStateLiveData.observe(this) {
             LogUtils.d("saveStateLiveData observer $it")
         }
 

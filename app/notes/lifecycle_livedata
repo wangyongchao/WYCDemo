@@ -9,4 +9,7 @@ LiveData:
 LiveData observe必须放在主线程调用，否则会抛出异常，注册观察者的时候会传入LifecycleOwner，这样livedata就能感知activity或fragment的生命周期。
 setValue()必须再主线程中调用,postValue一般用在子线程中调用
 
+同一个LiveData，观察多个owner，后注册的owner也能收到通知。
+如果我们想要在LiveData对象分发给观察者之前对其中存储的值进行更改，可以使用Transformations.map()和Transformations.switchMap()
+Transformations.switchMap 返回一个新的livedata
 

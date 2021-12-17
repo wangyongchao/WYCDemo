@@ -19,6 +19,6 @@ public class WorkTools {
 //        XmlStringToService.goServiceFormat("strings.xml");
         //从服务器下载的多语言文件的替换
         new ReadServiceLanguages(ReadServiceLanguages.BASE_SRC_PATH,
-                ReadServiceLanguages.BASE_DES_PATH_PLANK,ReadServiceLanguages.languagesGradle_plank).startCopyFile();
+                ReadServiceLanguages.BASE_DES_PATH_BUTT1,ReadServiceLanguages.languagesGradle_butt1).startCopyFile();
     }
 }

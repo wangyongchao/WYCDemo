@@ -10,6 +10,24 @@ LiveData observe必须放在主线程调用，否则会抛出异常，注册观�
 setValue()必须再主线程中调用,postValue一般用在子线程中调用
 
 同一个LiveData，观察多个owner，后注册的owner也能收到通知。
-如果我们想要在LiveData对象分发给观察者之前对其中存储的值进行更改，可以使用Transformations.map()和Transformations.switchMap()
-Transformations.switchMap 返回一个新的livedata
+
+更改livedata中的数据
+如果我们想要在LiveData对象分发给观察者之前对其中存储的值进行更改，可以使用Transformations.map()
+  val map: LiveData<Int> = Transformations.map(mutableLiveData) {
+            33
+        }
+Fuction 函数返回的是另一个值，map返回的是livedata
+
+Transformations.switchMap 如果想要手动控制监听其中一个的数据变化，并能根据需要随时切换监听，这时可以使用Transformations.switchMap()，
+它和Transformations.map()使用方式类似，只不过switchMap()必须返回一个LiveData对象。
+var transformSwitchMap: LiveData<String> = Transformations.switchMap(mutableLiveData, Function {
+            LogUtils.d("switchMap $it")
+            MutableLiveData<String>(it + "transform")
+        })
+  Fuction 函数返回的是一个livedata对象
+
+
+合并多个LiveData数据,MediatorLiveData
+
+
 

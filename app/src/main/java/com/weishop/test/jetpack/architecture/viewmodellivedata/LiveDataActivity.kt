@@ -38,25 +38,32 @@ class LiveDataActivity : AppCompatActivity() {
 
         }
 
-        val map = Transformations.map(mutableLiveData) {
+
+    }
+
+    fun testMediatorLiveData() {
+
+    }
+
+    fun testChangeData() {
+        val map: LiveData<Int> = Transformations.map(mutableLiveData) {
             LogUtils.d("observe $it")
+            //返回一个具体的改变后的数值
             33
         }
         map.observe(this) {
 
         }
 
-        var transformSwitchMap: LiveData<String> =
-            Transformations.switchMap(mutableLiveData, Function {
-                LogUtils.d("switchMap $it")
-                MutableLiveData<String>(it + "transform")
-            })
+        var transformSwitchMap: LiveData<String> = Transformations.switchMap(mutableLiveData, Function {
+            LogUtils.d("switchMap $it")
+            //必须返回livedata
+            MutableLiveData<String>(it + "transform")
+        })
 
         transformSwitchMap.observe(this, Observer {
             LogUtils.d("transform observe  $it")
         })
-
-
     }
 
     override fun onResume() {

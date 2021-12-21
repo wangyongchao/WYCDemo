@@ -5,10 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.arch.core.util.Function
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
 import com.weishop.test.databinding.ActivityViewmodelLivedataBinding
 import com.weishop.test.util.LogUtils
 
@@ -24,7 +21,7 @@ class LiveDataActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         mBinding.changeData.setOnClickListener {
-            mutableLiveData.postValue("post")
+            testMediatorLiveData()
 
         }
 
@@ -39,9 +36,26 @@ class LiveDataActivity : AppCompatActivity() {
         }
 
 
+
     }
 
     fun testMediatorLiveData() {
+        val mutableLiveData1 = MutableLiveData<String>()
+        val mutableLiveData2 = MutableLiveData<String>()
+        val liveDataMerger = MediatorLiveData<String>()
+        liveDataMerger.addSource(mutableLiveData1) {
+            LogUtils.d("mutableLiveData1 $it")
+
+        }
+        liveDataMerger.addSource(mutableLiveData2) {
+            LogUtils.d("mutableLiveData2 $it")
+        }
+
+        liveDataMerger.observe(this) {
+            LogUtils.d("liveDataMerger $it")
+        }
+
+        mutableLiveData1.postValue("1111")
 
     }
 

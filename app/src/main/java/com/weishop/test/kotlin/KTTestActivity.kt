@@ -11,6 +11,7 @@ import com.weishop.test.util.TestUtils
 import kotlinx.coroutines.*
 import java.text.DateFormat
 import java.util.*
+import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -29,10 +30,33 @@ class KTTestActivity : AppCompatActivity(), View.OnClickListener {
         button1?.setOnClickListener(this)
         button2?.setOnClickListener(this)
 
+//        init()
+
     }
 
 
     private fun init() {
+        GlobalScope.launch(Dispatchers.Main) {
+            LogUtils.d("launch isMainThread=${TestUtils.isMainThread()}")
+            val result = withContext(Dispatchers.IO) {
+                LogUtils.d("withContext IO isMainThread=${TestUtils.isMainThread()}")
+
+                withContext(Dispatchers.Main) {
+                    handleUi()
+                    LogUtils.d("handleUi after=${TestUtils.isMainThread()}")
+                }
+
+            }
+
+        }
+
+    }
+
+
+    private suspend fun handleUi() {
+        LogUtils.d("handleUi =${TestUtils.isMainThread()}")
+        Thread.sleep(2000)
+
     }
 
     fun log(msg: Any?) {
@@ -44,24 +68,38 @@ class KTTestActivity : AppCompatActivity(), View.OnClickListener {
             println("isMain=${TestUtils.isMainThread()} 1")
             //执行完以后才会接着往下执行
             withContext(Dispatchers.IO) {
-                val remoteDataFromLocalCache = getRemoteDataFromLocalCache()//等待执行完，并返回结果
-                println("remoteDataFromLocalCache=${remoteDataFromLocalCache},isMain=${TestUtils.isMainThread()}")
+                test1()
             }
             println("withContext after")
         }
         println("testSuspendCoroutine after")
+
     }
 
-    private suspend fun getRemoteDataFromLocalCache(): String = suspendCoroutine { cont ->
+    private fun test1() {
+
+
+    }
+
+    var continuation: Continuation<String>? = null
+
+    val func: (continuation: Continuation<String>) -> Unit = {
+        continuation = it
         println("getRemoteDataFromLocalCache isMain=${TestUtils.isMainThread()}")
         Thread.sleep(5000)
         println("getRemoteDataFromLocalCache after")
-        cont.resume("result ok")
 
     }
 
+    private suspend fun getRemoteDataFromLocalCache(): String = suspendCoroutine(func)
+
     override fun onClick(v: View?) {
-        testSuspendCoroutine()
+        if (v?.id == R.id.btn1) {
+            testSuspendCoroutine()
+        } else {
+            continuation?.resume("result..")
+        }
+
     }
 
 

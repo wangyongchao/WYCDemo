@@ -17,7 +17,7 @@
         android:id="@+id/btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="btn1"
+        android:text="get"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +25,7 @@
         android:id="@+id/btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="btn1"
+        android:text="resume"
         app:layout_constraintLeft_toRightOf="@id/btn1"
         app:layout_constraintTop_toTopOf="@id/btn1" />
 

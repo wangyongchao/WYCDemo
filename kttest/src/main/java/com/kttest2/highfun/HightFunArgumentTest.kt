@@ -3,6 +3,7 @@ package com.kttest2.highfun
 import com.kttest2.lambda.LambdaTest
 import com.kttest2.lambda.Person
 import java.lang.StringBuilder
+import kotlin.coroutines.Continuation
 
 /**
  * 作为函数参数
@@ -75,7 +76,6 @@ class HightFunArgumentTest {
         }
 
         fun testCallHighFun() {
-
 
             val sum = { x: Int, y: Int -> x + y }//不声明类型
             val sum1: (Int, Int) -> Int = { x, y -> x + y }//显示类型

@@ -51,9 +51,9 @@ class LiveDataActivity : AppCompatActivity() {
             LogUtils.d("mutableLiveData2 $it")
         }
 
-        liveDataMerger.observe(this) {
+        liveDataMerger.observe(this, Observer {
             LogUtils.d("liveDataMerger $it")
-        }
+        })
 
         mutableLiveData1.postValue("1111")
 
@@ -65,9 +65,10 @@ class LiveDataActivity : AppCompatActivity() {
             //返回一个具体的改变后的数值
             33
         }
-        map.observe(this) {
 
-        }
+        map.observe(this, Observer {
+
+        })
 
         var transformSwitchMap: LiveData<String> = Transformations.switchMap(mutableLiveData, Function {
             LogUtils.d("switchMap $it")

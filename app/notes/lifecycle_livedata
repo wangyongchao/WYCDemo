@@ -28,6 +28,15 @@ var transformSwitchMap: LiveData<String> = Transformations.switchMap(mutableLive
 
 
 合并多个LiveData数据,MediatorLiveData
+ val mutableLiveData1 = MutableLiveData<String>()
+ MediatorLiveData.addSource(mutableLiveData1) {
+            LogUtils.d("mutableLiveData1 $it")
+
+        }
+当mutableLiveData1 post数据的时候MediatorLiveData 也能收到。
+
+
+
 
 
 

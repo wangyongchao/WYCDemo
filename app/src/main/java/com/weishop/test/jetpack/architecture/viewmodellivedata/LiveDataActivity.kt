@@ -3,10 +3,13 @@ package com.weishop.test.jetpack.architecture.viewmodellivedata
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.arch.core.util.Function
 import androidx.lifecycle.*
 import com.weishop.test.databinding.ActivityViewmodelLivedataBinding
+import com.weishop.test.databinding.DialogCornerBinding
 import com.weishop.test.util.LogUtils
 
 class LiveDataActivity : AppCompatActivity() {
@@ -21,7 +24,7 @@ class LiveDataActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         mBinding.changeData.setOnClickListener {
-            testMediatorLiveData()
+            showDialog()
 
         }
 
@@ -36,8 +39,18 @@ class LiveDataActivity : AppCompatActivity() {
         }
 
 
-
     }
+
+    fun showDialog() {
+        val dialog = AlertDialog.Builder(this).create()
+        val binding = DialogCornerBinding.inflate(layoutInflater)
+        dialog.setView(binding.root)
+        dialog.window?.setDimAmount(0f)
+        dialog.window?.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+    }
+
 
     fun testMediatorLiveData() {
         val mutableLiveData1 = MutableLiveData<String>()

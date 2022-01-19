@@ -33,7 +33,7 @@ public class ReadServiceLanguages {
      * 源文件路径 --文件夹层级，最好是统一放到一个文件下面
      * 例如：C:\Users\Administrator\Downloads\stringsdownload_20181229101711
      */
-    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20211224101543";
+    public static final String BASE_SRC_PATH = "/Users/wangyongchao/datum-zj/strings/stringsdownload_20220117112015";
 
     /**
      * 目标项目路径----文件夹层级，最好是统一放到一个文件下面

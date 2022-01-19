@@ -1,8 +1,7 @@
 package com.weishop.test.jetpack.architecture.viewmodellivedata
 
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.content.Intent
+import android.os.*
 import android.view.Gravity
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,8 @@ import androidx.lifecycle.*
 import com.weishop.test.databinding.ActivityViewmodelLivedataBinding
 import com.weishop.test.databinding.DialogCornerBinding
 import com.weishop.test.util.LogUtils
+import com.weishop.test.util.RomUtil
+import com.weishop.test.util.StatusBarUtils
 
 class LiveDataActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityViewmodelLivedataBinding
@@ -24,7 +25,9 @@ class LiveDataActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         mBinding.changeData.setOnClickListener {
-            showDialog()
+
+            val prop = RomUtil.getProp("")
+            LogUtils.d("${android.os.Build.BRAND},${android.os.Build.MODEL}")
 
         }
 
@@ -37,8 +40,22 @@ class LiveDataActivity : AppCompatActivity() {
             LogUtils.d("observe $it")
 
         }
+        StatusBarUtils.setTransparentBar(this, true)
+        var statusBarHeight = 0
+        if (Build.VERSION.SDK_INT >= 21) {
+            statusBarHeight = StatusBarUtils.getStatusBarHeight(this)
+        }
+        mBinding.container.setPadding(0, statusBarHeight, 0, 0)
 
 
+    }
+
+    fun test() {
+        val resetAppIntent = Intent(this, LiveDataActivity::class.java)
+        resetAppIntent.putExtra("isNewUser", true)
+        startActivity(resetAppIntent)
+        Process.killProcess(Process.myPid())
+        System.exit(0)
     }
 
     fun showDialog() {

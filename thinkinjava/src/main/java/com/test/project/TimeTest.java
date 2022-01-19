@@ -22,15 +22,24 @@ public class TimeTest {
 
 
     public static void main(String[] args) {
-        getTime2(1637339679120000l);// startup
-        getTime2(1637350707726000l);// startup
-        getTime2(1637350763722000l);// startup
-        getTime2(1637361019638000l);// startup
-        getTime2(1637361020050000l);// startup
-        getTime2(1637369140651000l);// startup
-        getTime2(1637381439646000l);// startup
+        getTime2(1642153461852002l);// startup
+        getTime2(1642153658335029l);// startup
 
 
+    }
+
+    public static long getTimeZeroZone() {
+        Calendar calendar = getCalendar();
+        // 设置0时区
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+        return calendar.getTimeInMillis();
+    }
+
+    public static Calendar getCalendar(){
+        Calendar c = Calendar.getInstance();
+        c.setFirstDayOfWeek(Calendar.SUNDAY);
+        c.setMinimalDaysInFirstWeek(1);
+        return  c;
     }
 
     private static void firebaseTime() {

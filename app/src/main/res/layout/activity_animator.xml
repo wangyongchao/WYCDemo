@@ -23,6 +23,19 @@
         android:layout_below="@id/end"
         android:text="end1" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_toRightOf="@+id/end"
+        style="?android:attr/progressBarStyleSmall"
+        android:indeterminateDrawable="@drawable/icon_loading"
+        android:indeterminateOnly="true"
+        android:indeterminateDuration="1000"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+
     <com.weishop.test.animator.LiangChengLayout
         android:id="@+id/lcl_layout"
         android:layout_width="wrap_content"
@@ -46,6 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+
 
 
     <FrameLayout
@@ -99,6 +114,28 @@
             android:textSize="12sp" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/end1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp">
+
+
+        <ImageView
+            android:id="@+id/icon_download_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="-10dp"
+            android:src="@drawable/ic_icon_arrow" />
+
+
+
+
+    </FrameLayout>
 
 
 </RelativeLayout>

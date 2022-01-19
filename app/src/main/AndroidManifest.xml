@@ -39,7 +39,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".jetpack.architecture.viewmodellivedata.LiveDataActivity"
+            android:name=".animator.AnimatorActivity"
             android:label="Demo工程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

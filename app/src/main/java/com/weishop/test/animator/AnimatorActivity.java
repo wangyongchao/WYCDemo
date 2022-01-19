@@ -13,8 +13,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+
 import androidx.annotation.NonNull;
+
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.ImageAssetDelegate;
@@ -27,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.LinkedBlockingQueue;
+
+import static android.view.animation.Animation.INFINITE;
 
 public class AnimatorActivity extends Activity implements View.OnClickListener {
     private static final String LOTTIE_RES_ASSETS_ROOTDIR = "interaction/";
@@ -41,6 +46,8 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
     private int number = 500;
     private boolean isOpen = true;
     private LinkedBlockingQueue<String> concurrentLinkedQueue = new LinkedBlockingQueue<>();
+    private View progress_layout;
+    private ImageView icon_download_arrow;
 
 
     @Override
@@ -55,6 +62,8 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
         textLayout = findViewById(R.id.testText_layout);
         mTestText = (TextView) findViewById(R.id.testText);
         mTestText1 = (TextView) findViewById(R.id.testText1);
+        icon_download_arrow = (ImageView) findViewById(R.id.icon_download_arrow);
+        progress_layout = findViewById(R.id.progress_layout);
         mTestViewProperty = (TextScaleView) findViewById(R.id.test_view_porperty);
         findViewById(R.id.start).setOnClickListener(this);
         findViewById(R.id.end).setOnClickListener(this);
@@ -119,21 +128,43 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        int id = v.getId();
-//        if (id == R.id.start) {
-//            isOpen = true;
-//            concurrentLinkedQueue.offer(String.valueOf(key++));
-//        } else if (id == R.id.end){
-//            concurrentLinkedQueue.offer(String.valueOf(2));
-//        }else {
-//            concurrentLinkedQueue.offer(String.valueOf(3));
-//        }
 
-        mTestViewProperty.smoothAddValue(5);
+        testProgress();
 
     }
 
 
+    private void testScore() {
+        AnimatorSet animatorSet = new AnimatorSet();
+
+        ObjectAnimator alphaObjectAnimator = ObjectAnimator.ofFloat(mTestText, "alpha", 0f, 1f);
+        alphaObjectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Object animatedValue = animation.getAnimatedValue();
+                System.out.println("animatedValue=" + animatedValue);
+            }
+        });
+
+        float translationY = mTestText.getTranslationY();
+        System.out.println("translationY=" + translationY);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTestText, "translationY",
+                translationY, -mTestText
+                        .getLeft(), translationY);
+        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Object animatedValue = animation.getAnimatedValue();
+                float translationX = mTestText.getTranslationX();
+                System.out.println("animatedValue=" + animatedValue + ",translationX=" + translationX + ",getLeft=" +
+                        mTestText.getLeft());
+            }
+        });
+        animatorSet.play(alphaObjectAnimator).with(objectAnimator);
+        animatorSet.setDuration(1000);
+        animatorSet.start();
+
+    }
 
 
     private void startBubbleAnimation() {
@@ -176,35 +207,25 @@ public class AnimatorActivity extends Activity implements View.OnClickListener {
 
     }
 
-    private void testScore() {
-        AnimatorSet animatorSet = new AnimatorSet();
+    private void testProgress() {
 
-        ObjectAnimator alphaObjectAnimator = ObjectAnimator.ofFloat(mTestText, "alpha", 0f, 1f);
-        alphaObjectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Object animatedValue = animation.getAnimatedValue();
-                System.out.println("animatedValue=" + animatedValue);
-            }
-        });
+//        ObjectAnimator alphaObjectAnimator = ObjectAnimator.ofFloat(icon_download_arrow, "alpha", 0f, 1f);
+//        alphaObjectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animation) {
+//                Object animatedValue = animation.getAnimatedValue();
+//                System.out.println("animatedValue=" + animatedValue);
+//            }
+//        });
 
-        float translationY = mTestText.getTranslationY();
+        float translationY = icon_download_arrow.getTranslationY();
         System.out.println("translationY=" + translationY);
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTestText, "translationY",
-                translationY, -mTestText
-                        .getLeft(), translationY);
-        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Object animatedValue = animation.getAnimatedValue();
-                float translationX = mTestText.getTranslationX();
-                System.out.println("animatedValue=" + animatedValue + ",translationX=" + translationX + ",getLeft=" +
-                        mTestText.getLeft());
-            }
-        });
-        animatorSet.play(alphaObjectAnimator).with(objectAnimator);
-        animatorSet.setDuration(1000);
-        animatorSet.start();
+        int distance = TestUtils.dip2px(this, 30);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(icon_download_arrow, "translationY",
+                0, distance);
+        objectAnimator.setRepeatCount(-1);
+        objectAnimator.setDuration(1000);
+        objectAnimator.start();
 
     }
 

@@ -1,0 +1,447 @@
+releaseRuntimeClasspath - Runtime classpath of compilation 'release' (target  (androidJvm)).
++--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.3.72
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72
+|         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.3.72
+|         \--- org.jetbrains:annotations:13.0 -> 16.0.1
++--- project :MPChartLib
++--- project :loginui
+|    +--- com.drojian.workout:CommonUtils:0.4.0
+|    +--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.3.72 (*)
+|    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 (*)
+|    +--- androidx.appcompat:appcompat:1.0.0
+|    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    +--- androidx.core:core:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0
+|    |    |    |    +--- androidx.lifecycle:lifecycle-common:2.0.0
+|    |    |    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    +--- androidx.arch.core:core-common:2.0.0 -> 2.0.1
+|    |    |    |    |    \--- androidx.annotation:annotation:1.0.2 -> 1.2.0
+|    |    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.versionedparcelable:versionedparcelable:1.1.0
+|    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    |    \--- androidx.collection:collection:1.0.0
+|    |    |    |         \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    \--- androidx.collection:collection:1.0.0 (*)
+|    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    +--- androidx.cursoradapter:cursoradapter:1.0.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    +--- androidx.legacy:legacy-support-core-utils:1.0.0
+|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    +--- androidx.documentfile:documentfile:1.0.0
+|    |    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.loader:loader:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    +--- androidx.lifecycle:lifecycle-livedata:2.0.0
+|    |    |    |    |    +--- androidx.arch.core:core-runtime:2.0.0 -> 2.0.1
+|    |    |    |    |    |    +--- androidx.annotation:annotation:1.0.2 -> 1.2.0
+|    |    |    |    |    |    \--- androidx.arch.core:core-common:2.0.1 (*)
+|    |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.0.0
+|    |    |    |    |    |    +--- androidx.lifecycle:lifecycle-common:2.0.0 (*)
+|    |    |    |    |    |    +--- androidx.arch.core:core-common:2.0.0 -> 2.0.1 (*)
+|    |    |    |    |    |    \--- androidx.arch.core:core-runtime:2.0.0 -> 2.0.1 (*)
+|    |    |    |    |    \--- androidx.arch.core:core-common:2.0.0 -> 2.0.1 (*)
+|    |    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.0.0
+|    |    |    |         \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0
+|    |    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    \--- androidx.print:print:1.0.0
+|    |    |         \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    +--- androidx.fragment:fragment:1.0.0
+|    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    +--- androidx.legacy:legacy-support-core-ui:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    +--- androidx.legacy:legacy-support-core-utils:1.0.0 (*)
+|    |    |    |    +--- androidx.customview:customview:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    \--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    +--- androidx.viewpager:viewpager:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    |    +--- androidx.coordinatorlayout:coordinatorlayout:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    |    +--- androidx.drawerlayout:drawerlayout:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    |    +--- androidx.slidingpanelayout:slidingpanelayout:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    |    +--- androidx.interpolator:interpolator:1.0.0
+|    |    |    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    +--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    |    \--- androidx.interpolator:interpolator:1.0.0 (*)
+|    |    |    |    +--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    \--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    \--- androidx.cursoradapter:cursoradapter:1.0.0 (*)
+|    |    |    +--- androidx.legacy:legacy-support-core-utils:1.0.0 (*)
+|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.loader:loader:1.0.0 (*)
+|    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.0.0 (*)
+|    |    +--- androidx.vectordrawable:vectordrawable:1.0.0
+|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    \--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    \--- androidx.vectordrawable:vectordrawable-animated:1.0.0
+|    |         +--- androidx.vectordrawable:vectordrawable:1.0.0 (*)
+|    |         \--- androidx.legacy:legacy-support-core-ui:1.0.0 (*)
+|    +--- androidx.constraintlayout:constraintlayout:1.1.3
+|    |    \--- androidx.constraintlayout:constraintlayout-solver:1.1.3
+|    +--- com.drojian.workout:Login:1.2.7
+|    +--- com.drojian.workout:PickerView:1.0.1
+|    +--- com.drojian.workout:CircleImageView:1.0.1
+|    +--- com.github.bumptech.glide:glide:3.7.0
+|    +--- app.lp.widget:Core_360:1.0.1
+|    +--- app.lp.widget:Core_375:1.0.1
+|    +--- com.google.android.material:material:1.0.0
+|    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    +--- androidx.legacy:legacy-support-core-ui:1.0.0 (*)
+|    |    +--- androidx.legacy:legacy-support-core-utils:1.0.0 (*)
+|    |    +--- androidx.fragment:fragment:1.0.0 (*)
+|    |    +--- androidx.transition:transition:1.0.0
+|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    \--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    +--- androidx.appcompat:appcompat:1.0.0 (*)
+|    |    +--- androidx.cardview:cardview:1.0.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    \--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
+|    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |         +--- androidx.core:core:1.1.0 -> 1.2.0 (*)
+|    |         +--- androidx.customview:customview:1.0.0 (*)
+|    |         \--- androidx.collection:collection:1.0.0 (*)
+|    +--- androidx.recyclerview:recyclerview:1.1.0 (*)
+|    +--- org.greenrobot:eventbus:3.1.1
+|    +--- com.drojian.workout:CustomAlertDialog:1.0.2
+|    +--- com.google.android.gms:play-services-auth:19.0.0
+|    |    +--- androidx.fragment:fragment:1.0.0 (*)
+|    |    +--- androidx.loader:loader:1.0.0 (*)
+|    |    +--- com.google.android.gms:play-services-auth-api-phone:17.0.0 -> 17.4.0
+|    |    |    +--- com.google.android.gms:play-services-base:17.1.0
+|    |    |    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    +--- androidx.fragment:fragment:1.0.0 (*)
+|    |    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0
+|    |    |    |    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    |    |    |    +--- androidx.core:core:1.2.0 (*)
+|    |    |    |    |    \--- androidx.fragment:fragment:1.0.0 (*)
+|    |    |    |    \--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2
+|    |    |    |         \--- com.google.android.gms:play-services-basement:17.2.1 -> 17.6.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-basement:17.1.0 -> 17.6.0 (*)
+|    |    |    \--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    +--- com.google.android.gms:play-services-auth-base:17.0.0
+|    |    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-base:17.0.0 -> 17.1.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    \--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    +--- com.google.android.gms:play-services-base:17.1.0 (*)
+|    |    +--- com.google.android.gms:play-services-basement:17.1.1 -> 17.6.0 (*)
+|    |    \--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    +--- com.jakewharton.timber:timber:4.7.1
+|    |    \--- org.jetbrains:annotations:16.0.1
+|    +--- com.google.firebase:firebase-bom:28.2.1
+|    |    +--- com.google.firebase:firebase-analytics:19.0.0 (c)
+|    |    +--- com.google.firebase:firebase-auth:21.0.1 (c)
+|    |    +--- com.google.firebase:firebase-config:21.0.0 (c)
+|    |    +--- com.google.firebase:firebase-crashlytics:18.1.0 (c)
+|    |    +--- com.google.firebase:firebase-storage:20.0.0 (c)
+|    |    +--- com.google.firebase:firebase-installations:17.0.0 (c)
+|    |    +--- com.google.firebase:firebase-common:20.0.0 (c)
+|    |    \--- com.google.firebase:firebase-encoders:17.0.0 (c)
+|    +--- com.google.firebase:firebase-auth -> 21.0.1
+|    |    +--- androidx.browser:browser:1.0.0
+|    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.interpolator:interpolator:1.0.0 (*)
+|    |    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    |    \--- androidx.legacy:legacy-support-core-ui:1.0.0 (*)
+|    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    +--- androidx.fragment:fragment:1.0.0 (*)
+|    |    +--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0 (*)
+|    |    +--- com.google.android.gms:play-services-auth-api-phone:17.4.0 (*)
+|    |    +--- com.google.android.gms:play-services-base:17.1.0 (*)
+|    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    +--- com.google.android.gms:play-services-safetynet:17.0.0
+|    |    |    +--- com.google.android.gms:play-services-base:17.0.0 -> 17.1.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    \--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    +--- com.google.firebase:firebase-auth-interop:20.0.0
+|    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    |    +--- com.google.firebase:firebase-annotations:16.0.0
+|    |    |    \--- com.google.firebase:firebase-common:20.0.0
+|    |    |         +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |         +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    |         \--- com.google.firebase:firebase-components:17.0.0
+|    |    |              +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |              \--- com.google.firebase:firebase-annotations:16.0.0
+|    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    \--- com.google.firebase:firebase-components:17.0.0 (*)
+|    +--- com.drojian.workout:Setting:1.0.9
+|    +--- com.drojian.workout:DateUtils:1.1.2
+|    \--- com.drojian.workout:workout-analytics:1.2.0
++--- project :PermissionGuideLib
+|    +--- project :xplayer
+|    |    +--- androidx.appcompat:appcompat:1.0.0 (*)
+|    |    +--- com.google.android.material:material:1.0.0 (*)
+|    |    +--- androidx.recyclerview:recyclerview:1.1.0 (*)
+|    |    +--- androidx.media:media:1.0.0
+|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    \--- androidx.versionedparcelable:versionedparcelable:1.0.0 -> 1.1.0 (*)
+|    |    +--- com.drojian.workout:workout-analytics:1.2.0
+|    |    +--- com.github.bumptech.glide:glide:3.7.0
+|    |    \--- com.google.android.exoplayer:exoplayer:r1.5.16
+|    +--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.3.72 (*)
+|    +--- androidx.appcompat:appcompat:1.0.0 (*)
+|    +--- com.drojian.workout:CommonUtils:0.4.0
+|    \--- com.drojian.workout:workout-analytics:1.2.0
++--- project :thirtydayfit-lib
+|    +--- project :result-page_1.2
+|    |    +--- androidx.appcompat:appcompat:1.0.0 (*)
+|    |    +--- androidx.cardview:cardview:1.0.0 (*)
+|    |    +--- com.google.android.gms:play-services-auth:19.0.0 (*)
+|    |    +--- com.android.support.constraint:constraint-layout:1.1.3 -> androidx.constraintlayout:constraintlayout:1.1.3 (*)
+|    |    +--- com.github.bumptech.glide:glide:3.7.0
+|    |    \--- com.drojian.workout:workout-analytics:1.2.0
+|    +--- project :xplayer (*)
+|    +--- project :XShareLib
+|    |    +--- androidx.appcompat:appcompat:1.0.0 (*)
+|    |    +--- com.android.support.constraint:constraint-layout:1.1.3 -> androidx.constraintlayout:constraintlayout:1.1.3 (*)
+|    |    +--- com.google.android.material:material:1.0.0 (*)
+|    |    \--- androidx.recyclerview:recyclerview:1.1.0 (*)
+|    +--- androidx.appcompat:appcompat:1.0.0 (*)
+|    +--- com.google.android.material:material:1.0.0 (*)
+|    +--- androidx.recyclerview:recyclerview:1.1.0 (*)
+|    +--- androidx.cardview:cardview:1.0.0 (*)
+|    +--- com.github.bumptech.glide:glide:3.7.0
+|    +--- com.google.android.gms:play-services-auth:19.0.0 (*)
+|    +--- com.google.android.gms:play-services-fitness:20.0.0
+|    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    +--- com.google.android.gms:play-services-base:17.1.0 (*)
+|    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    \--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    +--- com.drojian.workout:FitnessPermission:1.0.9
+|    +--- com.orhanobut:logger:1.15
+|    +--- org.greenrobot:eventbus:3.1.1
+|    +--- com.drojian.workout:WorkoutHelper:1.6.5
+|    |    \--- com.drojian.workout:WorkoutHelperVo:1.0.3
+|    +--- com.drojian.workout:WorkoutProcessLib:1.1.61-Fix
+|    +--- com.drojian.workout:exercises-lib:1.3.2
+|    +--- com.drojian.workout:tts-lib:1.4.8
+|    +--- app.lp:RateUs:1.1.3
+|    |    \--- app.lp.widget:Core_360:1.0.1
+|    +--- com.drojian.workout:workout-analytics:1.2.0
+|    +--- com.drojian.workout:CommonUtils:0.4.0
+|    +--- com.google.code.gson:gson:2.8.5
+|    +--- com.android.support.constraint:constraint-layout:1.1.3 -> androidx.constraintlayout:constraintlayout:1.1.3 (*)
+|    +--- com.airbnb.android:lottie:3.0.7
+|    |    +--- androidx.appcompat:appcompat:1.0.0 (*)
+|    |    \--- com.squareup.okio:okio:1.17.4
+|    +--- app.lp.widget:Core_375:1.0.1
+|    +--- com.drojian.workout:iap:1.3.4
+|    +--- app.lp.billing:Core:1.0.3
+|    |    \--- com.android.billingclient:billing:3.0.0
+|    +--- com.drojian.workout:KotPref:1.1.4
+|    +--- com.google.firebase:firebase-bom:28.2.1 (*)
+|    +--- com.google.firebase:firebase-storage -> 20.0.0
+|    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    +--- com.google.android.gms:play-services-base:17.0.0 -> 17.1.0 (*)
+|    |    +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    +--- com.google.firebase:firebase-appcheck-interop:16.0.0-beta01
+|    |    |    +--- com.google.android.gms:play-services-base:17.1.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    |    \--- com.google.firebase:firebase-components:17.0.0 (*)
+|    |    +--- com.google.firebase:firebase-auth-interop:18.0.0 -> 20.0.0 (*)
+|    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    \--- com.google.firebase:firebase-components:17.0.0 (*)
+|    +--- com.google.firebase:firebase-auth -> 21.0.1 (*)
+|    +--- com.google.firebase:firebase-config -> 21.0.0
+|    |    +--- com.google.android.gms:play-services-tasks:17.0.2 (*)
+|    |    +--- com.google.firebase:firebase-abt:21.0.0
+|    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    |    +--- com.google.firebase:firebase-components:17.0.0 (*)
+|    |    |    \--- com.google.firebase:firebase-measurement-connector:18.0.0 -> 19.0.0
+|    |    |         +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |         \--- com.google.firebase:firebase-annotations:16.0.0
+|    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    +--- com.google.firebase:firebase-components:17.0.0 (*)
+|    |    +--- com.google.firebase:firebase-installations:17.0.0
+|    |    |    +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    |    +--- com.google.firebase:firebase-components:17.0.0 (*)
+|    |    |    \--- com.google.firebase:firebase-installations-interop:17.0.0
+|    |    |         +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    |         \--- com.google.firebase:firebase-annotations:16.0.0
+|    |    +--- com.google.firebase:firebase-installations-interop:17.0.0 (*)
+|    |    \--- com.google.firebase:firebase-measurement-connector:18.0.0 -> 19.0.0 (*)
+|    +--- com.google.firebase:firebase-analytics -> 19.0.0
+|    |    +--- com.google.android.gms:play-services-measurement:19.0.0
+|    |    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    |    +--- androidx.legacy:legacy-support-core-utils:1.0.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-ads-identifier:17.0.0
+|    |    |    |    \--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-measurement-base:19.0.0
+|    |    |    |    \--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-measurement-impl:19.0.0
+|    |    |    |    +--- androidx.collection:collection:1.0.0 (*)
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |    |    +--- com.google.android.gms:play-services-ads-identifier:17.0.0 (*)
+|    |    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    |    +--- com.google.android.gms:play-services-measurement-base:19.0.0 (*)
+|    |    |    |    \--- com.google.android.gms:play-services-stats:17.0.0
+|    |    |    |         +--- androidx.legacy:legacy-support-core-utils:1.0.0 (*)
+|    |    |    |         \--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    \--- com.google.android.gms:play-services-stats:17.0.0 (*)
+|    |    +--- com.google.android.gms:play-services-measurement-api:19.0.0
+|    |    |    +--- com.google.android.gms:play-services-ads-identifier:17.0.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-measurement-base:19.0.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-measurement-sdk-api:19.0.0
+|    |    |    |    +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |    |    \--- com.google.android.gms:play-services-measurement-base:19.0.0 (*)
+|    |    |    +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    |    +--- com.google.firebase:firebase-components:17.0.0 (*)
+|    |    |    +--- com.google.firebase:firebase-installations:17.0.0 (*)
+|    |    |    +--- com.google.firebase:firebase-installations-interop:17.0.0 (*)
+|    |    |    \--- com.google.firebase:firebase-measurement-connector:19.0.0 (*)
+|    |    \--- com.google.android.gms:play-services-measurement-sdk:19.0.0
+|    |         +--- androidx.collection:collection:1.0.0 (*)
+|    |         +--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |         +--- com.google.android.gms:play-services-measurement-base:19.0.0 (*)
+|    |         \--- com.google.android.gms:play-services-measurement-impl:19.0.0 (*)
+|    +--- com.google.firebase:firebase-crashlytics -> 18.1.0
+|    |    +--- com.google.android.datatransport:transport-api:3.0.0
+|    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    +--- com.google.android.datatransport:transport-backend-cct:3.0.0
+|    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    +--- com.google.android.datatransport:transport-api:3.0.0 (*)
+|    |    |    +--- com.google.android.datatransport:transport-runtime:3.0.0 -> 3.0.1
+|    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    |    +--- com.google.android.datatransport:transport-api:3.0.0 (*)
+|    |    |    |    \--- javax.inject:javax.inject:1
+|    |    |    +--- com.google.firebase:firebase-encoders:17.0.0
+|    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    \--- com.google.firebase:firebase-encoders-json:18.0.0
+|    |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |         \--- com.google.firebase:firebase-encoders:17.0.0 (*)
+|    |    +--- com.google.android.datatransport:transport-runtime:3.0.1 (*)
+|    |    +--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    +--- com.google.firebase:firebase-annotations:16.0.0
+|    |    +--- com.google.firebase:firebase-common:20.0.0 (*)
+|    |    +--- com.google.firebase:firebase-components:17.0.0 (*)
+|    |    +--- com.google.firebase:firebase-encoders:17.0.0 (*)
+|    |    +--- com.google.firebase:firebase-encoders-json:18.0.0 (*)
+|    |    +--- com.google.firebase:firebase-installations:17.0.0 (*)
+|    |    +--- com.google.firebase:firebase-installations-interop:17.0.0 (*)
+|    |    \--- com.google.firebase:firebase-measurement-connector:18.0.2 -> 19.0.0 (*)
+|    +--- com.google.firebase:firebase-installations -> 17.0.0 (*)
+|    +--- com.drojian.adconfig:Plank_1:1.3.2-C121-A1141-F1081-AM100-FA1062-ZA103
+|    |    +--- com.drojian.common:AdConfig:1.2.1
+|    |    +--- app.lp:Core:1.2.1
+|    |    |    \--- com.google.android.ads.consent:consent-library:1.0.8
+|    |    |         +--- com.google.code.gson:gson:2.8.4 -> 2.8.5
+|    |    |         \--- androidx.appcompat:appcompat:1.0.0 (*)
+|    |    +--- app.lp.ads:Admob:1.1.4.1
+|    |    |    \--- com.google.android.gms:play-services-ads:20.2.0
+|    |    |         +--- androidx.browser:browser:1.0.0 (*)
+|    |    |         +--- androidx.collection:collection:1.0.0 (*)
+|    |    |         +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |         +--- com.google.android.gms:play-services-ads-base:20.2.0
+|    |    |         |    \--- com.google.android.gms:play-services-basement:17.6.0 (*)
+|    |    |         +--- com.google.android.gms:play-services-ads-identifier:17.0.0 (*)
+|    |    |         +--- com.google.android.gms:play-services-ads-lite:20.2.0
+|    |    |         |    +--- androidx.work:work-runtime:2.1.0
+|    |    |         |    |    +--- com.google.guava:listenablefuture:1.0
+|    |    |         |    |    +--- androidx.lifecycle:lifecycle-livedata:2.0.0 (*)
+|    |    |         |    |    +--- androidx.room:room-runtime:2.1.0
+|    |    |         |    |    |    +--- androidx.room:room-common:2.1.0
+|    |    |         |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |         |    |    |    +--- androidx.sqlite:sqlite-framework:2.0.1
+|    |    |         |    |    |    |    +--- androidx.annotation:annotation:1.0.2 -> 1.2.0
+|    |    |         |    |    |    |    \--- androidx.sqlite:sqlite:2.0.1
+|    |    |         |    |    |    |         \--- androidx.annotation:annotation:1.0.2 -> 1.2.0
+|    |    |         |    |    |    +--- androidx.sqlite:sqlite:2.0.1 (*)
+|    |    |         |    |    |    +--- androidx.arch.core:core-runtime:2.0.1 (*)
+|    |    |         |    |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |         |    |    |    \--- androidx.collection:collection:1.0.0 (*)
+|    |    |         |    |    +--- androidx.core:core:1.0.0 -> 1.2.0 (*)
+|    |    |         |    |    \--- androidx.lifecycle:lifecycle-service:2.0.0
+|    |    |         |    |         \--- androidx.lifecycle:lifecycle-runtime:2.0.0 (*)
+|    |    |         |    +--- com.google.android.gms:play-services-ads-base:20.2.0 (*)
+|    |    |         |    +--- com.google.android.gms:play-services-basement:17.6.0 (*)
+|    |    |         |    +--- com.google.android.gms:play-services-measurement-sdk-api:18.0.0 -> 19.0.0 (*)
+|    |    |         |    \--- com.google.android.ump:user-messaging-platform:1.0.0
+|    |    |         |         +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |         |         +--- com.google.android.gms:play-services-ads-identifier:17.0.0 (*)
+|    |    |         |         \--- com.google.android.gms:play-services-basement:17.0.0 -> 17.6.0 (*)
+|    |    |         +--- com.google.android.gms:play-services-basement:17.6.0 (*)
+|    |    |         \--- com.google.android.gms:play-services-tasks:17.0.0 -> 17.0.2 (*)
+|    |    +--- app.lp.ads:Fan:1.0.8.1
+|    |    |    +--- com.google.ads.mediation:facebook:6.5.1.1
+|    |    |    |    +--- com.facebook.android:audience-network-sdk:6.5.1
+|    |    |    |    |    \--- com.google.android.gms:play-services-basement:11.0.4 -> 17.6.0 (*)
+|    |    |    |    +--- androidx.annotation:annotation:1.2.0
+|    |    |    |    \--- com.google.android.gms:play-services-ads:20.2.0 (*)
+|    |    |    \--- com.facebook.android:audience-network-sdk:6.5.1 (*)
+|    |    +--- app.lp.ads:AdMananger:1.0.0
+|    |    +--- app.lp.ads:FunnyAd:1.0.6.2
+|    |    \--- app.lp.ads:ZJAd:1.0.3
+|    +--- com.drojian.workout:AudioHelper:1.2.5
+|    +--- com.drojian.workout:WorkoutDownloader:1.0.6
+|    |    +--- com.drojian.workout:okdownload:1.0.9-DROJIAN
+|    |    +--- com.drojian.workout:okdownload-breakpoint-sqlite:1.0.9-DROJIAN
+|    |    +--- io.reactivex.rxjava2:rxjava:2.2.10
+|    |    |    \--- org.reactivestreams:reactive-streams:1.0.2
+|    |    \--- io.reactivex.rxjava2:rxandroid:2.1.1
+|    |         \--- io.reactivex.rxjava2:rxjava:2.2.6 -> 2.2.10 (*)
+|    +--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.3.72 (*)
+|    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72 (*)
+|    +--- com.drojian.workout:zoe:1.0.8
+|    +--- androidx.lifecycle:lifecycle-livedata:2.0.0 (*)
+|    \--- org.jetbrains.anko:anko-common:0.10.8
+|         +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.0 -> 1.3.72 (*)
+|         \--- org.jetbrains.anko:anko-commons:0.10.8
+|              +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.0 -> 1.3.72 (*)
+|              \--- org.jetbrains.anko:commons-base:0.10.8
+|                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.0 -> 1.3.72 (*)
+|                   \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
++--- nl.dionsegijn:konfetti:1.1.0
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.1
+|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.1.1 -> 1.3.72 (*)
++--- androidx.multidex:multidex:2.0.0
++--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72 (*)
++--- com.drojian.workout:GoogleFit:1.4.1
++--- com.drojian.workout:Setting:1.0.9
++--- com.drojian.workout:Reminder:1.1.4
++--- com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50
++--- com.drojian.workout:Login:1.2.7
++--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.1
+|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.50 -> 1.3.72 (*)
+|    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1
+|         +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.50 -> 1.3.72 (*)
+|         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.3.50 -> 1.3.72
++--- com.drojian.workout:PickerView:1.0.1
++--- com.drojian.workout:CircleImageView:1.0.1
++--- com.drojian.workout:CustomAlertDialog:1.0.2
++--- com.google.android.gms:play-services-auth:19.0.0 (*)
++--- com.jakewharton.timber:timber:4.7.1 (*)
++--- com.drojian.workout:DateUtils:1.1.2
++--- com.drojian.workout:KotPref:1.1.4
++--- com.liulishuo.magicprogresswidget:library:1.1.1
+\--- cn.dreamtobe.percentsmoothhandler:library:0.1.1

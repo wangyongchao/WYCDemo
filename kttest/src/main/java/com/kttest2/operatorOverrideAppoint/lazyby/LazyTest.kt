@@ -9,7 +9,7 @@ class LazyTest {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            testMap()
+            testDelegat()
 
         }
 

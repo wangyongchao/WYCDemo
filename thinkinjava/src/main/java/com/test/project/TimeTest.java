@@ -22,8 +22,8 @@ public class TimeTest {
 
 
     public static void main(String[] args) {
-        getTime2(1642153461852002l);// startup
-        getTime2(1642153658335029l);// startup
+        getTime2(1642656551937044l);// startup
+        getTime2(1642656531114044l);// startup
 
 
     }

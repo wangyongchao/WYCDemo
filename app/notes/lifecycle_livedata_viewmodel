@@ -36,6 +36,7 @@ var transformSwitchMap: LiveData<String> = Transformations.switchMap(mutableLive
 当mutableLiveData1 post数据的时候MediatorLiveData 也能收到。
 
 
+ViewModel ：viewmodel本身支持横屏切换，viewModel实例不会销毁。但是不支持开启不保留活动后，viewModel依旧不会销毁。
 
 
 

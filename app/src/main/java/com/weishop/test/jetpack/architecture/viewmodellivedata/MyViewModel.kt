@@ -5,16 +5,8 @@ import androidx.lifecycle.ViewModel
 
 class MyViewModel : ViewModel() {
 
-    private lateinit var name: MutableLiveData<String>
+    var name: MutableLiveData<String> = MutableLiveData()
 
-    fun getName(): MutableLiveData<String> {
-        if (name == null) {
-            name = MutableLiveData()
-            name.value = "firstName"
-        }
-        return name
-
-    }
-
+    var currentValue=0
 
 }

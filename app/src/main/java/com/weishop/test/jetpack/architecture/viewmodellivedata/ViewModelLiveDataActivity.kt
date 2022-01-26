@@ -14,13 +14,16 @@ class ViewModelLiveDataActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LogUtils.d("ViewModelLiveDataActivity onCreate")
+        LogUtils.d("ViewModelLiveDataActivity onCreate $this")
         mBinding = ActivityViewmodelLivedataBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         mBinding.start.setOnClickListener {
+            model.name.value = "click value"
+            model.currentValue = 2
 
         }
-        model.getName().observe(this, {
+        LogUtils.d("model=$model,currentValue=${model.currentValue}")
+        model.name.observe(this, {
             LogUtils.d("observe $it")
         })
 
